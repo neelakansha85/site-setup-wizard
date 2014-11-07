@@ -1,0 +1,279 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Style for container */
+
+.ssw-container {
+	width:100%;
+	height:auto;
+	margin: 0 auto;
+	clear:both;
+}
+
+/* Style for content */
+
+.ssw-content {
+	position:relative;
+	margin:0 auto;
+}
+
+/* Breadcrumb Text */
+
+.sww-breadcrumb-text {
+	color:#999999;
+	margin: 0 0 30px 0;
+}
+
+.sww-breadcrumb-selected {
+	color:#000000;
+	font-weight:bold;
+}
+
+/* Vertical aligns the labels and input forms */
+
+.ssw-field .ssw-label {
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.ssw-field .ssw-input {
+	width:65%;
+	padding-right:0px;
+	text-transform:none;
+	margin-bottom: 0px;
+	margin-top: 8px;
+}
+
+/* Hack to keep select fields inline in Namo */
+
+.ssw-field .ssw-select {
+	width:65%;
+}
+
+/* Don't display error until it happens */
+.ssw-error {
+	display:none;
+	color: #ff1133;
+}
+
+.ssw-error .ssw-label {
+	display:inline-block;
+	vertical-align:middle;
+}
+/* Don't display error until it happens */
+.ssw-error {
+	display:none;
+	color: #ff1133;
+}
+
+.ssw-error .ssw-span {
+	display:inline-block;
+	width:65%;
+}
+
+/* Don't display process until it happens */
+.ssw-processing {
+	display:none;
+	text-align:center;
+}
+
+.ssw-processing .ssw-label {
+	display:inline-block;
+	vertical-align:middle;
+}
+/* Vertical aligns the text for radio inputs */
+
+.ssw-radio-text {
+	display:table;
+	padding-left:20px;
+	text-indent:-20px;
+}
+
+.ssw-radio-text-strong {
+	display:table;
+	padding-left:20px;
+	text-indent:-20px;
+	font-weight:bold;
+}
+
+.ssw-radio-field .ssw-label {
+}
+
+.ssw-radio-field .ssw-p {
+	margin:10px 0px 10px 0px;
+	display:table;
+}
+
+.ssw-radio-field .ssw-input {
+	display:inline-block;
+	width:20px;
+	vertical-align: middle; 
+	margin:-1px 0px 0px 0px;
+	text-indent:20px;
+}
+
+/* Hack to align radio buttons */
+.ssw-radio-field-spacing {
+	height:1px;
+	display:block !important;
+}
+
+.ssw-site-terms-input {
+	width: 20px;
+	margin-left: -4px;
+}
+
+/* Style for the Step-1 page */
+.ssw-selection {
+	text-align:center;
+}
+
+.ssw-start-btn {
+	white-space:normal;
+}
+
+.ssw-selection .ssw-start-btn {
+	background-color:#ffa500;
+	display:block;
+	width:100%;
+	padding: 20px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: white;
+	border-radius: 3px;
+	border: none;
+}
+#ssw-site-terms-input {
+	margin: 0px 5px 0px 0px;
+}
+
+/* Style for the Step-2 page */
+#ssw-site-address-display-field {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+#ssw-site-address-display {
+	color:#000;
+	width: 65%;
+	display: inline-block;
+}
+#ssw-site-address-display-field-spacing {
+	vertical-align: top;
+}
+
+/* Fix for Next button */
+.ssw-field .ssw-primary-btn {
+	padding:10px 0px;
+	display:inline-block;
+	font-size: 11px;
+	letter-spacing:3px;
+	text-transform: uppercase;
+	border-radius: 3px;
+	border: none;
+	background-color: #bfbfbf;
+}
+
+.ssw-proceed {
+	text-align:center;
+	margin-top:20px;
+}
+
+.ssw-proceed .ssw-back-btn {
+	color:#FFFFFF;
+	background-color: #bfbfbf;
+	margin-right:20px;
+}
+
+.ssw-proceed .ssw-front-btn {
+	background-color:#FFA500;
+	color:#FFFFFF;
+}
+
+.ssw-xtra-block {
+	position: relative;
+	float: right;
+	white-space:pre-line;
+	margin-top: -30px;
+}
+
+/* Style for making columns for plugins */
+
+.ssw-field-plugins {
+	display:inline-block;
+}
+
+/* Style for making columns for plugins when WPMU Pretty Plugins is activated with plugin categories */
+.ssw-plugins-categories-col {
+	display:inline-block;
+	vertical-align: top;
+	margin-bottom:20px;
+}
+
+/* For styling the Plugins column*/
+
+.ssw-plugins-categories-col .ssw-h4 {
+	margin-bottom:5px;
+}
+
+.ssw-plugins-categories-col .ssw-element {
+	float:none;
+	margin:0;
+}
+
+/* Style for making columns for themes when WPMU Pretty Plugins is activated with plugin categories */
+.ssw-themes-categories-col {
+	display:inline-block;
+	vertical-align: top;
+	
+}
+
+.ssw-themes-radio {
+	text-align:center;
+	border-top:1px solid #CCC;
+}
+
+.ssw-themes-radio .ssw-input {
+	width:auto;
+}
+
+.ssw-themes-border {
+	border:1px solid #CCC;
+	margin-bottom:20px;
+}
+
+.ssw-themes-categories-col .ssw-element {
+	float:none;
+	margin:0;
+}
+.ssw-back-btn:hover {
+background-color:#999999;
+}
+
+.ssw-back-btn:active {
+color:#d50000;
+}
+
+.ssw-front-btn:hover {
+background-color:#26cda4;
+}
+
+.ssw-front-btn:active {
+color:#d50000;
+}
+
+.ssw-start-btn:hover {
+	background-color:#bfbfbf;
+	cursor:pointer;
+}
+
+.ssw-start-btn:active {
+	background-color:#999999;
+}
+
+.ssw-back-btn:hover {
+	cursor:pointer;
+}
+
+.ssw-front-btn:hover {
+	cursor:pointer;
+}

@@ -1,0 +1,118 @@
+@media (min-width: 10px) and (max-width:479px) {
+	.ssw-content {
+	width:100%;
+	}
+	
+	/* Center aligns labels */
+	
+	.ssw-field .ssw-label {
+		width:100%;
+		text-align:center;
+	}
+	
+	.ssw-subfield {
+		width:95% !important;
+	}
+
+	/* Center aligns everything */
+	
+	.ssw-content .ssw-fieldset {
+		text-align:center;
+	}
+	
+	/* Removes spaces from between options */
+	
+	.ssw-radio-field {
+		text-align: left;
+		display: block;
+		width: 90%;
+		margin: 0 auto;
+	}
+	
+	.ssw-radio-field .ssw-label {
+		margin: 0 auto;
+	}
+	
+	/* Keeps buttons responsive */
+	
+	.ssw-selection .ssw-start-btn {
+		font-size:15px;
+		line-height:24px;
+		margin: 5px auto;
+	}
+	
+	.ssw-field .ssw-primary-btn {
+		width:35%;
+	}
+	
+	.ssw-plugins-categories-col {
+		width:90%;
+		text-align:left;
+	}
+
+	.ssw-themes-categories-col {
+		width:90%;
+		text-align:left;
+	}	
+	.ssw-site-address-error-field-spacing {
+		display:none;
+	}
+		
+}
+
+@media (min-width: 480px) {
+	.ssw-content {
+		width:80%;
+	}
+	
+	.ssw-field .ssw-label {
+		width:25%;
+		text-align:right;
+		padding-right:10px;
+	}
+	
+	.ssw-radio-field .ssw-label {
+		float:left;
+	}
+	
+	.ssw-selection .ssw-start-btn {
+		font-size:20px;
+		line-height:30px;
+		margin: 10px auto;
+		text-align:left;
+	}
+
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+	.ssw-plugins-categories-col {
+		width:45%;
+		margin-right:4.5%;
+	}
+
+	.ssw-themes-categories-col {
+		width:45%;
+		margin-right:4.5%;
+	}	
+	
+	.ssw-field .ssw-primary-btn {
+		width:20%;
+	}
+}
+
+@media (min-width: 768px) {
+	.ssw-plugins-categories-col {
+		width:30%;
+		margin-right:2.7%;
+	}
+
+	.ssw-themes-categories-col {
+		width:30%;
+		margin-right:2.7%;
+	}	
+
+	.ssw-field .ssw-primary-btn {
+		width:154px;
+	}
+
+}
