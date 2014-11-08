@@ -1,10 +1,10 @@
 <?php
 
-	echo "<h3>Options Page</h3>";
+	echo '<h3>Options Page</h3>';
 
-	echo "<p>This page will be having all the available options to configure for the Site Setup Wizard Plugin</p>";
+	echo '<p>This page will be having all the available options to configure for the Site Setup Wizard Plugin</p>';
 
-	echo "<p>Following is the Demo of different Sanitize functions of wordpress for reference<br/>";
+	echo '<p>Following is the Demo of different Sanitize functions of wordpress for reference<br/>';
 
 	$sanitization_string = 'Hello_World - Test 91 %user <br/>\' " $ \\ & % ; neelshah@email.com! ';
 	echo '<br /><br />Original String: '.$sanitization_string.'<br /><br />';

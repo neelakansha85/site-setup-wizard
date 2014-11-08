@@ -2,8 +2,8 @@
 /*
 Plugin Name: Site Setup Wizard
 Description: Allows creating sites automatically using a simple shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
-Plugin URI: http://wp.nyu.edu
-Author: Neel Shah at NYU Web Publishing
+Plugin URI: http://neelshah.info
+Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
 Version: 0.1.1
@@ -16,9 +16,12 @@ define('SSW_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('SSW_PLUGIN_DIR', dirname( __FILE__ ).'/');
 // SSW Plugin Main table name
 define('SSW_MAIN_TABLE', 'ssw_main_nsd');
+// SSW Plugin Root Dir name
+define('SSW_PLUGIN_FIXED_DIR', 'nsd_ssw');
 // This is the slug used for the plugin's create site wizard page 
 define('SSW_CREATE_SITE_SLUG', 'Site_Setup_Wizard');
 define('SSW_OPTIONS_PAGE_SLUG', 'Site_Setup_Wizard_Options');
+define('SSW_ANALYTICS_PAGE_SLUG', 'Site_Setup_Wizard_Analytics');
 define('SSW_CONFIG_OPTIONS_FOR_DATABASE', 'ssw_config_options_nsd');
 define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
@@ -27,8 +30,8 @@ define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
 define('SSW_VERSION', '0.1.1');
 
 
-if(!class_exists('Site_Setup_Wizard')) {
-	class Site_Setup_Wizard {
+if(!class_exists('Site_Setup_Wizard_NSD')) {
+	class Site_Setup_Wizard_NSD {
 
 		/* All public variables that will be used for dynamic programming */	
 			public $multiste;		
@@ -238,7 +241,7 @@ if(!class_exists('Site_Setup_Wizard')) {
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
 			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
-				array( $this, 'ssw_create_site' ), plugins_url('ssw/images/icon.png'), '1.35');
+				array( $this, 'ssw_create_site' ), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
 		}
 
 		/*	Menu function to display Site Setup Wizard -> Create Site in the Network Admin's Dashboard	*/
@@ -247,13 +250,16 @@ if(!class_exists('Site_Setup_Wizard')) {
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
 			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
-				array($this, 'ssw_create_site'), plugins_url('ssw/images/icon.png'), '1.35');
+				array($this, 'ssw_create_site'), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
 			/* Adding First Sub menu item in the SSW Plugin to reflect the Create Site functionality in the sub menu */
 			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
 				array($this, 'ssw_create_site') );
 			/* Adding SSW Options page in the Network Dashboard below the Create Site menu item */
-			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Options', 'SSW Options', 'manage_network', 
+			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Options', 'Options', 'manage_network', 
 				SSW_OPTIONS_PAGE_SLUG, array($this, 'ssw_options_page') );
+			/* Adding SSW Reports page in the Network Dashboard below the Create Site menu item */
+			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Analytics', 'Analytics', 'manage_network', 
+				SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
 		}
 
 		/* Display all admin message errors when occurs */
@@ -418,6 +424,11 @@ if(!class_exists('Site_Setup_Wizard')) {
 		/* SSW Options Page which is displayed under the Network Dashboard -> Create Site -> Options Page */
 		public function ssw_options_page() {
 			include(SSW_PLUGIN_DIR.'admin/ssw_options_page.php');
+		}
+
+		/* SSW Reports Page which is displayed under the Network Dashboard -> Create Site -> Reports Page */
+		public function ssw_analytics_page() {
+			include(SSW_PLUGIN_DIR.'admin/ssw_analytics_page.php');
 		}
 
 		/* Replaces dash in string to null for sanitizing site path */
@@ -675,9 +686,9 @@ if(!class_exists('Site_Setup_Wizard')) {
 	}
 }
 
-if(class_exists('Site_Setup_Wizard')) {
+if(class_exists('Site_Setup_Wizard_NSD')) {
 	// instantiate the plugin class
-	$site_setup_wizard = new Site_Setup_Wizard();
+	$site_setup_wizard_nsd = new Site_Setup_Wizard_NSD();
 }
 
 ?>
