@@ -6,17 +6,17 @@
 	$ssw_config_options_nsd = array(
         'site_address_bucket' => array(
             'student' => array(
-                'no_category' => 'No Category Selected',
+/*                'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
                 'teaching_and_learning' => 'Teaching/Learning/Research',
                 'clubs' => 'Club'
-                ),
+*/                ),
             'faculty' => array(
-                'no_category' => 'No Category Selected',
+/*                'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
                 'teaching_and_learning' => 'Teaching/Learning/Research',
                 'faculty' => 'Faculty'
-                ),
+*/                ),
             'employee' => array(
                 'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
@@ -76,10 +76,10 @@
                 'gls' => 'Global Liberal Studies'
                 ),
             'affiliate' => array(
-                'no_category' => 'No Category Selected',
+/*                'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
                 'teaching_and_learning' => 'Teaching/Learning/Research',
-                ),
+*/                ),
             ),
         'banned_root_site_address' => array( 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'z' ),
         'banned_site_address' => array( 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive' ),
