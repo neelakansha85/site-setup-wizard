@@ -161,6 +161,11 @@
 	vertical-align: top;
 }
 
+/* Style for the Step-2 page */
+.ssw-header-note {
+	color: #000;
+}
+
 /* Fix for Next button */
 .ssw-field .ssw-primary-btn {
 	padding:10px 0px;
