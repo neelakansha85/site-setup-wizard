@@ -145,49 +145,34 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			include(SSW_PLUGIN_DIR.'admin/ssw_activate.php');
 			include(SSW_PLUGIN_DIR.'admin/ssw_add_options.php');
 			/* Add SSW plugin options to the wp_sitemeta table for network wide settings */
-			$config_options_exist = get_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
-			if($config_options_exist == '')
+			$add_config_option_result = add_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
+			if( !$add_config_option_result == true )
 			{
-			    add_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
-			}
-			else {
-			    $error = 1000;
+				$error = 1000;
 				$this->ssw_admin_errors( $error );
 			}
-			$plugins_categories_options_exist = get_site_option( SSW_PLUGINS_CATEGORIES_FOR_DATABASE, '' );
-			if($plugins_categories_options_exist == '')
+			$add_plugins_categories_options_result = add_site_option( SSW_PLUGINS_CATEGORIES_FOR_DATABASE, '' );
+			if( !$add_plugins_categories_options_result == true )
 			{
-			    add_site_option( SSW_PLUGINS_CATEGORIES_FOR_DATABASE, '' );
-			}
-			else {
-			    $error = 1001;
+				$error = 1001;
 				$this->ssw_admin_errors( $error );
 			}
-			$plugins_list_options_exist = get_site_option( SSW_PLUGINS_LIST_FOR_DATABASE, '' );
-			if($plugins_list_options_exist == '')
+			$add_plugins_list_options_result = add_site_option( SSW_PLUGINS_LIST_FOR_DATABASE, '' );
+			if( !$add_plugins_list_options_result == true )
 			{
-			    add_site_option( SSW_PLUGINS_LIST_FOR_DATABASE, '' );
-			}
-			else {
-			    $error = 1002;
+				$error = 1002;
 				$this->ssw_admin_errors( $error );
 			}
-			$themes_categories_options_exist = get_site_option( SSW_THEMES_CATEGORIES_FOR_DATABASE, '' );
-			if($themes_categories_options_exist == '')
+			$add_themes_categories_options_result = add_site_option( SSW_THEMES_CATEGORIES_FOR_DATABASE, '' );
+			if( !$add_themes_categories_options_result == true )
 			{
-			    add_site_option( SSW_THEMES_CATEGORIES_FOR_DATABASE, '' );
-			}
-			else {
-			    $error = 1003;
+				$error = 1003;
 				$this->ssw_admin_errors( $error );
 			}
-			$themes_list_options_exist = add_site_option( SSW_THEMES_LIST_FOR_DATABASE,'' );
-			if($themes_list_options_exist == '')
+			$add_themes_list_options_result = add_site_option( SSW_THEMES_LIST_FOR_DATABASE,'' );
+			if( !$add_themes_list_options_result == true )
 			{
-			    add_site_option( SSW_THEMES_LIST_FOR_DATABASE, '' );
-			}
-			else {
-			    $error = 1004;
+				$error = 1004;
 				$this->ssw_admin_errors( $error );
 			}
 			/* Find list of all plugins available in network when this plugin is activated */
