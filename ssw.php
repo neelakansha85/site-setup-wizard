@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.1a
+Version: 0.1.1b
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
@@ -27,7 +27,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '0.1.1a');
+define('SSW_VERSION', '0.1.1b');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -47,14 +47,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     	/*	Construct the plugin object	*/
 		public function __construct() {
 
-			// Installation and uninstallation hooks
+			// Installation and Deactivation hooks
 			register_activation_hook(__FILE__, array( $this, 'ssw_activate' ) );
 			// Plugin Deactivation Hook
 			register_deactivation_hook(__FILE__, array( $this, 'ssw_deactivate' ) );
 			
-			// Plugin Uninstall hook - Used to call ssw_uninstall function while plugin is being uninstalled
-			register_uninstall_hook(__FILE__, array( $this, 'ssw_uninstall' ) );
-
 			/* Add action to display Create Site menu item in Site's Dashboard */
 			// add_action( 'admin_menu', array($this, 'ssw_menu'));
 			/* Add action to display Create Site menu item in Network Admin's Dashboard */
@@ -207,34 +204,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			
 		} 
 		
-		/*	Unistall the plugin	*/ 
-		public function ssw_uninstall() {
-			global $wpdb;
-
-			if ( !defined('WP_UNINSTALL_PLUGIN') ) {
-				header('Status: 403 Forbidden');
-				header('HTTP/1.1 403 Forbidden');
-				exit();
-			}
-
-			if ( !is_user_logged_in() ) {
-				wp_die( 'You must be logged in to run this script.' );
-			}
-
-			if ( !current_user_can( 'install_plugins' ) ) {
-				wp_die( 'You do not have permission to run this script.' );
-			}
-			delete_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
-			delete_site_option( SSW_PLUGINS_CATEGORIES_FOR_DATABASE );
-			delete_site_option( SSW_PLUGINS_LIST_FOR_DATABASE );
-			delete_site_option( SSW_THEMES_CATEGORIES_FOR_DATABASE );
-			delete_site_option( SSW_THEMES_LIST_FOR_DATABASE );
-			$ssw_main_table = $wpdb->base_prefix.SSW_MAIN_TABLE;
-			// Drop SSW Main Table
-			$wpdb->query( 'DROP TABLE IF EXISTS '.$ssw_main_table );
-			
-		}
-
 		/*	Menu function to display Site Setup Wizard -> Create Site in Site's Dashboard	*/
 		public function ssw_menu() {
 			/*	Adding Menu item "Create Site" in Dashboard, allowing it to be displayed for all users including 
