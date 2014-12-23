@@ -47,12 +47,14 @@ $step4 = 'features';
                                                     <div class="ssw-plugins-list">
     ';
                                         foreach($plugins_list as $plugin_path => $plugin_details) {
-                                            foreach ($plugin_details['Categories'] as $category_count => $category_system_name_in_details) {
-                                                if($category_system_name == $category_system_name_in_details) {
+                                            if( $plugin_details['Categories'] && $plugin_details['Name']) {
+                                                foreach ($plugin_details['Categories'] as $category_count => $category_system_name_in_details) {
+                                                    if($category_system_name == $category_system_name_in_details) {
     echo '
-                                                        <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
+                                                            <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
 
     ';
+                                                    }
                                                 }
                                             }
                                         }
@@ -70,7 +72,7 @@ $step4 = 'features';
                                         	<div class="ssw-plugins-categories-col">
                                             <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'</div>';
                                 }
-                            }
+                            }    
     echo '
                     <div class="ssw-processing ssw-field" id="ssw-site-processing" name="ssw_site_processing">
                         <span id="ssw-site-processing-label" ></span>
