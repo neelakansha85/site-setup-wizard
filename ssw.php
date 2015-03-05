@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.1b
+Version: 0.1.2
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
