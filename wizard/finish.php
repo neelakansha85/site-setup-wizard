@@ -14,6 +14,15 @@ $finish = 'finish';
                 <fieldset class="ssw-fieldset">
     ';
 
+    /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
+                    wp_nonce_field('finish_action','finish_nonce');
+    echo '
+                    <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step4"/>
+                    <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_finish"/>
+                    <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step1"/>
+                    <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
+    ';
+
 
     /* Fetch all data from the SSW Plugins's Main Table for current user to start creating site for him */
     $results = $wpdb->get_results( 
@@ -71,7 +80,11 @@ $finish = 'finish';
         }
     }
     else {
-        echo '<p>You don\'t seem to have any site created for adding features to it. Please create a new site first.</p>';
+        echo '<p>You don\'t seem to have any site created for adding features to it. Please create a new site first.</p>
+                <p>If you think you have reached this page in error, please click 
+                <a href="#" onclick="ssw_js_submit_form_cancel()" style="color:red;" value="Cancel" />Start Over</a> to begin creating sites again!</p>
+
+        ';
     }
     echo '
                 </fieldset>
