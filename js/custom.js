@@ -79,6 +79,12 @@ function ssw_js_submit_form_next() {
         }
         return false;
     }
+    else {
+        if(current_stage == 'ssw_step2') {
+            document.getElementsByClassName('ssw-front-btn')[0].value='Done';
+            document.getElementsByClassName('ssw-front-btn')[0].onclick="location.href='https://wp.nyu.edu/wp-admin/'";
+        }
+    }
 
     var theForm = document.forms['ssw-steps'];
     ssw_js_add_hidden_input(theForm, 'ssw_ajax_nonce', ssw_custom_ajax.ssw_ajax_nonce);
@@ -432,7 +438,6 @@ function ssw_js_display_processing_msg(option) {
         if(current_stage == 'ssw_step2') {
             document.getElementById("ssw-site-processing-label").innerHTML=ssw_site_processing_step2_msg;
             document.getElementById("ssw-site-processing").style.display="block";
-            document.getElementsByClassName('ssw-front-btn')[0].value='Done';
         }
         else if(current_stage == 'ssw_step4') {
             document.getElementById("ssw-site-processing-label").innerHTML=ssw_site_processing_step4_msg;
