@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.3
+Version: 0.1.42
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
@@ -27,7 +27,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '0.1.3');
+define('SSW_VERSION', '0.1.42');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
