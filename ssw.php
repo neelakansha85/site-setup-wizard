@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.43
+Version: 0.1.44
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
@@ -27,7 +27,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '0.1.43');
+define('SSW_VERSION', '0.1.44');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -601,6 +601,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					$ssw_next_stage = $wpdb->get_var( 
 						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 					);
+					/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
+					if($ssw_next_stage != 'ssw_step2') {
+						$ssw_next_stage = '';
+					}
 				}
 				/* Move to the next step using this POST variable "ssw_next_stage" */
 				if( $_POST['ssw_next_stage'] != '' && $_POST['ssw_cancel'] != true ) {
