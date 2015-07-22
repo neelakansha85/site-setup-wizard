@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.42
+Version: 0.1.43
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
@@ -27,7 +27,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '0.1.42');
+define('SSW_VERSION', '0.1.43');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -597,7 +597,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				}
 
 				/* Resume Site Setup Wizard from where left off before */
-				if ( $_POST['ssw_cancel'] != true) {
+				if( $_POST['ssw_cancel'] != true ) {
 					$ssw_next_stage = $wpdb->get_var( 
 						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 					);

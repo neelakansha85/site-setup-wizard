@@ -432,6 +432,7 @@ function ssw_js_display_processing_msg(option) {
         if(current_stage == 'ssw_step2') {
             document.getElementById("ssw-site-processing-label").innerHTML=ssw_site_processing_step2_msg;
             document.getElementById("ssw-site-processing").style.display="block";
+            document.getElementsByClassName('ssw-front-btn')[0].value='Done';
         }
         else if(current_stage == 'ssw_step4') {
             document.getElementById("ssw-site-processing-label").innerHTML=ssw_site_processing_step4_msg;
