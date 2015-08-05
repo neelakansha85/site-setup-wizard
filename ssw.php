@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah
 Author URI: http://neelshah.info
 License: GPL2
-Version: 0.1.44
+Version: 0.1.5
 */
 
 /* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
@@ -27,7 +27,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '0.1.44');
+define('SSW_VERSION', '0.1.5');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -546,7 +546,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     		$current_user_role = $current_user_role_array[0];
     		/* User with this property will be able to see complete SSW plugin */
     		/* Currently edit_post is a capability of all users above subscriber level. */
-    		$master_user = current_user_can('edit_post');
+    		$master_user = current_user_can('read');
     		
     		/* Restore to original blog it came from before you switched to root site in case you did */
     		restore_current_blog();
