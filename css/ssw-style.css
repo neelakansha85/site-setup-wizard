@@ -81,19 +81,24 @@
 	display:inline-block;
 	vertical-align:middle;
 }
+/* Site Privacy message when not displaying the privacy selection settings  */
+
+.ssw-privacy-text {
+	display:table;
+	padding-left: 4px;
+	width: 66%;
+}
+
+.strong {
+	font-weight:bold;
+}
+
 /* Vertical aligns the text for radio inputs */
 
 .ssw-radio-text {
 	display:table;
 	padding-left:20px;
 	text-indent:-20px;
-}
-
-.ssw-radio-text-strong {
-	display:table;
-	padding-left:20px;
-	text-indent:-20px;
-	font-weight:bold;
 }
 
 .ssw-radio-field .ssw-label {

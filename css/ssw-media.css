@@ -20,6 +20,11 @@
 		text-align:center;
 	}
 	
+	/* Center align Site Privacy display text when selection settings are not displayed */
+	.ssw-privacy-text {
+		width: 99% !important;
+	}
+
 	/* Removes spaces from between options */
 	
 	.ssw-radio-field {
