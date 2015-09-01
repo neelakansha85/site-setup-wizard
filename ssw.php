@@ -3,13 +3,12 @@
 Plugin Name: Site Setup Wizard
 Description: Allows creating sites automatically using a simple shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
 Plugin URI: http://neelshah.info
-Author: Neel Shah
+Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.2
+Version: 1.2.1
 */
 
-/* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
 
 define('SSW_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 //define('SSW_PLUGIN_URL', plugins_url( __FILE__ ).'/');
