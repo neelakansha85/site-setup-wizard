@@ -15,11 +15,11 @@ echo '<p class="sww-breadcrumb-text">';
 	}
 	echo '>Themes</span> -> <span ';
 */
-/*	if(isset($step4)) {
+	if(isset($step4)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
 	echo '>Features</span> -> <span ';
-*/	if(isset($finish)) {
+	if(isset($finish)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
 	echo '>Done!</span></p>';

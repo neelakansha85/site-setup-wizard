@@ -23,7 +23,7 @@ $create_new_site = 'create_new_site';
         since it is not supported currently with the path variable */
         if( !is_subdomain_install() ) {
             $new_blog_id = wpmu_create_blog( $current_blog->domain, $path, $title, $admin_user_id );
-            if( !is_wp_error( $new_blog_id ) ) {
+            if( !is_wp_error( $new_blog_id ) && $is_privacy_selection == true ) {
                 /* Set Privacy of the newly created blog to the privacy level selected durign the wizard */
                 update_blog_option($new_blog_id, 'blog_public', $privacy, true);
             }

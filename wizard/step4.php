@@ -67,10 +67,12 @@ $step4 = 'features';
                                 }
                             }
                             else {
-                                foreach ($plugins_to_install_group as $plugin_path => $plugin_details){
+                                foreach ($plugins_list as $plugin_path => $plugin_details){
+                                    if(isset($plugin_details['Name'])) {    
     echo '
                                         	<div class="ssw-plugins-categories-col">
                                             <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'</div>';
+                                    }
                                 }
                             }    
     echo '

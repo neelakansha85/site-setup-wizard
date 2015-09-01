@@ -136,11 +136,23 @@ function ssw_js_validate_form(step) {
         return true;
     }
     else if(step == 'ssw_step2') {
-        if (ssw_js_validate_email() & ssw_js_validate_site_address() & ssw_js_validate_title() & ssw_js_validate_privacy() & ssw_js_validate_terms()) {
-            if(ssw_js_check_admin_email_exists()) {
-                if(ssw_js_check_domain_available()) {
-                    return true;
-                }                
+        if (ssw_js_validate_email() & ssw_js_validate_site_address() & ssw_js_validate_title() & ssw_js_validate_terms()) {
+            var is_privacy_selection = document.getElementById('ssw-steps').is_privacy_selection.value;
+            if(is_privacy_selection == 1) {
+                if(ssw_js_validate_privacy()) {
+                    if(ssw_js_check_admin_email_exists()) {
+                        if(ssw_js_check_domain_available()) {
+                            return true;
+                        }                
+                    }
+                }
+            }
+            else { 
+                if(ssw_js_check_admin_email_exists()) {
+                    if(ssw_js_check_domain_available()) {
+                        return true;
+                    }                
+                }
             }
         }
     }

@@ -83,7 +83,7 @@
                 'teaching_and_learning' => 'Teaching/Learning/Research',
 */                ),
             ),
-        'banned_root_site_address' => array( 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'z' ),
+        'banned_root_site_address' => array( 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
         'banned_site_address' => array( 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive' ),
         /* Sites with this category selected will not have any bucket in it's site address */
         'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
@@ -137,7 +137,7 @@
         'site_usage_display_common' => true,
         'ssw_not_available' => 'alumni_subscriber',
         'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
-        'site_privacy' => false,
+        'privacy_selection' => true,
         'debug_mode' => false
     );
 	/* END Default Content for config options  */

@@ -20,7 +20,12 @@
         $title = sanitize_text_field( $_POST['site_title'] );
         /* sanitize_key sanitizes the value to all right content required for the path for security */
         /* Multisite Privacy Plugin uses value -1, -2 and -3 hence we add 3 and then subtract 3 after sending it to sanitize values */
-        $privacy = sanitize_title_for_query( $_POST['site_privacy'] ) - 3;
+        if( isset($_POST['site_privacy']) ) {
+            $privacy = sanitize_title_for_query( $_POST['site_privacy'] ) - 3;
+        }
+        else {
+            $privacy = '';
+        }
         $next_stage = sanitize_title_for_query( $_POST['ssw_next_stage'] );
         $endtime = current_time('mysql');
         

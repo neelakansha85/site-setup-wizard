@@ -318,6 +318,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			global $wpdb;
 			$options = $this->ssw_fetch_config_options();
 			$wpmu_pretty_plugins = $options['external_plugins']['wpmu_pretty_plugins'];
+			$plugins_list = array('');
 
 			if ($wpmu_pretty_plugins == true) {
 				$plugins_categories = get_site_option($this->wpmu_pretty_plugins_categories_site_option);
@@ -567,7 +568,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$ssw_not_available = $options['ssw_not_available'];
 				$terms_of_use = $options['terms_of_use'];
 				$is_debug_mode = $options['debug_mode'];
-				$is_site_privacy = $options['site_privacy'];
+				$is_privacy_selection = $options['privacy_selection'];
 
 				/* Fetch values if the given external plugins are installed or not */
     			$wpmu_multisite_privacy_plugin = $external_plugins['wpmu_multisite_privacy_plugin'];
@@ -604,9 +605,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 					);
 					/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
+					/*
 					if($ssw_next_stage != 'ssw_step2') {
 						$ssw_next_stage = '';
 					}
+					*/
 				}
 				/* Move to the next step using this POST variable "ssw_next_stage" */
 				if( $_POST['ssw_next_stage'] != '' && $_POST['ssw_cancel'] != true ) {
@@ -648,7 +651,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						include(SSW_PLUGIN_DIR.'admin/create_new_site.php');
 				    }
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce($_POST['step3_nonce'], 'step3_action') ){
+					else if (wp_verify_nonce($_POST['step3_nonce'], 'step3_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step3_process.php');
 				    }

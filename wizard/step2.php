@@ -36,6 +36,7 @@ $step2 = 'essential_options';
                     <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step1"/>
                     <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step2"/>
                     <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step4"/>
+                    <input id="is-privacy-selection" name="is_privacy_selection" type="hidden" value="'.(int)$is_privacy_selection.'"/>
                     <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
 
                     <input id="ssw-current-site-root-address" name="current_site_root_address" type="hidden" value="'.$current_site_root_address.'"/>
@@ -103,7 +104,7 @@ $step2 = 'essential_options';
     ';
                             /* Check if Site Privacy options have to be displayed or not
                             */
-                            if ($is_site_privacy == true) {
+                            if ($is_privacy_selection == true) {
     echo '
                                 <span class="ssw-radio-text strong">Public</span>
                                 <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>

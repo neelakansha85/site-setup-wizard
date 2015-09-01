@@ -22,7 +22,9 @@
         echo '<br/>$stitle_query = '.$stitle_query.'<br/>';
     
 
+/*    $is_privacy_selection = $options['privacy_selection'];
+    echo '<br/>$is_privacy_selection = '.(int)$is_privacy_selection.'<br/>';
 
-
+*/
 
 ?>
