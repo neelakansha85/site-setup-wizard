@@ -162,7 +162,7 @@ $step2 = 'essential_options';
 
                         <div class="ssw-proceed ssw-field">
                             <input name="ssw_back_btn" class="ssw-primary-btn ssw-back-btn" type="button" onclick="ssw_js_submit_form_previous()" value="Back" tabindex="11" />
-                            <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Create" onclick="ssw_js_submit_form_next()" tabindex="12" />
+                            <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Next" onclick="ssw_js_submit_form_next()" tabindex="12" />
                         </div> 
                     </fieldset>
             </div>

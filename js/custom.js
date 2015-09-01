@@ -14,7 +14,7 @@ var ssw_site_title_invalid_msg = "Site title can not be left blank.";
 var ssw_site_privacy_error_msg = "Please select a site privacy option.";
 var ssw_theme_error_msg = "Please select a theme.";
 var ssw_terms_error_msg = "Please accept the Terms of Use to proceed.";
-var ssw_site_processing_step2_msg = "<h6>Your site is being generated and may take a moment. Visit your new dashboard at <a href='https://wp.nyu.edu/wp-admin/'>https://wp.nyu.edu/wp-admin</a>. Check the 'My Sites' menu at the top left for a list of your sites.</h6>";
+var ssw_site_processing_step2_msg = "<h6>Please wait while your site address is being reserved. It may take few minutes.</h6>";
 var ssw_site_processing_step4_msg = "<h6>Please wait while your site is being prepared. It may take few minutes to do so based on the number of features you selected to activate for your site.</h6>";
 
 /* Function for 'Cancel' button action */
@@ -78,12 +78,6 @@ function ssw_js_submit_form_next() {
             ssw_js_display_processing_msg(false);
         }
         return false;
-    }
-    else {
-        if(current_stage == 'ssw_step2') {
-            document.getElementsByClassName('ssw-front-btn')[0].value='Done';
-            document.getElementsByClassName('ssw-front-btn')[0].onclick="location.href='https://wp.nyu.edu/wp-admin/'";
-        }
     }
 
     var theForm = document.forms['ssw-steps'];
