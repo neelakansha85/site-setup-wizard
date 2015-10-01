@@ -457,3 +457,38 @@ function ssw_js_display_processing_msg(option) {
     }
 }
 /* ENDS Function to dosplay site processing message */
+
+/* JS to update config options for Site Setup Wizard */
+function ssw_js_update_config_options() {
+
+    jQuery.ajax({
+        type: "POST", 
+        url: ssw_custom_ajax.ajaxurl,
+        dataType: "html",
+        async: false,
+        data: { 
+            action: 'ssw_update_config_options',
+            ssw_ajax_nonce: ssw_custom_ajax.ssw_ajax_nonce  
+        },
+        success: function(options_value){
+            options_id = options_id_value;
+        } 
+    });
+
+    if(options_id == 0) {
+        //document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
+        //document.getElementById("ssw-validate-email-error").style.display="block";
+        return false;
+    }
+    else if(options_id > 0) {
+        //var theForm = document.forms['ssw-steps'];
+        //ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
+        return true;
+    }
+    else {
+        //document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
+        //document.getElementById("ssw-validate-email-error").style.display="block";
+        return false;
+    }
+}
+/* ENDS JS to update config options for Site Setup Wizard */

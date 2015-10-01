@@ -31,18 +31,24 @@ Allows multiste registered users to create sites using pre selected features/set
 
 1. Download the latest [tagged archive](https://github.com/neelakansha85/nsd-site-setup-wizard/releases) (choose the "zip" option).
 2. Unzip the archive, rename the folder correctly to `nsd-site-setup-wizard`, then re-zip the file.
-3. Go to the __Plugins -> Add New__ screen and click the __Upload__ tab.
+3. Go to the __Network Admin -> Plugins -> Add New__ screen and click the __Upload__ tab.
 4. Upload the zipped archive directly.
-5. Go to the Plugins screen and click __Activate__.
+5. Go to the Network Admin -> Plugins screen and click __Network Activate__ below __Site Setup Wizard__.
 
 ### Manual
 
 1. Download the latest [tagged archive](https://github.com/neelakansha85/nsd-site-setup-wizard/releases) (choose the "zip" option).
 2. Unzip the archive, rename the folder to `nsd-site-setup-wizard`.
 3. Copy the folder to your `/wp-content/plugins/` directory.
-4. Go to the Plugins screen and click __Activate__.
+4. Go to the __Network Admin -> Plugins__ screen and click __Network Activate__ below __Site Setup Wizard__.
 
 Check out the Codex for more information about [installing plugins manually](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
+
+# Usage
+* Default plugin settings will be configured upon activating the plugin. 
+* To modify plugin settings:
+    * Modify required settings in `nsd-site-setup-wizard/admin/ssw_update_options.php`.
+    * Go to __Network Admin -> Create Site -> Options__ screen and click __Update Plugin Settings__.
 
 ## License
 The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
@@ -56,6 +62,7 @@ A copy of the license is included in the root of the plugin’s directory. The f
 
 ## Important Notes
 * This plugin is compatible with caching and cdn enabled.
+* The plugin stores information in the database in the form of serialized array, hence please do not modify it directly unless you are sure of the modification.
 
 ## Issues
 

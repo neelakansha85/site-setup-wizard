@@ -31,7 +31,7 @@ $step2 = 'essential_options';
                     }
 
                     /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
-				    wp_nonce_field('step2_action','step2_nonce');
+                    wp_nonce_field('step2_action','step2_nonce');
     echo '
                     <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step1"/>
                     <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step2"/>

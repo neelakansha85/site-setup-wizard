@@ -6,7 +6,7 @@ Plugin URI: http://neelshah.info
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.2.1
+Version: 1.2.2
 */
 
 
@@ -16,7 +16,7 @@ define('SSW_PLUGIN_DIR', dirname( __FILE__ ).'/');
 // SSW Plugin Main table name
 define('SSW_MAIN_TABLE', 'ssw_main_nsd');
 // SSW Plugin Root Dir name
-define('SSW_PLUGIN_FIXED_DIR', 'nsd_ssw');
+define('SSW_PLUGIN_FIXED_DIR', 'nsd-site-setup-wizard');
 // This is the slug used for the plugin's create site wizard page 
 define('SSW_CREATE_SITE_SLUG', 'Site_Setup_Wizard');
 define('SSW_OPTIONS_PAGE_SLUG', 'Site_Setup_Wizard_Options');
@@ -26,7 +26,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '1.2.1');
+define('SSW_VERSION', '1.2.2');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -77,6 +77,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_ssw_submit_form_skip', array( $this, 'ssw_create_site' ) );
 			add_action( 'wp_ajax_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
+			add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
 			/* Add ajax request handlers for all buttons of wizard for frontend section */
 			add_action( 'wp_ajax_nopriv_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
@@ -101,15 +102,30 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			return $ssw_main_table;
 		} 
 
-		/* Fetch configurations options for SSW Plugin from wp_sitemeta table */
+		/* Fetch configuration options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_config_options() {
 			$options = get_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
 			return $options;
 		}
-		/* Update configurations options for SSW Plugin from wp_sitemeta table */
-		public function ssw_update_config_options( $new_options ) {
-			$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $new_options );
-			return $options;
+		/* Update configuration options for SSW Plugin from wp_sitemeta table */
+		public function ssw_update_config_options() {
+			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
+				include(SSW_PLUGIN_DIR.'admin/ssw_update_options.php');
+				$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
+				if( $options ) {
+					echo '1';
+				}
+				else {
+					echo '0';
+				}
+		        /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+				wp_die();
+			}
+			else {
+				wp_die("Please use valid forms to send data.");
+			}
+
+			
 		}
 		/* Fetch Plugin options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_plugin_options() {

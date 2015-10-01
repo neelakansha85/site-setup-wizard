@@ -4,7 +4,7 @@ global $wpdb;
 			/* Table name to store on going site setup wizard */
 			$ssw_main_table = $this->ssw_main_table();
 
-			$sql_ssw_main_table = 'CREATE TABLE '.$ssw_main_table.' (
+			$sql_ssw_main_table = 'CREATE TABLE IF NOT EXISTS '.$ssw_main_table.' (
 				ssw_id bigint(20) AUTO_INCREMENT,
 				user_id bigint(20) NOT NULL,
 				admin_email varchar(100) DEFAULT NULL,
