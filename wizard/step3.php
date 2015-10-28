@@ -1,5 +1,6 @@
 <?php
 
+$can_skip = true;
 $step3 = 'themes';
 
     echo '  

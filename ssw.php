@@ -261,6 +261,36 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
 		}
 
+        /* Log all MySQL errors to nsd_ssw_sql_log.log file in wp-contents/uploads dir */
+		public function ssw_log_sql_error( $error ) {
+           $options = $this->ssw_fetch_config_options();
+            $is_debug_mode = $options['debug_mode'];
+            if ($is_debug_mode == true) {
+              if($error!=NULL) {
+                    $uploads = wp_upload_dir();
+                    $upload_path = $uploads['basedir'];
+                    $filename = $upload_path.'/nsd_ssw_sql_log.log';
+                    $open = fopen($filename, "a"); 
+                    $write = fputs($open,"\n".'error at ( '.date('Y-m-d H:i:s').' '. $error); 
+                    fclose($open);
+              }
+            }
+        }
+
+        /* Log all variables for DEBUG to nsd_ssw_debug_log.log file in wp-contents/uploads dir */
+        public function ssw_debug_log( $file_name, $var_name, $value ) {
+            $options = $this->ssw_fetch_config_options();
+            $is_debug_mode = $options['debug_mode'];
+            if ($is_debug_mode == true) {
+                $uploads = wp_upload_dir();
+                $upload_path = $uploads['basedir'];
+                $filename = $upload_path.'/nsd_ssw_debug_log.log';
+                $open = fopen($filename, "a");
+                $write = fputs($open,"\nFile: ".$file_name." $".$var_name." = ".print_r($value, true)); 
+                fclose($open);
+            }
+        }
+        
 		/* Display all admin message errors when occurs */
 		public function ssw_admin_errors( $error ) {
 			if($error == 1000) {
@@ -610,6 +640,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				if( $_REQUEST['ssw_cancel'] == true )
 				{
 					$wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false' );
+                    	$this->ssw_log_sql_error($wpdb->last_error);
+					
 					// $wpdb->delete ($ssw_main_table, array('user_id'=>$current_user_id));
 					echo 'Let\'s Create a new site again!';
 				}
@@ -619,6 +651,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					$ssw_next_stage = $wpdb->get_var( 
 						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 					);
+                    	$this->ssw_log_sql_error($wpdb->last_error);
+					
 					/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
 					/*
 					if($ssw_next_stage != 'ssw_step2') {
@@ -635,7 +669,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				echo '<form action="'.$_SERVER['REQUEST_URI'].'" method="POST" id="ssw-steps" name="ssw-steps">';
 	         
 				if($ssw_next_stage == '' || $ssw_next_stage =='ssw_step1') {
-					include(SSW_PLUGIN_DIR.'wizard/step1.php');
+					include(SSW_PLUGIN_DIR.'wizard/step1.php');                    
 				}
 
 				else if($ssw_next_stage =='ssw_step2') {
@@ -643,6 +677,16 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					if (wp_verify_nonce($_POST['step1_nonce'], 'step1_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step1_process.php');
+
+							/* DEBUG variables in ssw_create_site() which are defined before Step1 */
+							$this->ssw_debug_log('ssw', 'current_user_id', $current_user_id);
+							$this->ssw_debug_log('ssw', 'current_user_email', $current_user_email);
+							$this->ssw_debug_log('ssw', 'current_site_root_address', $current_site_root_address);
+							$this->ssw_debug_log('ssw', 'current_user_role_array', $current_user_role_array);
+							$this->ssw_debug_log('ssw', 'current_user_role', $current_user_role);
+							$this->ssw_debug_log('ssw', 'options', $options);
+							$this->ssw_debug_log('ssw', 'theme_options', $theme_options);
+							$this->ssw_debug_log('ssw', 'plugin_options', $plugin_options);
 				    }
 					include(SSW_PLUGIN_DIR.'wizard/step2.php');
 				}

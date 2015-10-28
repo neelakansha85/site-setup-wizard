@@ -1,9 +1,5 @@
 <?php
 
-/* Update the list of available plugins for the Wizard Plugins page */
-//$this->ssw_find_plugins();
-
-$skip = true;
 $step4 = 'features';
 
     echo '
