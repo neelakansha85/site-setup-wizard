@@ -67,8 +67,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'ssw_admin_scripts' ) );
 			/* Include Javascripts and CSS for SSW Plugin on the frontend */
 			add_action( 'wp_enqueue_scripts', array( $this, 'ssw_frontend_scripts' ) );
-			/* Add filter to replace dash to null for function sanitize_key() for sanitizing site path */
-			add_filter( 'sanitize_key', array( $this, 'ssw_dash_to_null' ) );
 
 			/* Add ajax request handlers for all buttons of wizard for admin section */
 			add_action( 'wp_ajax_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
@@ -461,11 +459,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			include(SSW_PLUGIN_DIR.'admin/ssw_analytics_page.php');
 		}
 
-		/* Replaces dash in string to null for sanitizing site path */
-		public function ssw_dash_to_null($site_path) {
-			return str_replace( '-', '', $site_path );
-		}
-
 		/* Check if given path is already taken by another site or not */
 		public function ssw_check_domain_exists() {
 			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
@@ -479,7 +472,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     			$is_debug_mode = $options['debug_mode'];
     			
     			$site_address_bucket = sanitize_key( $_POST['site_address_bucket']);
-    			$site_address = sanitize_key( $_POST['site_address']);
+    			/**
+    			*	Replace '-' from site address since it is being used to separate a site name from site category/bucket 
+    			*/
+    			$site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
     			$is_banned_site = 0;
     			if( in_array($site_address_bucket, $site_address_bucket_none_value) != true  && $site_address_bucket != '' ) {
     				/* Check for banned site addresses */

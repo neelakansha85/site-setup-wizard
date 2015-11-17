@@ -13,7 +13,7 @@
         $site_address_bucket = sanitize_key( $_POST['site_address_bucket'] );
             $this->ssw_debug_log('step2_process', 'site_address_bucket', $site_address_bucket);
         
-        $site_address = sanitize_key( $_POST['site_address'] );
+        $site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
             $this->ssw_debug_log('step2_process', 'site_address', $site_address);
         
         /* Check if the bucket selected is from the list of all buckets that should be blank buckets */
