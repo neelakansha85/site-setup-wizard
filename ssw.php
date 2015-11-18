@@ -307,12 +307,12 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
-			wp_register_script( 'ssw-custom-js', SSW_PLUGIN_URL.'js/custom.js' );
+			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-custom-js' );
+    		wp_enqueue_script( 'ssw-main-js' );
 
     		// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
-			wp_localize_script( 'ssw-custom-js', 'ssw_custom_ajax', array( 
+			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				/* generate a nonce with a unique ID "ssw_ajax_nonce"
             	so that you can check it later when an AJAX request is sent */
@@ -334,13 +334,13 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
-			wp_register_script( 'ssw-custom-js', SSW_PLUGIN_URL.'js/custom.js' );
+			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-custom-js' );
+    		wp_enqueue_script( 'ssw-main-js' );
 
 			// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
-			wp_localize_script( 'ssw-custom-js', 'ssw_custom_ajax', array( 
+			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				/* generate a nonce with a unique ID "ssw_ajax_nonce"
             	so that you can check it later when an AJAX request is sent */
