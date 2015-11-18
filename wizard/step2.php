@@ -1,6 +1,5 @@
 <?php
 
-$skip = true;
 $step2 = 'essential_options';
 
     echo '
@@ -19,19 +18,8 @@ $step2 = 'essential_options';
 
     ';
 
-                    /* Debug Code */
-                    if( $is_debug_mode == true ) {
-                        echo '<br/>Debug Mode is ON';
-                        echo '<br/>Current Site Root Address = '.$current_site_root_address;
-                        echo '<br/>Current User Role = '.$current_user_role;
-                        echo '<br/>Restricted User Roles = ';
-                            print_r($restricted_user_roles);
-                        echo '<br/><br/>';
-
-                    }
-
                     /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
-				    wp_nonce_field('step2_action','step2_nonce');
+                    wp_nonce_field('step2_action','step2_nonce');
     echo '
                     <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step1"/>
                     <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step2"/>

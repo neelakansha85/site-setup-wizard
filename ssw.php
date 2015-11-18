@@ -3,13 +3,12 @@
 Plugin Name: Site Setup Wizard
 Description: Allows creating sites automatically using a simple shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
 Plugin URI: http://neelshah.info
-Author: Neel Shah
+Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.2
+Version: 1.2.2
 */
 
-/* #TODO: NEEL PLEASE REMOVE THE DROP TABLE QUERY FROM DEACTIVATION HOOK FOR PRODUCTION	*/
 
 define('SSW_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 //define('SSW_PLUGIN_URL', plugins_url( __FILE__ ).'/');
@@ -17,7 +16,7 @@ define('SSW_PLUGIN_DIR', dirname( __FILE__ ).'/');
 // SSW Plugin Main table name
 define('SSW_MAIN_TABLE', 'ssw_main_nsd');
 // SSW Plugin Root Dir name
-define('SSW_PLUGIN_FIXED_DIR', 'nsd_ssw');
+define('SSW_PLUGIN_FIXED_DIR', 'nsd-site-setup-wizard');
 // This is the slug used for the plugin's create site wizard page 
 define('SSW_CREATE_SITE_SLUG', 'Site_Setup_Wizard');
 define('SSW_OPTIONS_PAGE_SLUG', 'Site_Setup_Wizard_Options');
@@ -27,7 +26,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '1.2');
+define('SSW_VERSION', '1.2.2');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -68,8 +67,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'ssw_admin_scripts' ) );
 			/* Include Javascripts and CSS for SSW Plugin on the frontend */
 			add_action( 'wp_enqueue_scripts', array( $this, 'ssw_frontend_scripts' ) );
-			/* Add filter to replace dash to null for function sanitize_key() for sanitizing site path */
-			add_filter( 'sanitize_key', array( $this, 'ssw_dash_to_null' ) );
 
 			/* Add ajax request handlers for all buttons of wizard for admin section */
 			add_action( 'wp_ajax_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
@@ -78,6 +75,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_ssw_submit_form_skip', array( $this, 'ssw_create_site' ) );
 			add_action( 'wp_ajax_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
+			add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
 			/* Add ajax request handlers for all buttons of wizard for frontend section */
 			add_action( 'wp_ajax_nopriv_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
@@ -102,15 +100,30 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			return $ssw_main_table;
 		} 
 
-		/* Fetch configurations options for SSW Plugin from wp_sitemeta table */
+		/* Fetch configuration options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_config_options() {
 			$options = get_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
 			return $options;
 		}
-		/* Update configurations options for SSW Plugin from wp_sitemeta table */
-		public function ssw_update_config_options( $new_options ) {
-			$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $new_options );
-			return $options;
+		/* Update configuration options for SSW Plugin from wp_sitemeta table */
+		public function ssw_update_config_options() {
+			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
+				include(SSW_PLUGIN_DIR.'admin/ssw_update_options.php');
+				$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
+				if( $options ) {
+					echo '1';
+				}
+				else {
+					echo '0';
+				}
+		        /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+				wp_die();
+			}
+			else {
+				wp_die("Please use valid forms to send data.");
+			}
+
+			
 		}
 		/* Fetch Plugin options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_plugin_options() {
@@ -140,7 +153,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Activate the plugin	*/  
 		public function ssw_activate() {
 			include(SSW_PLUGIN_DIR.'admin/ssw_activate.php');
-			include(SSW_PLUGIN_DIR.'admin/ssw_add_options.php');
+			include(SSW_PLUGIN_DIR.'admin/ssw_default_options.php');
 			/* Add SSW plugin options to the wp_sitemeta table for network wide settings */
 			$config_options_exist = get_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
 			if($config_options_exist == '')
@@ -246,6 +259,36 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
 		}
 
+        /* Log all MySQL errors to nsd_ssw_sql_log.log file in wp-contents/uploads dir */
+		public function ssw_log_sql_error( $error ) {
+           $options = $this->ssw_fetch_config_options();
+            $is_debug_mode = $options['debug_mode'];
+            if ($is_debug_mode == true) {
+              if($error!=NULL) {
+                    $uploads = wp_upload_dir();
+                    $upload_path = $uploads['basedir'];
+                    $filename = $upload_path.'/nsd_ssw_sql_log.log';
+                    $open = fopen($filename, "a"); 
+                    $write = fputs($open,"\n".'error at ( '.date('Y-m-d H:i:s').' '. $error); 
+                    fclose($open);
+              }
+            }
+        }
+
+        /* Log all variables for DEBUG to nsd_ssw_debug_log.log file in wp-contents/uploads dir */
+        public function ssw_debug_log( $file_name, $var_name, $value ) {
+            $options = $this->ssw_fetch_config_options();
+            $is_debug_mode = $options['debug_mode'];
+            if ($is_debug_mode == true) {
+                $uploads = wp_upload_dir();
+                $upload_path = $uploads['basedir'];
+                $filename = $upload_path.'/nsd_ssw_debug_log.log';
+                $open = fopen($filename, "a");
+                $write = fputs($open,"\nFile: ".$file_name." $".$var_name." = ".print_r($value, true)); 
+                fclose($open);
+            }
+        }
+        
 		/* Display all admin message errors when occurs */
 		public function ssw_admin_errors( $error ) {
 			if($error == 1000) {
@@ -264,12 +307,12 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
-			wp_register_script( 'ssw-custom-js', SSW_PLUGIN_URL.'js/custom.js' );
+			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-custom-js' );
+    		wp_enqueue_script( 'ssw-main-js' );
 
     		// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
-			wp_localize_script( 'ssw-custom-js', 'ssw_custom_ajax', array( 
+			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				/* generate a nonce with a unique ID "ssw_ajax_nonce"
             	so that you can check it later when an AJAX request is sent */
@@ -291,13 +334,13 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
-			wp_register_script( 'ssw-custom-js', SSW_PLUGIN_URL.'js/custom.js' );
+			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-custom-js' );
+    		wp_enqueue_script( 'ssw-main-js' );
 
 			// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
-			wp_localize_script( 'ssw-custom-js', 'ssw_custom_ajax', array( 
+			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				/* generate a nonce with a unique ID "ssw_ajax_nonce"
             	so that you can check it later when an AJAX request is sent */
@@ -416,11 +459,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			include(SSW_PLUGIN_DIR.'admin/ssw_analytics_page.php');
 		}
 
-		/* Replaces dash in string to null for sanitizing site path */
-		public function ssw_dash_to_null($site_path) {
-			return str_replace( '-', '', $site_path );
-		}
-
 		/* Check if given path is already taken by another site or not */
 		public function ssw_check_domain_exists() {
 			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
@@ -434,7 +472,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     			$is_debug_mode = $options['debug_mode'];
     			
     			$site_address_bucket = sanitize_key( $_POST['site_address_bucket']);
-    			$site_address = sanitize_key( $_POST['site_address']);
+    			/**
+    			*	Replace '-' from site address since it is being used to separate a site name from site category/bucket 
+    			*/
+    			$site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
     			$is_banned_site = 0;
     			if( in_array($site_address_bucket, $site_address_bucket_none_value) != true  && $site_address_bucket != '' ) {
     				/* Check for banned site addresses */
@@ -595,6 +636,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				if( $_REQUEST['ssw_cancel'] == true )
 				{
 					$wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false' );
+                    	$this->ssw_log_sql_error($wpdb->last_error);
+					
 					// $wpdb->delete ($ssw_main_table, array('user_id'=>$current_user_id));
 					echo 'Let\'s Create a new site again!';
 				}
@@ -604,6 +647,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					$ssw_next_stage = $wpdb->get_var( 
 						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 					);
+                    	$this->ssw_log_sql_error($wpdb->last_error);
+					
 					/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
 					/*
 					if($ssw_next_stage != 'ssw_step2') {
@@ -620,7 +665,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				echo '<form action="'.$_SERVER['REQUEST_URI'].'" method="POST" id="ssw-steps" name="ssw-steps">';
 	         
 				if($ssw_next_stage == '' || $ssw_next_stage =='ssw_step1') {
-					include(SSW_PLUGIN_DIR.'wizard/step1.php');
+					include(SSW_PLUGIN_DIR.'wizard/step1.php');                    
 				}
 
 				else if($ssw_next_stage =='ssw_step2') {
@@ -628,6 +673,16 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					if (wp_verify_nonce($_POST['step1_nonce'], 'step1_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step1_process.php');
+
+							/* DEBUG variables in ssw_create_site() which are defined before Step1 */
+							$this->ssw_debug_log('ssw', 'current_user_id', $current_user_id);
+							$this->ssw_debug_log('ssw', 'current_user_email', $current_user_email);
+							$this->ssw_debug_log('ssw', 'current_site_root_address', $current_site_root_address);
+							$this->ssw_debug_log('ssw', 'current_user_role_array', $current_user_role_array);
+							$this->ssw_debug_log('ssw', 'current_user_role', $current_user_role);
+							$this->ssw_debug_log('ssw', 'options', $options);
+							$this->ssw_debug_log('ssw', 'theme_options', $theme_options);
+							$this->ssw_debug_log('ssw', 'plugin_options', $plugin_options);
 				    }
 					include(SSW_PLUGIN_DIR.'wizard/step2.php');
 				}
