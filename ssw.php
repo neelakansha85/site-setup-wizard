@@ -153,7 +153,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Activate the plugin	*/  
 		public function ssw_activate() {
 			include(SSW_PLUGIN_DIR.'admin/ssw_activate.php');
-			include(SSW_PLUGIN_DIR.'admin/ssw_add_options.php');
+			include(SSW_PLUGIN_DIR.'admin/ssw_default_options.php');
 			/* Add SSW plugin options to the wp_sitemeta table for network wide settings */
 			$config_options_exist = get_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
 			if($config_options_exist == '')

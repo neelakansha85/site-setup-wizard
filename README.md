@@ -70,5 +70,5 @@ Please log issues on the GitHub at https://github.com/neelakansha85/nsd-site-set
 
 ## ChangeLog
 
-See [CHANGES.md](CHANGES.md). In your project create a `CHANGES.md` or `CHANGELOG.md` file.
+See [CHANGES.md](CHANGELOG.md).
 
