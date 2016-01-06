@@ -11,7 +11,7 @@ Allows multiste registered users to create sites using pre selected features/set
 
 ## Features
 
-* This plugin allows users to selection following settings before creating a site:
+* This plugin allows users to select following settings before creating a site:
     * Site Privacy (Also includes WPMU Multisite Privacy settings if enabled).
     * Site Category (Allows users to select a pre-configured site category if required). (Ex: http://yourdomain.com/category1-mysite)
     * Plugins to be activated within the site (Works with WPMU Pretty Plugins including their categories if enabled).
