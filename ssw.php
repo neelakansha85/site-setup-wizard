@@ -33,7 +33,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 	class Site_Setup_Wizard_NSD {
 
 		/* All public variables that will be used for dynamic programming */	
-			public $multiste;		
+			public $multisite;		
 			/* Site Path variable */
 			public $path;
 
@@ -89,7 +89,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_shortcode('site_setup_wizard', array( $this, 'ssw_shortcode' ) );
 			
 			/* Check and store is the wordpress installation is multisite or not */
-			$this->multiste = is_multisite();
+			$this->multisite = is_multisite();
 
 		}
 
@@ -627,7 +627,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
     		if ( $current_user_role == $ssw_not_available ) {
     			echo 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. 
-    				If you believe this is by error, please contact askits@nyu.edu';
+    				If you believe this is by error, please contact askit@nyu.edu';
     		}
     		else {
 	    		$ssw_main_table = $this->ssw_main_table();
