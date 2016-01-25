@@ -689,7 +689,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				else if($ssw_next_stage =='ssw_step3') {
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce($_POST['step2_nonce'], 'step2_action') ){
+					if ( isset( $_POST['step2_nonce'] ) && wp_verify_nonce($_POST['step2_nonce'], 'step2_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step2_process.php');
 				    }
@@ -698,7 +698,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				
 				else if($ssw_next_stage =='ssw_step4') {
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce($_POST['step2_nonce'], 'step2_action') ){
+					if ( isset( $_POST['step2_nonce'] ) && wp_verify_nonce($_POST['step2_nonce'], 'step2_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step2_process.php');
 						/* Create Actual new site based on information given */
@@ -706,7 +706,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						include(SSW_PLUGIN_DIR.'admin/create_new_site.php');
 				    }
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					else if (wp_verify_nonce($_POST['step3_nonce'], 'step3_action') ){
+					else if ( isset( $_POST['step3_nonce'] ) && wp_verify_nonce($_POST['step3_nonce'], 'step3_action' ) ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step3_process.php');
 				    }
@@ -715,7 +715,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				
 				else if($ssw_next_stage == 'ssw_finish') {
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce($_POST['step4_nonce'], 'step4_action') ){
+					if ( isset( $_POST['step4_nonce'] ) && wp_verify_nonce( $_POST['step4_nonce'], 'step4_action' ) ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step4_process.php');
 				    }
