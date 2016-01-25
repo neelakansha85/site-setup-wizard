@@ -366,6 +366,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			if ($wpmu_pretty_plugins == true) {
 				$plugins_categories = get_site_option($this->wpmu_pretty_plugins_categories_site_option);
 				$all_plugins = get_site_option($this->wpmu_pretty_plugins_plugins_list_site_option);
+				if ( ! $all_plugins ) {
+					$all_plugins = array();
+				}
+
 				foreach ($all_plugins as $key => $value) {
 					if ( !function_exists( 'validate_plugin' ) ) {
 		        		require_once ABSPATH . 'wp-admin/includes/plugin.php';
