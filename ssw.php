@@ -724,10 +724,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				echo '</form>';
 				echo '</div>';
-				/* SSW Container for AJAX ends */
-				if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
-					/* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
-					wp_die();
+
+				// Die when doing AJAX to prevent extra output.
+				if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+					die();
 				}
 			}
 		}
