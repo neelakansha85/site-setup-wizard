@@ -39,12 +39,38 @@
         $next_stage = sanitize_title_for_query( $_POST['ssw_next_stage'] );
             $this->ssw_debug_log('step2_process', 'next_stage', $next_stage);
         $endtime = current_time('mysql');
-        $ssw_process_query =  'UPDATE '.$ssw_main_table.' SET user_id = \''.$current_user_id.'\', admin_email = \''.$admin_email.'\', 
-            admin_user_id = \''.$admin_user_id.'\', path = \''.$path.'\', title = \''.$title.'\', 
-            privacy = \''.$privacy.'\', next_stage = \''.$next_stage.'\', endtime = \''.$endtime.'\' WHERE user_id = '.$current_user_id.' and site_created = false and wizard_completed = false';
-            $this->ssw_debug_log('step2_process', 'ssw_process_query', $ssw_process_query);
-        
-        $result = $wpdb->query( $ssw_process_query );
+	$result = $wpdb->update(
+		$ssw_main_table,
+		array(
+			'user_id' => $current_user_id,
+			'admin_email' => $admin_email,
+			'path' => $path,
+			'title' => $title,
+			'privacy' => $private,
+			'next_stage' => $next_stage,
+			'endtime' => $endtime,
+		),
+		array(
+			'user_id' => $current_user_id,
+			'site_created' => 0,
+			'wizard_completed' => 0,
+		),
+		array(
+			'%d',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+		),
+		array(
+			'%d',
+			'%d',
+			'%d',
+		)
+	);
+
             $this->ssw_log_sql_error($wpdb->last_error);
         
         if ( is_wp_error( $result ) ) {
