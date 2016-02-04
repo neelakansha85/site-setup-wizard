@@ -124,7 +124,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				wp_die();
 			}
 			else {
-				wp_die("Please use valid forms to send data.");
+				wp_die( __( 'Please use valid forms to send data.', 'nsd-site-setup-wizard' ) );
 			}
 
 			
@@ -248,7 +248,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			/*	Adding Menu item "Create Site" in Dashboard, allowing it to be displayed for all users including 
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
-			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
+			add_menu_page( __( 'Site Setup Wizard', 'nsd-site-setup-wizard' ), __( 'Create Site', 'nsd-site-setup-wizard' ), 'read', SSW_CREATE_SITE_SLUG,
 				array( $this, 'ssw_create_site' ), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
 		}
 
@@ -257,16 +257,16 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			/*	Adding Menu item "Create Site" in Dashboard, allowing it to be displayed for all users including 
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
-			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
+			add_menu_page( __( 'Site Setup Wizard', 'nsd-site-setup-wizard' ), _x( 'Create Site', 'dashboard page title', 'nsd-site-setup-wizard' ), 'read', SSW_CREATE_SITE_SLUG,
 				array($this, 'ssw_create_site'), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
 			/* Adding First Sub menu item in the SSW Plugin to reflect the Create Site functionality in the sub menu */
-			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
+			add_submenu_page( SSW_CREATE_SITE_SLUG, __( 'Site Setup Wizard', 'nsd-site-setup-wizard' ), _x( 'Create Site', 'dashboard page title', 'nsd-site-setup-wizard' ), 'read', SSW_CREATE_SITE_SLUG,
 				array($this, 'ssw_create_site') );
 			/* Adding SSW Options page in the Network Dashboard below the Create Site menu item */
-			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Options', 'Options', 'manage_network', 
+			add_submenu_page( SSW_CREATE_SITE_SLUG, __( 'Site Setup Wizard Options', 'nsd-site-setup-wizard' ), _x( 'Options', 'dashboard page title', 'nsd-site-setup-wizard' ), 'manage_network',
 				SSW_OPTIONS_PAGE_SLUG, array($this, 'ssw_options_page') );
 			/* Adding SSW Reports page in the Network Dashboard below the Create Site menu item */
-			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Analytics', 'Analytics', 'manage_network', 
+			add_submenu_page( SSW_CREATE_SITE_SLUG, __( 'Site Setup Wizard Analytics', 'nsd-site-setup-wizard' ), _x( 'Analytics', 'dashboard page title', 'nsd-site-setup-wizard' ), 'manage_network',
 				SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
 		}
 
@@ -303,12 +303,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Display all admin message errors when occurs */
 		public function ssw_admin_errors( $error ) {
 			if($error == 1000) {
-				echo '
+				printf( '
 					<div class="error">
-						<p>Plugin Activation Error: There exists another plugin which uses the same config options name
-						as Site Setup Wizard Plugin uses.</p>
+						<p>%s</p>
 					</div>
-				';
+				', esc_html( __( 'Plugin Activation Error: There exists another plugin which uses the same config options name as Site Setup Wizard Plugin uses.', 'nsd-site-setup-wizard' ) ) );
 			}
 		}
 
@@ -453,7 +452,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		public function ssw_shortcode() {
 			if( !is_user_logged_in()) {
 				$login_url = site_url( 'wp-login.php?redirect_to='.urlencode( network_site_url( $_SERVER['REQUEST_URI'] ) ) ).'&action=shibboleth';
-				echo sprintf( __( 'You must first <a href="%s">log in</a>, and then you can create a new site.' ), $login_url );
+				echo sprintf( __( 'You must first <a href="%s">log in</a>, and then you can create a new site.', 'nsd-site-setup-wizard' ), esc_url( $login_url ) );
 			}
 			else {
 				$this->ssw_create_site();
@@ -521,7 +520,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				wp_die();
 			}
 			else {
-				wp_die("Please use valid forms to send data.");
+				wp_die( __( 'Please use valid forms to send data.', 'nsd-site-setup-wizard' ) );
 			}
 		}
 
@@ -554,10 +553,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				wp_die();
 			}
 			else {
-				wp_die("Please use valid forms to send data.");
+				wp_die( __( 'Please use valid forms to send data.', 'nsd-site-setup-wizard' ) );
 			}
 		}
-		
+
 		/*	SSW Create Site function which is the main function	*/
 		public function ssw_create_site() {
 
@@ -566,7 +565,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				/* Double check security to not allow running this script if called from outside class */
 				if ( !is_user_logged_in() ) {
-					wp_die( 'You must be logged in to run this script.' );
+					wp_die( __( 'You must be logged in to run this script.', 'nsd-site-setup-wizard' ) );
 				}
 				/*	Currently this plugin only supports sub directory path hence unless it supports sub domain
 					path value please do not allow users with sub domain to activate it. 
@@ -575,8 +574,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					which calls wpmu_create_blog method to create new site 
 				*/
 				if( is_subdomain_install() ) {
-					echo '<h2>This plugin only supports sub directory wordpress installation. Please switch 
-							to sub directory installation or contact author.</h2>';
+					echo '<h2>' . esc_html( __( 'This plugin only supports subdirectory WordPress installation. Please switch to subdirectory installation or contact author.', 'nsd-site-setup-wizard' ) ) . '</h2>';
 				}
 			
 			/* Fecth information of current user based on his role assigned on root site by switching to root site */
@@ -637,8 +635,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$plugins_list = $plugin_options['plugins_list'];
 
     		if ( $current_user_role == $ssw_not_available ) {
-    			echo 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. 
-    				If you believe this is by error, please contact askit@nyu.edu';
+    			esc_html_e( 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU.  If you believe this is by error, please contact askit@nyu.edu', 'nsd-site-setup-wizard' );
     		}
     		else {
 	    		$ssw_main_table = $this->ssw_main_table();
@@ -650,7 +647,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
                     	$this->ssw_log_sql_error($wpdb->last_error);
 					
 					// $wpdb->delete ($ssw_main_table, array('user_id'=>$current_user_id));
-					echo 'Let\'s Create a new site again!';
+					esc_html_e( 'Let\'s Create a new site again!', 'nsd-site-setup-wizard' );
 				}
 
 				/* Resume Site Setup Wizard from where left off before */
