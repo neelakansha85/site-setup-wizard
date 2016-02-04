@@ -5,6 +5,7 @@ Description: Allows creating sites automatically using a simple shortcode [site_
 Plugin URI: http://neelshah.info
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
+Text Domain: nsd-site-setup-wizard
 License: GPL2
 Version: 1.2.2
 */
@@ -50,7 +51,10 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			register_activation_hook(__FILE__, array( $this, 'ssw_activate' ) );
 			// Plugin Deactivation Hook
 			register_deactivation_hook(__FILE__, array( $this, 'ssw_deactivate' ) );
-			
+
+			// Set up internationalization.
+			add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+
 			/* Add action to display Create Site menu item in Site's Dashboard */
 			// add_action( 'admin_menu', array($this, 'ssw_menu'));
 			/* Add action to display Create Site menu item in Network Admin's Dashboard */
@@ -229,9 +233,16 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			*/
 
 			delete_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
-			
-		} 
-		
+
+		}
+
+		/**
+		 * Load plugin textdomain.
+		 */
+		public function load_plugin_textdomain() {
+			load_plugin_textdomain( 'nsd-site-setup-wizard' );
+		}
+
 		/*	Menu function to display Site Setup Wizard -> Create Site in Site's Dashboard	*/
 		public function ssw_menu() {
 			/*	Adding Menu item "Create Site" in Dashboard, allowing it to be displayed for all users including 
