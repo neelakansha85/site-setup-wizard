@@ -12,20 +12,31 @@
         $starttime = current_time('mysql');
 	    $endtime = $starttime;
 
-	    $previously_inserted = $wpdb->get_var( 
-	    	'SELECT COUNT(*) FROM '.$ssw_main_table.' WHERE user_id ='.$current_user_id.' and wizard_completed = false'
-	    	);
+	    $previously_inserted = $wpdb->get_var( $wpdb->prepare(
+		'SELECT COUNT(*) FROM '.$ssw_main_table.' WHERE user_id = %d and wizard_completed = false', $current_user_id
+		) );
 	        $this->ssw_log_sql_error($wpdb->last_error);
 	    	$this->ssw_debug_log('step1_process','previously_inserted',$previously_inserted);
 
 	    if( $previously_inserted == 0 ) {
-		    $result = $wpdb->query(
-		        $wpdb->prepare(
-		            "Insert into $ssw_main_table (user_id, site_usage, next_stage, starttime, endtime)
-		            Values (%d, %s, %s, %s, %s)",
-		            $current_user_id, $site_usage, $next_stage, $starttime, $endtime
-		        )
-		    );
+		$result = $wpdb->insert(
+			$ssw_main_table,
+			array(
+				'user_id'    => $current_user_id,
+				'site_usage' => $site_usage,
+				'next_stage' => $next_stage,
+				'starttime'  => $starttime,
+				'endtime'    => $endtime,
+			),
+			array(
+				'%d',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+			)
+		);
+
             	$this->ssw_log_sql_error($wpdb->last_error);
 		    
 		    if( is_wp_error( $result ) ) {
