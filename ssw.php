@@ -637,7 +637,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 	    		$ssw_main_table = $this->ssw_main_table();
 				
 				/* Cancel current site setup Wizard Process and restart it */
-				if( $_REQUEST['ssw_cancel'] == true )
+				if( isset( $_POST['ssw_cancel'] ) && 'true' === $_POST['ssw_cancel'] )
 				{
 					$wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false' );
                     	$this->ssw_log_sql_error($wpdb->last_error);
@@ -647,21 +647,18 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				}
 
 				/* Resume Site Setup Wizard from where left off before */
-				if( $_POST['ssw_cancel'] != true ) {
-					$ssw_next_stage = $wpdb->get_var( 
-						'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
-					);
-                    	$this->ssw_log_sql_error($wpdb->last_error);
-					
-					/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
-					/*
-					if($ssw_next_stage != 'ssw_step2') {
-						$ssw_next_stage = '';
-					}
-					*/
+				$ssw_next_stage = $wpdb->get_var(
+					'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
+				);
+		$this->ssw_log_sql_error($wpdb->last_error);
+
+				/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
+				/*
+				if($ssw_next_stage != 'ssw_step2') {
+					$ssw_next_stage = '';
 				}
 				/* Move to the next step using this POST variable "ssw_next_stage" */
-				if( $_POST['ssw_next_stage'] != '' && $_POST['ssw_cancel'] != true ) {
+				if( ! empty( $_POST['ssw_next_stage'] ) ) {
 					$ssw_next_stage = $_POST['ssw_next_stage'];
 				}
 
