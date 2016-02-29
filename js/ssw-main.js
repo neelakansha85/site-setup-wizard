@@ -1,4 +1,4 @@
-/* Custom Javascript for Web Publishing NYU */
+/* Site Setup Wizard */
 
 /* JS for all button actions */
 
@@ -19,7 +19,6 @@ var ssw_site_processing_step4_msg = "<h6>Please wait while your site is being pr
 
 /* Function for 'Cancel' button action */
 function ssw_js_submit_form_cancel() {
-
     ssw_js_display_processing(true);
 
     jQuery.ajax({
@@ -40,7 +39,6 @@ function ssw_js_submit_form_cancel() {
 
 /* Function for 'Previous' button action */
 function ssw_js_submit_form_previous() {
-
     ssw_js_display_processing(true);
     ssw_next_stage = document.getElementById('ssw-steps').ssw_previous_stage.value;
     
@@ -63,7 +61,6 @@ function ssw_js_submit_form_previous() {
 
 /* Function for 'Next' button action */
 function ssw_js_submit_form_next() {
-
     var current_stage = document.forms['ssw-steps'].ssw_current_stage.value;
     
     if(current_stage == 'ssw_step2' || current_stage == 'ssw_step4') {
@@ -100,7 +97,6 @@ function ssw_js_submit_form_next() {
 
 /* Function for 'Skip' button action */
 function ssw_js_submit_form_skip() {
-
     ssw_js_display_processing(true);
     ssw_next_stage = document.getElementById('ssw-steps').ssw_next_stage.value;
 
@@ -124,7 +120,6 @@ function ssw_js_submit_form_skip() {
 
 /* JS for Validating Forms based on current step */
 function ssw_js_validate_form(step) {
-
     if (step == 'ssw_step1') {
         /* Will be used for 2 iteration of plugin for validation from step1 */
         return true;
@@ -168,7 +163,6 @@ function ssw_js_validate_form(step) {
 
 /* Function to validate admin_email */
 function ssw_js_validate_email() {
-
     var email_regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     var email = document.getElementById('ssw-steps').admin_email.value;
     
@@ -186,7 +180,6 @@ function ssw_js_validate_email() {
 
 /* Function to validate site_address */
 function ssw_js_validate_site_address() {
-
     var site_address_regex = /^[a-zA-Z0-9]+[a-zA-Z0-9_]*$/;
     site_address = document.getElementById('ssw-steps').site_address.value;
 
@@ -204,7 +197,6 @@ function ssw_js_validate_site_address() {
 
 /* Function to validate site_title */
 function ssw_js_validate_title() {
-
     var site_title_regex = /^.+$/;
     site_title = document.getElementById('ssw-steps').site_title.value;
 
@@ -221,8 +213,7 @@ function ssw_js_validate_title() {
 /* ENDS Function to validate site_title */
 
 /* Function to validate site_privacy */
-function ssw_js_validate_privacy() {
-    
+function ssw_js_validate_privacy() {    
     var privacy_button = document.getElementById('ssw-steps').site_privacy;
     var privacy_button_count = -1;
 
@@ -242,8 +233,7 @@ function ssw_js_validate_privacy() {
 /* ENDS Function to validate site_privacy */
 
 /* Function to validate select_theme */
-function ssw_js_validate_theme() {
-    
+function ssw_js_validate_theme() {    
     var theme_button = document.getElementById('ssw-steps').select_theme;
     var theme_button_count = -1;
 
@@ -263,8 +253,7 @@ function ssw_js_validate_theme() {
 /* ENDS Function to validate select_theme */
 
 /* Function to validate site_terms */
-function ssw_js_validate_terms() {
-    
+function ssw_js_validate_terms() {   
     var terms_checkbox = document.getElementById('ssw-steps').site_terms;
     
     if (terms_checkbox.checked) {
@@ -281,7 +270,6 @@ function ssw_js_validate_terms() {
 
 /* JS for checking availability of site address from wordpress server */
 function ssw_js_check_domain_available() {
-
     var site_exists = '';
     var site_address_bucket = document.getElementById('ssw-steps').site_address_bucket.value;
     var site_address = document.getElementById('ssw-steps').site_address.value;
@@ -331,7 +319,6 @@ function ssw_js_check_domain_available() {
 
 /* JS to check if given admin email address is a registered user of the system */
 function ssw_js_check_admin_email_exists() {
-
     var admin_user_id = '';
     
     /*  AJAX request with aync flag true as we need the response synchrnously for use in the 
@@ -374,7 +361,6 @@ function ssw_js_check_admin_email_exists() {
 
 /* Function for adding hidden input variables to a form */
 function ssw_js_add_hidden_input(theForm, key, value) {
-
     // Create a hidden input element, and append it to theForm
     var input = document.createElement('input');
     input.type = 'hidden';
@@ -386,7 +372,6 @@ function ssw_js_add_hidden_input(theForm, key, value) {
 
 /* Function for submitting first step data */
 function ssw_js_submit_first_step(usage) {
-
     var theForm = document.forms['ssw-steps'];
     ssw_js_add_hidden_input(theForm, 'ssw_site_usage', usage);
     ssw_js_submit_form_next();
@@ -395,7 +380,6 @@ function ssw_js_submit_first_step(usage) {
 
 /* Function to get site complete path from site category concatenated with site address */
 function ssw_js_get_site_complete_path() {
-
     var site_address_bucket = document.getElementById('ssw-steps').site_address_bucket.value;
     var site_address = document.getElementById('ssw-steps').site_address.value;
     site_address = site_address.toLowerCase();
@@ -417,7 +401,6 @@ function ssw_js_get_site_complete_path() {
 
 /* Function for displaying complete site address */
 function ssw_js_site_address_display() {
-
     var site_complete_path = ssw_js_get_site_complete_path();
     var current_site_root_address = document.getElementById('ssw-steps').current_site_root_address.value;
     document.getElementById("ssw-site-address-display").innerHTML = current_site_root_address + site_complete_path;
@@ -458,37 +441,69 @@ function ssw_js_display_processing_msg(option) {
 }
 /* ENDS Function to dosplay site processing message */
 
-/* JS to update config options for Site Setup Wizard */
-function ssw_js_update_config_options() {
-
-    jQuery.ajax({
-        type: "POST", 
-        url: ssw_main_ajax.ajaxurl,
-        dataType: "html",
-        async: false,
-        data: { 
-            action: 'ssw_update_config_options',
-            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
-        },
-        success: function(options_value){
-            options_id = options_id_value;
-        } 
-    });
-
-    if(options_id == 0) {
-        //document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
-        //document.getElementById("ssw-validate-email-error").style.display="block";
-        return false;
-    }
-    else if(options_id > 0) {
-        //var theForm = document.forms['ssw-steps'];
-        //ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
-        return true;
-    }
-    else {
-        //document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
-        //document.getElementById("ssw-validate-email-error").style.display="block";
-        return false;
-    }
+/* JS for Site Setup Wizard Options Page */
+function ssw_user_role() {
+    if (document.getElementById("ssw_user_role").value=='add_new')
+    {        
+        document.getElementById("u72_input").style.visibility='visible'
+        document.getElementById("u73_img").style.visibility='visible'
+    } 
+    else 
+    { 
+        document.getElementById("u72_input").style.visibility='hidden'
+        document.getElementById("u73_img").style.visibility='hidden'
+    }; 
 }
-/* ENDS JS to update config options for Site Setup Wizard */
+
+function ssw_site_category() {
+    if (document.getElementById("ssw-site-category").value=='add_new')
+    {        
+        document.getElementById("u71_input").style.visibility='visible'
+        document.getElementById("u75_img").style.visibility='visible'
+    } 
+    else 
+    { 
+        document.getElementById("u71_input").style.visibility='hidden'
+        document.getElementById("u75_img").style.visibility='hidden'
+    }; 
+}
+
+function ssw_site_type() {
+    if (document.getElementById("ssw-site-type").value=='add_new')
+    {        
+        document.getElementById("u70_input").style.visibility='visible'
+        document.getElementById("u77_img").style.visibility='visible'
+    } 
+    else 
+    { 
+        document.getElementById("u70_input").style.visibility='hidden'
+        document.getElementById("u77_img").style.visibility='hidden'
+    }; 
+}
+
+function ssw_select_template() {
+    if (document.getElementById("ssw-select-template").value=='add_new')
+    {        
+        document.getElementById("u69_input").style.visibility='visible'
+        document.getElementById("u79_img").style.visibility='visible'
+    } 
+    else 
+    { 
+        document.getElementById("u69_input").style.visibility='hidden'
+        document.getElementById("u79_img").style.visibility='hidden'
+    }; 
+}
+
+function ssw_banned_site_address() {
+    if (document.getElementById("ssw-banned-site-address").value=='add_new')
+    {        
+        document.getElementById("u68_input").style.visibility='visible'
+        document.getElementById("u83_img").style.visibility='visible'
+    } 
+    else 
+    { 
+        document.getElementById("u68_input").style.visibility='hidden'
+        document.getElementById("u83_img").style.visibility='hidden'
+    }; 
+}
+/* ENDS JS for Site Setup Wizard Options Page */

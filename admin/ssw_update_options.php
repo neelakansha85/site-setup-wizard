@@ -87,7 +87,7 @@
             'writing1' => 'Writing 1',
             'writing2' => 'Writing 2',
             'portfolio1' => 'Portfolio 1',
-            'portfolio2' => 'Portfolio 2',
+            'portfolio2' => 'Portfolio 2'
             ),
         'hide_plugin_category' => 'other',
         'external_plugins' => array(
@@ -120,6 +120,13 @@
                 'teaching_learning_research' => 'Teaching/Learning/Research Site',
                 'administrative' => 'Administrative'
                 ),
+            ),
+        'steps_name' => array(
+            'step1' => 'Start',
+            'step2' => 'Essential Settings',
+            'step3' => 'Themes',
+            'step4' => 'Features',
+            'finish' => 'Done'
             ),
         'site_usage_display_common' => true,
         'ssw_not_available' => 'alumni_subscriber',

@@ -134,6 +134,13 @@
                 'administrative' => 'Administrative'
                 ),
             ),
+        'steps_name' => array(
+            'step1' => 'Start',
+            'step2' => 'Essential Settings',
+            'step3' => 'Themes',
+            'step4' => 'Features',
+            'finish' => 'Done'
+            ),
         'site_usage_display_common' => true,
         'ssw_not_available' => 'alumni_subscriber',
         'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
