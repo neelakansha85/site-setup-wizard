@@ -83,8 +83,7 @@
                 'teaching_and_learning' => 'Teaching/Learning/Research',
 */                ),
             ),
-        'banned_root_site_address' => array( 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
-        'banned_site_address' => array( 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive' ),
+        'banned_site_address' => array( 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
         /* Sites with this category selected will not have any bucket in it's site address */
         'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
         'template_type' => array(
@@ -117,35 +116,36 @@
             ),
         'site_usage' => array(
             'student' => array(
-                'personal' => 'Personal Site',
+/*                'personal' => 'Personal Site',
                 'clubs' => 'Club Site'
-                ),
+*/                ),
             'faculty' => array(
-                'personal' => 'Personal Site',
+/*                'personal' => 'Personal Site',
                 'teaching_learning_research' => 'Teaching/Learning/Research Site'
-                ),
+*/                ),
             'employee' => array(
-                'personal' => 'Personal Site',
-                'administrative' => 'Administrative'
-                ),
-            'common' => array(
                 'personal' => 'Personal Site',
                 'teaching_learning_research' => 'Teaching/Learning/Research Site',
                 'administrative' => 'Administrative'
                 ),
+            'affiliate' => array(
+/*                'personal' => 'Personal Site',
+                'teaching_learning_research' => 'Teaching/Learning/Research Site'
+*/                ),
             ),
+        'site_usage_display_common' => false,
         'steps_name' => array(
             'step1' => 'Start',
             'step2' => 'Essential Settings',
             'step3' => 'Themes',
             'step4' => 'Features',
-            'finish' => 'Done'
+            'finish' => 'Done!'
             ),
-        'site_usage_display_common' => true,
         'ssw_not_available' => 'alumni_subscriber',
         'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
         'privacy_selection' => true,
-        'debug_mode' => false
+        'debug_mode' => false,
+        'master_user' => true
     );
 	/* END Default Content for config options  */
 

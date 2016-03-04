@@ -5,23 +5,23 @@ echo '<p class="sww-breadcrumb-text">';
 	if(isset($step1)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
-	echo '>Start</span> -> <span ';
+	echo '>'.$steps_name['step1'].'</span> -> <span ';
 	if(isset($step2)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
-	echo '>Essential Settings</span> -> <span ';
+	echo '>'.$steps_name['step2'].'</span> -> <span ';
 /*	if(isset($step3)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
-	echo '>Themes</span> -> <span ';
+	echo '>'.$steps_name['step3'].'</span> -> <span ';
 */
 	if(isset($step4)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
-	echo '>Features</span> -> <span ';
+	echo '>'.$steps_name['step4'].'</span> -> <span ';
 	if(isset($finish)) {
 		echo 'class="sww-breadcrumb-selected"';
 	}
-	echo '>Done!</span></p>';
+	echo '>'.$steps_name['finish'].'</span></p>';
 
 ?>

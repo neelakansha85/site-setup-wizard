@@ -23,9 +23,9 @@ $step1 = 'start';
 
 					<div class="ssw-selection">
     ';
-                    if( $site_usage_display_common != true ) {
+                    if( $is_site_usage_display_common != true ) {
                         foreach ( $site_usage as $site_usage_user => $site_usage_user_details ) {
-                            if ( $master_user == true ) {        
+                            if ( $is_master_user == true ) {        
                                 if ( $site_usage_user != 'common' ) {
 
                                     foreach ( $site_usage_user_details as $site_usage_user_details_key => $site_usage_user_details_value ) {

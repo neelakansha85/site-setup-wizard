@@ -128,11 +128,11 @@
             'step4' => 'Features',
             'finish' => 'Done'
             ),
-        'site_usage_display_common' => true,
         'ssw_not_available' => 'alumni_subscriber',
         'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
         'privacy_selection' => true,
-        'debug_mode' => true
+        'debug_mode' => false,
+        'master_user' => true
     );
 	/* END config options  */
 

@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Site Setup Wizard
-Description: Allows creating sites automatically using a simple shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
-Plugin URI: http://neelshah.info
+Description: Allows users to create new sites using a wizard of multiple steps and pre-selecting site settings such as theme, plugins, privacy, etc. You can use the wizard by adding shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
+Plugin URI: https://github.com/neelakansha85/nsd-site-setup-wizard
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
@@ -590,11 +590,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     		/* Identifying current user's role to restrict some content based on that */
     		$current_user_role_array = $current_user->roles;
     		$current_user_role = $current_user_role_array[0];
-    		/* User with this property will be able to see complete SSW plugin */
-    		/* Currently edit_post is a capability of all users above subscriber level. */
-    		// $master_user = current_user_can('read');
-    		$master_user = true;
-
+    		
     		/* Restore to original blog it came from before you switched to root site in case you did */
     		restore_current_blog();
 
@@ -609,12 +605,14 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$external_plugins = $options['external_plugins'];
 				$restricted_user_roles = $options['restricted_user_roles'];
 				$site_usage = $options['site_usage'];
-				$site_usage_display_common = $options['site_usage_display_common'];
+				$is_site_usage_display_common = $options['site_usage_display_common'];
 				$ssw_not_available = $options['ssw_not_available'];
 				$terms_of_use = $options['terms_of_use'];
-				$is_debug_mode = $options['debug_mode'];
-				$is_privacy_selection = $options['privacy_selection'];
-
+				$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
+		        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
+		        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
+		        $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
+				
 				/* Fetch values if the given external plugins are installed or not */
     			$wpmu_multisite_privacy_plugin = $external_plugins['wpmu_multisite_privacy_plugin'];
     			$wpmu_pretty_plugins = $external_plugins['wpmu_pretty_plugins'];
@@ -671,7 +669,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				else if($ssw_next_stage =='ssw_step2') {
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce($_POST['step1_nonce'], 'step1_action') ){
+					if (wp_verify_nonce(isset( $_POST['step1_nonce'] ), 'step1_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step1_process.php');
 

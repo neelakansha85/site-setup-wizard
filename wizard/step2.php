@@ -46,7 +46,7 @@ $step2 = 'essential_options';
                             <select id="ssw-site-address-bucket" class="ssw-subfield ssw-select" name="site_address_bucket" tabindex="2" onchange="ssw_js_site_address_display()" required >
     ';
                             foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
-                                if ( $master_user == true ) {        
+                                if ( $is_master_user == true ) {        
                                     foreach ( $site_address_bucket_user_value as $key => $value) {
                                         echo '
                                             <option value="'.$key.'">'.$value.'</option>
