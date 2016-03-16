@@ -321,11 +321,14 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
             	)
 			);
 
+      /* Register Options Page Javascript for SSW Plugin */
+      wp_register_script( 'ssw-options-js', SSW_PLUGIN_URL.'js/ssw-options.js');   
+
 			/* Link stylesheets for the SSW Plugin when plugin is called for */
 			wp_register_style( 'ssw-style-css', SSW_PLUGIN_URL.'css/ssw-style.css' );
 			wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
 			wp_enqueue_style( 'ssw-style-css' );
-  			wp_enqueue_style( 'ssw-media-css' );
+  		wp_enqueue_style( 'ssw-media-css' );
 		}
 
 		/* Register Javascripts for the frontend and backend */

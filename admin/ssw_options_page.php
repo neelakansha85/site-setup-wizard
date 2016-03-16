@@ -1,6 +1,11 @@
-<?php 
+<?php
+
+    /* Include the Javascripts for the ssw plugin while trying to create a site */
+    wp_enqueue_script( 'ssw-options-js' );
+    
     global $current_blog;
     global $current_site;
+    
     /* Identifing current domain and path on domain where wordpress is running from */
     $current_site_root_address = $current_blog->domain.$current_site->path;
 
@@ -22,6 +27,10 @@
         $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
         $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
 
+    /* Pass value of $options to ssw-options.js */
+    wp_localize_script( 'ssw-options-js', 'options', $options );
+
+/*
 echo "<br/>Debug :";
     echo $is_debug_mode;
 echo "<br/>Privacy mode:";
@@ -30,45 +39,56 @@ echo "<br/>";
 echo "<br/>options :";
     print_r($options);
 echo "<br/>";
+*/
+
 ?>
+
+
 <div class="wrap">
     <h1><?php echo esc_html('Site Setup Wizard Settings') ?></h1>
     <form method="post" action="settings.php" novalidate="novalidate">
         <h3><?php echo esc_html('Basic Settings') ?></h3>
         <table class="form-table">
             <tbody><tr>
-                <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('User Role') ?></label></th>
-                <td>
-                    <select id="ssw-site-usage" class="regular-text" onchange="ssw_user_role()">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <?php                         
-                        foreach($site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value){ 
-                      ?> 
-                            <option value="<?php echo $site_address_bucket_user?>"><?php echo $site_address_bucket_user?></option>
-                      <?php
-                        }
-                      ?>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
                 <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
                 <td>
                     <select id="ssw-user-role" class="regular-text" onchange="ssw_user_role()">
                       <option value="select"><?php echo esc_html('--Select--') ?></option>
                       <?php                         
-                        foreach($site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value){ 
+/*                        foreach($site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value){ 
                       ?> 
                             <option value="<?php echo $site_address_bucket_user?>"><?php echo $site_address_bucket_user?></option>
                       <?php
+                        }
+*/                      ?>
+                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('Site Usage') ?></label></th>
+                <td>
+                    <select id="ssw-site-usage" class="regular-text">
+                      <option value="select"><?php echo esc_html('--Select--') ?></option>
+                      <?php                         
+                        foreach($site_usage as $site_usage_user => $site_usage_user_value){ 
+                            /*
+                            ** TODO: Add ajax rule to check the selected user in the above select box and pass that value here 
+                            */
+                            $selected_site_usage_user = 'employee';
+                            if($site_usage_user == $selected_site_usage_user){
+                                foreach ( $site_usage_user_value as $key => $value){                            
+                      ?> 
+                                    <option value="<?php echo $key?>"><?php echo $value?></option>
+                      <?php
+                                }
+                            }
                         }
                       ?>
                       <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
                     </select>
                 </td>
             </tr>
-
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
