@@ -2,6 +2,8 @@
 
     /* Include the Javascripts for the ssw plugin while trying to create a site */
     wp_enqueue_script( 'ssw-options-js' );
+    /* Include CSS for Options Page */
+    wp_enqueue_style( 'ssw-style-admin-css' );
     
     global $current_blog;
     global $current_site;
@@ -52,64 +54,21 @@ echo "<br/>";
             <tbody><tr>
                 <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
                 <td>
-                    <select id="ssw-user-role" class="regular-text" onchange="ssw_user_role()">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <?php                         
-/*                        foreach($site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value){ 
-                      ?> 
-                            <option value="<?php echo $site_address_bucket_user?>"><?php echo $site_address_bucket_user?></option>
-                      <?php
-                        }
-*/                      ?>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
+                    <select id="ssw-user-role" class="regular-text ssw-select" onchange="ssw_user_role()">
                     </select>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('Site Usage') ?></label></th>
                 <td>
-                    <select id="ssw-site-usage" class="regular-text">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <?php                         
-                        foreach($site_usage as $site_usage_user => $site_usage_user_value){ 
-                            /*
-                            ** TODO: Add ajax rule to check the selected user in the above select box and pass that value here 
-                            */
-                            $selected_site_usage_user = 'employee';
-                            if($site_usage_user == $selected_site_usage_user){
-                                foreach ( $site_usage_user_value as $key => $value){                            
-                      ?> 
-                                    <option value="<?php echo $key?>"><?php echo $value?></option>
-                      <?php
-                                }
-                            }
-                        }
-                      ?>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
+                    <select id="ssw-site-usage" class="regular-text ssw-select">
                     </select>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
-                    <select id="ssw-site-category" class="regular-text" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <?php                         
-                        foreach($site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value){ 
-                            /*
-                            ** TODO: Add ajax rule to check the selected user in the above select box and pass that value here 
-                            */
-                            $selected_site_address_bucket_user = 'employee';
-                            if($site_address_bucket_user == $selected_site_address_bucket_user){
-                                foreach ( $site_address_bucket_user_value as $key => $value){                            
-                      ?> 
-                                    <option value="<?php echo $key?>"><?php echo $value?></option>
-                      <?php
-                                }
-                            }
-                        }
-                      ?>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
+                    <select id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
                     </select>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;'); ?>
@@ -119,34 +78,16 @@ echo "<br/>";
             <tr>
                 <th scope="row"><label for="ssw-site-category-none-prefix"><?php echo esc_html('Site Category with no Prefix') ?></label></th>
                 <td>
-                    <input name="ssw-site-category-none-prefix" type="text" id="ssw-site-category-none-prefix" aria-describedby="ssw-site-category-none-prefix-desc" class="large-text" value="<?php echo esc_attr( $site_address_bucket_none_value == '' ? '' : implode( " ", $site_address_bucket_none_value ) ) ?>" size="45" />
+                    <input name="ssw-site-category-none-prefix" type="text" id="ssw-site-category-none-prefix" aria-describedby="ssw-site-category-none-prefix-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-site-category-none-prefix-desc">
                         <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by spaces.'); ?>
                     </p>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
-                <td>
-                    <select id="ssw-site-type" class="regular-text" onchange="ssw_site_type()">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="ssw-select-template"><?php echo esc_html('Select Template') ?></label></th>
-                <td>
-                    <select id="ssw-select-template" class="regular-text" onchange="ssw_select_template()">
-                      <option value="select"><?php echo esc_html('--Select--') ?></option>
-                      <option value="add_new"><?php echo esc_html('--Add New--') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
                 <th scope="row"><label for="ssw-banned-site-address"><?php echo esc_html('Banned Site Address') ?></label></th>
                 <td>
-                    <input name="ssw-banned-site-address" type="text" id="ssw-banned-site-address" aria-describedby="ssw-banned-site-address-desc" class="large-text" value="<?php echo esc_attr( $banned_site_address == '' ? '' : implode( " ", $banned_site_address ) ) ?>" size="45" />
+                    <input name="ssw-banned-site-address" type="text" id="ssw-banned-site-address" aria-describedby="ssw-banned-site-address-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-banned-site-address-desc">
                         <?php _e( 'Users are not allowed to register these sites. Separate names by spaces.'); ?>
                     </p>
@@ -155,7 +96,7 @@ echo "<br/>";
             <tr>
                 <th scope="row"><label for="ssw-terms-of-use"><?php echo esc_html('Terms of Use') ?> </label></th>
                 <td>
-                    <textarea name="ssw-terms-of-use" id="ssw-terms-of-use" aria-describedby="ssw-terms-of-use-desc" cols="45" rows="5"><?php echo $options['terms_of_use'] ?></textarea>
+                    <textarea name="ssw-terms-of-use" id="ssw-terms-of-use" aria-describedby="ssw-terms-of-use-desc" cols="45" rows="5"></textarea>
                     <p class="description" id="ssw-terms-of-use-desc">
                         <?php _e('Please enter the text you want to display next to Terms of Use checkbox.'); ?>
                     </p>
@@ -164,7 +105,7 @@ echo "<br/>";
             <tr>
                 <th scope="row"><?php echo esc_html('Privacy Selection') ?> </th>
                 <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" <?php if ($is_privacy_selection == true) echo "checked"; ?> ><?php echo esc_html('Display privacy selection options on Step 2') ?> </label>
+                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?> </label>
                 </td>
             </tr>
         </tbody></table>

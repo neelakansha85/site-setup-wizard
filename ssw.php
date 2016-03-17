@@ -326,7 +326,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 			/* Link stylesheets for the SSW Plugin when plugin is called for */
 			wp_register_style( 'ssw-style-css', SSW_PLUGIN_URL.'css/ssw-style.css' );
-			wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
+      wp_register_style( 'ssw-style-admin-css', SSW_PLUGIN_URL.'css/ssw-style-admin.css' );
+      wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
 			wp_enqueue_style( 'ssw-style-css' );
   		wp_enqueue_style( 'ssw-media-css' );
 		}
@@ -354,9 +355,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 			/* Link stylesheets for the SSW Plugin when plugin is called for */
 			wp_register_style( 'ssw-style-css', SSW_PLUGIN_URL.'css/ssw-style.css' );
-			wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
+      wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
 			wp_enqueue_style( 'ssw-style-css' );
-  			wp_enqueue_style( 'ssw-media-css' );
+  		wp_enqueue_style( 'ssw-media-css' );
 		}
 
 		/* Find all currently available plugins and are not network activated to offer for the Features page */

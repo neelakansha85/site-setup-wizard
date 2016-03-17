@@ -1,19 +1,9 @@
 /* Site Setup Wizard Admin CSS */
 
-.ssw-selection .ssw-start-btn {
-	background-color:#000000;
-	display:block;
-	width:100%;
-	padding: 20px;
-	letter-spacing: 3px;
-	text-transform: uppercase;
-	color: white;
-	border-radius: 3px;
-	border: none;
-}
-
 /* Options Page */
 
-
+.ssw-select {
+  min-width: 25em;
+}
 
 /* ENDS Options Page */
