@@ -6,18 +6,6 @@
 	$ssw_config_options_nsd = array(
         'site_address_bucket' => array(
             'student' => array(
-/*                'no_category' => 'No Category Selected',
-                'personal' => 'Personal',
-                'teaching_and_learning' => 'Teaching/Learning/Research',
-                'clubs' => 'Club'
-*/                ),
-            'faculty' => array(
-/*                'no_category' => 'No Category Selected',
-                'personal' => 'Personal',
-                'teaching_and_learning' => 'Teaching/Learning/Research',
-                'faculty' => 'Faculty'
-*/                ),
-            'employee' => array(
                 'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
                 'teaching_and_learning' => 'Teaching/Learning/Research',
@@ -77,61 +65,44 @@
                 'ls' => 'Liberal Studies',
                 'gls' => 'Global Liberal Studies'
                 ),
-            'affiliate' => array(
-/*                'no_category' => 'No Category Selected',
+            'employee' => array(
+                /* Sample Data */
+                /*
+                'no_category' => 'No Category Selected',
                 'personal' => 'Personal',
                 'teaching_and_learning' => 'Teaching/Learning/Research',
-*/                ),
-            ),
-        'banned_site_address' => array( 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
-        /* Sites with this category selected will not have any bucket in it's site address */
+                'clubs' => 'Club'
+                */
+                )
+           ),
+        'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
+        /* Sites with this category selected will not have any prefixes in it's site address */
         'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
-        'template_type' => array(
-            'teaching_and_learning' => 'Teaching and Learning',
-            'administrative' => 'Administrative',
-            'personal' => 'Personal',
-            'custom' => 'Custom'
-            ),
-        'select_template' => array(
-            'dusk_to_dawn' => 'Dusk To Dawn',
-            'sunspot' => 'Sunspot',
-            'hueman' => 'Hueman',
-            'writing1' => 'Writing 1',
-            'writing2' => 'Writing 2',
-            'portfolio1' => 'Portfolio 1',
-            'portfolio2' => 'Portfolio 2',
-            ),
         'hide_plugin_category' => 'other',
         'external_plugins' => array(
             'wpmu_multisite_privacy_plugin' => true,
             'wpmu_pretty_plugins' => true,
-            'wpmu_multisite_theme_manager' => true,
+            'wpmu_multisite_theme_manager' => false,
             'wpmu_new_blog_template' => false
             ),
+        /* In progress */
         'restricted_user_roles' => array(
             'student' => 'student_subscriber',
-            'faculty' => 'faculty_subscriber',
             'employee' => 'staff_subscriber',
-            'affiliate' => 'affiliate_subscriber'
             ),
         'site_usage' => array(
             'student' => array(
-/*                'personal' => 'Personal Site',
-                'clubs' => 'Club Site'
-*/                ),
-            'faculty' => array(
-/*                'personal' => 'Personal Site',
-                'teaching_learning_research' => 'Teaching/Learning/Research Site'
-*/                ),
-            'employee' => array(
                 'personal' => 'Personal Site',
                 'teaching_learning_research' => 'Teaching/Learning/Research Site',
                 'administrative' => 'Administrative'
                 ),
-            'affiliate' => array(
-/*                'personal' => 'Personal Site',
-                'teaching_learning_research' => 'Teaching/Learning/Research Site'
-*/                ),
+            'employee' => array(
+                /* Sample Data */
+                /*
+                'personal' => 'Personal Site',
+                'clubs' => 'Club Site'
+                */
+                )
             ),
         'site_usage_display_common' => false,
         'steps_name' => array(
@@ -141,11 +112,13 @@
             'step4' => 'Features',
             'finish' => 'Done!'
             ),
+        /* Map wordpress user role to which Site Setup Wizard should not be available */
         'ssw_not_available' => 'alumni_subscriber',
         'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
+        'plugins_page_note' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
         'privacy_selection' => true,
         'debug_mode' => false,
-        'master_user' => true
+        'master_user' => false
     );
 	/* END Default Content for config options  */
 

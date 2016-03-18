@@ -121,3 +121,13 @@
 	}
 
 }
+
+@media (max-width: 782px) {
+	.ssw-add-new-text {
+		width: 90% !important;
+		display: inline-block !important;
+	}
+	ssw-add-new-input {
+		
+	}
+}

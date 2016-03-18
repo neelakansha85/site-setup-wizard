@@ -11,44 +11,16 @@
     /* Identifing current domain and path on domain where wordpress is running from */
     $current_site_root_address = $current_blog->domain.$current_site->path;
 
-    $options = $this->ssw_fetch_config_options();
-        $site_address_bucket = $options['site_address_bucket'];
-        $site_address_bucket_none_value = $options['site_address_bucket_none_value'];
-        $banned_site_address = $options['banned_site_address'];
-        $template_type = $options['template_type'];
-        $select_template = $options['select_template'];
-        $hide_plugin_category = $options['hide_plugin_category'];
-        $external_plugins = $options['external_plugins'];
-        $restricted_user_roles = $options['restricted_user_roles'];
-        $site_usage = $options['site_usage'];
-        $is_site_usage_display_common = $options['site_usage_display_common'];
-        $ssw_not_available = $options['ssw_not_available'];
-        $terms_of_use = $options['terms_of_use'];
-        $steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
-        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
-        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
-        $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
-
     /* Pass value of $options to ssw-options.js */
+    $options = $this->ssw_fetch_config_options();
     wp_localize_script( 'ssw-options-js', 'options', $options );
-
-/*
-echo "<br/>Debug :";
-    echo $is_debug_mode;
-echo "<br/>Privacy mode:";
-    echo $is_privacy_selection;
-echo "<br/>";
-echo "<br/>options :";
-    print_r($options);
-echo "<br/>";
-*/
 
 ?>
 
 
 <div class="wrap">
     <h1><?php echo esc_html('Site Setup Wizard Settings') ?></h1>
-    <form method="post" action="settings.php" novalidate="novalidate">
+    <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate">
         <h3><?php echo esc_html('Basic Settings') ?></h3>
         <table class="form-table">
             <tbody><tr>
@@ -56,13 +28,21 @@ echo "<br/>";
                 <td>
                     <select id="ssw-user-role" class="regular-text ssw-select" onchange="ssw_user_role()">
                     </select>
+                    <div class="ssw-add-new-input">
+                        <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" value="">
+                        <img id="add-user-role-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-user-role-input', 'ssw-user-role')">
+                    </div>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('Site Usage') ?></label></th>
                 <td>
-                    <select id="ssw-site-usage" class="regular-text ssw-select">
+                    <select id="ssw-site-usage" class="regular-text ssw-select" onchange="ssw_site_usage()">
                     </select>
+                    <div class="ssw-add-new-input">
+                        <input name="add-site-usage-input" type="text" id="add-site-usage-input" class="ssw-add-new-text" value="">
+                        <img id="add-site-usage-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-site-usage-input', 'ssw-site-usage')">
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -70,6 +50,10 @@ echo "<br/>";
                 <td>
                     <select id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
                     </select>
+                    <div class="ssw-add-new-input">
+                        <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" value="">
+                        <img id="add-site-category-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-site-category-input', 'ssw-site-category')">
+                    </div>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;'); ?>
                     </p>
@@ -94,7 +78,7 @@ echo "<br/>";
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-terms-of-use"><?php echo esc_html('Terms of Use') ?> </label></th>
+                <th scope="row"><label for="ssw-terms-of-use"><?php echo esc_html('Terms of Use') ?></label></th>
                 <td>
                     <textarea name="ssw-terms-of-use" id="ssw-terms-of-use" aria-describedby="ssw-terms-of-use-desc" cols="45" rows="5"></textarea>
                     <p class="description" id="ssw-terms-of-use-desc">
@@ -103,9 +87,18 @@ echo "<br/>";
                 </td>
             </tr>
             <tr>
-                <th scope="row"><?php echo esc_html('Privacy Selection') ?> </th>
+                <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
                 <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?> </label>
+                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="ssw-plugins-page-note"><?php echo esc_html('Plugins Page Note') ?></label></th>
+                <td>
+                    <textarea name="ssw-plugins-page-note" id="ssw-plugins-page-note" aria-describedby="ssw-plugins-page-note-desc" cols="45" rows="5"></textarea>
+                    <p class="description" id="ssw-plugins-page-note-desc">
+                        <?php _e('Please enter the text you want to display on Plugins Selection (Step 4) page.'); ?>
+                    </p>
                 </td>
             </tr>
         </tbody></table>
@@ -113,34 +106,34 @@ echo "<br/>";
         <table class="form-table">
             <tbody>
             <tr>
-                <th scope="row"><label for="ssw-step-1"><?php echo esc_html('Step 1') ?> </label></th>
+                <th scope="row"><label for="ssw-step-1"><?php echo esc_html('Step 1') ?></label></th>
                 <td>
-                    <input name="ssw-step-1" type="text" id="ssw-step-1" class="regular-text" value="<?php echo esc_attr($steps_name['step1']) ?>">
+                    <input name="ssw-step-1" type="text" id="ssw-step-1" class="regular-text" value="">
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-step-2"><?php echo esc_html('Step 2') ?> </label></th>
+                <th scope="row"><label for="ssw-step-2"><?php echo esc_html('Step 2') ?></label></th>
                 <td>
-                    <input name="ssw-step-2" type="text" id="ssw-step-2" class="regular-text" value="<?php echo esc_attr($steps_name['step2']) ?>">
+                    <input name="ssw-step-2" type="text" id="ssw-step-2" class="regular-text" value="">
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-step-3"><?php echo esc_html('Step 3') ?> </label></th>
+                <th scope="row"><label for="ssw-step-3"><?php echo esc_html('Step 3') ?></label></th>
                 <td>
-                    <input name="ssw-step-3" type="text" id="ssw-step-3" class="regular-text" value="<?php echo esc_attr($steps_name['step3']) ?>">
+                    <input name="ssw-step-3" type="text" id="ssw-step-3" class="regular-text" value="">
                 </td>
             </tr>
             
             <tr>
-                <th scope="row"><label for="ssw-step-4"><?php echo esc_html('Step 4') ?> </label></th>
+                <th scope="row"><label for="ssw-step-4"><?php echo esc_html('Step 4') ?></label></th>
                 <td>
-                    <input name="ssw-step-4" type="text" id="ssw-step-4" class="regular-text" value="<?php echo esc_attr($steps_name['step4']) ?>">
+                    <input name="ssw-step-4" type="text" id="ssw-step-4" class="regular-text" value="">
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-finish"><?php echo esc_html('Finish') ?> </label></th>
+                <th scope="row"><label for="ssw-finish"><?php echo esc_html('Finish') ?></label></th>
                 <td>
-                    <input name="ssw-finish" type="text" id="ssw-finish" class="regular-text" value="<?php echo esc_attr($steps_name['finish']) ?>">
+                    <input name="ssw-finish" type="text" id="ssw-step-finish" class="regular-text" value="">
                 </td>
             </tr>
         </tbody></table>
@@ -148,15 +141,15 @@ echo "<br/>";
         <table class="form-table">
             <tbody>
             <tr>
-                <th scope="row"><?php echo esc_html('External Plugins') ?> </th>
+                <th scope="row"><?php echo esc_html('External Plugins') ?></th>
                 <td>
-                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" <?php if ($external_plugins['wpmu_multisite_privacy_plugin'] == true) echo "checked"; ?> ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?> </label>
+                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" <?php if ($external_plugins['wpmu_pretty_plugins'] == true) echo "checked"; ?> ><?php echo esc_html('WPMU Pretty Plugin') ?> </label>
+                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" <?php if ($external_plugins['wpmu_multisite_theme_manager'] == true) echo "checked"; ?> ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?> </label>
+                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-multisite-new-blog-template-plugin" value="true" <?php if ($external_plugins['wpmu_new_blog_template'] == true) echo "checked"; ?> ><?php echo esc_html('WPMU New Blog Template Plugin') ?> </label>
+                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
                 </td>
             </tr>
         </tbody></table>
@@ -164,18 +157,18 @@ echo "<br/>";
         <table class="form-table">
             <tbody>
             <tr>
-                <th scope="row"><?php echo esc_html('Debug Mode') ?> </th>
+                <th scope="row"><?php echo esc_html('Debug Mode') ?></th>
                 <td>
                     <fieldset>
-                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" <?php if ($is_debug_mode == true) echo "checked"; ?> /><?php echo esc_html(' Enable') ?> </label>
-                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" <?php if ($is_debug_mode != true) echo "checked"; ?> /><?php echo esc_html(' Disable') ?> </label>
+                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" /><?php echo esc_html('Enable') ?></label>
+                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" /><?php echo esc_html('Disable') ?></label>
                     </fieldset>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><?php echo esc_html('Activate Master User') ?> </th>
+                <th scope="row"><?php echo esc_html('Activate Master User') ?></th>
                 <td>
-                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true" <?php if ($is_master_user == true) echo "checked"; ?> ><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
+                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true"><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
                     </label>
                 </td>
             </tr>

@@ -107,8 +107,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		}
 		/* Update configuration options for SSW Plugin from wp_sitemeta table */
 		public function ssw_update_config_options() {
+			/*
 			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
-				include(SSW_PLUGIN_DIR.'admin/ssw_update_options.php');
+				
 				$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
 				if( $options ) {
 					echo '1';
@@ -117,12 +118,14 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 					echo '0';
 				}
 		        /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+			/*
 				wp_die();
 			}
 			else {
 				wp_die("Please use valid forms to send data.");
 			}
-
+			
+			*/
 			
 		}
 		/* Fetch Plugin options for SSW Plugin from wp_sitemeta table */
@@ -207,27 +210,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/*	Deactivate the plugin	*/
 		public function ssw_deactivate() {
 			/* Simply deactivate the plugin for now */			
-			/*	#TODO:	NEEL PLEASE REMOVE THIS FOR PRODUCTION	*/
-			/*
-			
-			global $wpdb;
-			if ( !is_user_logged_in() ) {
-				wp_die( 'You must be logged in to run this script.' );
-			}
-			if ( !current_user_can( 'install_plugins' ) ) {
-				wp_die( 'You do not have permission to run this script.' );
-			}
-			delete_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
-			delete_site_option( SSW_PLUGINS_CATEGORIES_FOR_DATABASE );
-			delete_site_option( SSW_PLUGINS_LIST_FOR_DATABASE );
-			delete_site_option( SSW_THEMES_CATEGORIES_FOR_DATABASE );
-			delete_site_option( SSW_THEMES_LIST_FOR_DATABASE );
-			$ssw_main_table = $wpdb->base_prefix.SSW_MAIN_TABLE;
-			// Drop SSW Main Table
-			$wpdb->query( 'DROP TABLE IF EXISTS '.$ssw_main_table );
-			
+			/** 
+			* Also deleting the Options saved for the plugin since still need to fix a way to update * the options from Options Page
 			*/
-
 			delete_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
 			
 		} 
@@ -408,7 +393,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 			$this->ssw_update_plugin_options( $plugin_options );
 		}
-		/* Find all currently available themes which are network activated to offer for the Themes page */
+
+		/**
+		* This is still in progress.
+		* Find all currently available themes which are network activated to offer for the Themes * page 
+		*/
 		public function ssw_find_themes() {
 			global $wpdb;
 			$options = $this->ssw_fetch_config_options();
@@ -475,7 +464,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				global $wpdb;
 				$options = $this->ssw_fetch_config_options();
 				$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
-				$banned_root_site_address = $options['banned_root_site_address'];
     			$banned_site_address = $options['banned_site_address'];
     			$is_debug_mode = $options['debug_mode'];
     			
@@ -494,20 +482,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     					$is_banned_site = 1;
     				}
     			}
-    			else {
-    				/* Check for banned root site addresses and banned site addresses */
-    				if( in_array($site_address, $banned_root_site_address) != true && in_array($site_address, $banned_site_address) != true ) {
-    					$site_exists = domain_exists( $current_blog->domain, $current_site->path.sanitize_key( $_POST['site_complete_path'] ) );		
-    				}
-    				else {
-    					$is_banned_site = 1;
-    				}
-    			}
 				if( $is_banned_site == 1 ) {
 					echo '2';
 				}
 				else {
-					if( $site_exists) {
+					if( isset($site_exists) ) {
 						echo '1';
 					}
 					else {
@@ -603,8 +582,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     		$options = $this->ssw_fetch_config_options();
     			$site_address_bucket = $options['site_address_bucket'];
     			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
-    			$template_type = $options['template_type'];
-				$select_template = $options['select_template'];
 				$hide_plugin_category = $options['hide_plugin_category'];
 				$external_plugins = $options['external_plugins'];
 				$restricted_user_roles = $options['restricted_user_roles'];
@@ -612,6 +589,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$is_site_usage_display_common = $options['site_usage_display_common'];
 				$ssw_not_available = $options['ssw_not_available'];
 				$terms_of_use = $options['terms_of_use'];
+				$plugins_page_note = $options['plugins_page_note'];
 				$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
 		        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
 		        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
@@ -673,7 +651,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				else if($ssw_next_stage =='ssw_step2') {
 					/* Wordpress Security function wp_nonce to avoid execution of same function/orject multiple times */
-					if (wp_verify_nonce(isset( $_POST['step1_nonce'] ), 'step1_action') ){
+					if ( isset( $_POST['step1_nonce'] ) && wp_verify_nonce($_POST['step1_nonce'], 'step1_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step1_process.php');
 

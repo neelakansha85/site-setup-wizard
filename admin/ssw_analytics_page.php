@@ -37,13 +37,4 @@
         }
     echo '</p>';
 
-    /* Debug Code */
-        if( $is_debug_mode == true ) {
-            echo '<br/>Debug Mode is ON';
-            echo '<br/>Results Query 1 = ';
-            print_r($results);
-            echo '<br/>Results Query 2 = ';
-            print_r($results2);
-        }
-
 ?>

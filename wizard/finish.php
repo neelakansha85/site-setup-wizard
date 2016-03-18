@@ -71,7 +71,7 @@ $finish = 'finish';
             $blog_details = get_blog_details($new_blog_id);
 
             /* Send notifications for the newly created site */
-            include(SSW_PLUGIN_DIR.'admin/servicelink_notification.php');
+            include(SSW_PLUGIN_DIR.'admin/user_notification.php');
             /* Restore to original blog it came from before you switched to new blog site to update it's features */
             restore_current_blog();
         }

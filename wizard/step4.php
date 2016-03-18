@@ -13,11 +13,7 @@ $step4 = 'features';
     ';
                     include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
     echo '
-                    <p class="ssw-header-note">
-                        THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate
-                         or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more
-                         about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>
-                    </p>
+                    <p class="ssw-header-note">'.$plugins_page_note.'</p>
                 </div>
                 <fieldset class="ssw-fieldset">
 	';

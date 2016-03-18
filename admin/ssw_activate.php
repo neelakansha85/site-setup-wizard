@@ -12,7 +12,6 @@ global $wpdb;
 				path varchar(100) DEFAULT NULL, 
 				title varchar(255) DEFAULT NULL, 
 				privacy varchar(100) DEFAULT NULL,
-				template_type varchar(100) DEFAULT NULL,
 				template varchar(100) DEFAULT NULL,
 				theme varchar(100) DEFAULT NULL,
 				plugins_group longtext DEFAULT NULL,

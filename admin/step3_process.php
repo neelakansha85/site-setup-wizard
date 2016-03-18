@@ -10,7 +10,7 @@
             $this->ssw_debug_log('step3_process', 'next_stage', $next_stage);
         
         $endtime = current_time('mysql');
-        $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET template_type = \''.$template_type.'\', next_stage = \''.$next_stage.'\', 
+        $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET theme = \''.$theme.'\', next_stage = \''.$next_stage.'\', 
 			endtime = \''.$endtime.'\' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
             $this->ssw_debug_log('step3_process', 'ssw_process_query', $ssw_process_query);
         
