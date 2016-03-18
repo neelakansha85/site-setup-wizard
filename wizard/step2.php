@@ -46,22 +46,31 @@ $step2 = 'essential_options';
                             <select id="ssw-site-address-bucket" class="ssw-subfield ssw-select" name="site_address_bucket" tabindex="2" onchange="ssw_js_site_address_display()" required >
     ';
                             foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
-                                if ( $is_master_user == true ) {        
+                                if ( $is_master_user != true ) {        
+                                    if ( $is_user_role_restriction != true ) {
+                                        foreach ( $site_address_bucket_user_value as $key => $value) {
+                                            echo '
+                                                <option value="'.$key.'">'.$value.'</option>
+                                            ';
+                                        }
+                                    }
+                                    else {
+                                        foreach ( $user_role_mapping as $restricted_role_in_ssw => $restricted_role_in_wp ) {
+                                            if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_address_bucket_user ) { 
+                                                foreach ( $site_address_bucket_user_value as $key => $value) {
+                                                    echo '
+                                                    <option value="'.$key.'">'.$value.'</option>
+                                                    ';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else {
                                     foreach ( $site_address_bucket_user_value as $key => $value) {
                                         echo '
                                             <option value="'.$key.'">'.$value.'</option>
                                         ';
-                                    }
-                                }
-                                else {
-                                    foreach ( $user_role_mapping as $restricted_role_in_ssw => $restricted_role_in_wp ) {
-                                        if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_address_bucket_user ) { 
-                                            foreach ( $site_address_bucket_user_value as $key => $value) {
-                                                echo '
-                                                    <option value="'.$key.'">'.$value.'</option>
-                                                ';
-                                            }
-                                        }
                                     }
                                 }
                             }
