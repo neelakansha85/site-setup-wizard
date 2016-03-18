@@ -584,9 +584,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 				$hide_plugin_category = $options['hide_plugin_category'];
 				$external_plugins = $options['external_plugins'];
-				$restricted_user_roles = $options['restricted_user_roles'];
+				$user_role_mapping = $options['user_role_mapping'];
 				$site_usage = $options['site_usage'];
-				$is_site_usage_display_common = $options['site_usage_display_common'];
+				$is_user_role_restriction = $options['user_role_restriction'];
 				$ssw_not_available = $options['ssw_not_available'];
 				$terms_of_use = $options['terms_of_use'];
 				$plugins_page_note = $options['plugins_page_note'];

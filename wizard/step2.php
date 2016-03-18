@@ -54,8 +54,8 @@ $step2 = 'essential_options';
                                     }
                                 }
                                 else {
-                                    foreach ( $restricted_user_roles as $restricted_role => $restricted_role_in_wp ) {
-                                        if ( $current_user_role == $restricted_role_in_wp && $restricted_role == $site_address_bucket_user ) { 
+                                    foreach ( $user_role_mapping as $restricted_role_in_ssw => $restricted_role_in_wp ) {
+                                        if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_address_bucket_user ) { 
                                             foreach ( $site_address_bucket_user_value as $key => $value) {
                                                 echo '
                                                     <option value="'.$key.'">'.$value.'</option>

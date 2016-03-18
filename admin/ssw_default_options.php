@@ -86,10 +86,11 @@
             'wpmu_new_blog_template' => false
             ),
         /* In progress */
-        'restricted_user_roles' => array(
-            'student' => 'student_subscriber',
-            'employee' => 'staff_subscriber',
+        'user_role_mapping' => array(
+            'student' => 'subscriber',
+            'employee' => 'administrator',
             ),
+        'user_role_restriction' => false,
         'site_usage' => array(
             'student' => array(
                 'personal' => 'Personal Site',
@@ -104,7 +105,6 @@
                 */
                 )
             ),
-        'site_usage_display_common' => false,
         'steps_name' => array(
             'step1' => 'Start',
             'step2' => 'Essential Settings',

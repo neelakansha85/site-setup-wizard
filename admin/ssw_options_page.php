@@ -46,6 +46,12 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row"><?php echo esc_html('Site Usage Restriction') ?></th>
+                <td>
+                    <label><input name="ssw-usage-restriction" type="checkbox" id="ssw-usage-restriction" value="" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
                     <select id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
@@ -89,7 +95,7 @@
             <tr>
                 <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
                 <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
+                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
                 </td>
             </tr>
             <tr>
@@ -143,13 +149,13 @@
             <tr>
                 <th scope="row"><?php echo esc_html('External Plugins') ?></th>
                 <td>
-                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
+                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
+                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
+                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
+                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
                 </td>
             </tr>
         </tbody></table>
@@ -168,7 +174,7 @@
             <tr>
                 <th scope="row"><?php echo esc_html('Activate Master User') ?></th>
                 <td>
-                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true"><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
+                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value=""><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
                     </label>
                 </td>
             </tr>
