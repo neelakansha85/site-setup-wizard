@@ -66,10 +66,10 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-site-category-none-prefix"><?php echo esc_html('Site Category with no Prefix') ?></label></th>
+                <th scope="row"><label for="ssw-site-category-no-prefix"><?php echo esc_html('Site Category with no Prefix') ?></label></th>
                 <td>
-                    <input name="ssw-site-category-none-prefix" type="text" id="ssw-site-category-none-prefix" aria-describedby="ssw-site-category-none-prefix-desc" class="large-text" value="" size="45" />
-                    <p class="description" id="ssw-site-category-none-prefix-desc">
+                    <input name="ssw-site-category-no-prefix" type="text" id="ssw-site-category-no-prefix" aria-describedby="ssw-site-category-no-prefix-desc" class="large-text" value="" size="45" />
+                    <p class="description" id="ssw-site-category-no-prefix-desc">
                         <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by spaces.'); ?>
                     </p>
                 </td>

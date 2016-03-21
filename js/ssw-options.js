@@ -35,7 +35,7 @@ function add_new_select_option(selectBox) {
 function options_page() {
     // add the values to userSelect by default on page load
     var userSelect = document.getElementById("ssw-user-role");
-    var siteCategoryNonePrefix = document.getElementById("ssw-site-category-none-prefix");
+    var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
     var bannedSiteAddress = document.getElementById("ssw-banned-site-address");
     var termsOfUse = document.getElementById("ssw-terms-of-use");
     var pluginsPageNote = document.getElementById("ssw-plugins-page-note");
@@ -64,7 +64,7 @@ function options_page() {
     ssw_user_role();
 
     // load remaining options independant values
-    siteCategoryNonePrefix.value = site_address_bucket_none_value.join(" ");
+    siteCategoryNoPrefix.value = site_address_bucket_none_value.join(" ");
     bannedSiteAddress.value = banned_site_address.join(" ");
     termsOfUse.innerHTML = terms_of_use;
     pluginsPageNote.innerHTML = plugins_page_note;
