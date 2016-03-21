@@ -276,7 +276,7 @@ function ssw_js_check_domain_available() {
     site_address = site_address.toLowerCase();
     var site_complete_path = ssw_js_get_site_complete_path();
 
-    /*  AJAX request with aync flag true as we need the response synchrnously for use in the 
+    /*  AJAX request with async flag false as we need the response synchrnously for use in the 
         ssw_js_validate_form() and ssw_js_submit_form_next() function 
     */
     jQuery.ajax({
