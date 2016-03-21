@@ -30,7 +30,7 @@
                     </select>
                     <div class="ssw-add-new-input">
                         <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" value="">
-                        <img id="add-user-role-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-user-role-input', 'ssw-user-role')">
+                        <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-user-role-input', 'ssw-user-role')"></span>
                     </div>
                 </td>
             </tr>
@@ -41,7 +41,7 @@
                     </select>
                     <div class="ssw-add-new-input">
                         <input name="add-site-usage-input" type="text" id="add-site-usage-input" class="ssw-add-new-text" value="">
-                        <img id="add-site-usage-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-site-usage-input', 'ssw-site-usage')">
+                        <span id="add-site-usage-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-site-usage-input', 'ssw-site-usage')"></span>
                     </div>
                 </td>
             </tr>
@@ -58,7 +58,7 @@
                     </select>
                     <div class="ssw-add-new-input">
                         <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" value="">
-                        <img id="add-site-category-btn" src="<?php echo plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/add_new_icon.png'); ?>" class="ssw-add-new-btn" alt="Add New" onclick="ssw_add_new_value('add-site-category-input', 'ssw-site-category')">
+                        <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-site-category-input', 'ssw-site-category')"></span>
                     </div>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;'); ?>

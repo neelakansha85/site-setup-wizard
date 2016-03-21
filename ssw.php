@@ -223,7 +223,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
 			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
-				array( $this, 'ssw_create_site' ), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
+				array( $this, 'ssw_create_site' ), 'dashicons-plus', '1.38');
 		}
 
 		/*	Menu function to display Site Setup Wizard -> Create Site in the Network Admin's Dashboard	*/
@@ -232,7 +232,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				subscribers with "read" capability and displaying it above the Dashboard with position "1.7"
 			*/
 			add_menu_page('Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
-				array($this, 'ssw_create_site'), plugins_url(SSW_PLUGIN_FIXED_DIR.'/images/icon.png'), '1.38');
+				array($this, 'ssw_create_site'), 'dashicons-plus', '1.38');
 			/* Adding First Sub menu item in the SSW Plugin to reflect the Create Site functionality in the sub menu */
 			add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard', 'Create Site', 'read', SSW_CREATE_SITE_SLUG, 
 				array($this, 'ssw_create_site') );
