@@ -46,12 +46,6 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row"><?php echo esc_html('Site Usage Restriction') ?></th>
-                <td>
-                    <label><input name="ssw-usage-restriction" type="checkbox" id="ssw-usage-restriction" value="" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
-                </td>
-            </tr>
-            <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
                     <select id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
@@ -86,23 +80,17 @@
             <tr>
                 <th scope="row"><label for="ssw-terms-of-use"><?php echo esc_html('Terms of Use') ?></label></th>
                 <td>
-                    <textarea name="ssw-terms-of-use" id="ssw-terms-of-use" aria-describedby="ssw-terms-of-use-desc" cols="45" rows="5"></textarea>
+                    <textarea name="ssw-terms-of-use" id="ssw-terms-of-use" aria-describedby="ssw-terms-of-use-desc" cols="60" rows="5"></textarea>
                     <p class="description" id="ssw-terms-of-use-desc">
                         <?php _e('Please enter the text you want to display next to Terms of Use checkbox.'); ?>
                     </p>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
+                <th scope="row"><label for="ssw-plugins-page-txt"><?php echo esc_html('Plugins Page Note') ?></label></th>
                 <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="ssw-plugins-page-note"><?php echo esc_html('Plugins Page Note') ?></label></th>
-                <td>
-                    <textarea name="ssw-plugins-page-note" id="ssw-plugins-page-note" aria-describedby="ssw-plugins-page-note-desc" cols="45" rows="5"></textarea>
-                    <p class="description" id="ssw-plugins-page-note-desc">
+                    <textarea name="ssw-plugins-page-txt" id="ssw-plugins-page-txt" aria-describedby="ssw-plugins-page-txt-desc" cols="60" rows="5"></textarea>
+                    <p class="description" id="ssw-plugins-page-txt-desc">
                         <?php _e('Please enter the text you want to display on Plugins Selection (Step 4) page.'); ?>
                     </p>
                 </td>
@@ -129,7 +117,6 @@
                     <input name="ssw-step-3" type="text" id="ssw-step-3" class="regular-text" value="">
                 </td>
             </tr>
-            
             <tr>
                 <th scope="row"><label for="ssw-step-4"><?php echo esc_html('Step 4') ?></label></th>
                 <td>
@@ -156,6 +143,71 @@
                     <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
                     <br/>
                     <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
+                </td>
+            </tr>
+        </tbody></table>
+        <h3><?php echo esc_html('Advanced Privacy Options') ?></h3>
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
+                <td>
+                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="privacy-selection-txt"><?php echo esc_html('Pivacy Selection Text') ?></label></th>
+                <td>
+                    <textarea name="privacy-selection-txt" id="privacy-selection-txt" aria-describedby="privacy-selection-txt-desc" cols="60" rows="5"></textarea>
+                    <p class="description" id="privacy-selection-txt-desc">
+                        <?php _e('Please enter the text you want to display if Privacy Selection is disabled on Step 2.'); ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="private-network-users-txt"><?php echo esc_html('Available to Network Users') ?></label></th>
+                <td>
+                    <input name="private-network-users-txt" type="text" id="private-network-users-txt" class="large-text" value="">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="private-site-users-txt"><?php echo esc_html('Available to Site Users') ?></label></th>
+                <td>
+                    <input name="private-site-users-txt" type="text" id="private-site-users-txt" class="large-text" value="">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="private-administrator-txt"><?php echo esc_html('Available to Site Admins') ?></label></th>
+                <td>
+                    <input name="private-administrator-txt" type="text" id="private-administrator-txt" class="large-text" value="">
+                </td>
+            </tr>
+        </tbody></table>
+        <h3><?php echo esc_html('User Role Restriction') ?></h3>
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row"><?php echo esc_html('Site Usage Restriction') ?></th>
+                <td>
+                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="ssw-not-available"><?php echo esc_html('Restricted User Role') ?></label></th>
+                <td>
+                    <input name="ssw-not-available" type="text" id="ssw-not-available" aria-describedby="ssw-not-available-desc" class="regular-text" value="">
+                    <p class="description" id="ssw-not-available-desc">
+                        <?php _e( 'User with this role in wordpress root site will not be allowed to access Site Setup Wizard.'); ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="ssw-not-available-txt"><?php echo esc_html('Note to Restricted User') ?></label></th>
+                <td>
+                    <textarea name="ssw-not-available-txt" id="ssw-not-available-txt" aria-describedby="ssw-not-available-txt-desc" cols="60" rows="5"></textarea>
+                    <p class="description" id="ssw-not-available-txt-desc">
+                        <?php _e('Please enter the text you want to display to the user who will not be able to access Site Setup Wizard.'); ?>
+                    </p>
                 </td>
             </tr>
         </tbody></table>

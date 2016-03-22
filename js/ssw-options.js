@@ -11,12 +11,19 @@ var external_plugins = options['external_plugins'];
     var wpmu_pretty_plugins = external_plugins['wpmu_pretty_plugins'] ? external_plugins['wpmu_pretty_plugins'] : false;
     var wpmu_multisite_theme_manager = external_plugins['wpmu_multisite_theme_manager'] ? external_plugins['wpmu_multisite_theme_manager'] : false;
     var wpmu_new_blog_template = external_plugins['wpmu_new_blog_template'] ? external_plugins['wpmu_new_blog_template'] : false;
+
+var privacy_selection_txt = options['advanced_privacy']['privacy_selection_txt'];
+var private_network_users_txt = options['advanced_privacy']['private_network_users_txt'];
+var private_site_users_txt = options['advanced_privacy']['private_site_users_txt'];
+var private_administrator_txt = options['advanced_privacy']['private_administrator_txt'];
+
 var user_role_mapping = options['user_role_mapping'];
 var site_usage = options['site_usage'];
 var is_user_role_restriction = options['user_role_restriction'] ? options['user_role_restriction'] : false;
 var ssw_not_available = options['ssw_not_available'];
+var ssw_not_available_txt = options['ssw_not_available_txt'];
 var terms_of_use = options['terms_of_use'];
-var plugins_page_note = options['plugins_page_note'];
+var plugins_page_txt = options['plugins_page_txt'];
 var steps_name = options['steps_name'] ? options['steps_name'] : '';
 var is_privacy_selection = options['privacy_selection'] ? options['privacy_selection'] : false;
 var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
@@ -38,7 +45,7 @@ function options_page() {
     var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
     var bannedSiteAddress = document.getElementById("ssw-banned-site-address");
     var termsOfUse = document.getElementById("ssw-terms-of-use");
-    var pluginsPageNote = document.getElementById("ssw-plugins-page-note");
+    var pluginsPageTxt = document.getElementById("ssw-plugins-page-txt");
     var privacySelection = document.getElementById("ssw-privacy-selection");
     var step1 = document.getElementById("ssw-step-1");
     var step2 = document.getElementById("ssw-step-2");
@@ -49,6 +56,13 @@ function options_page() {
     var wpmuPrettyPlugin = document.getElementById("wpmu-pretty-plugin");
     var wpmuMultisiteThemeManagerPlugin = document.getElementById("wpmu-multisite-theme-manager-plugin");
     var wpmuNewBlogTemplatePlugin = document.getElementById("wpmu-new-blog-template-plugin");
+    var privacySelectionTxt = document.getElementById("privacy-selection-txt");
+    var privateNetworkUsersTxt = document.getElementById("private-network-users-txt");
+    var privateSiteUsersTxt = document.getElementById("private-site-users-txt");
+    var privateAdministratorTxt = document.getElementById("private-administrator-txt");
+    var userRoleRestriction = document.getElementById("user-role-restriction");
+    var sswNotAvailable = document.getElementById("ssw-not-available");
+    var sswNotAvailableTxt = document.getElementById("ssw-not-available-txt");    
     var debugModeEnable = document.getElementById("ssw-debug-mode-enable");
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
@@ -67,7 +81,7 @@ function options_page() {
     siteCategoryNoPrefix.value = site_address_bucket_none_value.join(" ");
     bannedSiteAddress.value = banned_site_address.join(" ");
     termsOfUse.innerHTML = terms_of_use;
-    pluginsPageNote.innerHTML = plugins_page_note;
+    pluginsPageTxt.innerHTML = plugins_page_txt;
     privacySelection.checked = is_privacy_selection;
 
     // Wizard Titles
@@ -82,6 +96,17 @@ function options_page() {
     wpmuPrettyPlugin.checked = wpmu_pretty_plugins;
     wpmuMultisiteThemeManagerPlugin.checked = wpmu_multisite_theme_manager;
     wpmuNewBlogTemplatePlugin.checked = wpmu_new_blog_template;
+
+    // Advanced Privacy Options
+    privacySelectionTxt.innerHTML = privacy_selection_txt;
+    privateNetworkUsersTxt.value = private_network_users_txt;
+    privateSiteUsersTxt.value = private_site_users_txt;
+    privateAdministratorTxt.value = private_administrator_txt;
+
+    // User Role Restriction
+    userRoleRestriction.checked = is_user_role_restriction;
+    sswNotAvailable.value = ssw_not_available;
+    sswNotAvailableTxt.innerHTML = ssw_not_available_txt;
     
     // Debug Settings
     if(is_debug_mode) {

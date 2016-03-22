@@ -269,7 +269,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
                 $upload_path = $uploads['basedir'];
                 $filename = $upload_path.'/nsd_ssw_debug_log.log';
                 $open = fopen($filename, "a");
-                $write = fputs($open,"\nFile: ".$file_name." $".$var_name." = ".print_r($value, true)); 
+                $write = fputs($open,"\nReferrer: ".$file_name." $".$var_name." = ".print_r($value, true)); 
                 fclose($open);
             }
         }
@@ -588,30 +588,36 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$site_usage = $options['site_usage'];
 				$is_user_role_restriction = $options['user_role_restriction'];
 				$ssw_not_available = $options['ssw_not_available'];
+				$ssw_not_available_txt = $options['ssw_not_available_txt'];
 				$terms_of_use = $options['terms_of_use'];
-				$plugins_page_note = $options['plugins_page_note'];
+				$plugins_page_txt = $options['plugins_page_txt'];
 				$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
 		        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
 		        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
 		        $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
 				
-				/* Fetch values if the given external plugins are installed or not */
+					/* Fetch values if the given external plugins are installed or not */
     			$wpmu_multisite_privacy_plugin = $external_plugins['wpmu_multisite_privacy_plugin'];
     			$wpmu_pretty_plugins = $external_plugins['wpmu_pretty_plugins'];
     			$wpmu_new_blog_template = $external_plugins['wpmu_new_blog_template'];
+
+    			/* Advanced Privacy Settings Text */
+    			$privacy_selection_txt = $options['advanced_privacy']['privacy_selection_txt'];
+    			$private_network_users_txt = $options['advanced_privacy']['private_network_users_txt'];
+    			$private_site_users_txt = $options['advanced_privacy']['private_site_users_txt'];
+    			$private_administrator_txt = $options['advanced_privacy']['private_administrator_txt'];
 
     		/* Fetch theme options to get list of all themes and their categories */
     		$theme_options = $this->ssw_fetch_theme_options();
     			$themes_categories = $theme_options['themes_categories'];
     			$themes_list = $theme_options['themes_list'];
-			/* Fetch plugin options to get list of all plugins and their categories */
+				/* Fetch plugin options to get list of all plugins and their categories */
     		$plugin_options = $this->ssw_fetch_plugin_options();
     			$plugins_categories = $plugin_options['plugins_categories'];
 				$plugins_list = $plugin_options['plugins_list'];
 
     		if ( $current_user_role == $ssw_not_available ) {
-    			echo 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. 
-    				If you believe this is by error, please contact askit@nyu.edu';
+    			_e($ssw_not_available_txt);
     		}
     		else {
 	    		$ssw_main_table = $this->ssw_main_table();

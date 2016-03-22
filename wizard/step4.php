@@ -13,7 +13,7 @@ $step4 = 'features';
     ';
                     include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
     echo '
-                    <p class="ssw-header-note">'.$plugins_page_note.'</p>
+                    <p class="ssw-header-note">'.$plugins_page_txt.'</p>
                 </div>
                 <fieldset class="ssw-fieldset">
 	';

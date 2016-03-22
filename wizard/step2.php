@@ -109,34 +109,40 @@ $step2 = 'essential_options';
                                 <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
                                 <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="3" tabindex="6" onclick="ssw_js_validate_privacy()">Not indexed in search engines but still available for public to view</span>
     ';
-                                /*  Check from the SSW Options if WPMU Multisite Privacy plugin is installed or not and if yes then
-                                    display following privacy options
+                                /** 
+                                * Check from the SSW Options if WPMU Multisite Privacy 
+                                * plugin is installed or not and if yes then
+                                * display following privacy options
                                 */
-                                /*  The values -3 to 1 are defined and being used by Multisite Privacy Plugin. Due to sanitization we add 3 to values and subtract 3
-                                    on receiving it. SSW Plugin simply stores and puts this value in "blog_public" option in wp_options table for that particular site 
+                                /** 
+                                * The values -3 to 1 are defined and being used by 
+                                * Multisite Privacy Plugin. Due to sanitization we add 
+                                * 3 to values and subtract 3 on receiving it. 
+                                * SSW Plugin simply stores and puts this value in 
+                                * "blog_public" option in wp_options table for that 
+                                * particular site 
+                                * Triple equal can not be used here since this value 
+                                * is coming from database 
                                 */
-                                /* Triple equal can not be used here since this value is coming from database */
 
                                 if ($wpmu_multisite_privacy_plugin == true) {
     echo '
                                     <label style="height:auto;" class="ssw-label">&nbsp;</label>
                                     <span class="ssw-radio-text strong">Private</span>
                                     <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
-                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="2" tabindex="7" onclick="ssw_js_validate_privacy()">Visible to all of NYU</span>
+                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="2" tabindex="7" onclick="ssw_js_validate_privacy()">'.$private_network_users_txt.'</span>
                                     <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
-                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="1" tabindex="8" onclick="ssw_js_validate_privacy()">Limited to only users who you specify in the "Users" settings (by adding their netid@nyu.edu and assigning them a role)</span>
+                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="1" tabindex="8" onclick="ssw_js_validate_privacy()">'.$private_site_users_txt.'</span>
                                     <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
-                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="0" tabindex="9" onclick="ssw_js_validate_privacy()">Limited to only site administrators who you specify in the "Users" settings (good for preparing a site before making it visible to a larger audience)</span>
+                                    <span class="ssw-radio-text"><input type="radio" class="ssw-input" name="site_privacy" value="0" tabindex="9" onclick="ssw_js_validate_privacy()">'.$private_administrator_txt.'</span>
     ';
                                 }
                             }
                             else {
     echo '
-                                <span class="ssw-privacy-text strong">Please note that by default, your site privacy settings are set to "Public on the Web, but are not indexed by search engines".</span>
-                                <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
-                                <span class="ssw-privacy-text">Once your site is created, please update your site privacy settings, by going to Settings (in the left menu) > Reading > Site visibility.</span>
-                                <label class="ssw-radio-field-spacing ssw-label">&nbsp;</label>
-                                <span class="ssw-privacy-text strong">More information can be found <a href="http://www.nyu.edu/servicelink/KB0012245" target="_blank" >here</a>.</span>
+                                <span class="ssw-privacy-text">';
+                                _e($privacy_selection_txt);
+    echo '                      </span>
     ';
                             }                            
     echo '

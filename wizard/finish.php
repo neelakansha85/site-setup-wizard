@@ -61,10 +61,12 @@ $finish = 'finish';
             /* Delete current site's details from the SSW_MAIN_TABLE to allow user create another site now. */
             //        $wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id );
 
+            $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET wizard_completed = '.true.' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
+            $this->ssw_debug_log('step4_process', 'ssw_process_query', $ssw_process_query);
+            
             /* Update current site's details as wizard_completed = true from the SSW_MAIN_TABLE to allow user create another site now. */
-            $result = $wpdb->query(
-                'UPDATE '.$ssw_main_table.' SET wizard_completed = '.true.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
-            );
+            $result = $wpdb->query( $ssw_process_query );
+            $this->ssw_log_sql_error($wpdb->last_error);
             
             $admin_first_name = get_user_meta( $admin_user_id, 'first_name', true );
             $admin_last_name = get_user_meta( $admin_user_id, 'last_name', true );

@@ -75,22 +75,8 @@
                 */
                 )
            ),
-        'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
         /* Sites with this category selected will not have any prefixes in it's site address */
         'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
-        'hide_plugin_category' => 'other',
-        'external_plugins' => array(
-            'wpmu_multisite_privacy_plugin' => true,
-            'wpmu_pretty_plugins' => true,
-            'wpmu_multisite_theme_manager' => false,
-            'wpmu_new_blog_template' => false
-            ),
-        /* In progress */
-        'user_role_mapping' => array(
-            'student' => 'subscriber',
-            'employee' => 'administrator',
-            ),
-        'user_role_restriction' => false,
         'site_usage' => array(
             'student' => array(
                 'personal' => 'Personal Site',
@@ -105,6 +91,9 @@
                 */
                 )
             ),
+        'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
+        'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
+        'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
         'steps_name' => array(
             'step1' => 'Start',
             'step2' => 'Essential Settings',
@@ -112,10 +101,31 @@
             'step4' => 'Features',
             'finish' => 'Done!'
             ),
+        'external_plugins' => array(
+            'wpmu_multisite_privacy_plugin' => true,
+            'wpmu_pretty_plugins' => true,
+            'wpmu_multisite_theme_manager' => false,
+            'wpmu_new_blog_template' => false
+            ),
+        'advanced_privacy' => array(
+            'privacy_selection_txt' => '<strong>Please note that by default, your site privacy settings are set to "Public on the Web, but are not indexed by search engines".</strong><br>Once your site is created, please update your site privacy settings, by going to Settings (in the left menu) &gt; Reading &gt; Site visibility.<br><strong>More information can be found <a href="http://www.nyu.edu/servicelink/KB0012245" target="_blank">here</a>.</strong>',
+            'private_network_users_txt' => 'Visible to all of NYU',
+            'private_site_users_txt' => 'Limited to only users who you specify in the "Users" settings (by adding their netid@nyu.edu and assigning them a role)',
+            'private_administrator_txt' => 'Limited to only site administrators who you specify in the "Users" settings (good for preparing a site before making it visible to a larger audience)'
+            ),
+        'hide_plugin_category' => 'other',
+        /**
+        * All contents will be displayed to users based on the mapped user roles
+        * if user_role_restriction is set true 
+        */
+        'user_role_restriction' => false,
+        'user_role_mapping' => array(
+            'student' => 'subscriber',
+            'employee' => 'administrator',
+            ),
         /* Map wordpress user role to which Site Setup Wizard should not be available */
         'ssw_not_available' => 'alumni_subscriber',
-        'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
-        'plugins_page_note' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
+        'ssw_not_available_txt' => 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. If you believe this is by error, please contact askit@nyu.edu',
         'privacy_selection' => true,
         'debug_mode' => false,
         'master_user' => false
