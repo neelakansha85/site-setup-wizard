@@ -459,40 +459,67 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Check if given path is already taken by another site or not */
 		public function ssw_check_domain_exists() {
 			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
-				global $current_blog;
-				global $current_site;
-				global $wpdb;
-				$options = $this->ssw_fetch_config_options();
-				$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
-    			$banned_site_address = $options['banned_site_address'];
-    			$is_debug_mode = $options['debug_mode'];
-    			
-    			$site_address_bucket = sanitize_key( $_POST['site_address_bucket']);
-    			/**
-    			*	Replace '-' from site address since it is being used to separate a site name from site category/bucket 
-    			*/
-    			$site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
-    			$is_banned_site = 0;
-    			if( in_array($site_address_bucket, $site_address_bucket_none_value) != true  && $site_address_bucket != '' ) {
-    				/* Check for banned site addresses */
-    				if( in_array($site_address, $banned_site_address) != true ) {
-    					$site_exists = domain_exists( $current_blog->domain, $current_site->path.sanitize_key( $_POST['site_complete_path'] ) );		
-    				}
-    				else {
-    					$is_banned_site = 1;
-    				}
-    			}
-				if( $is_banned_site == 1 ) {
-					echo '2';
-				}
-				else {
-					if( isset($site_exists) ) {
-						echo '1';
-					}
-					else {
-						echo '0';
-					}
-				}
+        global $current_blog;
+        global $current_site;
+        global $wpdb;
+        $options = $this->ssw_fetch_config_options();
+        $site_category = $options['site_address_bucket'];
+        $site_category_no_prefix = $options['site_address_bucket_none_value'];
+        $banned_site_address = $options['banned_site_address'];
+        $is_debug_mode = $options['debug_mode'];
+
+        $site_category_selected = sanitize_key( $_POST['site_address_bucket']);
+        /**
+        * Replace '-' from site address since it is being used to separate a site name
+        * from site category/bucket 
+        */
+        $site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
+        $is_banned_site = 0;
+
+        if( in_array($site_category_selected, $site_category_no_prefix) != true && $site_category_selected != '' ) {
+          $path = $site_category_selected.'-'.$site_address;
+        }
+        else {
+          $path = $site_address;
+        }
+        
+        $this->ssw_debug_log('ssw_check_domain_exists()', 'site path', $path);
+
+        /**
+        * Validate if user's given path is a banned site address
+        */
+        if( in_array($path, $banned_site_address) != true ) {
+          $site_exists = domain_exists( $current_blog->domain, $current_site->path.$path );   
+        }
+        else {
+          $is_banned_site = 1;
+        }
+
+        /**
+        * Validate if user's given path is name of a site category
+        * Super admins are allowed to create sites with address as one of site category
+        */
+        if ( !is_super_admin() ) {
+          foreach ( $site_category as $site_category_user => $site_category_user_value ) {
+            foreach ( $site_category_user_value as $key => $value) {
+              if( $path == $key) {
+                $is_banned_site = 1;
+              }
+            }
+          }
+        }
+        /* Validate for error flags if set */
+        if( $is_banned_site == 1 ) {
+          echo '2';
+        }
+        else {
+          if( $site_exists ) {
+            echo '1';
+          }
+          else {
+            echo '0';
+          }
+        }
 				/* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
 				wp_die();
 			}

@@ -10,20 +10,39 @@
         $admin_user_id = sanitize_key( $_POST['admin_user_id'] );
             $this->ssw_debug_log('step2_process', 'admin_user_id', $admin_user_id);
         
-        $site_address_bucket = sanitize_key( $_POST['site_address_bucket'] );
-            $this->ssw_debug_log('step2_process', 'site_address_bucket', $site_address_bucket);
+        $site_category_selected = sanitize_key( $_POST['site_address_bucket'] );
+            $this->ssw_debug_log('step2_process', 'site_address_bucket', $site_category_selected);
         
         $site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
             $this->ssw_debug_log('step2_process', 'site_address', $site_address);
         
-        /* Check if the bucket selected is from the list of all buckets that should be blank buckets */
-        if( in_array($site_address_bucket, $site_address_bucket_none_value) != true && $site_address_bucket != '' ) {
-            $path = $current_site->path.$site_address_bucket.'-'.$site_address;
+        /**
+        * Check if the bucket selected is from the list of all buckets that
+        * should be blank buckets 
+        */
+        if( in_array($site_category_selected, $site_address_bucket_none_value) != true && $site_category_selected != '' ) {
+            $path = $site_category_selected.'-'.$site_address;
         }
         else {
-            $path = $current_site->path.$site_address ;
+            $path = $site_address ;
         }
+        $is_banned_site = 0;
+        if ( !is_super_admin() ) {
+          foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
+            foreach ( $site_address_bucket_user_value as $key => $value) {
+              if( $path == $key) {
+                $is_banned_site = 1;
+              }
+            }
+          }
+        }
+
+        /**
+        * Add wordpress path for storing in db 
+        */
+        $path = $current_site->path.$path;
         
+
         /* sanitize_title_for_query sanitizes the value to make it safe for passing in to a SQL query */
         $title = sanitize_text_field( $_POST['site_title'] );
             $this->ssw_debug_log('step2_process', 'title', $title);
@@ -43,10 +62,17 @@
             admin_user_id = \''.$admin_user_id.'\', path = \''.$path.'\', title = \''.$title.'\', 
             privacy = \''.$privacy.'\', next_stage = \''.$next_stage.'\', endtime = \''.$endtime.'\' WHERE user_id = '.$current_user_id.' and site_created = false and wizard_completed = false';
             $this->ssw_debug_log('step2_process', 'ssw_process_query', $ssw_process_query);
-        
-        $result = $wpdb->query( $ssw_process_query );
-            $this->ssw_log_sql_error($wpdb->last_error);
-        
+        /**
+        * Throw Error if site address is illegal
+        */
+        if( $is_banned_site == 1) {
+            $result = new WP_Error( 'broke', __("This site address is not allowed. Please enter another one.", "Site Setup Wizard") );
+        }
+        else {
+            $result = $wpdb->query( $ssw_process_query );
+                $this->ssw_log_sql_error($wpdb->last_error);
+        }
+
         if ( is_wp_error( $result ) ) {
            $error_string = $result->get_error_message();
            echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
