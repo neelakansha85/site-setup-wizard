@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.3](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2.3) - 2016-03-22
+### Added
+- Options Page to view all options for Site Setup Wizard
+- Added new options to configure in Options Page
+
+### Fixed
+- [Issue #12](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/12) Restricting users from creating sites with names as site categories
+- [Issue #1](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/1)
+- PHP Warnings and Notices that used to appear when running this plugin. 
+
 ## [1.2.2](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2.2) - 2015-11-18
 ### Added
 - A Readme.md file for documentation

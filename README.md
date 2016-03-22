@@ -2,7 +2,7 @@
 Allows multiste registered users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdomain multisite install.
 
 * Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress 
-* Requires at least: 3.9
+* Requires at least: 4.0
 * Requires PHP: 5.5
 * Tested up to: 4.3
 * Stable tag: master

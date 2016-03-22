@@ -29,6 +29,10 @@
 	font-weight:bold;
 }
 
+.ssw-fieldset{
+	border: 0px;
+}
+
 /* Vertical aligns the labels and input forms */
 
 .ssw-field .ssw-label {
@@ -45,7 +49,6 @@
 }
 
 /* Hack to keep select fields inline in Namo */
-
 .ssw-field .ssw-select {
 	width:65%;
 }
