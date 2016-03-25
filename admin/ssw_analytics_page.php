@@ -11,29 +11,29 @@
 
     /* Fetch count of all sites created so far using Site Setup Wizard based on their cateogory selected */
     $results = $wpdb->get_results( 
-        'SELECT site_usage, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE site_created = 1 group by site_usage'
+        'SELECT site_type, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE site_created = 1 group by site_type'
     );
 
     echo '<h4>Number of Sites created using Site Setup Wizard</h4>';
     echo '<p>';
         foreach( $results as $obj ) {
-            $site_usage = $obj->site_usage;
+            $site_type = $obj->site_type;
             $number_of_sites = $obj->number_of_sites;
-            echo $site_usage.' - '.$number_of_sites.'<br/>';
+            echo $site_type.' - '.$number_of_sites.'<br/>';
         }
     echo '</p>';
 
     /* Fetch count of all sites created and all steps of wizard completed so far using Site Setup Wizard based on their cateogory selected */
     $results2 = $wpdb->get_results( 
-        'SELECT site_usage, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE wizard_completed = 1 group by site_usage'
+        'SELECT site_type, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE wizard_completed = 1 group by site_type'
     );
 
     echo '<h4>Number of Sites created using Site Setup Wizard and all steps of wizard were completed</h4>';
     echo '<p>';
         foreach( $results2 as $obj ) {
-            $site_usage = $obj->site_usage;
+            $site_type = $obj->site_type;
             $number_of_sites = $obj->number_of_sites;
-            echo $site_usage.' - '.$number_of_sites.'<br/>';
+            echo $site_type.' - '.$number_of_sites.'<br/>';
         }
     echo '</p>';
 

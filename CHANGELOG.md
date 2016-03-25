@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 ## [1.2.4](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2)
 ### Added
 - Allowing users to change/save options for Site Setup Wizard Plugin
+- Renamed site_usage to site_type in wp_ssw_main_nsd table and other places as as required.
 
 ## [1.2.3](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2.3) - 2016-03-22
 ### Added
 - Options Page to view all options for Site Setup Wizard
 - Added new options to configure in Options Page
+- Removed from template_type field from wp_ssw_main_nsd table
 
 ### Fixed
 - [Issue #12](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/12) Restricting users from creating sites with names as site categories

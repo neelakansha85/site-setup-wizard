@@ -371,9 +371,9 @@ function ssw_js_add_hidden_input(theForm, key, value) {
 /* ENDS Function for adding hidden input variables to a form */
 
 /* Function for submitting first step data */
-function ssw_js_submit_first_step(usage) {
+function ssw_js_submit_first_step(type) {
     var theForm = document.forms['ssw-steps'];
-    ssw_js_add_hidden_input(theForm, 'ssw_site_usage', usage);
+    ssw_js_add_hidden_input(theForm, 'ssw_site_type', type);
     ssw_js_submit_form_next();
 }
 /* ENDS Function for submitting first step data */

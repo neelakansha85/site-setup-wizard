@@ -19,7 +19,7 @@ global $wpdb;
 				new_users longtext DEFAULT NULL,
 				new_users_role varchar(255) DEFAULT NULL,
 				next_stage varchar(50) DEFAULT NULL,
-				site_usage varchar(100) DEFAULT NULL,
+				site_type varchar(100) DEFAULT NULL,
 				blog_id bigint(20) DEFAULT NULL,
 				ssw_main_meta longtext DEFAULT NULL,
 				site_created boolean NOT NULL DEFAULT "0",

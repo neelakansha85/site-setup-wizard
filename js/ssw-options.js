@@ -18,7 +18,7 @@ var private_site_users_txt = options['advanced_privacy']['private_site_users_txt
 var private_administrator_txt = options['advanced_privacy']['private_administrator_txt'];
 
 var user_role_mapping = options['user_role_mapping'];
-var site_usage = options['site_usage'];
+var site_type = options['site_type'];
 var is_user_role_restriction = options['user_role_restriction'] ? options['user_role_restriction'] : false;
 var ssw_not_available = options['ssw_not_available'];
 var ssw_not_available_txt = options['ssw_not_available_txt'];
@@ -120,7 +120,7 @@ function loadOptionsPage() {
 
 function sswUserRole() {
     var userSelect = document.getElementById("ssw-user-role");
-    var siteUsageSelect = document.getElementById("ssw-site-usage");
+    var siteTypeSelect = document.getElementById("ssw-site-type");
     var siteCategorySelect = document.getElementById("ssw-site-category");
     if (userSelect.value=='add_new')
     {
@@ -129,24 +129,24 @@ function sswUserRole() {
 
         // Set remaining select boxes to Add New
         document.getElementById("ssw-site-category").value='add_new';
-        document.getElementById("ssw-site-usage").value='add_new';
+        document.getElementById("ssw-site-type").value='add_new';
     } 
     else 
     {
         document.getElementById("add-user-role-input").style.visibility='hidden';
         document.getElementById("add-user-role-btn").style.visibility='hidden';
 
-        // change value of siteUsageSelect based on userSelect value
-        var siteUsageUser = site_usage[userSelect.value];
-        siteUsageSelect.options.length = 0;
-        for(var prop in siteUsageUser) {
-            if(!siteUsageUser.hasOwnProperty([prop])) { continue; }
+        // change value of siteTypeSelect based on userSelect value
+        var siteTypeUser = site_type[userSelect.value];
+        siteTypeSelect.options.length = 0;
+        for(var prop in siteTypeUser) {
+            if(!siteTypeUser.hasOwnProperty([prop])) { continue; }
             var opt = document.createElement('option');
             opt.value = prop;
-            opt.innerHTML = siteUsageUser[prop];
-            siteUsageSelect.appendChild(opt);
+            opt.innerHTML = siteTypeUser[prop];
+            siteTypeSelect.appendChild(opt);
         }
-        addNewSelectOption(siteUsageSelect);
+        addNewSelectOption(siteTypeSelect);
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
@@ -161,24 +161,24 @@ function sswUserRole() {
         addNewSelectOption(siteCategorySelect);
     }
 
-    // trigger change function for siteCategorySelect and siteUsageSelect
-    sswSiteUsage();
+    // trigger change function for siteCategorySelect and siteTypeSelect
+    sswSiteType();
     sswSiteCategory();
 }
 
-function sswSiteUsage() {
-    if (document.getElementById("ssw-site-usage").value=='add_new')
+function sswSiteType() {
+    if (document.getElementById("ssw-site-type").value=='add_new')
     {        
-        document.getElementById("add-site-usage-input").style.visibility='visible';
-        document.getElementById("add-site-usage-btn").style.visibility='visible';
+        document.getElementById("add-site-type-input").style.visibility='visible';
+        document.getElementById("add-site-type-btn").style.visibility='visible';
 
         // Set remaining select boxes to Add New
         //document.getElementById("ssw-site-category").value='add_new';
     } 
     else 
     { 
-        document.getElementById("add-site-usage-input").style.visibility='hidden';
-        document.getElementById("add-site-usage-btn").style.visibility='hidden';
+        document.getElementById("add-site-type-input").style.visibility='hidden';
+        document.getElementById("add-site-type-btn").style.visibility='hidden';
     }; 
 }
 
@@ -204,8 +204,8 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
     if(selectBox != userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
-        if(selectBox.value == 'ssw-site-usage') {
-            options['site_usage'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
+        if(selectBox.value == 'ssw-site-type') {
+            options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
         }
         if(selectBox.value == 'ssw-site-category') {
             //options['site_address_bucket'][selectedUser][inputTxt.value] = inputTxt.value;
@@ -219,7 +219,7 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     opt.innerHTML = inputTxt.value;
     selectBox.appendChild(opt);
     
-    //console.log(site_usage); 
+    //console.log(site_type); 
     console.log(site_user_category);
 }
 

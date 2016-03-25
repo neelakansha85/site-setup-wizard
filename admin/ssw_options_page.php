@@ -26,39 +26,52 @@
             <tbody><tr>
                 <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
                 <td>
-                    <select name="ssw-user-role[]" id="ssw-user-role" class="regular-text ssw-select" onchange="sswUserRole()">
+                    <select name="ssw-user-role" id="ssw-user-role" class="regular-text ssw-select" aria-describedby="ssw-user-role-desc" onchange="sswUserRole()">
                     </select>
                     <div class="ssw-add-new-input">
                         <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
                         <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
                     </div>
+                    <p class="description" id="ssw-user-role-desc">
+                        <?php _e( 'Please Save Options after adding Site Type and Site Category information for a particular user role.'); ?>
+                    </p>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('Site Usage') ?></label></th>
+                <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
                 <td>
-                    <select name= "ssw-site-usage[]" id="ssw-site-usage" class="regular-text ssw-select" aria-describedby="ssw-site-usage-desc" multiple="multiple" onchange="sswSiteUsage()">
+                    <?php /*
+                    <textarea name="ssw-site-type" id="ssw-site-type" aria-describedby="ssw-site-type-desc" cols="60" rows="5"></textarea>
+                    */ ?>
+                                        <select name= "ssw-site-type" id="ssw-site-type" class="regular-text ssw-select" aria-describedby="ssw-site-type-desc" multiple="multiple" onchange="sswSiteType()">
                     </select>
-                    <div class="ssw-add-new-input">
-                        <input name="add-site-usage-input" type="text" id="add-site-usage-input" class="ssw-add-new-text" placeholder="Add New Site Usage" value="">
-                        <span id="add-site-usage-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-usage-input', 'ssw-site-usage')"></span>
+                                        <div class="ssw-add-new-input">
+                        <input name="add-site-type-input" type="text" id="add-site-type-input" class="ssw-add-new-text" placeholder="Add New Site Type" value="">
+                        <span id="add-site-type-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-type-input', 'ssw-site-type')"></span>
                     </div>
-                    <p class="description" id="ssw-site-usage-desc">
-                        <?php _e( 'These Site Usage types will be displayed for a user to choose from on first page of Site Setup Wizard (Step 1).'); ?>
+
+                    <p class="description" id="ssw-site-type-desc">
+                        <?php _e( 'These Site Type will be displayed for a user to choose from on first page of Site Setup Wizard (Step 1). Separate types by new line.'); ?>
                     </p>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
-                    <select name="ssw-site-category[]" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
+                    <?php /*
+                    <textarea name="ssw-site-category" id="ssw-site-category" aria-describedby="ssw-site-category-desc" cols="60" rows="5"></textarea>
+                    */ ?>
+                                        <select name="ssw-site-category" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
                     </select>
+
+                    <?php /* Commenting this out for next iteration */ ?>
                     <div class="ssw-add-new-input">
                         <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" placeholder="Add New Site Category" value="">
                         <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-category-input', 'ssw-site-category')"></span>
                     </div>
+                    <?php /* */ ?>
                     <p class="description" id="ssw-site-category-desc">
-                        <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;'); ?>
+                        <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;<br/> Separate categories by new line.'); ?>
                     </p>
                 </td>
             </tr>
@@ -190,9 +203,9 @@
         <table class="form-table">
             <tbody>
             <tr>
-                <th scope="row"><?php echo esc_html('Site Usage Restriction') ?></th>
+                <th scope="row"><?php echo esc_html('Site Type Restriction') ?></th>
                 <td>
-                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="true" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
+                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="true" ><?php echo esc_html('Restrict Site Type on Step 1 based on user role mapping with wordpress') ?></label>
                 </td>
             </tr>
             <tr>

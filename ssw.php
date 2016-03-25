@@ -612,7 +612,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$hide_plugin_category = $options['hide_plugin_category'];
 				$external_plugins = $options['external_plugins'];
 				$user_role_mapping = $options['user_role_mapping'];
-				$site_usage = $options['site_usage'];
+				$site_type = $options['site_type'];
 				$is_user_role_restriction = $options['user_role_restriction'];
 				$ssw_not_available = $options['ssw_not_available'];
 				$ssw_not_available_txt = $options['ssw_not_available_txt'];

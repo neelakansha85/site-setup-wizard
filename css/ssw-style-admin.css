@@ -11,3 +11,44 @@
 }
 
 /* ENDS Options Page */
+
+/* Media CSS for Options Page */
+
+@media (min-width: 10px) and (max-width:479px) {
+    
+}
+
+@media (min-width: 480px) {
+
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) {
+  .ssw-select {
+    min-width: 25em;
+  }
+  
+  .ssw-add-new-text {
+    min-width: 20em;
+  }
+
+}
+
+@media (max-width: 782px) {
+  .ssw-add-new-text {
+    width: 90% !important;
+    display: inline-block !important;
+  }
+  ssw-add-new-input {
+    
+  }
+
+  select[multiple] {
+    height: auto !important;
+  }
+}
+
+/* ENDS Media CSS for Options Page */
