@@ -2,8 +2,8 @@
 
 /* JS for Site Setup Wizard Options Page */
 
-var site_address_bucket = options['site_address_bucket'];
-var site_address_bucket_none_value = options['site_address_bucket_none_value'];
+var site_user_category = options['site_address_bucket'];
+var site_category_no_prefix = options['site_address_bucket_none_value'];
 var banned_site_address = options['banned_site_address'];
 var hide_plugin_category = options['hide_plugin_category'];
 var external_plugins = options['external_plugins'];
@@ -32,14 +32,34 @@ var is_master_user = options['master_user'] ? options['master_user'] : false;
 console.log(options);
 
 // add a default --Select-- value to selectBox
-function add_new_select_option(selectBox) {
+function addNewSelectOption(selectBox) {
     var opt = document.createElement('option');
     opt.value = 'add_new';
     opt.innerHTML = '--Add New--';
     selectBox.appendChild(opt);
 }
 
-function options_page() {
+function convertToArray() {
+    var i = 1;
+    var siteUser = new Array();
+    for (var siteUserCategory in site_user_category) {
+        if(!site_user_category.hasOwnProperty([siteUserCategory])) { continue; }
+        siteUser.push(siteUserCategory);
+        var siteCategory = new Array();
+        for (var userCategory in site_user_category[siteUserCategory]) {
+            if(!siteUserCategory.hasOwnProperty([userCategory])) {  continue;   }
+            siteCategory.push(userCategory);
+        }
+        i++;
+        console.log("User Categories: ");
+        console.log(siteCategory);
+    }
+    console.log("Site Users: ");
+    console.log(site_user_category);
+    
+}
+
+function loadOptionsPage() {
     // add the values to userSelect by default on page load
     var userSelect = document.getElementById("ssw-user-role");
     var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
@@ -66,19 +86,19 @@ function options_page() {
     var debugModeEnable = document.getElementById("ssw-debug-mode-enable");
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
-    for(var siteAddressBucketUser in site_address_bucket) {
+    for(var siteUserCategory in site_user_category) {
         // skip loop if property is from prototype
-        if(!site_address_bucket.hasOwnProperty([siteAddressBucketUser])) { continue; }
+        if(!site_user_category.hasOwnProperty([siteUserCategory])) { continue; }
         var opt = document.createElement('option');
-        opt.value = siteAddressBucketUser;
-        opt.innerHTML = siteAddressBucketUser;
+        opt.value = siteUserCategory;
+        opt.innerHTML = siteUserCategory;
         userSelect.appendChild(opt);
     }
-    add_new_select_option(userSelect);
-    ssw_user_role();
+    addNewSelectOption(userSelect);
+    sswUserRole();
 
     // load remaining options independant values
-    siteCategoryNoPrefix.value = site_address_bucket_none_value.join(" ");
+    siteCategoryNoPrefix.value = site_category_no_prefix.join(" ");
     bannedSiteAddress.value = banned_site_address.join(" ");
     termsOfUse.innerHTML = terms_of_use;
     pluginsPageTxt.innerHTML = plugins_page_txt;
@@ -115,10 +135,12 @@ function options_page() {
     else {
         debugModeDisable.checked = true;
     }
-        debugMasterUser.checked = is_master_user;
+    debugMasterUser.checked = is_master_user;
+
+    convertToArray();
 }
 
-function ssw_user_role() {
+function sswUserRole() {
     var userSelect = document.getElementById("ssw-user-role");
     var siteUsageSelect = document.getElementById("ssw-site-usage");
     var siteCategorySelect = document.getElementById("ssw-site-category");
@@ -146,43 +168,45 @@ function ssw_user_role() {
             opt.innerHTML = siteUsageUser[prop];
             siteUsageSelect.appendChild(opt);
         }
-        add_new_select_option(siteUsageSelect);
+        addNewSelectOption(siteUsageSelect);
 
         // change value of siteCategorySelect based on userSelect value
-        var siteCategoryUser = site_address_bucket[userSelect.value];
+        var siteUserCategory = site_user_category[userSelect.value];
         siteCategorySelect.options.length = 0;
-        for(var prop in siteCategoryUser) {
-            if(!siteCategoryUser.hasOwnProperty([prop])) { continue; }
+        for(var prop in siteUserCategory) {
+            if(!siteUserCategory.hasOwnProperty([prop])) { continue; }
             var opt = document.createElement('option');
             opt.value = prop;
-            opt.innerHTML = siteCategoryUser[prop];
+            opt.innerHTML = siteUserCategory[prop];
             siteCategorySelect.appendChild(opt);
         }
-        add_new_select_option(siteCategorySelect);
+        addNewSelectOption(siteCategorySelect);
     }
 
     // trigger change function for siteCategorySelect and siteUsageSelect
-    ssw_site_usage();
-    ssw_site_category();
+    sswSiteUsage();
+    sswSiteCategory();
 }
 
-function ssw_site_usage() {
+function sswSiteUsage() {
     if (document.getElementById("ssw-site-usage").value=='add_new')
     {        
         document.getElementById("add-site-usage-input").style.visibility='visible';
         document.getElementById("add-site-usage-btn").style.visibility='visible';
 
         // Set remaining select boxes to Add New
-        document.getElementById("ssw-site-category").value='add_new';
+        //document.getElementById("ssw-site-category").value='add_new';
     } 
     else 
     { 
         document.getElementById("add-site-usage-input").style.visibility='hidden';
         document.getElementById("add-site-usage-btn").style.visibility='hidden';
     }; 
+
+    convertToArray();
 }
 
-function ssw_site_category() {
+function sswSiteCategory() {
     if (document.getElementById("ssw-site-category").value=='add_new')
     {
         document.getElementById("add-site-category-input").style.visibility='visible';
@@ -192,16 +216,29 @@ function ssw_site_category() {
     { 
         document.getElementById("add-site-category-input").style.visibility='hidden';
         document.getElementById("add-site-category-btn").style.visibility='hidden';
-    }; 
+    };
+
+        // Test area
+/*        var banned_site_address1 = $.map(options['banned_site_address'], function(value, index) {
+        return [value];
+        });
+*/
+//        console.log(banned_site_address1);
+
+
+        var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
+        console.log("Arr: ");
+        console.log(arr);
+        
 }
 
 
-function ssw_add_new_value(inputTxtId, selectBoxId) {
+function sswAddNewValue(inputTxtId, selectBoxId) {
     var inputTxt = document.getElementById(inputTxtId);
     var selectBox = document.getElementById(selectBoxId);
     var userSelect = document.getElementById("ssw-user-role");
 
-var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
+    var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
     if(selectBox != userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
         if(selectBox.value == 'ssw-site-usage') {
@@ -209,27 +246,38 @@ var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser
         }
         if(selectBox.value == 'ssw-site-category') {
             //options['site_address_bucket'][selectedUser][inputTxt.value] = inputTxt.value;
-
-
         }
     }
 
-console.log(arr);
-
-
+    console.log(arr);
     
-/*    var opt = document.createElement('option');
+    var opt = document.createElement('option');
     opt.value = inputTxt.value.replace(/ /g,"_");
     opt.innerHTML = inputTxt.value;
     selectBox.appendChild(opt);
-*/
     
-
     //console.log(site_usage); 
-    console.log(site_address_bucket);
+    console.log(site_user_category);
+}
+
+function selectAll(selectBoxId) 
+    { 
+        selectBox = document.getElementById(selectBoxId);
+        for (var i = 0; i < selectBox.options.length; i++) 
+        { 
+             selectBox.options[i].selected = true;
+        } 
+    }
+
+function saveOptions(){
+    // select all options of all select boxes
+    //selectAll("ssw-user-role");
+    //selectAll("ssw-site-usage");
+    //selectAll("ssw-site-category");
+
 }
 
 // Load the values first time when the page loads 
-window.onload = options_page();
+window.onload = loadOptionsPage();
 
 /* ENDS JS for Site Setup Wizard Options Page */

@@ -26,33 +26,36 @@
             <tbody><tr>
                 <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
                 <td>
-                    <select id="ssw-user-role" class="regular-text ssw-select" onchange="ssw_user_role()">
+                    <select name="ssw-user-role[]" id="ssw-user-role" class="regular-text ssw-select" onchange="sswUserRole()">
                     </select>
                     <div class="ssw-add-new-input">
-                        <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" value="">
-                        <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-user-role-input', 'ssw-user-role')"></span>
+                        <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
+                        <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
                     </div>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-usage"><?php echo esc_html('Site Usage') ?></label></th>
                 <td>
-                    <select id="ssw-site-usage" class="regular-text ssw-select" onchange="ssw_site_usage()">
+                    <select name= "ssw-site-usage[]" id="ssw-site-usage" class="regular-text ssw-select" aria-describedby="ssw-site-usage-desc" multiple="multiple" onchange="sswSiteUsage()">
                     </select>
                     <div class="ssw-add-new-input">
-                        <input name="add-site-usage-input" type="text" id="add-site-usage-input" class="ssw-add-new-text" value="">
-                        <span id="add-site-usage-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-site-usage-input', 'ssw-site-usage')"></span>
+                        <input name="add-site-usage-input" type="text" id="add-site-usage-input" class="ssw-add-new-text" placeholder="Add New Site Usage" value="">
+                        <span id="add-site-usage-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-usage-input', 'ssw-site-usage')"></span>
                     </div>
+                    <p class="description" id="ssw-site-usage-desc">
+                        <?php _e( 'These Site Usage types will be displayed for a user to choose from on first page of Site Setup Wizard (Step 1).'); ?>
+                    </p>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
-                    <select id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" onchange="ssw_site_category()">
+                    <select name="ssw-site-category[]" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
                     </select>
                     <div class="ssw-add-new-input">
-                        <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" value="">
-                        <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="ssw_add_new_value('add-site-category-input', 'ssw-site-category')"></span>
+                        <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" placeholder="Add New Site Category" value="">
+                        <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-category-input', 'ssw-site-category')"></span>
                     </div>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;'); ?>
@@ -136,13 +139,13 @@
             <tr>
                 <th scope="row"><?php echo esc_html('External Plugins') ?></th>
                 <td>
-                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
+                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
+                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
+                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
                     <br/>
-                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
+                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
                 </td>
             </tr>
         </tbody></table>
@@ -152,7 +155,7 @@
             <tr>
                 <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
                 <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
+                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
                 </td>
             </tr>
             <tr>
@@ -189,7 +192,7 @@
             <tr>
                 <th scope="row"><?php echo esc_html('Site Usage Restriction') ?></th>
                 <td>
-                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
+                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="true" ><?php echo esc_html('Restrict Site Usage categories on Step 1 based on user role mapping with wordpress') ?></label>
                 </td>
             </tr>
             <tr>
@@ -226,14 +229,14 @@
             <tr>
                 <th scope="row"><?php echo esc_html('Activate Master User') ?></th>
                 <td>
-                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value=""><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
+                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true"><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
                     </label>
                 </td>
             </tr>
         </tbody></table>
         <p class="submit">
             <?php wp_nonce_field('submit_ssw_settings'); ?>
-            <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes">
+            <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes" onclick="saveOptions()">
         </p>
     </form>
 </div>
