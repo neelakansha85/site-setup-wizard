@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Site Setup Wizard
-Description: Allows users to create new sites using a wizard of multiple steps and pre-selecting site settings such as theme, plugins, privacy, etc. You can use the wizard by adding shortcode [site_setup_wizard] placed on the site. The plugin is completely customizable.
+Description: Allows users to create new sites using a wizard of multiple steps and pre-selecting site settings such as theme, plugins, privacy, etc. You can use the wizard by adding shortcode [site_setup_wizard] at any place on the site. The plugin is completely customizable.
 Plugin URI: https://github.com/neelakansha85/nsd-site-setup-wizard
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.2.3
+Version: 1.2.4
 */
 
 
@@ -26,7 +26,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '1.2.3');
+define('SSW_VERSION', '1.2.4');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {

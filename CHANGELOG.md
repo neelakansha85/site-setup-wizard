@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.4](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2)
+### Added
+- Allowing users to change/save options for Site Setup Wizard Plugin
+
 ## [1.2.3](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2.3) - 2016-03-22
 ### Added
 - Options Page to view all options for Site Setup Wizard
@@ -23,7 +27,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - [Issue #3](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/3) conflicting with Activity Log Plugin.
-- [Issue #2](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/2) related to Quick Draft and Permalinks not working
+- [Issue #2](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/2) related to Quick Draft and Permalinks not working.
 
 ## [1.2.0](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2) - 2015-09-01
 ### Added
