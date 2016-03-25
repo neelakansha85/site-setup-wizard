@@ -2,20 +2,12 @@
 
 /* Options Page */
 
-.ssw-select {
-  min-width: 25em;
-}
-
 .ssw-add-new-input {
   display: inline;
 }
 
 .ssw-add-new-btn {
   vertical-align: middle;
-}
-
-.ssw-add-new-text {
-  min-width: 20em;
 }
 
 /* ENDS Options Page */

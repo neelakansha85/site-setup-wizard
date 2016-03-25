@@ -120,6 +120,14 @@
 		width:154px;
 	}
 
+	.ssw-select {
+	  min-width: 25em;
+	}
+	
+	.ssw-add-new-text {
+  	min-width: 20em;
+	}
+
 }
 
 @media (max-width: 782px) {
@@ -130,4 +138,7 @@
 	ssw-add-new-input {
 		
 	}
-}
+
+	select[multiple] {
+		height: auto !important;
+	}
