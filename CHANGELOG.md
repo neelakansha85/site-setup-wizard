@@ -3,8 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.4](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2)
 ### Added
-- Allowing users to change/save options for Site Setup Wizard Plugin
 - Renamed site_usage to site_type in wp_ssw_main_nsd table and other places as as required.
+- Added readme.txt and license.txt for wordpress.org support.
 
 ## [1.2.3](https://github.com/neelakansha85/nsd-site-setup-wizard/releases/tag/v1.2.3) - 2016-03-22
 ### Added

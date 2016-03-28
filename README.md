@@ -16,7 +16,7 @@ Allows multiste registered users to create sites using pre selected features/set
     * Site Category (Allows users to select a pre-configured site category if required). (Ex: http://yourdomain.com/category1-mysite)
     * Plugins to be activated within the site (Works with WPMU Pretty Plugins including their categories if enabled).
 * Super admins can configure banned site names to disallow users from creating specific sites.
-* User's email address is displayedby default  on the page in addition to allowing them to enter another user from the system as an admin for the new site.
+* User's email address is displayed by default  on the page in addition to allowing them to enter another user from the system as an admin for the new site.
 * Users are not allow to use hyphen "-" in a site name since it is used to differentiate between sites and their catgories. 
 * If WPMU Pretty Plugins is not enabled, it will display all the plugins available for site admins to activate.
 * It resumes from where user's left off on returning to the plugin page if they haven't completed all steps of the wizard.
