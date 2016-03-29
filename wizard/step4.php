@@ -39,7 +39,7 @@ $step4 = 'features';
                                                     <div class="ssw-plugins-list">
     ';
                                         foreach($plugins_list as $plugin_path => $plugin_details) {
-                                            if( $plugin_details['Categories'] && $plugin_details['Name']) {
+                                            if( isset($plugin_details['Categories']) && isset($plugin_details['Name'])) {
                                                 foreach ($plugin_details['Categories'] as $category_count => $category_system_name_in_details) {
                                                     if($category_system_name == $category_system_name_in_details) {
     echo '
