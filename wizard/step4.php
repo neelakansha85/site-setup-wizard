@@ -28,7 +28,10 @@ $step4 = 'features';
                         ';
 
                             if ($wpmu_pretty_plugins == true) {
-                                
+
+                                $this->ssw_debug_log('Step4', 'plugins_categories', $plugins_categories);
+                                $this->ssw_debug_log('Step4', 'plugins_list', $plugins_list);
+
                                 foreach ($plugins_categories as $category_system_name => $category_name) {
                                     if ($category_name != $hide_plugin_category) {
                                         echo '
