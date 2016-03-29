@@ -70,5 +70,5 @@ Please log issues on the GitHub at https://github.com/neelakansha85/nsd-site-set
 
 ## ChangeLog
 
-See [CHANGES.md](CHANGELOG.md).
+See [readme.txt](readme.txt).
 

@@ -3,7 +3,7 @@ Contributors: neelakansha85
 Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress
 Requires at least: 4.0
 Tested up to: 4.4
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2V9UGN9L5547U&lc=US&item_name=Site%20Setup%20Wizard%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
@@ -85,6 +85,11 @@ Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more doc
 
 == Changelog ==
 
+= 1.2.5 =
+* Fixed notices coming on Step4.php when WPMU Pretty Plugins is enabled but does not have any plugins categorized.
+* Added variables from ssw_find_plugins() method in Debug file.
+* Corrected readme file texts.
+
 = 1.2.4 =
 * Renamed site_usage to site_type in wp_ssw_main_nsd table and other places as as required.
 * Added readme.txt and license.txt for wordpress.org support.
@@ -92,7 +97,7 @@ Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more doc
 = 1.2.3 =
 * Added Options Page to view all options for Site Setup Wizard
 * Added new options to configure in Options Page
-* Removed from template_type field from wp_ssw_main_nsd table
+* Removed template_type field from wp_ssw_main_nsd table
 * Fixed [Issue #12](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/12) Restricting users from creating sites with names as site categories
 * Fixed [Issue #1](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/1)
 * Fixed PHP Warnings and Notices that used to appear when running this plugin. 
