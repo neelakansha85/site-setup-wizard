@@ -355,6 +355,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			if ($wpmu_pretty_plugins == true) {
 				$plugins_categories = get_site_option($this->wpmu_pretty_plugins_categories_site_option);
 				$all_plugins = get_site_option($this->wpmu_pretty_plugins_plugins_list_site_option);
+					$this->ssw_debug_log('ssw_find_plugins()', 'all_plugins value from Pretty Plugins', $all_plugins);
+					$this->ssw_debug_log('ssw_find_plugins()', 'wpmu_pretty_plugins_plugins_list_site_option', $this->wpmu_pretty_plugins_plugins_list_site_option);
 				if ( ! $all_plugins ) {
 					$all_plugins = array();
 				}
