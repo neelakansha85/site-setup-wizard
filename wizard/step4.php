@@ -39,13 +39,23 @@ $step4 = 'features';
                                                     <div class="ssw-plugins-list">
     ';
                                         foreach($plugins_list as $plugin_path => $plugin_details) {
-                                            if( isset($plugin_details['Categories']) && isset($plugin_details['Name'])) {
+                                            $this->ssw_debug_log('Step4', 'plugin_details', $plugin_details);
+                                            if( isset($plugin_details['Categories']) ) {
                                                 foreach ($plugin_details['Categories'] as $category_count => $category_system_name_in_details) {
                                                     if($category_system_name == $category_system_name_in_details) {
+                                                        if(isset($plugin_details['Name'])) {
     echo '
                                                             <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
-
     ';
+                                                        }
+                                                        else {
+                                                            $plugin_details = get_plugin_data(WP_PLUGIN_DIR.'/'.$plugin_path);
+                                                            if(isset($plugin_details['Name'])) {
+    echo '
+                                                            <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
+    ';
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
