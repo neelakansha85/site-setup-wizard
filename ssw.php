@@ -6,7 +6,7 @@ Plugin URI: https://github.com/neelakansha85/nsd-site-setup-wizard
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.2.5
+Version: 1.2.6
 */
 
 
@@ -26,7 +26,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '1.2.5');
+define('SSW_VERSION', '1.2.6');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {

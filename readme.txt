@@ -84,6 +84,8 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.2.6 =
+* Fixed finding plugins default data when Pretty Plugins is enabled but does not override Plugin's default name.
 
 = 1.2.5 =
 * Fixed notices coming on Step4.php when WPMU Pretty Plugins is enabled but does not have any plugins categorized.
