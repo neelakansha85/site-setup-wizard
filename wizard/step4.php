@@ -32,6 +32,11 @@ $step4 = 'features';
                                 $this->ssw_debug_log('Step4', 'plugins_categories', $plugins_categories);
                                 $this->ssw_debug_log('Step4', 'plugins_list', $plugins_list);
 
+                                /**
+                                * Fetch Plugins default data for finding names if not present in Pretty Plugins data 
+                                */
+                                $plugins_default_data =  apply_filters('all_plugins', get_plugins());
+
                                 foreach ($plugins_categories as $category_system_name => $category_name) {
                                     if ($category_name != $hide_plugin_category) {
                                         echo '
@@ -52,7 +57,7 @@ $step4 = 'features';
     ';
                                                         }
                                                         else {
-                                                            $plugin_details = get_plugin_data(WP_PLUGIN_DIR.'/'.$plugin_path);
+                                                            $plugin_details = $plugins_default_data[$plugin_path];;
                                                             if(isset($plugin_details['Name'])) {
     echo '
                                                             <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
