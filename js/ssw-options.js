@@ -130,8 +130,8 @@ function sswUserRole() {
         document.getElementById("add-user-role-btn").style.visibility='visible';
 
         // Set remaining select boxes to Add New
-        document.getElementById("ssw-site-category").value='add_new';
-        document.getElementById("ssw-site-type").value='add_new';
+        // siteTypeSelect.value='add_new';
+        // siteCategorySelect.value='add_new';
     } 
     else 
     {
