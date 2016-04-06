@@ -1,19 +1,19 @@
 <?php
 
-    /* Include the Javascripts for the ssw plugin while trying to create a site */
-    wp_enqueue_script( 'ssw-options-js' );
-    /* Include CSS for Options Page */
-    wp_enqueue_style( 'ssw-style-admin-css' );
-    
-    global $current_blog;
-    global $current_site;
-    
-    /* Identifing current domain and path on domain where wordpress is running from */
-    $current_site_root_address = $current_blog->domain.$current_site->path;
+/* Include the Javascripts for the ssw plugin while trying to create a site */
+wp_enqueue_script( 'ssw-options-js' );
+/* Include CSS for Options Page */
+wp_enqueue_style( 'ssw-style-admin-css' );
 
-    /* Pass value of $options to ssw-options.js */
-    $options = $this->ssw_fetch_config_options();
-    wp_localize_script( 'ssw-options-js', 'options', $options );
+global $current_blog;
+global $current_site;
+
+/* Identifing current domain and path on domain where wordpress is running from */
+$current_site_root_address = $current_blog->domain.$current_site->path;
+
+/* Pass value of $options to ssw-options.js */
+$options = $this->ssw_fetch_config_options();
+wp_localize_script( 'ssw-options-js', 'options', $options );
 
 ?>
 
@@ -23,29 +23,30 @@
     <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate">
         <h3><?php echo esc_html('Basic Settings') ?></h3>
         <table class="form-table">
-            <tbody><tr>
-                <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
-                <td>
-                    <select name="ssw-user-role" id="ssw-user-role" class="regular-text ssw-select" aria-describedby="ssw-user-role-desc" onchange="sswUserRole()">
-                    </select>
-                    <div class="ssw-add-new-input">
-                        <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
-                        <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
-                    </div>
-                    <p class="description" id="ssw-user-role-desc">
-                        <?php _e( 'Please Save Options after adding Site Type and Site Category information for a particular user role.'); ?>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
-                <td>
+            <tbody>
+                <tr>
+                    <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
+                    <td>
+                        <select name="ssw-user-role" id="ssw-user-role" class="regular-text ssw-select" aria-describedby="ssw-user-role-desc" onchange="sswUserRole()">
+                        </select>
+                        <div class="ssw-add-new-input">
+                            <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
+                            <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
+                        </div>
+                        <p class="description" id="ssw-user-role-desc">
+                            <?php _e( 'Please Save Options after adding Site Type and Site Category information for a particular user role.'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
+                    <td>
                     <?php /*
                     <textarea name="ssw-site-type" id="ssw-site-type" aria-describedby="ssw-site-type-desc" cols="60" rows="5"></textarea>
                     */ ?>
-                                        <select name= "ssw-site-type" id="ssw-site-type" class="regular-text ssw-select" aria-describedby="ssw-site-type-desc" multiple="multiple" onchange="sswSiteType()">
+                    <select name= "ssw-site-type" id="ssw-site-type" class="regular-text ssw-select" aria-describedby="ssw-site-type-desc" multiple="multiple" onchange="sswSiteType()">
                     </select>
-                                        <div class="ssw-add-new-input">
+                    <div class="ssw-add-new-input">
                         <input name="add-site-type-input" type="text" id="add-site-type-input" class="ssw-add-new-text" placeholder="Add New Site Type" value="">
                         <span id="add-site-type-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-type-input', 'ssw-site-type')"></span>
                     </div>
@@ -61,7 +62,7 @@
                     <?php /*
                     <textarea name="ssw-site-category" id="ssw-site-category" aria-describedby="ssw-site-category-desc" cols="60" rows="5"></textarea>
                     */ ?>
-                                        <select name="ssw-site-category" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
+                    <select name="ssw-site-category" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
                     </select>
 
                     <?php /* Commenting this out for next iteration */ ?>
@@ -111,10 +112,11 @@
                     </p>
                 </td>
             </tr>
-        </tbody></table>
-        <h3><?php echo esc_html('Wizard Step Titles') ?></h3>
-        <table class="form-table">
-            <tbody>
+        </tbody>
+    </table>
+    <h3><?php echo esc_html('Wizard Step Titles') ?></h3>
+    <table class="form-table">
+        <tbody>
             <tr>
                 <th scope="row"><label for="ssw-step-1"><?php echo esc_html('Step 1') ?></label></th>
                 <td>
@@ -149,104 +151,108 @@
         <h3><?php echo esc_html('Network Activated External Plugins') ?></h3>
         <table class="form-table">
             <tbody>
-            <tr>
-                <th scope="row"><?php echo esc_html('External Plugins') ?></th>
-                <td>
-                    <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
-                    <br/>
-                    <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
-                    <br/>
-                    <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
-                    <br/>
-                    <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
-                </td>
-            </tr>
-        </tbody></table>
+                <tr>
+                    <th scope="row"><?php echo esc_html('External Plugins') ?></th>
+                    <td>
+                        <label><input name="wpmu-multisite-privacy-plugin" type="checkbox" id="wpmu-multisite-privacy-plugin" value="true" ><?php echo esc_html('WPMU Multisite Privacy Plugin') ?></label>
+                        <br/>
+                        <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
+                        <br/>
+                        <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
+                        <br/>
+                        <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <h3><?php echo esc_html('Advanced Privacy Options') ?></h3>
         <table class="form-table">
             <tbody>
-            <tr>
-                <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
-                <td>
-                    <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="privacy-selection-txt"><?php echo esc_html('Pivacy Selection Text') ?></label></th>
-                <td>
-                    <textarea name="privacy-selection-txt" id="privacy-selection-txt" aria-describedby="privacy-selection-txt-desc" cols="60" rows="5"></textarea>
-                    <p class="description" id="privacy-selection-txt-desc">
-                        <?php _e('Please enter the text you want to display if Privacy Selection is disabled on Step 2.'); ?>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="private-network-users-txt"><?php echo esc_html('Available to Network Users') ?></label></th>
-                <td>
-                    <input name="private-network-users-txt" type="text" id="private-network-users-txt" class="large-text" value="">
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="private-site-users-txt"><?php echo esc_html('Available to Site Users') ?></label></th>
-                <td>
-                    <input name="private-site-users-txt" type="text" id="private-site-users-txt" class="large-text" value="">
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="private-administrator-txt"><?php echo esc_html('Available to Site Admins') ?></label></th>
-                <td>
-                    <input name="private-administrator-txt" type="text" id="private-administrator-txt" class="large-text" value="">
-                </td>
-            </tr>
-        </tbody></table>
+                <tr>
+                    <th scope="row"><?php echo esc_html('Privacy Selection') ?></th>
+                    <td>
+                        <label><input name="ssw-privacy-selection" type="checkbox" id="ssw-privacy-selection" value="true" ><?php echo esc_html('Display privacy selection options on Step 2') ?></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="privacy-selection-txt"><?php echo esc_html('Pivacy Selection Text') ?></label></th>
+                    <td>
+                        <textarea name="privacy-selection-txt" id="privacy-selection-txt" aria-describedby="privacy-selection-txt-desc" cols="60" rows="5"></textarea>
+                        <p class="description" id="privacy-selection-txt-desc">
+                            <?php _e('Please enter the text you want to display if Privacy Selection is disabled on Step 2.'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="private-network-users-txt"><?php echo esc_html('Available to Network Users') ?></label></th>
+                    <td>
+                        <input name="private-network-users-txt" type="text" id="private-network-users-txt" class="large-text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="private-site-users-txt"><?php echo esc_html('Available to Site Users') ?></label></th>
+                    <td>
+                        <input name="private-site-users-txt" type="text" id="private-site-users-txt" class="large-text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="private-administrator-txt"><?php echo esc_html('Available to Site Admins') ?></label></th>
+                    <td>
+                        <input name="private-administrator-txt" type="text" id="private-administrator-txt" class="large-text" value="">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <h3><?php echo esc_html('User Role Restriction') ?></h3>
         <table class="form-table">
             <tbody>
-            <tr>
-                <th scope="row"><?php echo esc_html('Site Type Restriction') ?></th>
-                <td>
-                    <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="true" ><?php echo esc_html('Restrict Site Type on Step 1 based on user role mapping with wordpress') ?></label>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="ssw-not-available"><?php echo esc_html('Restricted User Role') ?></label></th>
-                <td>
-                    <input name="ssw-not-available" type="text" id="ssw-not-available" aria-describedby="ssw-not-available-desc" class="regular-text" value="">
-                    <p class="description" id="ssw-not-available-desc">
-                        <?php _e( 'User with this role in wordpress root site will not be allowed to access Site Setup Wizard.'); ?>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="ssw-not-available-txt"><?php echo esc_html('Note to Restricted User') ?></label></th>
-                <td>
-                    <textarea name="ssw-not-available-txt" id="ssw-not-available-txt" aria-describedby="ssw-not-available-txt-desc" cols="60" rows="5"></textarea>
-                    <p class="description" id="ssw-not-available-txt-desc">
-                        <?php _e('Please enter the text you want to display to the user who will not be able to access Site Setup Wizard.'); ?>
-                    </p>
-                </td>
-            </tr>
-        </tbody></table>
+                <tr>
+                    <th scope="row"><?php echo esc_html('Site Type Restriction') ?></th>
+                    <td>
+                        <label><input name="user-role-restriction" type="checkbox" id="user-role-restriction" value="true" ><?php echo esc_html('Restrict Site Type on Step 1 based on user role mapping with wordpress') ?></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="ssw-not-available"><?php echo esc_html('Restricted User Role') ?></label></th>
+                    <td>
+                        <input name="ssw-not-available" type="text" id="ssw-not-available" aria-describedby="ssw-not-available-desc" class="regular-text" value="">
+                        <p class="description" id="ssw-not-available-desc">
+                            <?php _e( 'User with this role in wordpress root site will not be allowed to access Site Setup Wizard.'); ?>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="ssw-not-available-txt"><?php echo esc_html('Note to Restricted User') ?></label></th>
+                    <td>
+                        <textarea name="ssw-not-available-txt" id="ssw-not-available-txt" aria-describedby="ssw-not-available-txt-desc" cols="60" rows="5"></textarea>
+                        <p class="description" id="ssw-not-available-txt-desc">
+                            <?php _e('Please enter the text you want to display to the user who will not be able to access Site Setup Wizard.'); ?>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <h3><?php echo esc_html('Debug Settings') ?></h3>
         <table class="form-table">
             <tbody>
-            <tr>
-                <th scope="row"><?php echo esc_html('Debug Mode') ?></th>
-                <td>
-                    <fieldset>
-                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" /><?php echo esc_html('Enable') ?></label>
-                        <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" /><?php echo esc_html('Disable') ?></label>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><?php echo esc_html('Activate Master User') ?></th>
-                <td>
-                    <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true"><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
-                    </label>
-                </td>
-            </tr>
-        </tbody></table>
+                <tr>
+                    <th scope="row"><?php echo esc_html('Debug Mode') ?></th>
+                    <td>
+                        <fieldset>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" /><?php echo esc_html('Enable') ?></label>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" /><?php echo esc_html('Disable') ?></label>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><?php echo esc_html('Activate Master User') ?></th>
+                    <td>
+                        <label><input name="ssw-debug-master-user" type="checkbox" id="ssw-debug-master-user" value="true"><?php echo esc_html('Please select this if you would like to display all options in the Wizard without discriminating based on User Role') ?> 
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <p class="submit">
             <?php wp_nonce_field('submit_ssw_settings'); ?>
             <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes" onclick="saveOptions()">

@@ -7,10 +7,10 @@ var site_category_no_prefix = options['site_address_bucket_none_value'];
 var banned_site_address = options['banned_site_address'];
 var hide_plugin_category = options['hide_plugin_category'];
 var external_plugins = options['external_plugins'];
-    var wpmu_multisite_privacy_plugin = external_plugins['wpmu_multisite_privacy_plugin'] ? external_plugins['wpmu_multisite_privacy_plugin']: false;
-    var wpmu_pretty_plugins = external_plugins['wpmu_pretty_plugins'] ? external_plugins['wpmu_pretty_plugins'] : false;
-    var wpmu_multisite_theme_manager = external_plugins['wpmu_multisite_theme_manager'] ? external_plugins['wpmu_multisite_theme_manager'] : false;
-    var wpmu_new_blog_template = external_plugins['wpmu_new_blog_template'] ? external_plugins['wpmu_new_blog_template'] : false;
+var wpmu_multisite_privacy_plugin = external_plugins['wpmu_multisite_privacy_plugin'] ? external_plugins['wpmu_multisite_privacy_plugin']: false;
+var wpmu_pretty_plugins = external_plugins['wpmu_pretty_plugins'] ? external_plugins['wpmu_pretty_plugins'] : false;
+var wpmu_multisite_theme_manager = external_plugins['wpmu_multisite_theme_manager'] ? external_plugins['wpmu_multisite_theme_manager'] : false;
+var wpmu_new_blog_template = external_plugins['wpmu_new_blog_template'] ? external_plugins['wpmu_new_blog_template'] : false;
 
 var privacy_selection_txt = options['advanced_privacy']['privacy_selection_txt'];
 var private_network_users_txt = options['advanced_privacy']['private_network_users_txt'];

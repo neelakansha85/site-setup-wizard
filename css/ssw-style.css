@@ -259,19 +259,19 @@
 	margin:0;
 }
 .ssw-back-btn:hover {
-background-color:#999999;
+	background-color:#999999;
 }
 
 .ssw-back-btn:active {
-color:#d50000;
+	color:#d50000;
 }
 
 .ssw-front-btn:hover {
-background-color:#26cda4;
+	background-color:#26cda4;
 }
 
 .ssw-front-btn:active {
-color:#d50000;
+	color:#d50000;
 }
 
 .ssw-start-btn:hover {
