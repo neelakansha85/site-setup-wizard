@@ -53,14 +53,14 @@ echo '
                                         if($category_system_name == $category_system_name_in_details) {
                                             if(isset($plugin_details['Name'])) {
                                                 echo '
-                                                <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
+                                                <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" /> '.$plugin_details['Name'].'<br/>
                                                 ';
                                             }
                                             else {
                                                 $plugin_details = $plugins_default_data[$plugin_path];;
                                                 if(isset($plugin_details['Name'])) {
                                                     echo '
-                                                    <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'<br/>
+                                                    <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" /> '.$plugin_details['Name'].'<br/>
                                                     ';
                                                 }
                                             }
