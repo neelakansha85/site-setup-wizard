@@ -41,15 +41,16 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <tr>
                     <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
                     <td>
-                    <?php /*
+                    
                     <textarea name="ssw-site-type" id="ssw-site-type" aria-describedby="ssw-site-type-desc" cols="60" rows="5"></textarea>
-                    */ ?>
+                    <?php /*
                     <select name= "ssw-site-type" id="ssw-site-type" class="regular-text ssw-select" aria-describedby="ssw-site-type-desc" multiple="multiple" onchange="sswSiteType()">
                     </select>
                     <div class="ssw-add-new-input">
                         <input name="add-site-type-input" type="text" id="add-site-type-input" class="ssw-add-new-text" placeholder="Add New Site Type" value="">
                         <span id="add-site-type-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-type-input', 'ssw-site-type')"></span>
                     </div>
+                    */ ?>
 
                     <p class="description" id="ssw-site-type-desc">
                         <?php _e( 'These Site Type will be displayed for a user to choose from on first page of Site Setup Wizard (Step 1). Separate types by new line.'); ?>
@@ -59,18 +60,15 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
-                    <?php /*
                     <textarea name="ssw-site-category" id="ssw-site-category" aria-describedby="ssw-site-category-desc" cols="60" rows="5"></textarea>
-                    */ ?>
+                    <?php /*
                     <select name="ssw-site-category" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
                     </select>
-
-                    <?php /* Commenting this out for next iteration */ ?>
                     <div class="ssw-add-new-input">
                         <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" placeholder="Add New Site Category" value="">
                         <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-category-input', 'ssw-site-category')"></span>
                     </div>
-                    <?php /* */ ?>
+                    */ ?>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;<br/> Separate categories by new line.'); ?>
                     </p>

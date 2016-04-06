@@ -120,8 +120,10 @@ function loadOptionsPage() {
 
 function sswUserRole() {
     var userSelect = document.getElementById("ssw-user-role");
-    var siteTypeSelect = document.getElementById("ssw-site-type");
-    var siteCategorySelect = document.getElementById("ssw-site-category");
+    var siteTypeTxt = document.getElementById("ssw-site-type");
+    var siteCategoryTxt = document.getElementById("ssw-site-category");
+    // var siteTypeSelect = document.getElementById("ssw-site-type");    
+    // var siteCategorySelect = document.getElementById("ssw-site-category");
     if (userSelect.value=='add_new')
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
@@ -138,6 +140,8 @@ function sswUserRole() {
 
         // change value of siteTypeSelect based on userSelect value
         var siteTypeUser = site_type[userSelect.value];
+        
+        /*
         siteTypeSelect.options.length = 0;
         for(var prop in siteTypeUser) {
             if(!siteTypeUser.hasOwnProperty([prop])) { continue; }
@@ -147,9 +151,11 @@ function sswUserRole() {
             siteTypeSelect.appendChild(opt);
         }
         addNewSelectOption(siteTypeSelect);
+        */
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
+        /*
         siteCategorySelect.options.length = 0;
         for(var prop in siteUserCategory) {
             if(!siteUserCategory.hasOwnProperty([prop])) { continue; }
@@ -159,13 +165,15 @@ function sswUserRole() {
             siteCategorySelect.appendChild(opt);
         }
         addNewSelectOption(siteCategorySelect);
+        */
     }
 
     // trigger change function for siteCategorySelect and siteTypeSelect
-    sswSiteType();
-    sswSiteCategory();
+    // sswSiteType();
+    // sswSiteCategory();
 }
 
+/* Will be used using Select Box for SiteType input
 function sswSiteType() {
     if (document.getElementById("ssw-site-type").value=='add_new')
     {        
@@ -181,7 +189,8 @@ function sswSiteType() {
         document.getElementById("add-site-type-btn").style.visibility='hidden';
     }; 
 }
-
+*/
+/* Will be used using Select Box for SiteCategory input
 function sswSiteCategory() {
     if (document.getElementById("ssw-site-category").value=='add_new')
     {
@@ -194,7 +203,7 @@ function sswSiteCategory() {
         document.getElementById("add-site-category-btn").style.visibility='hidden';
     }; 
 }
-
+*/
 
 function sswAddNewValue(inputTxtId, selectBoxId) {
     var inputTxt = document.getElementById(inputTxtId);
