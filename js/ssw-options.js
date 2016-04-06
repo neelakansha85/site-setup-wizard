@@ -169,12 +169,12 @@ function sswUserRole() {
     }
 
     // trigger change function for siteCategorySelect and siteTypeSelect
-    // sswSiteType();
-    // sswSiteCategory();
+    sswSiteType();
+    sswSiteCategory();
 }
 
-/* Will be used using Select Box for SiteType input
 function sswSiteType() {
+    /* Will be used using Select Box for SiteType input
     if (document.getElementById("ssw-site-type").value=='add_new')
     {        
         document.getElementById("add-site-type-input").style.visibility='visible';
@@ -188,10 +188,10 @@ function sswSiteType() {
         document.getElementById("add-site-type-input").style.visibility='hidden';
         document.getElementById("add-site-type-btn").style.visibility='hidden';
     }; 
+    */
 }
-*/
-/* Will be used using Select Box for SiteCategory input
 function sswSiteCategory() {
+    /* Will be used using Select Box for SiteCategory input
     if (document.getElementById("ssw-site-category").value=='add_new')
     {
         document.getElementById("add-site-category-input").style.visibility='visible';
@@ -202,8 +202,8 @@ function sswSiteCategory() {
         document.getElementById("add-site-category-input").style.visibility='hidden';
         document.getElementById("add-site-category-btn").style.visibility='hidden';
     }; 
+    */
 }
-*/
 
 function sswAddNewValue(inputTxtId, selectBoxId) {
     var inputTxt = document.getElementById(inputTxtId);
