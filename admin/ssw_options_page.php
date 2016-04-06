@@ -158,9 +158,9 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                         <br/>
                         <label><input name="wpmu-pretty-plugin" type="checkbox" id="wpmu-pretty-plugin" value="true" ><?php echo esc_html('WPMU Pretty Plugin') ?></label>
                         <br/>
-                        <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin') ?></label>
+                        <label><input name="wpmu-multisite-theme-manager-plugin" type="checkbox" id="wpmu-multisite-theme-manager-plugin" value="true" ><?php echo esc_html('WPMU Multisite Theme Manager Plugin (Not yet Supported)') ?></label>
                         <br/>
-                        <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin') ?></label>
+                        <label><input name="wpmu-new-blog-template-plugin" type="checkbox" id="wpmu-new-blog-template-plugin" value="true" ><?php echo esc_html('WPMU New Blog Template Plugin (Not yet Supported)') ?></label>
                     </td>
                 </tr>
             </tbody>
