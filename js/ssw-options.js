@@ -29,6 +29,9 @@ var is_privacy_selection = options['privacy_selection'] ? options['privacy_selec
 var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
 var is_master_user = options['master_user'] ? options['master_user'] : false;
 
+// Create a Array for Site Users in order to process form
+var siteUserArray = Object.keys(site_user_category);
+
 //console.log(options);
 
 // add a default --Select-- value to selectBox
@@ -76,6 +79,16 @@ function loadOptionsPage() {
     var debugModeEnable = document.getElementById("ssw-debug-mode-enable");
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
+    
+    for( var i=0; i<siteUserArray.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = siteUserArray[i];
+        opt.innerHTML = siteUserArray[i];
+        userSelect.appendChild(opt);
+        if(i == siteUserArray.length-1) {
+            addNewSelectOption(userSelect);
+        }
+    }
     /*
     for(var siteUserCategory in site_user_category) {
         // skip loop if property is from prototype
