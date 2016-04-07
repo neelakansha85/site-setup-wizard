@@ -39,6 +39,16 @@ function addNewSelectOption(selectBox) {
     selectBox.appendChild(opt);
 }
 
+// function to convert Object to Array 
+function objToArray(obj) {
+    var arr = Array();
+    for(var prop in obj) {
+            if(!obj.hasOwnProperty([prop])) { continue; }
+            arr.push(obj[prop]);
+    }
+    return arr;
+}
+
 function loadOptionsPage() {
     // add the values to userSelect by default on page load
     var userSelect = document.getElementById("ssw-user-role");
@@ -144,12 +154,8 @@ function sswUserRole() {
 
         // change value of siteTypeSelect based on userSelect value
         var siteTypeUser = site_type[userSelect.value];
-        var siteTypeArray = Array();
+        var siteTypeArray = objToArray(siteTypeUser);
         siteTypeTxt.innerHTML = '';
-        for(var prop in siteTypeUser) {
-            if(!siteTypeUser.hasOwnProperty([prop])) { continue; }
-            siteTypeArray.push(siteTypeUser[prop]);
-        }
         for(var i=0; i<siteTypeArray.length; i++) {
             siteTypeTxt.innerHTML += siteTypeArray[i];
             if(i != siteTypeArray.length-1 ) {
@@ -173,12 +179,8 @@ function sswUserRole() {
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
-        var siteCategoryArray = Array();
+        var siteCategoryArray = objToArray(siteUserCategory);
         siteCategoryTxt.innerHTML = '';
-        for(var prop in siteUserCategory) {
-            if(!siteUserCategory.hasOwnProperty([prop])) { continue; }
-            siteCategoryArray.push(siteUserCategory[prop]);
-        }
         for(var i=0; i<siteCategoryArray.length; i++) {
             siteCategoryTxt.innerHTML += siteCategoryArray[i];
             if(i != siteCategoryArray.length-1 ) {
