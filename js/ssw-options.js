@@ -29,7 +29,7 @@ var is_privacy_selection = options['privacy_selection'] ? options['privacy_selec
 var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
 var is_master_user = options['master_user'] ? options['master_user'] : false;
 
-console.log(options);
+//console.log(options);
 
 // add a default --Select-- value to selectBox
 function addNewSelectOption(selectBox) {
@@ -66,6 +66,7 @@ function loadOptionsPage() {
     var debugModeEnable = document.getElementById("ssw-debug-mode-enable");
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
+    /*
     for(var siteUserCategory in site_user_category) {
         // skip loop if property is from prototype
         if(!site_user_category.hasOwnProperty([siteUserCategory])) { continue; }
@@ -74,7 +75,8 @@ function loadOptionsPage() {
         opt.innerHTML = siteUserCategory;
         userSelect.appendChild(opt);
     }
-    addNewSelectOption(userSelect);
+    */
+    //addNewSelectOption(userSelect);
     sswUserRole();
 
     // load remaining options independant values
@@ -238,7 +240,7 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     var selectBox = document.getElementById(selectBoxId);
     var userSelect = document.getElementById("ssw-user-role");
 
-    var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
+    //var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
     if(selectBox != userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
         if(selectBox.value == 'ssw-site-type') {
@@ -249,12 +251,15 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
         }
     }
 
-    console.log(arr);
+    //console.log(arr);
     
     var opt = document.createElement('option');
     opt.value = inputTxt.value.replace(/ /g,"_");
     opt.innerHTML = inputTxt.value;
     selectBox.appendChild(opt);
+
+    // Clear the user inputed new value in inputTxt
+    inputTxt.value = '';
     
     //console.log(site_type); 
     console.log(site_user_category);
