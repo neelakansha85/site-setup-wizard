@@ -130,6 +130,8 @@ function sswUserRole() {
         document.getElementById("add-user-role-btn").style.visibility='visible';
 
         // Set remaining select boxes to Add New
+        siteTypeTxt.innerHTML = '';
+        siteCategoryTxt.innerHTML = '';
         // siteTypeSelect.value='add_new';
         // siteCategorySelect.value='add_new';
     } 
@@ -140,7 +142,21 @@ function sswUserRole() {
 
         // change value of siteTypeSelect based on userSelect value
         var siteTypeUser = site_type[userSelect.value];
-        
+        var siteTypeArray = Array();
+        siteTypeTxt.innerHTML = '';
+        for(var prop in siteTypeUser) {
+            if(!siteTypeUser.hasOwnProperty([prop])) { continue; }
+            siteTypeArray.push(siteTypeUser[prop]);
+        }
+        for(var i=0; i<siteTypeArray.length; i++) {
+            siteTypeTxt.innerHTML += siteTypeArray[i];
+            if(i != siteTypeArray.length-1 ) {
+                siteTypeTxt.innerHTML += '\n';
+            }
+        }
+        //console.log('userSelect: '+userSelect.value);
+        //console.log(siteTypeUser);
+        //console.log('siteTypeArray: '+siteTypeArray);
         /*
         siteTypeSelect.options.length = 0;
         for(var prop in siteTypeUser) {
@@ -155,6 +171,18 @@ function sswUserRole() {
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
+        var siteCategoryArray = Array();
+        siteCategoryTxt.innerHTML = '';
+        for(var prop in siteUserCategory) {
+            if(!siteUserCategory.hasOwnProperty([prop])) { continue; }
+            siteCategoryArray.push(siteUserCategory[prop]);
+        }
+        for(var i=0; i<siteCategoryArray.length; i++) {
+            siteCategoryTxt.innerHTML += siteCategoryArray[i];
+            if(i != siteCategoryArray.length-1 ) {
+                siteCategoryTxt.innerHTML += '\n';
+            }
+        }
         /*
         siteCategorySelect.options.length = 0;
         for(var prop in siteUserCategory) {
