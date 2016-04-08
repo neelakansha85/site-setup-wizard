@@ -276,25 +276,26 @@ function ssw_js_check_domain_available() {
     site_address = site_address.toLowerCase();
     var site_complete_path = ssw_js_get_site_complete_path();
 
-    /*  AJAX request with async flag false as we need the response synchrnously for use in the 
-        ssw_js_validate_form() and ssw_js_submit_form_next() function 
-        */
-        jQuery.ajax({
-            type: "POST", 
-            url: ssw_main_ajax.ajaxurl,
-            dataType: "html",
-            async: false,
-            data: { 
-                action: 'ssw_check_domain_exists',
-                site_address_bucket: site_address_bucket,
-                site_address: site_address,
-                site_complete_path: site_complete_path,
-                ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
-            },
-            success: function(site_exists_value){
-                site_exists = site_exists_value;
-            } 
-        });
+    /**
+    * AJAX request with async flag false as we need the response synchrnously for 
+    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
+    */
+    jQuery.ajax({
+        type: "POST", 
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "html",
+        async: false,
+        data: { 
+            action: 'ssw_check_domain_exists',
+            site_address_bucket: site_address_bucket,
+            site_address: site_address,
+            site_complete_path: site_complete_path,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
+        },
+        success: function(site_exists_value){
+            site_exists = site_exists_value;
+        } 
+    });
 
     if(site_exists == 2) { //this is a banned site address
         document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_banned_msg;
@@ -321,46 +322,47 @@ else {
 function ssw_js_check_admin_email_exists() {
     var admin_user_id = '';
     
-    /*  AJAX request with aync flag true as we need the response synchrnously for use in the 
-        ssw_js_validate_form() and ssw_js_submit_form_next() function 
-        */
-        jQuery.ajax({
-            type: "POST", 
-            url: ssw_main_ajax.ajaxurl,
-            dataType: "html",
-            async: false,
-            data: { 
-                action: 'ssw_check_admin_email_exists',
-                admin_email: document.getElementById('ssw-steps').admin_email.value,
-                ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
-            },
-            success: function(admin_user_id_value){
-                admin_user_id = admin_user_id_value;
-            } 
-        });
+    /**
+    * AJAX request with aync flag true as we need the response synchrnously for 
+    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
+    */
+    jQuery.ajax({
+        type: "POST", 
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "html",
+        async: false,
+        data: { 
+            action: 'ssw_check_admin_email_exists',
+            admin_email: document.getElementById('ssw-steps').admin_email.value,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
+        },
+        success: function(admin_user_id_value){
+            admin_user_id = admin_user_id_value;
+        } 
+    });
 
-        if(admin_user_id == 0) {
-            document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
-            document.getElementById("ssw-validate-email-error").style.display="block";
-            return false;
-        }
-        else if(admin_user_id > 0) {
-            var theForm = document.forms['ssw-steps'];
-            ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
-            return true;
-        }
-        else {
-            document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
-            document.getElementById("ssw-validate-email-error").style.display="block";
-            return false;
-        }
+    if(admin_user_id == 0) {
+        document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
+        document.getElementById("ssw-validate-email-error").style.display="block";
+        return false;
     }
-    /* ENDS JS to check if given admin email address is a registered user of the system */
+    else if(admin_user_id > 0) {
+        var theForm = document.forms['ssw-steps'];
+        ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
+        return true;
+    }
+    else {
+        document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
+        document.getElementById("ssw-validate-email-error").style.display="block";
+        return false;
+    }
+}
+/* ENDS JS to check if given admin email address is a registered user of the system */
 
-    /* ENDS JS for Validating Forms based on current step */
+/* ENDS JS for Validating Forms based on current step */
 
-    /* Function for adding hidden input variables to a form */
-    function ssw_js_add_hidden_input(theForm, key, value) {
+/* Function for adding hidden input variables to a form */
+function ssw_js_add_hidden_input(theForm, key, value) {
     // Create a hidden input element, and append it to theForm
     var input = document.createElement('input');
     input.type = 'hidden';
