@@ -274,16 +274,16 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     }
     else {
 
-        siteUserArray.push(inputTxt.value);
-
-        // load values of userSelect from siteUserArray
-        loadSelectFromArray(userSelect, siteUserArray);
-        selectBox.selectedIndex = siteUserArray.length-1;
-        // Clear the user inputed new value in inputTxt
-        inputTxt.value = '';
-
-        if(selectBox = userSelect) {
-            // selectBox.selectedIndex = ;
+        if(inputTxt.value != '') {
+            siteUserArray.push(inputTxt.value);
+            // load values of userSelect from siteUserArray
+            loadSelectFromArray(userSelect, siteUserArray);
+            selectBox.selectedIndex = siteUserArray.length-1;
+            // Clear the user inputed new value in inputTxt
+            inputTxt.value = '';
+        }
+        else {
+            console.log('Please enter a valid User Role');
         }
     }
     //console.log(site_type); 
