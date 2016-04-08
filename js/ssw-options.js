@@ -293,6 +293,22 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     sswUserRole();
 }
 
+/* Function for adding hidden input variables to a form */
+function sswAddHiddenInput(theForm, key, value) {
+    // Create a hidden input element, and append it to theForm
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = value;
+    theForm.appendChild(input);
+}
+
+function saveOptions() {
+    var theForm = document.forms['ssw-options-page'];
+    sswAddHiddenInput(theForm, 'ssw-user-roles', siteUserArray);
+
+}
+
 // Load the values first time when the page loads 
 window.onload = loadOptionsPage();
 

@@ -20,7 +20,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
 
 <div class="wrap">
     <h1><?php echo esc_html('Site Setup Wizard Settings') ?></h1>
-    <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate">
+    <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate" name="ssw-options-page" id="ssw-options-page">
         <h3><?php echo esc_html('Basic Settings') ?></h3>
         <table class="form-table">
             <tbody>
