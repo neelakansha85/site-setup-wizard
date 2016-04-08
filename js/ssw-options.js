@@ -52,6 +52,19 @@ function objToArray(obj) {
     return arr;
 }
 
+function loadSelectFromArray(selectBox, srcArray) {
+    selectBox.options.length = 0;
+    for( var i=0; i<srcArray.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = srcArray[i];
+        opt.innerHTML = srcArray[i];
+        selectBox.appendChild(opt);
+        if(i == srcArray.length-1) {
+            addNewSelectOption(selectBox);
+        }
+    }
+}
+
 function loadOptionsPage() {
     // add the values to userSelect by default on page load
     var userSelect = document.getElementById("ssw-user-role");
@@ -80,15 +93,9 @@ function loadOptionsPage() {
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
     
-    for( var i=0; i<siteUserArray.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = siteUserArray[i];
-        opt.innerHTML = siteUserArray[i];
-        userSelect.appendChild(opt);
-        if(i == siteUserArray.length-1) {
-            addNewSelectOption(userSelect);
-        }
-    }
+    // load values of userSelect from siteUserArray
+    loadSelectFromArray(userSelect, siteUserArray);
+    
     /*
     for(var siteUserCategory in site_user_category) {
         // skip loop if property is from prototype
@@ -265,13 +272,25 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
             //options['site_address_bucket'][selectedUser][inputTxt.value] = inputTxt.value;
         }
     }
+    else {
 
+        siteUserArray.push(inputTxt.value);
 
-    // Clear the user inputed new value in inputTxt
-    inputTxt.value = '';
-    
+        // load values of userSelect from siteUserArray
+        loadSelectFromArray(userSelect, siteUserArray);
+        selectBox.selectedIndex = siteUserArray.length-1;
+        // Clear the user inputed new value in inputTxt
+        inputTxt.value = '';
+
+        if(selectBox = userSelect) {
+            // selectBox.selectedIndex = ;
+        }
+    }
     //console.log(site_type); 
     //console.log(site_user_category);
+
+    // Trigger sswUserRole() function with changed value
+    sswUserRole();
 }
 
 // Load the values first time when the page loads 
