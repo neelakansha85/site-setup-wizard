@@ -75,7 +75,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_ssw_submit_form_skip', array( $this, 'ssw_create_site' ) );
 			add_action( 'wp_ajax_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
-			add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
+			// add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
 			/* Add ajax request handlers for all buttons of wizard for frontend section */
 			add_action( 'wp_ajax_nopriv_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
