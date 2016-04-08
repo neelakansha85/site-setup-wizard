@@ -5,6 +5,15 @@ wp_enqueue_script( 'ssw-options-js' );
 /* Include CSS for Options Page */
 wp_enqueue_style( 'ssw-style-admin-css' );
 
+if(isset($_POST['ssw-user-roles'])) { 
+    if ( !empty($_POST['ssw-user-roles']) && check_admin_referer('submit_ssw_settings')){
+        $this->ssw_update_config_options();
+        //echo('Inside ssw_options_page Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
+    }else{
+        wp_die('Please use valid forms to send data.'); 
+    }
+}
+
 global $current_blog;
 global $current_site;
 
@@ -237,8 +246,8 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                     <th scope="row"><?php echo esc_html('Debug Mode') ?></th>
                     <td>
                         <fieldset>
-                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" /><?php echo esc_html('Enable') ?></label>
-                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" /><?php echo esc_html('Disable') ?></label>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="true" /><?php echo esc_html('Enable') ?></label>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="false" /><?php echo esc_html('Disable') ?></label>
                         </fieldset>
                     </td>
                 </tr>

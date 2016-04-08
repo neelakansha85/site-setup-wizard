@@ -107,26 +107,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		}
 		/* Update configuration options for SSW Plugin from wp_sitemeta table */
 		public function ssw_update_config_options() {
-			/*
-			if (wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
-				
-				$options = update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
-				if( $options ) {
-					echo '1';
-				}
-				else {
-					echo '0';
-				}
-		        /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
-			/*
-				wp_die();
-			}
-			else {
-				wp_die("Please use valid forms to send data.");
-			}
-			
-			*/
-			
+			include(SSW_PLUGIN_DIR.'admin/ssw_update_options.php');
+      //echo('Inside ssw_update_config_options() Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
+      update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
 		}
 		/* Fetch Plugin options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_plugin_options() {
