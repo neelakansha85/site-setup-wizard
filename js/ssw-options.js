@@ -259,25 +259,19 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     if(selectBox != userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
         if(selectBox.value == 'ssw-site-type') {
-            options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
+            //options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
         }
         if(selectBox.value == 'ssw-site-category') {
             //options['site_address_bucket'][selectedUser][inputTxt.value] = inputTxt.value;
         }
     }
 
-    //console.log(arr);
-    
-    var opt = document.createElement('option');
-    opt.value = inputTxt.value.replace(/ /g,"_");
-    opt.innerHTML = inputTxt.value;
-    selectBox.appendChild(opt);
 
     // Clear the user inputed new value in inputTxt
     inputTxt.value = '';
     
     //console.log(site_type); 
-    console.log(site_user_category);
+    //console.log(site_user_category);
 }
 
 // Load the values first time when the page loads 
