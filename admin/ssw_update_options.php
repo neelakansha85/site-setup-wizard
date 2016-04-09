@@ -4,6 +4,13 @@
 * Update SSW options when fetched from Options Page 
 */
 
+if($_POST['ssw-debug-mode'] == 'true') {
+    $set_debug_mode = true;
+}
+else {
+    $set_debug_mode = false;
+}
+
 /* Inserting all new values */
 $ssw_config_options_nsd = array(
     'site_address_bucket' => array(
@@ -104,10 +111,10 @@ $ssw_config_options_nsd = array(
         'finish' => 'Done!'
         ),
     'external_plugins' => array(
-        'wpmu_multisite_privacy_plugin' => true,
-        'wpmu_pretty_plugins' => true,
-        'wpmu_multisite_theme_manager' => false,
-        'wpmu_new_blog_template' => false
+        'wpmu_multisite_privacy_plugin' => isset($_POST['wpmu-multisite-privacy-plugin']) ? true : false,
+        'wpmu_pretty_plugins' => isset($_POST['wpmu-pretty-plugin']) ? true : false,
+        'wpmu_multisite_theme_manager' => isset($_POST['wpmu-multisite-theme-manager-plugin']) ? true : false,
+        'wpmu_new_blog_template' => isset($_POST['wpmu-new-blog-template-plugin']) ? true : false
         ),
     'advanced_privacy' => array(
         'privacy_selection_txt' => '<strong>Please note that by default, your site privacy settings are set to "Public on the Web, but are not indexed by search engines".</strong><br>Once your site is created, please update your site privacy settings, by going to Settings (in the left menu) &gt; Reading &gt; Site visibility.<br><strong>More information can be found <a href="http://www.nyu.edu/servicelink/KB0012245" target="_blank">here</a>.</strong>',
@@ -120,7 +127,7 @@ $ssw_config_options_nsd = array(
     * All contents will be displayed to users based on the mapped user roles
     * if user_role_restriction is set true 
     */
-    'user_role_restriction' => false,
+    'user_role_restriction' => isset($_POST['user-role-restriction']) ? true : false,
     'user_role_mapping' => array(
         'student' => 'subscriber',
         'employee' => 'administrator',
@@ -129,11 +136,12 @@ $ssw_config_options_nsd = array(
     'ssw_not_available' => 'alumni_subscriber',
     'ssw_not_available_txt' => 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. If you believe this is by error, please contact askit@nyu.edu',
     'privacy_selection' => sanitize_key($_POST['ssw-privacy-selection']),
-    'debug_mode' => false,
-    'master_user' => isset($_POST['ssw-debug-master-user']) ? sanitize_key($_POST['ssw-debug-master-user']) : false
+    'debug_mode' => $set_debug_mode,
+    'master_user' => isset($_POST['ssw-debug-master-user']) ? true : false
     );
 
-//echo('Inside ssw_updates_options Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
+echo('Inside ssw_updates_options Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
+echo('Inside ssw_updates_options set Debug Mode: '.$set_debug_mode.'<br/>');
 /* END Default Content for config options  */
 
 ?>
