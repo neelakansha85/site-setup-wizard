@@ -3,24 +3,23 @@
 $can_skip = true;
 $step3 = 'themes';
 
-echo '  
+?> 
 <div class="ssw-container">
     <div class="ssw-content">
-        ';
+        <?php
         include(SSW_PLUGIN_DIR.'admin/ssw_cancel_skip_button.php');
-        echo '
+        ?>
         <div class="ssw-header-wrapper">
             <h3>Themes (Step 3)</h3>
-            ';
+            <?php
             include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
-            echo '
+            ?>
         </div>
-        
         <fieldset class="ssw-fieldset">
-            ';
+            <?php
             /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
             wp_nonce_field('step3_action','step3_nonce');
-            echo '            
+            ?>
             <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step2"/>
             <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step3"/>
             <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step4"/>
@@ -53,5 +52,3 @@ echo '
         </fieldset>
     </div>
 </div>
-';
-?>
