@@ -584,7 +584,12 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     		$current_site_root_address = $current_blog->domain.$current_site->path;
     		/* Identifying current user's role to restrict some content based on that */
     		$current_user_role_array = $current_user->roles;
-    		$current_user_role = $current_user_role_array[0];
+				if(!$current_user_role_array) {
+    			$current_user_role = Array();
+    		}
+    		else {
+    			$current_user_role = $current_user_role_array[0];	
+    		}
     		
     		/* Restore to original blog it came from before you switched to root site in case you did */
     		restore_current_blog();
