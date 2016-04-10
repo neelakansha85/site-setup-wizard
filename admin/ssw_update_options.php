@@ -104,11 +104,11 @@ $ssw_config_options_nsd = array(
     'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
     'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
     'steps_name' => array(
-        'step1' => 'Start',
-        'step2' => 'Essential Settings',
-        'step3' => 'Themes',
-        'step4' => 'Features',
-        'finish' => 'Done!'
+        'step1' => sanitize_text_field($_POST['ssw-step-1']),
+        'step2' => sanitize_text_field($_POST['ssw-step-2']),
+        'step3' => sanitize_text_field($_POST['ssw-step-3']),
+        'step4' => sanitize_text_field($_POST['ssw-step-4']),
+        'finish' => sanitize_text_field($_POST['ssw-finish'])
         ),
     'external_plugins' => array(
         'wpmu_multisite_privacy_plugin' => isset($_POST['wpmu-multisite-privacy-plugin']) ? true : false,
