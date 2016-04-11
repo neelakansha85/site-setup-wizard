@@ -101,8 +101,8 @@ $ssw_config_options_nsd = array(
                 )
         ),
     'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
-    'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
-    'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
+    'terms_of_use' => stripslashes(wp_kses_post($_POST['ssw-terms-of-use'])),
+    'plugins_page_txt' => stripslashes(wp_kses_post($_POST['ssw-plugins-page-txt'])),
     'steps_name' => array(
         'step1' => sanitize_text_field($_POST['ssw-step-1']),
         'step2' => sanitize_text_field($_POST['ssw-step-2']),
@@ -117,10 +117,10 @@ $ssw_config_options_nsd = array(
         'wpmu_new_blog_template' => isset($_POST['wpmu-new-blog-template-plugin']) ? true : false
         ),
     'advanced_privacy' => array(
-        'privacy_selection_txt' => '<strong>Please note that by default, your site privacy settings are set to "Public on the Web, but are not indexed by search engines".</strong><br>Once your site is created, please update your site privacy settings, by going to Settings (in the left menu) &gt; Reading &gt; Site visibility.<br><strong>More information can be found <a href="http://www.nyu.edu/servicelink/KB0012245" target="_blank">here</a>.</strong>',
-        'private_network_users_txt' => sanitize_text_field($_POST['private-network-users-txt']),
-        'private_site_users_txt' => sanitize_text_field($_POST['private-site-users-txt']),
-        'private_administrator_txt' => sanitize_text_field($_POST['private-administrator-txt'])
+        'privacy_selection_txt' => stripslashes(wp_kses_post($_POST['privacy-selection-txt'])),
+        'private_network_users_txt' => stripslashes(wp_kses_post($_POST['private-network-users-txt'])),
+        'private_site_users_txt' => stripslashes(wp_kses_post($_POST['private-site-users-txt'])),
+        'private_administrator_txt' => stripslashes(wp_kses_post($_POST['private-administrator-txt']))
         ),
     'hide_plugin_category' => 'other',
     /**
@@ -134,7 +134,7 @@ $ssw_config_options_nsd = array(
         ),
     /* Map wordpress user role to which Site Setup Wizard should not be available */
     'ssw_not_available' => sanitize_text_field($_POST['ssw-not-available']),
-    'ssw_not_available_txt' => sanitize_text_field($_POST['ssw-not-available-txt']),
+    'ssw_not_available_txt' => stripslashes(wp_kses_post($_POST['ssw-not-available-txt'])),
     'privacy_selection' => isset($_POST['ssw-privacy-selection']) ? true : false,
     'debug_mode' => $set_debug_mode,
     'master_user' => isset($_POST['ssw-debug-master-user']) ? true : false
