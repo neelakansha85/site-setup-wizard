@@ -6,7 +6,7 @@ $finish = 'finish';
 <div class="ssw-container">
     <div class="ssw-content">
         <div class="ssw-header-wrapper">
-           <h3>Done!</h3>
+           <h3><?php _e($steps_name['finish']); ?></h3>
            <?php
            include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
            ?>

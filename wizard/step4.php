@@ -9,7 +9,7 @@ $step4 = 'features';
         include(SSW_PLUGIN_DIR.'admin/ssw_cancel_skip_button.php');
         ?>
         <div class="ssw-header-wrapper">
-            <h3>Features (Step 3)</h3>
+            <h3><?php _e($steps_name['step4']); ?></h3>
             <?php
             include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
             ?>

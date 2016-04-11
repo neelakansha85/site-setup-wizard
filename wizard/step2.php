@@ -9,7 +9,7 @@ $step2 = 'essential_options';
         include(SSW_PLUGIN_DIR.'admin/ssw_cancel_skip_button.php');
         ?>
         <div class="ssw-header-wrapper">
-            <h3>Essential Settings (Step 2)</h3>
+            <h3><?php _e($steps_name['step2']); ?></h3>
             <?php
             include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
             ?>
