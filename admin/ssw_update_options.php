@@ -118,9 +118,9 @@ $ssw_config_options_nsd = array(
         ),
     'advanced_privacy' => array(
         'privacy_selection_txt' => '<strong>Please note that by default, your site privacy settings are set to "Public on the Web, but are not indexed by search engines".</strong><br>Once your site is created, please update your site privacy settings, by going to Settings (in the left menu) &gt; Reading &gt; Site visibility.<br><strong>More information can be found <a href="http://www.nyu.edu/servicelink/KB0012245" target="_blank">here</a>.</strong>',
-        'private_network_users_txt' => 'Visible to all of NYU',
-        'private_site_users_txt' => 'Limited to only users who you specify in the "Users" settings (by adding their netid@nyu.edu and assigning them a role)',
-        'private_administrator_txt' => 'Limited to only site administrators who you specify in the "Users" settings (good for preparing a site before making it visible to a larger audience)'
+        'private_network_users_txt' => sanitize_text_field($_POST['private-network-users-txt']),
+        'private_site_users_txt' => sanitize_text_field($_POST['private-site-users-txt']),
+        'private_administrator_txt' => sanitize_text_field($_POST['private-administrator-txt'])
         ),
     'hide_plugin_category' => 'other',
     /**
@@ -133,9 +133,9 @@ $ssw_config_options_nsd = array(
         'employee' => 'administrator',
         ),
     /* Map wordpress user role to which Site Setup Wizard should not be available */
-    'ssw_not_available' => 'alumni_subscriber',
-    'ssw_not_available_txt' => 'Apologies but Alumni\'s do not have access to create new sites using this service at NYU. If you believe this is by error, please contact askit@nyu.edu',
-    'privacy_selection' => sanitize_key($_POST['ssw-privacy-selection']),
+    'ssw_not_available' => sanitize_text_field($_POST['ssw-not-available']),
+    'ssw_not_available_txt' => sanitize_text_field($_POST['ssw-not-available-txt']),
+    'privacy_selection' => isset($_POST['ssw-privacy-selection']) ? true : false,
     'debug_mode' => $set_debug_mode,
     'master_user' => isset($_POST['ssw-debug-master-user']) ? true : false
     );
