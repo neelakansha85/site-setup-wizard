@@ -34,15 +34,15 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
         <table class="form-table">
             <tbody>
                 <tr>
-                    <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
+                    <th scope="row"><label for="ssw-user-role-select"><?php echo esc_html('User Role') ?></label></th>
                     <td>
-                        <select name="ssw-user-role" id="ssw-user-role" class="regular-text ssw-select" aria-describedby="ssw-user-role-desc" onchange="sswUserRole()">
+                        <select name="ssw-user-role-select" id="ssw-user-role-select" class="regular-text ssw-select" aria-describedby="ssw-user-role-select-desc" onchange="sswUserRole()">
                         </select>
                         <div class="ssw-add-new-input">
                             <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
-                            <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
+                            <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role-select')"></span>
                         </div>
-                        <p class="description" id="ssw-user-role-desc">
+                        <p class="description" id="ssw-user-role-select-desc">
                             <?php _e( 'Please Save Options after adding Site Type and Site Category information for a particular user role.'); ?>
                         </p>
                     </td>

@@ -4,6 +4,16 @@
 * Update SSW options when fetched from Options Page 
 */
 
+$ssw_user_role_selected = stripslashes(sanitize_text_field($_POST['ssw-user-role-select']));
+$ssw_user_role_array = stripslashes(sanitize_text_field($_POST['ssw-user-roles']));
+$ssw_user_role_array = explode(',', $ssw_user_role_array);
+
+$site_category_no_prefix = stripslashes(sanitize_text_field($_POST['ssw-site-category-no-prefix']));
+$site_category_no_prefix = explode(' ', $site_category_no_prefix);
+
+$banned_site_address = stripslashes(sanitize_text_field($_POST['ssw-banned-site-address']));
+$banned_site_address = explode(' ', $banned_site_address);
+
 if($_POST['ssw-debug-mode'] == 'true') {
     $set_debug_mode = true;
 }
@@ -85,7 +95,7 @@ $ssw_config_options_nsd = array(
                 )
         ),
     /* Sites with this category selected will not have any prefixes in it's site address */
-    'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
+    'site_address_bucket_none_value' => $site_category_no_prefix,
     'site_type' => array(
         'student' => array(
             'personal' => 'Personal Site',
@@ -100,7 +110,7 @@ $ssw_config_options_nsd = array(
                 */
                 )
         ),
-    'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
+    'banned_site_address' => $banned_site_address,
     'terms_of_use' => stripslashes(wp_kses_post($_POST['ssw-terms-of-use'])),
     'plugins_page_txt' => stripslashes(wp_kses_post($_POST['ssw-plugins-page-txt'])),
     'steps_name' => array(
@@ -140,8 +150,6 @@ $ssw_config_options_nsd = array(
     'master_user' => isset($_POST['ssw-debug-master-user']) ? true : false
     );
 
-echo('Inside ssw_updates_options Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
-echo('Inside ssw_updates_options set Debug Mode: '.$set_debug_mode.'<br/>');
 /* END Default Content for config options  */
 
 ?>

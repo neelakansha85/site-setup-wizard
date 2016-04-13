@@ -67,7 +67,7 @@ function loadSelectFromArray(selectBox, srcArray) {
 
 function loadOptionsPage() {
     // add the values to userSelect by default on page load
-    var userSelect = document.getElementById("ssw-user-role");
+    var userSelect = document.getElementById("ssw-user-role-select");
     var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
     var bannedSiteAddress = document.getElementById("ssw-banned-site-address");
     var termsOfUse = document.getElementById("ssw-terms-of-use");
@@ -151,7 +151,7 @@ function loadOptionsPage() {
 }
 
 function sswUserRole() {
-    var userSelect = document.getElementById("ssw-user-role");
+    var userSelect = document.getElementById("ssw-user-role-select");
     var siteTypeTxt = document.getElementById("ssw-site-type");
     var siteCategoryTxt = document.getElementById("ssw-site-category");
     // var siteTypeSelect = document.getElementById("ssw-site-type");    
@@ -260,7 +260,7 @@ function sswSiteCategory() {
 function sswAddNewValue(inputTxtId, selectBoxId) {
     var inputTxt = document.getElementById(inputTxtId);
     var selectBox = document.getElementById(selectBoxId);
-    var userSelect = document.getElementById("ssw-user-role");
+    var userSelect = document.getElementById("ssw-user-role-select");
 
     //var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
     if(selectBox != userSelect) {
