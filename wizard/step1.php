@@ -28,7 +28,7 @@ $step1 = 'start';
                     if ( $is_user_role_restriction != true ) {
                         foreach ( $site_type_user_details as $site_type_user_details_key => $site_type_user_details_value ) {
                             ?>
-                            <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_key); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
+                            <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_value); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
                             <?php
                         }
                     }
@@ -37,7 +37,7 @@ $step1 = 'start';
                             if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_type_user ) { 
                                 foreach ( $site_type_user_details as $site_type_user_details_key => $site_type_user_details_value ) {
                                     ?>
-                                    <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_key); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
+                                    <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_value); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
                                     <?php
                                 }
                             }
@@ -49,7 +49,7 @@ $step1 = 'start';
                 foreach ( $site_type as $site_type_user => $site_type_user_details ) {
                     foreach( $site_type_user_details as $site_type_user_details_key => $site_type_user_details_value ) {
                         ?>
-                        <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_key); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
+                        <input name="ssw_start_<?php _e($site_type_user_details_key); ?>" class="ssw-start-btn" type="button" onclick="ssw_js_submit_first_step('<?php _e($site_type_user_details_value); ?>')" value="<?php _e($site_type_user_details_value); ?>" />
                         <?php
                     }
                 }

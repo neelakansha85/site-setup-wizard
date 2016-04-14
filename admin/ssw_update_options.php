@@ -3,10 +3,17 @@
 /**
 * Update SSW options when fetched from Options Page 
 */
+/* Get current options for use where required */
+$options = $this->ssw_fetch_config_options();
 
 $ssw_user_role_selected = stripslashes(sanitize_text_field($_POST['ssw-user-role-select']));
 $ssw_user_role_array = stripslashes(sanitize_text_field($_POST['ssw-user-roles']));
 $ssw_user_role_array = explode(',', $ssw_user_role_array);
+
+    $ssw_site_type_array = stripslashes(wp_kses_post($_POST['ssw-site-type']));
+    $ssw_site_type_array = explode(PHP_EOL, $ssw_site_type_array);
+    echo ('<br/><br/>ssw_site_type_array: ');
+    print_r($ssw_site_type_array);
 
 $site_category_no_prefix = stripslashes(sanitize_text_field($_POST['ssw-site-category-no-prefix']));
 $site_category_no_prefix = explode(' ', $site_category_no_prefix);
@@ -98,17 +105,11 @@ $ssw_config_options_nsd = array(
     'site_address_bucket_none_value' => $site_category_no_prefix,
     'site_type' => array(
         'student' => array(
-            'personal' => 'Personal Site',
-            'teaching_learning_research' => 'Teaching/Learning/Research Site',
-            'administrative' => 'Administrative'
+            'Personal Site', 
+            'Teaching/Learning/Research Site', 
+            'Administrative' 
             ),
-        'employee' => array(
-            /* Sample Data */
-                /*
-                'personal' => 'Personal Site',
-                'clubs' => 'Club Site'
-                */
-                )
+        'employee' => array()
         ),
     'banned_site_address' => $banned_site_address,
     'terms_of_use' => stripslashes(wp_kses_post($_POST['ssw-terms-of-use'])),

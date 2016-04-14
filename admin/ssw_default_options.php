@@ -81,18 +81,18 @@ $ssw_config_options_nsd = array(
     /* Sites with this category selected will not have any prefixes in it's site address */
     'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
     'site_type' => array(
-        'student' => array(
-            'personal' => 'Personal Site',
-            'teaching_learning_research' => 'Teaching/Learning/Research Site',
-            'administrative' => 'Administrative'
+        'student' => array( 
+            'Personal Site', 
+            'Teaching/Learning/Research Site', 
+            'Administrative' 
             ),
         'employee' => array(
             /* Sample Data */
-                /*
-                'personal' => 'Personal Site',
-                'clubs' => 'Club Site'
-                */
-                )
+            /*
+            'Personal Site',
+            'Club Site'
+            */
+            )
         ),
     'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
     'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
