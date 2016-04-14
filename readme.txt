@@ -86,6 +86,7 @@ Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more doc
 == Changelog ==
 = 1.2.6 =
 * Fixed finding plugins default data when Pretty Plugins is enabled but does not override Plugin's default name.
+* Changed site_type value in options from associate array to array.
 
 = 1.2.5 =
 * Fixed notices coming on Step4.php when WPMU Pretty Plugins is enabled but does not have any plugins categorized.
