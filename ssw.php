@@ -227,48 +227,45 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
 		}
 
-        /* Log all MySQL errors to nsd_ssw_sql_log.log file in wp-contents/uploads dir */
+		/* Log all MySQL errors to nsd_ssw_sql_log.log file in wp-contents/uploads dir */
 		public function ssw_log_sql_error( $error ) {
-           $options = $this->ssw_fetch_config_options();
-            $is_debug_mode = $options['debug_mode'];
-            if ($is_debug_mode == true) {
-              if($error!=NULL) {
-                    $uploads = wp_upload_dir();
-                    $upload_path = $uploads['basedir'];
-                    $filename = $upload_path.'/nsd_ssw_sql_log.log';
-                    $open = fopen($filename, "a"); 
-                    $write = fputs($open,"\n".'error at ( '.date('Y-m-d H:i:s').' '. $error); 
-                    fclose($open);
-              }
-            }
-        }
+			$options = $this->ssw_fetch_config_options();
+			$is_debug_mode = $options['debug_mode'];
+			if ($is_debug_mode == true) {
+				if($error!=NULL) {
+					$uploads = wp_upload_dir();
+					$upload_path = $uploads['basedir'];
+					$filename = $upload_path.'/nsd_ssw_sql_log.log';
+					$open = fopen($filename, "a"); 
+					$write = fputs($open,"\n".'error at ( '.date('Y-m-d H:i:s').' '. $error); 
+					fclose($open);
+				}
+			}
+		}
 
-        /* Log all variables for DEBUG to nsd_ssw_debug_log.log file in wp-contents/uploads dir */
-        public function ssw_debug_log( $file_name, $var_name, $value ) {
-            $options = $this->ssw_fetch_config_options();
-            $is_debug_mode = $options['debug_mode'];
-            if ($is_debug_mode == true) {
-                $uploads = wp_upload_dir();
-                $upload_path = $uploads['basedir'];
-                $filename = $upload_path.'/nsd_ssw_debug_log.log';
-                $open = fopen($filename, "a");
-                $write = fputs($open,"\nReferrer: ".$file_name." $".$var_name." = ".print_r($value, true)); 
-                fclose($open);
-            }
-        }
-        
+		/* Log all variables for DEBUG to nsd_ssw_debug_log.log file in wp-contents/uploads dir */
+		public function ssw_debug_log( $file_name, $var_name, $value ) {
+			$options = $this->ssw_fetch_config_options();
+			$is_debug_mode = $options['debug_mode'];
+			if ($is_debug_mode == true) {
+				$uploads = wp_upload_dir();
+				$upload_path = $uploads['basedir'];
+				$filename = $upload_path.'/nsd_ssw_debug_log.log';
+				$open = fopen($filename, "a");
+				$write = fputs($open,"\nReferrer: ".$file_name." $".$var_name." = ".print_r($value, true)); 
+				fclose($open);
+			}
+		}   
 		/* Display all admin message errors when occurs */
 		public function ssw_admin_errors( $error ) {
 			if($error == 1000) {
 				echo '
 					<div class="error">
-						<p>Plugin Activation Error: There exists another plugin which uses the same config options name
-						as Site Setup Wizard Plugin uses.</p>
+						<p>Plugin Activation Error: There exists another plugin which uses the same config options name as Site Setup Wizard Plugin uses.</p>
 					</div>
 				';
 			}
 		}
-
 		/* Register CSS Stylesheet for Admin section pages on the backend */
 		public function ssw_admin_scripts() {
 			$options = $this->ssw_fetch_config_options();
@@ -277,17 +274,18 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
 			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-main-js' );
+    	wp_enqueue_script( 'ssw-main-js' );
 
-    		// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
+    	// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
 			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				/* generate a nonce with a unique ID "ssw_ajax_nonce"
-            	so that you can check it later when an AJAX request is sent */
-            	'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
-            	'site_address_bucket_none_value' => $site_address_bucket_none_value
-            	)
-			);
+				/** generate a nonce with a unique ID "ssw_ajax_nonce"
+				*	so that you can check it later when an AJAX request is sent 
+				*/
+				'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
+				'site_address_bucket_none_value' => $site_address_bucket_none_value
+			)
+		);
 
       /* Register Options Page Javascript for SSW Plugin */
       wp_register_script( 'ssw-options-js', SSW_PLUGIN_URL.'js/ssw-options.js');   
@@ -309,16 +307,17 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
 
 			/* Include the Javascripts for the ssw plugin while trying to create a site */
-    		wp_enqueue_script( 'ssw-main-js' );
+    	wp_enqueue_script( 'ssw-main-js' );
 
 			// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
 			wp_localize_script( 'ssw-main-js', 'ssw_main_ajax', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				/* generate a nonce with a unique ID "ssw_ajax_nonce"
-            	so that you can check it later when an AJAX request is sent */
-            	'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
-            	'site_address_bucket_none_value' => $site_address_bucket_none_value
-            	)
+				/** generate a nonce with a unique ID "ssw_ajax_nonce"
+        * so that you can check it later when an AJAX request is sent 
+        */
+				'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
+				'site_address_bucket_none_value' => $site_address_bucket_none_value
+	    	)
 			);
 
 			/* Link stylesheets for the SSW Plugin when plugin is called for */
@@ -343,20 +342,19 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				if ( ! $all_plugins ) {
 					$all_plugins = array();
 				}
-
 				foreach ($all_plugins as $key => $value) {
 					if ( !function_exists( 'validate_plugin' ) ) {
-		        		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	    			}
+        		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    			}
 
 					/* Validate if the plugin still exists in the system though it is present in Pretty Plugins list */
 					$validated = validate_plugin( $key );
 					if( !is_wp_error( $validated ) ) {
 						/* Find list of all plugins which are not network activated and store it in plugins_list variable */
 						if( !is_plugin_active_for_network( $key ) ) {
-		                    $plugins_list[$key] = $value;
-		                }
-	            	}
+              $plugins_list[$key] = $value;
+            }
+        	}
 				}
 			}
 
@@ -548,21 +546,21 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 	    		$admin_email = sanitize_email( $_POST['admin_email'] );
 
 				if( $admin_email == $current_user_email ) {
-		            $admin_user_id = $current_user_id;
-		        }
-		        else {
-		            /*  Find Admin's ID if current user is not going to be the admin of the site from wp_users table
-		                to store since it will be used as a parameter in wpmu_create_blog function 
-		            */
-		            $admin_user_id = $wpdb->get_var( 'SELECT ID FROM '.$wpdb->base_prefix.'users WHERE user_email = \''.$admin_email.'\'' );
-		        }
-		        if( $admin_user_id != '' ) {
-		        	echo $admin_user_id;
-		        }
-		        else {
-		        	echo '0';
-		        }
-		        /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+	            $admin_user_id = $current_user_id;
+        }
+        else {
+          /** Find Admin's ID if current user is not going to be the admin of the site from wp_users table
+          *   to store since it will be used as a parameter in wpmu_create_blog function 
+          */
+          $admin_user_id = $wpdb->get_var( 'SELECT ID FROM '.$wpdb->base_prefix.'users WHERE user_email = \''.$admin_email.'\'' );
+        }
+        if( $admin_user_id != '' ) {
+        	echo $admin_user_id;
+        }
+        else {
+        	echo '0';
+        }
+		    /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
 				wp_die();
 			}
 			else {
@@ -591,18 +589,18 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 							to sub directory installation or contact author.</h2>';
 				}
 			
-			/* Fecth information of current user based on his role assigned on root site by switching to root site */
+				/* Fecth information of current user based on his role assigned on root site by switching to root site */
     		if ( get_current_blog_id() != 1 ) {
 				switch_to_blog(1);
     		}			
     		global $wpdb;
 		    /* Fetch details of current user in form of Array; wordpress global variable */
-			global $current_user;
-			/* Fetch details of current blog in form of Array; wordpress global variable */
+				global $current_user;
+				/* Fetch details of current blog in form of Array; wordpress global variable */
     		global $current_blog;
     		global $current_site;
 
-			$current_user_id = $current_user->ID;
+				$current_user_id = $current_user->ID;
     		$current_user_email = $current_user->user_email;
     		/* Identifing current domain and path on domain where wordpress is running from */
     		$current_site_root_address = $current_blog->domain.$current_site->path;
@@ -618,11 +616,11 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     		/* Restore to original blog it came from before you switched to root site in case you did */
     		restore_current_blog();
 
-			/* Site Setup Wizard implementation starts here */	
+				/* Site Setup Wizard implementation starts here */	
     		/* Fetch basic config options to control the work flow of the Site Setup Wizard */
     		$options = $this->ssw_fetch_config_options();
-    			$site_address_bucket = $options['site_address_bucket'];
-    			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
+  			$site_address_bucket = $options['site_address_bucket'];
+  			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
 				$hide_plugin_category = $options['hide_plugin_category'];
 				$external_plugins = $options['external_plugins'];
 				$user_role_mapping = $options['user_role_mapping'];
@@ -633,28 +631,28 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$terms_of_use = $options['terms_of_use'];
 				$plugins_page_txt = $options['plugins_page_txt'];
 				$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
-		        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
-		        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
-		        $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
+        $is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
+        $is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
+        $is_master_user = isset($options['master_user']) ? $options['master_user'] : false;
 				
-					/* Fetch values if the given external plugins are installed or not */
-    			$wpmu_multisite_privacy_plugin = $external_plugins['wpmu_multisite_privacy_plugin'];
-    			$wpmu_pretty_plugins = $external_plugins['wpmu_pretty_plugins'];
-    			$wpmu_new_blog_template = $external_plugins['wpmu_new_blog_template'];
+				/* Fetch values if the given external plugins are installed or not */
+  			$wpmu_multisite_privacy_plugin = $external_plugins['wpmu_multisite_privacy_plugin'];
+  			$wpmu_pretty_plugins = $external_plugins['wpmu_pretty_plugins'];
+  			$wpmu_new_blog_template = $external_plugins['wpmu_new_blog_template'];
 
-    			/* Advanced Privacy Settings Text */
-    			$privacy_selection_txt = $options['advanced_privacy']['privacy_selection_txt'];
-    			$private_network_users_txt = $options['advanced_privacy']['private_network_users_txt'];
-    			$private_site_users_txt = $options['advanced_privacy']['private_site_users_txt'];
-    			$private_administrator_txt = $options['advanced_privacy']['private_administrator_txt'];
+  			/* Advanced Privacy Settings Text */
+  			$privacy_selection_txt = $options['advanced_privacy']['privacy_selection_txt'];
+  			$private_network_users_txt = $options['advanced_privacy']['private_network_users_txt'];
+  			$private_site_users_txt = $options['advanced_privacy']['private_site_users_txt'];
+  			$private_administrator_txt = $options['advanced_privacy']['private_administrator_txt'];
 
     		/* Fetch theme options to get list of all themes and their categories */
     		$theme_options = $this->ssw_fetch_theme_options();
-    			$themes_categories = $theme_options['themes_categories'];
-    			$themes_list = $theme_options['themes_list'];
+  			$themes_categories = $theme_options['themes_categories'];
+  			$themes_list = $theme_options['themes_list'];
 				/* Fetch plugin options to get list of all plugins and their categories */
     		$plugin_options = $this->ssw_fetch_plugin_options();
-    			$plugins_categories = $plugin_options['plugins_categories'];
+  			$plugins_categories = $plugin_options['plugins_categories'];
 				$plugins_list = $plugin_options['plugins_list'];
 
     		if ( $current_user_role == $ssw_not_available ) {
@@ -667,7 +665,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				if( isset( $_POST['ssw_cancel'] ) && 'true' === $_POST['ssw_cancel'] )
 				{
 					$wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false' );
-                    	$this->ssw_log_sql_error($wpdb->last_error);
+          $this->ssw_log_sql_error($wpdb->last_error);
 					
 					// $wpdb->delete ($ssw_main_table, array('user_id'=>$current_user_id));
 					echo 'Let\'s Create a new site again!';
@@ -677,7 +675,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				$ssw_next_stage = $wpdb->get_var(
 					'SELECT next_stage FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false'
 				);
-		$this->ssw_log_sql_error($wpdb->last_error);
+				$this->ssw_log_sql_error($wpdb->last_error);
 
 				/* Applying Hotfix to avoid displaying Step 3 for issue with wizard freezing on Step 2 */
 				/*
@@ -702,15 +700,15 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step1_process.php');
 
-							/* DEBUG variables in ssw_create_site() which are defined before Step1 */
-							$this->ssw_debug_log('ssw', 'current_user_id', $current_user_id);
-							$this->ssw_debug_log('ssw', 'current_user_email', $current_user_email);
-							$this->ssw_debug_log('ssw', 'current_site_root_address', $current_site_root_address);
-							$this->ssw_debug_log('ssw', 'current_user_role_array', $current_user_role_array);
-							$this->ssw_debug_log('ssw', 'current_user_role', $current_user_role);
-							$this->ssw_debug_log('ssw', 'options', $options);
-							$this->ssw_debug_log('ssw', 'theme_options', $theme_options);
-							$this->ssw_debug_log('ssw', 'plugin_options', $plugin_options);
+						/* DEBUG variables in ssw_create_site() which are defined before Step1 */
+						$this->ssw_debug_log('ssw', 'current_user_id', $current_user_id);
+						$this->ssw_debug_log('ssw', 'current_user_email', $current_user_email);
+						$this->ssw_debug_log('ssw', 'current_site_root_address', $current_site_root_address);
+						$this->ssw_debug_log('ssw', 'current_user_role_array', $current_user_role_array);
+						$this->ssw_debug_log('ssw', 'current_user_role', $current_user_role);
+						$this->ssw_debug_log('ssw', 'options', $options);
+						$this->ssw_debug_log('ssw', 'theme_options', $theme_options);
+						$this->ssw_debug_log('ssw', 'plugin_options', $plugin_options);
 				    }
 					include(SSW_PLUGIN_DIR.'wizard/step2.php');
 				}
@@ -749,10 +747,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				    }
 					include(SSW_PLUGIN_DIR.'wizard/finish.php');
 				}
-
 				echo '</form>';
 				echo '</div>';
-
 				// Die when doing AJAX to prevent extra output.
 				if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 					die();

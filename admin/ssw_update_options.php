@@ -10,8 +10,6 @@ $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_field', $_POST['s
 $ssw_user_role_array = $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-user-roles']);
 $ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-type']);
 $ssw_site_category_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-category']);
-$site_category_no_prefix = $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-site-category-no-prefix']);
-$banned_site_address = $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-banned-site-address']);
 
 if($_POST['ssw-debug-mode'] == 'true') {
     $set_debug_mode = true;
@@ -94,7 +92,7 @@ $ssw_config_options_nsd = array(
             )
         ),
     /* Sites with this category selected will not have any prefixes in it's site address */
-    'site_address_bucket_none_value' => $site_category_no_prefix,
+    'site_address_bucket_none_value' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-site-category-no-prefix']),
     'site_type' => array(
         'student' => array(
             'Personal', 
@@ -103,7 +101,7 @@ $ssw_config_options_nsd = array(
             ),
         'employee' => array()
         ),
-    'banned_site_address' => $banned_site_address,
+    'banned_site_address' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-banned-site-address']),
     'terms_of_use' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-terms-of-use']),
     'plugins_page_txt' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-plugins-page-txt']),
     'steps_name' => array(
