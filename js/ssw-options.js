@@ -110,8 +110,8 @@ function loadOptionsPage() {
     sswUserRole();
 
     // load remaining options independant values
-    siteCategoryNoPrefix.value = site_category_no_prefix.join(" ");
-    bannedSiteAddress.value = banned_site_address.join(" ");
+    siteCategoryNoPrefix.value = site_category_no_prefix.join(",");
+    bannedSiteAddress.value = banned_site_address.join(",");
     termsOfUse.innerHTML = terms_of_use;
     pluginsPageTxt.innerHTML = plugins_page_txt;
     privacySelection.checked = is_privacy_selection;

@@ -88,7 +88,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <td>
                     <input name="ssw-site-category-no-prefix" type="text" id="ssw-site-category-no-prefix" aria-describedby="ssw-site-category-no-prefix-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-site-category-no-prefix-desc">
-                        <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by spaces.'); ?>
+                        <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by comma.'); ?>
                     </p>
                 </td>
             </tr>
@@ -97,7 +97,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <td>
                     <input name="ssw-banned-site-address" type="text" id="ssw-banned-site-address" aria-describedby="ssw-banned-site-address-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-banned-site-address-desc">
-                        <?php _e( 'Users are not allowed to register these sites. Separate names by spaces.'); ?>
+                        <?php _e( 'Users are not allowed to register these sites. Separate names by comma.'); ?>
                     </p>
                 </td>
             </tr>

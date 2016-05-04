@@ -85,7 +85,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_nopriv_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_nopriv_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
 			
-			/* Add shortcode [site_setuo_wizard] to any page to display Site Setup Wizard over it */
+			/* Add shortcode [site_setup_wizard] to any page to display Site Setup Wizard over it */
 			add_shortcode('site_setup_wizard', array( $this, 'ssw_shortcode' ) );
 			
 			/* Check and store is the wordpress installation is multisite or not */
@@ -420,6 +420,30 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 			$this->ssw_update_theme_options( $theme_options );
 		}
+
+		/* Sanitize user inputted options before saving them */
+    public function ssw_sanitize_option( $sanitize_type, $plain_text ) {
+      if ($sanitize_type == 'to_array_on_eol') {
+        $sanitized_text = stripslashes(wp_kses_post($plain_text));
+        $sanitized_text = explode("\n", $sanitized_text);
+        return $sanitized_text;
+      }
+      else if($sanitize_type == 'to_array_on_comma') {
+      	$sanitized_text = stripslashes(wp_kses_post($plain_text));
+        $sanitized_text = explode(",", $sanitized_text);
+        return $sanitized_text;
+      }
+      else if ($sanitize_type == 'allow_html') {
+      	$sanitized_text = stripslashes(wp_kses_post($plain_text));
+      	return $sanitized_text;
+      }
+      else if($sanitize_type == 'sanitize_field') {
+      	$sanitized_text = stripslashes(sanitize_text_field($plain_text));
+      	return $sanitized_text;
+      }
+      
+    }
+
 		/* SSW Shortcode function */
 		public function ssw_shortcode() {
 			if( !is_user_logged_in()) {
