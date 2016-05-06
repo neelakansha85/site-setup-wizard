@@ -20,6 +20,9 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     * Check if the bucket selected is from the list of all buckets that
     * should be blank buckets 
     */
+    for($i=0 ; $i<count($site_address_bucket_none_value); $i++) {
+        $site_address_bucket_none_value[$i] = $this->ssw_sanitize_option('sanitize_url', $site_address_bucket_none_value[$i]);
+    }
     if( in_array($site_category_selected, $site_address_bucket_none_value) != true && $site_category_selected != '' ) {
         $path = $site_category_selected.'-'.$site_address;
     }
