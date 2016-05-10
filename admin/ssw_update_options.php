@@ -11,6 +11,12 @@ $ssw_user_role_array = $this->ssw_sanitize_option('to_array_on_comma', $_POST['s
 $ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-type']);
 $ssw_site_category_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-category']);
 
+$site_address_bucket = $options['site_address_bucket'];
+$site_address_bucket[$ssw_user_role_selected] = $ssw_site_category_array;
+
+$site_type = $options['site_type'];
+$site_type[$ssw_user_role_selected] = $ssw_site_type_array;
+
 if($_POST['ssw-debug-mode'] == 'true') {
     $set_debug_mode = true;
 }
@@ -20,87 +26,10 @@ else {
 
 /* Inserting all new values */
 $ssw_config_options_nsd = array(
-    'site_address_bucket' => array(
-        'student' => array(
-            'No Category Selected',
-            'Personal',
-            'Teaching/Learning/Research',
-            'Abu Dhabi',
-            'Africa House',
-            'Apa',
-            'AS',
-            'Bursar',
-            'Campus Cable',
-            'Campus Media',
-            'Career Development',
-            'CAS',
-            'CCPR',
-            'China House',
-            'Clubs',
-            'CMEP',
-            'CSALS',
-            'CSGS',
-            'CTE',
-            'Dental',
-            'Deutscheshaus',
-            'Faculty',
-            'Faculty Housing',
-            'FAS',
-            'Financial Aid',
-            'Financial Services',
-            'Gallatin',
-            'Giving',
-            'Global Liberal Studies',
-            'Greyart',
-            'GSAS',
-            'Human Resource',
-            'IR',
-            'Kimmel Center',
-            'KJC',
-            'LGBTQ',
-            'Library',
-            'Liberal Studies',
-            'Nursing',
-            'NYU TV',
-            'OGCA',
-            'OGS',
-            'OSP',
-            'Public Affairs',
-            'Registrar',
-            'Residential Education',
-            'Shanghai',
-            'SHC',
-            'Social Work',
-            'SPS',
-            'SRC',
-            'Steinhardt',
-            'Student Affairs',
-            'Stugov',
-            'Sustainability',
-            'Tisch',
-            'TV Center',
-            'TV Media'
-            ),
-        'employee' => array(
-            /* Sample Data */
-            /*
-            'no_category' => 'No Category Selected',
-            'personal' => 'Personal',
-            'teaching_and_learning' => 'Teaching/Learning/Research',
-            'clubs' => 'Club'
-            */
-            )
-        ),
+    'site_address_bucket' => $site_address_bucket,
     /* Sites with this category selected will not have any prefixes in it's site address */
     'site_address_bucket_none_value' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-site-category-no-prefix']),
-    'site_type' => array(
-        'student' => array(
-            'Personal', 
-            'Teaching/Learning/Research', 
-            'Administrative' 
-            ),
-        'employee' => array()
-        ),
+    'site_type' => $site_type,
     'banned_site_address' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-banned-site-address']),
     'terms_of_use' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-terms-of-use']),
     'plugins_page_txt' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-plugins-page-txt']),
