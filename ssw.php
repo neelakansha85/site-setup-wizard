@@ -423,12 +423,12 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
     public function ssw_sanitize_option( $sanitize_type, $plain_text ) {
       if ($sanitize_type == 'to_array_on_eol') {
         $sanitized_text = stripslashes(wp_kses_post($plain_text));
-        $sanitized_text = explode("\n", $sanitized_text);
+        $sanitized_text = array_map('trim', explode("\n", $sanitized_text));
         return $sanitized_text;
       }
       else if($sanitize_type == 'to_array_on_comma') {
       	$sanitized_text = stripslashes(wp_kses_post($plain_text));
-        $sanitized_text = explode(",", $sanitized_text);
+        $sanitized_text = array_map('trim', explode(",", $sanitized_text));
         return $sanitized_text;
       }
       else if ($sanitize_type == 'allow_html') {
