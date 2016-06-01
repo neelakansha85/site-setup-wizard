@@ -48,7 +48,7 @@ $step2 = 'essential_options';
                             if ( $is_user_role_restriction != true ) {
                                 foreach ( $site_address_bucket_user_value as $key => $value) {
                                     echo '
-                                    <option value="'.$key.'">'.$value.'</option>
+                                    <option value="'.$value.'">'.$value.'</option>
                                     ';
                                 }
                             }
@@ -57,7 +57,7 @@ $step2 = 'essential_options';
                                     if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_address_bucket_user ) { 
                                         foreach ( $site_address_bucket_user_value as $key => $value) {
                                             echo '
-                                            <option value="'.$key.'">'.$value.'</option>
+                                            <option value="'.$value.'">'.$value.'</option>
                                             ';
                                         }
                                     }
@@ -67,7 +67,7 @@ $step2 = 'essential_options';
                         else {
                             foreach ( $site_address_bucket_user_value as $key => $value) {
                                 echo '
-                                <option value="'.$key.'">'.$value.'</option>
+                                <option value="'.$value.'">'.$value.'</option>
                                 ';
                             }
                         }
