@@ -40,15 +40,16 @@ $step2 = 'essential_options';
                 <span id="ssw-site-address-display"><?php _e($current_site_root_address); ?>&lt;Site Category&gt;-&lt;Site Address&gt;</span>
             </div>                 
             <div class="ssw-field">
-                <label for="ssw-site-address-bucket" class="ssw-site-address ssw-required ssw-label" title="Site Category">Site Category</label>
-                <select id="ssw-site-address-bucket" class="ssw-subfield ssw-select" name="site_address_bucket" tabindex="2" onchange="ssw_js_site_address_display()" required >
+                <label for="ssw-site-category" class="ssw-site-address ssw-required ssw-label" title="Site Category">Site Category</label>
+                <select id="ssw-site-category" class="ssw-subfield ssw-select" name="site_category" tabindex="2" onchange="ssw_js_site_address_display()" required >
                     <?php
                     foreach ( $site_user_category as $site_user => $site_category ) {
                         if ( $is_master_user != true ) {        
                             if ( $is_user_role_restriction != true ) {
                                 foreach ( $site_category as $key => $value) {
+                                    $key = $this->ssw_sanitize_option('sanitize_url', $value);
                                     echo '
-                                    <option value="'.$value.'">'.$value.'</option>
+                                    <option value="'.$key.'">'.$value.'</option>
                                     ';
                                 }
                             }
@@ -56,8 +57,9 @@ $step2 = 'essential_options';
                                 foreach ( $user_role_mapping as $restricted_role_in_ssw => $restricted_role_in_wp ) {
                                     if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_user ) { 
                                         foreach ( $site_category as $key => $value) {
+                                            $key = $this->ssw_sanitize_option('sanitize_url', $value);
                                             echo '
-                                            <option value="'.$value.'">'.$value.'</option>
+                                            <option value="'.$key.'">'.$value.'</option>
                                             ';
                                         }
                                     }
@@ -66,8 +68,9 @@ $step2 = 'essential_options';
                         }
                         else {
                             foreach ( $site_category as $key => $value) {
+                                $key = $this->ssw_sanitize_option('sanitize_url', $value);
                                 echo '
-                                <option value="'.$value.'">'.$value.'</option>
+                                <option value="'.$key.'">'.$value.'</option>
                                 ';
                             }
                         }

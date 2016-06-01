@@ -10,8 +10,8 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     $admin_user_id = sanitize_key( $_POST['admin_user_id'] );
     $this->ssw_debug_log('step2_process', 'admin_user_id', $admin_user_id);
 
-    $site_category_selected = sanitize_key( $_POST['site_address_bucket'] );
-    $this->ssw_debug_log('step2_process', 'site_address_bucket', $site_category_selected);
+    $site_category_selected = sanitize_key( $_POST['site_category'] );
+    $this->ssw_debug_log('step2_process', 'site_category', $site_category_selected);
 
     $site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
     $this->ssw_debug_log('step2_process', 'site_address', $site_address);

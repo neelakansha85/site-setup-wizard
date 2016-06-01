@@ -7,7 +7,7 @@
 
 /* Inserting all default Values */
 $ssw_config_options_nsd = array(
-    'site_address_bucket' => array(
+    'site_user_category' => array(
         'student' => array(
             'No Category Selected',
             'Personal',
@@ -79,7 +79,7 @@ $ssw_config_options_nsd = array(
                 )
         ),
     /* Sites with this category selected will not have any prefixes in it's site address */
-    'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
+    'site_category_no_prefix' => array( 'personal', 'no_category', 'teaching_and_learning' ),
     'site_type' => array(
         'student' => array( 
             'Personal', 

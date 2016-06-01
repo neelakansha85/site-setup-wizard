@@ -271,7 +271,7 @@ function ssw_js_validate_terms() {
 /* JS for checking availability of site address from wordpress server */
 function ssw_js_check_domain_available() {
     var site_exists = '';
-    var site_address_bucket = document.getElementById('ssw-steps').site_address_bucket.value;
+    var site_category = document.getElementById('ssw-steps').site_category.value;
     var site_address = document.getElementById('ssw-steps').site_address.value;
     site_address = site_address.toLowerCase();
     var site_complete_path = ssw_js_get_site_complete_path();
@@ -287,7 +287,7 @@ function ssw_js_check_domain_available() {
         async: false,
         data: { 
             action: 'ssw_check_domain_exists',
-            site_address_bucket: site_address_bucket,
+            site_category: site_category,
             site_address: site_address,
             site_complete_path: site_complete_path,
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
@@ -382,16 +382,16 @@ function ssw_js_submit_first_step(type) {
 
 /* Function to get site complete path from site category concatenated with site address */
 function ssw_js_get_site_complete_path() {
-    var site_address_bucket = document.getElementById('ssw-steps').site_address_bucket.value;
+    var site_category = document.getElementById('ssw-steps').site_category.value;
     var site_address = document.getElementById('ssw-steps').site_address.value;
     site_address = site_address.toLowerCase();
     var site_complete_path = '';  
 
-    //Sample value for ssw_main_ajax.site_address_bucket_none_value: ["Personal", "Personal1", ""];
-    var site_address_bucket_none_value = ssw_main_ajax.site_address_bucket_none_value;
+    //Sample value for ssw_main_ajax.site_category_no_prefix: ["Personal", "Personal1", ""];
+    var site_category_no_prefix = ssw_main_ajax.site_category_no_prefix;
 
-    if (jQuery.inArray(site_address_bucket, site_address_bucket_none_value) < 0 && site_address_bucket != '') {
-        site_complete_path = site_address_bucket + '-' + site_address;
+    if (jQuery.inArray(site_category, site_category_no_prefix) < 0 && site_category != '') {
+        site_complete_path = site_category + '-' + site_address;
     }
     else {
         site_complete_path = site_address;

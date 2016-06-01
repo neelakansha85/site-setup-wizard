@@ -2,8 +2,8 @@
 
 /* JS for Site Setup Wizard Options Page */
 
-var site_user_category = options['site_address_bucket'];
-var site_category_no_prefix = options['site_address_bucket_none_value'];
+var site_user_category = options['site_user_category'];
+var site_category_no_prefix = options['site_category_no_prefix'];
 var banned_site_address = options['banned_site_address'];
 var hide_plugin_category = options['hide_plugin_category'];
 var external_plugins = options['external_plugins'];
@@ -262,14 +262,14 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     var selectBox = document.getElementById(selectBoxId);
     var userSelect = document.getElementById("ssw-user-role-select");
 
-    //var arr = Object.keys(options['site_address_bucket']).map(function (selectedUser) {return options['site_address_bucket'][selectedUser]});
+    //var arr = Object.keys(options['site_user_category']).map(function (selectedUser) {return options['site_user_category'][selectedUser]});
     if(selectBox != userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
         if(selectBox.value == 'ssw-site-type') {
             //options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
         }
         if(selectBox.value == 'ssw-site-category') {
-            //options['site_address_bucket'][selectedUser][inputTxt.value] = inputTxt.value;
+            //options['site_user_category'][selectedUser][inputTxt.value] = inputTxt.value;
         }
     }
     else {
