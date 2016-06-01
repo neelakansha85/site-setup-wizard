@@ -20,10 +20,10 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     * Check if the bucket selected is from the list of all buckets that
     * should be blank buckets 
     */
-    for($i=0 ; $i<count($site_address_bucket_none_value); $i++) {
-        $site_address_bucket_none_value[$i] = $this->ssw_sanitize_option('sanitize_url', $site_address_bucket_none_value[$i]);
+    for($i=0 ; $i<count($site_category_no_prefix); $i++) {
+        $site_category_no_prefix[$i] = $this->ssw_sanitize_option('sanitize_url', $site_category_no_prefix[$i]);
     }
-    if( in_array($site_category_selected, $site_address_bucket_none_value) != true && $site_category_selected != '' ) {
+    if( in_array($site_category_selected, $site_category_no_prefix) != true && $site_category_selected != '' ) {
         $path = $site_category_selected.'-'.$site_address;
     }
     else {
@@ -31,8 +31,8 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     }
     $is_banned_site = 0;
     if ( !is_super_admin() ) {
-        foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
-            foreach ( $site_address_bucket_user_value as $key => $value) {
+        foreach ( $site_user_category as $site_user => $site_category ) {
+            foreach ( $site_category as $key => $value) {
                 if( $path == $this->ssw_sanitize_option('sanitize_url', $value)) {
                     $is_banned_site = 1;
                 }

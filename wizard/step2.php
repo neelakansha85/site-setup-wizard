@@ -43,10 +43,10 @@ $step2 = 'essential_options';
                 <label for="ssw-site-address-bucket" class="ssw-site-address ssw-required ssw-label" title="Site Category">Site Category</label>
                 <select id="ssw-site-address-bucket" class="ssw-subfield ssw-select" name="site_address_bucket" tabindex="2" onchange="ssw_js_site_address_display()" required >
                     <?php
-                    foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
+                    foreach ( $site_user_category as $site_user => $site_category ) {
                         if ( $is_master_user != true ) {        
                             if ( $is_user_role_restriction != true ) {
-                                foreach ( $site_address_bucket_user_value as $key => $value) {
+                                foreach ( $site_category as $key => $value) {
                                     echo '
                                     <option value="'.$value.'">'.$value.'</option>
                                     ';
@@ -54,8 +54,8 @@ $step2 = 'essential_options';
                             }
                             else {
                                 foreach ( $user_role_mapping as $restricted_role_in_ssw => $restricted_role_in_wp ) {
-                                    if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_address_bucket_user ) { 
-                                        foreach ( $site_address_bucket_user_value as $key => $value) {
+                                    if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_user ) { 
+                                        foreach ( $site_category as $key => $value) {
                                             echo '
                                             <option value="'.$value.'">'.$value.'</option>
                                             ';
@@ -65,7 +65,7 @@ $step2 = 'essential_options';
                             }
                         }
                         else {
-                            foreach ( $site_address_bucket_user_value as $key => $value) {
+                            foreach ( $site_category as $key => $value) {
                                 echo '
                                 <option value="'.$value.'">'.$value.'</option>
                                 ';

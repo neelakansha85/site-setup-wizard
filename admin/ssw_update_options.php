@@ -11,8 +11,8 @@ $ssw_user_role_array = $this->ssw_sanitize_option('to_array_on_comma', $_POST['s
 $ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-type']);
 $ssw_site_category_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-category']);
 
-$site_address_bucket = $options['site_address_bucket'];
-$site_address_bucket[$ssw_user_role_selected] = $ssw_site_category_array;
+$site_user_category = $options['site_address_bucket'];
+$site_user_category[$ssw_user_role_selected] = $ssw_site_category_array;
 
 $site_type = $options['site_type'];
 $site_type[$ssw_user_role_selected] = $ssw_site_type_array;
@@ -26,7 +26,7 @@ else {
 
 /* Inserting all new values */
 $ssw_config_options_nsd = array(
-    'site_address_bucket' => $site_address_bucket,
+    'site_address_bucket' => $site_user_category,
     /* Sites with this category selected will not have any prefixes in it's site address */
     'site_address_bucket_none_value' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-site-category-no-prefix']),
     'site_type' => $site_type,

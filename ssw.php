@@ -269,7 +269,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Register CSS Stylesheet for Admin section pages on the backend */
 		public function ssw_admin_scripts() {
 			$options = $this->ssw_fetch_config_options();
-			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
+			$site_category_no_prefix = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
 			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
@@ -283,7 +283,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				*	so that you can check it later when an AJAX request is sent 
 				*/
 				'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
-				'site_address_bucket_none_value' => $site_address_bucket_none_value
+				'site_address_bucket_none_value' => $site_category_no_prefix
 			)
 		);
 
@@ -301,7 +301,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* Register Javascripts for the frontend and backend */
 		public function ssw_frontend_scripts() {
 			$options = $this->ssw_fetch_config_options();
-			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
+			$site_category_no_prefix = $options['site_address_bucket_none_value'];
 
 			/* Register all required Javascripts for SSW Plugin with it's wp_register_script hook */
 			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
@@ -316,7 +316,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
         * so that you can check it later when an AJAX request is sent 
         */
 				'ssw_ajax_nonce' => wp_create_nonce( 'ssw_ajax_action' ),
-				'site_address_bucket_none_value' => $site_address_bucket_none_value
+				'site_address_bucket_none_value' => $site_category_no_prefix
 	    	)
 			);
 
@@ -634,8 +634,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 				/* Site Setup Wizard implementation starts here */	
     		/* Fetch basic config options to control the work flow of the Site Setup Wizard */
     		$options = $this->ssw_fetch_config_options();
-  			$site_address_bucket = $options['site_address_bucket'];
-  			$site_address_bucket_none_value = $options['site_address_bucket_none_value'];
+  			$site_user_category = $options['site_address_bucket'];
+  			$site_category_no_prefix = $options['site_address_bucket_none_value'];
 				$hide_plugin_category = $options['hide_plugin_category'];
 				$external_plugins = $options['external_plugins'];
 				$user_role_mapping = $options['user_role_mapping'];
