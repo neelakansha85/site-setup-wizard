@@ -495,6 +495,9 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
         $site_address = str_replace( '-', '', sanitize_key( $_POST['site_address'] ));
         $is_banned_site = 0;
 
+        for($i=0 ; $i<count($site_category_no_prefix); $i++) {
+        $site_category_no_prefix[$i] = $this->ssw_sanitize_option('sanitize_url', $site_category_no_prefix[$i]);
+    		}
         if( in_array($site_category_selected, $site_category_no_prefix) != true && $site_category_selected != '' ) {
           $path = $site_category_selected.'-'.$site_address;
         }
@@ -521,7 +524,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
         if ( !is_super_admin() ) {
           foreach ( $site_category as $site_category_user => $site_category_user_value ) {
             foreach ( $site_category_user_value as $key => $value) {
-              if( $path == $key) {
+              if( $path == $this->ssw_sanitize_option('sanitize_url', $value)) {
                 $is_banned_site = 1;
               }
             }
