@@ -33,7 +33,7 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     if ( !is_super_admin() ) {
         foreach ( $site_address_bucket as $site_address_bucket_user => $site_address_bucket_user_value ) {
             foreach ( $site_address_bucket_user_value as $key => $value) {
-                if( $path == $key) {
+                if( $path == $this->ssw_sanitize_option('sanitize_url', $value)) {
                     $is_banned_site = 1;
                 }
             }
