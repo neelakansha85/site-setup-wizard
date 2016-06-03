@@ -6,10 +6,10 @@ if( $_POST['ssw_next_stage'] != '' ) {
 		* sanitize_title_for_query sanitizes the value to make it safe
 		* for passing in to a SQL query
 		*/
-		$site_type = sanitize_text_field( $_POST['ssw_site_type'] );
+		$site_type = $this->ssw_sanitize_option('sanitize_text_field', $_POST['ssw_site_type']);
 		$this->ssw_debug_log('step1_process','site_type',$site_type);
 
-		$next_stage = sanitize_title_for_query( $_POST['ssw_next_stage'] );
+		$next_stage = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw_next_stage']);
 		$this->ssw_debug_log('step1_process','next_stage',$next_stage);
 
 		$starttime = current_time('mysql');

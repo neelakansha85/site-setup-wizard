@@ -449,8 +449,20 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
       	$sanitized_text = str_replace( '-', '', stripslashes(sanitize_key($plain_text)));
       	return $sanitized_text;
       }
+      else if($sanitize_type == 'sanitize_email') {
+      	$sanitized_text = stripslashes(sanitize_email($plain_text));
+      	return $sanitized_text;
+      }
       else if($sanitize_type == 'sanitize_key') {
       	$sanitized_text = stripslashes(sanitize_key($plain_text));
+      	return $sanitized_text;
+      }
+      else if($sanitize_type == 'sanitize_text_field') {
+      	$sanitized_text = stripslashes(sanitize_text_field($plain_text));
+      	return $sanitized_text;
+      }
+      else if($sanitize_type == 'sanitize_title_for_query') {
+      	$sanitized_text = stripslashes(sanitize_title_for_query($plain_text));
       	return $sanitized_text;
       }
       else {

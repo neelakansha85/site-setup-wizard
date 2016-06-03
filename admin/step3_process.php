@@ -3,10 +3,10 @@
 /* Insert from Step 3 data into SSW's table in database */
 if( $_POST['ssw_next_stage'] != '' ) {
     /* sanitize_title_for_query strips the content to make it safe for passing in to a SQL query */
-    $theme = sanitize_title_for_query( $_POST['theme'] );
+    $theme = $this->ssw_sanitize_option('sanitize_title_for_query', $_POST['theme']);
     $this->ssw_debug_log('step3_process', 'theme', $theme);
     
-    $next_stage = sanitize_title_for_query( $_POST['ssw_next_stage'] );
+    $next_stage = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw_next_stage']);
     $this->ssw_debug_log('step3_process', 'next_stage', $next_stage);
     
     $endtime = current_time('mysql');
