@@ -7,7 +7,7 @@ wp_enqueue_style( 'ssw-style-admin-css' );
 
 if(isset($_POST['ssw-user-roles'])) { 
     if ( !empty($_POST['ssw-user-roles']) && check_admin_referer('submit_ssw_settings')){
-        $this->ssw_update_config_options();
+        $this->ssw_save_options();
         //echo('Inside ssw_options_page Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
     }else{
         wp_die('Please use valid forms to send data.'); 

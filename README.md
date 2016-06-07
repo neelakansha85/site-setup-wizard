@@ -47,8 +47,7 @@ Check out the Codex for more information about [installing plugins manually](htt
 # Usage
 * Default plugin settings will be configured upon activating the plugin. 
 * To modify plugin settings:
-    * Modify required settings in `nsd-site-setup-wizard/admin/ssw_update_options.php`.
-    * Go to __Network Admin -> Create Site -> Options__ screen and click __Update Plugin Settings__.
+    * Go to __Network Admin -> Create Site -> Options__ screen and click __Save Changes__.
 
 ## License
 The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.

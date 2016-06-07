@@ -33,6 +33,7 @@ var is_master_user = options['master_user'] ? options['master_user'] : false;
 var siteUserArray = Object.keys(site_user_category);
 
 //console.log(options);
+//console.log(siteUserArray);
 
 // add a default --Select-- value to selectBox
 function addNewSelectOption(selectBox) {
@@ -275,11 +276,7 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     else {
 
         if(inputTxt.value != '') {
-            siteUserArray.push(inputTxt.value);
-            // load values of userSelect from siteUserArray
-            loadSelectFromArray(userSelect, siteUserArray);
-            selectBox.selectedIndex = siteUserArray.length-1;
-            // Clear the user inputed new value in inputTxt
+            sswSaveNewUserRole(selectBox, inputTxt.value);
             inputTxt.value = '';
         }
         else {
@@ -291,6 +288,32 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
 
     // Trigger sswUserRole() function with changed value
     sswUserRole();
+}
+
+function sswSaveNewUserRole(userSelect, newUserRole) {
+    jQuery.ajax ({
+        type: "POST",
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "json",
+        async: true,
+        data: {
+            action: 'ssw_save_options',
+            new_user_role: newUserRole,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
+        },
+        success: function(new_options) {
+            console.log(new_options);
+            site_user_category = new_options['site_user_category'];
+            siteUserArray = Object.keys(site_user_category);
+            // load new values of userSelect from siteUserArray
+            loadSelectFromArray(userSelect, siteUserArray);
+            userSelect.selectedIndex = siteUserArray.length-1;
+            sswUserRole();
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
 }
 
 /* Function for adding hidden input variables to a form */

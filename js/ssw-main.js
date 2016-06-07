@@ -309,12 +309,12 @@ function ssw_js_check_domain_available() {
     }
     else if (site_exists == 0) { //site doesn't exist, good to go
         return true;
-}
-else {
-    document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_other_error_msg;
-    document.getElementById("ssw-site-address-error").style.display="block";
-    return false;   
-}
+    }
+    else {
+        document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_other_error_msg;
+        document.getElementById("ssw-site-address-error").style.display="block";
+        return false;   
+    }
 }
 /* ENDS JS for checking availability of site address from wordpress server */
 

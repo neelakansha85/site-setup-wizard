@@ -75,6 +75,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_ssw_submit_form_skip', array( $this, 'ssw_create_site' ) );
 			add_action( 'wp_ajax_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
+			add_action( 'wp_ajax_ssw_save_options', array( $this, 'ssw_save_options' ) );
 			// add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
 			/* Add ajax request handlers for all buttons of wizard for frontend section */
@@ -106,10 +107,42 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			return $options;
 		}
 		/* Update configuration options for SSW Plugin from wp_sitemeta table */
-		public function ssw_update_config_options() {
-			include(SSW_PLUGIN_DIR.'admin/ssw_update_options.php');
-      //echo('Inside ssw_update_config_options() Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
-      update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $ssw_config_options_nsd );
+		public function ssw_update_config_options($new_config_options) {
+      update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $new_config_options );
+		}
+		/* Save options for SSW Plugin for wp_sitemeta table */
+		public function ssw_save_options() {
+			if (isset($_POST['ssw_ajax_nonce']) && wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
+				$options = $this->ssw_fetch_config_options();
+				$site_user_category = $options['site_user_category'];
+				$site_type = $options['site_type'];
+
+				$new_user_role = $this->ssw_sanitize_option('sanitize_field', $_POST['new_user_role']);
+				if($new_user_role != '') {
+					if(!isset($site_user_category[$new_user_role])) {
+						$site_user_category[$new_user_role] = array();
+					}
+					if(!isset($site_type[$new_user_role])) {
+						$site_type[$new_user_role] = array();
+					}
+					/* Updating new values for configuration options */
+					$options['site_user_category'] = $site_user_category;
+					$options['site_type'] = $site_type;
+
+					$this->ssw_update_config_options($options);
+
+					/* Return new config options to reload Options Page */
+					header('Content-Type: application/json');
+					echo json_encode($options);
+				}
+	      /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+				wp_die();
+			}
+			else {
+				include(SSW_PLUGIN_DIR.'admin/ssw_save_options.php');
+				$this->ssw_update_config_options($new_config_options_nsd);
+			}
+
 		}
 		/* Fetch Plugin options for SSW Plugin from wp_sitemeta table */
 		public function ssw_fetch_plugin_options() {

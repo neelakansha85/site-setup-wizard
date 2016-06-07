@@ -25,7 +25,7 @@ else {
 }
 
 /* Inserting all new values */
-$ssw_config_options_nsd = array(
+$new_config_options_nsd = array(
     'site_user_category' => $site_user_category,
     /* Sites with this category selected will not have any prefixes in it's site address */
     'site_category_no_prefix' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-site-category-no-prefix']),
