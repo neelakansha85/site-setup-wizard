@@ -285,9 +285,6 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     }
     //console.log(site_type); 
     //console.log(site_user_category);
-
-    // Trigger sswUserRole() function with changed value
-    sswUserRole();
 }
 
 function sswSaveNewUserRole(userSelect, newUserRole) {
