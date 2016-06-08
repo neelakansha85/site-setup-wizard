@@ -10,6 +10,10 @@
   vertical-align: middle;
 }
 
+.ssw-remove-btn {
+  vertical-align: middle;
+}
+
 /* ENDS Options Page */
 
 /* Media CSS for Options Page */
@@ -38,11 +42,15 @@
 }
 
 @media (max-width: 782px) {
+  .ssw-select {
+    width: 90% !important;
+    display: inline-block !important;
+  }
   .ssw-add-new-text {
     width: 90% !important;
     display: inline-block !important;
   }
-  ssw-add-new-input {
+  .ssw-add-new-input {
     
   }
 

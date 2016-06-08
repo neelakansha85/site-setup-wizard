@@ -161,6 +161,7 @@ function sswUserRole() {
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
         document.getElementById("add-user-role-btn").style.visibility='visible';
+        document.getElementById("remove-user-role-btn").style.visibility='hidden';
 
         // Set remaining select boxes to Add New
         siteTypeTxt.innerHTML = '';
@@ -172,6 +173,7 @@ function sswUserRole() {
     {
         document.getElementById("add-user-role-input").style.visibility='hidden';
         document.getElementById("add-user-role-btn").style.visibility='hidden';
+        document.getElementById("remove-user-role-btn").style.visibility='visible';
 
         // change value of siteTypeSelect based on userSelect value
         var siteTypeUser = site_type[userSelect.value];
@@ -285,6 +287,42 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     }
     //console.log(site_type); 
     //console.log(site_user_category);
+}
+
+function sswRemoveValue(selectBoxId) {
+    var selectBox = document.getElementById(selectBoxId);
+    var userSelect = document.getElementById("ssw-user-role-select");
+
+    if(selectBox == userSelect) {
+        var selectedUser = userSelect.options[userSelect.selectedIndex].value;
+        sswRemoveUserRole(selectBox, selectedUser);
+    }
+}
+
+function sswRemoveUserRole(userSelect, removeUserRole) {
+    jQuery.ajax ({
+        type: "POST",
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "json",
+        async: "true",
+        data: {
+            action: 'ssw_save_options',
+            remove_user_role: removeUserRole,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
+        },
+        success: function(new_options) {
+            console.log(new_options);
+            site_user_category = new_options['site_user_category'];
+            siteUserArray = Object.keys(site_user_category);
+            // load new values of userSelect from siteUserArray
+            loadSelectFromArray(userSelect, siteUserArray);
+            userSelect.selectedIndex = siteUserArray.length-1;
+            sswUserRole();
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
 }
 
 function sswSaveNewUserRole(userSelect, newUserRole) {
