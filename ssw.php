@@ -75,6 +75,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			add_action( 'wp_ajax_ssw_submit_form_skip', array( $this, 'ssw_create_site' ) );
 			add_action( 'wp_ajax_ssw_check_domain_exists', array( $this, 'ssw_check_domain_exists'));
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
+			add_action( 'wp_ajax_ssw_set_default_options', array( $this, 'ssw_set_default_options' ) );
 			add_action( 'wp_ajax_ssw_save_options', array( $this, 'ssw_save_options' ) );
 			// add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
@@ -110,6 +111,14 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		public function ssw_update_config_options($new_config_options) {
       update_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE, $new_config_options );
 		}
+		/* Set Default Config options for SSW_CONFIG_OPTIONS_FOR_DATABASE */
+		function ssw_set_default_options() {
+			if (isset($_POST['ssw_ajax_nonce']) && wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
+				include(SSW_PLUGIN_DIR.'admin/ssw_default_options.php');
+				$this->ssw_update_config_options($ssw_config_options_nsd);
+			}
+		}
+
 		/* Save options for SSW Plugin for wp_sitemeta table */
 		public function ssw_save_options() {
 			if (isset($_POST['ssw_ajax_nonce']) && wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
@@ -136,6 +145,21 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						}
 						if(isset($site_type[$remove_user_role])) {
 							unset($site_type[$remove_user_role]);
+						}
+					}
+				}
+				else if(isset($_POST['update_user_role'])) {
+					$update_user_role = $this->ssw_sanitize_option('sanitize_field', $_POST['update_user_role']);
+					if($update_user_role != '') {
+						if(isset($site_user_category[$update_user_role])) {
+							$ssw_site_category_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['site_category']);
+							$site_user_category[$update_user_role] = $ssw_site_category_array;
+						}
+						if(isset($site_type[$update_user_role])) {
+							$ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['site_type']);
+							$site_type[$update_user_role] = $ssw_site_type_array;
+							echo 'Site Type: ';
+							print_r($ssw_site_type_array);
 						}
 					}
 				}

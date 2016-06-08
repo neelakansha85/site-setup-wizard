@@ -247,6 +247,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
         <p class="submit">
             <?php wp_nonce_field('submit_ssw_settings'); ?>
             <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes" onclick="saveOptions()">
+            <input type="button" name="default" id="default" class="ssw-options-default button-primary" value="Reset to Default" onclick="defaultOptions()">
         </p>
     </form>
 </div>

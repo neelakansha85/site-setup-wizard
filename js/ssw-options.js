@@ -310,6 +310,25 @@ function sswAddHiddenInput(theForm, key, value) {
     theForm.appendChild(input);
 }
 
+function defaultOptions() {
+    jQuery.ajax({
+        type: "POST",
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "json",
+        async: "true",
+        data: {
+            action: 'ssw_set_default_options',
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
+        },
+        success: function(new_options) {
+            loadOptionsPage();
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
 function saveOptions() {
     var theForm = document.forms['ssw-options-page'];
     sswAddHiddenInput(theForm, 'ssw-user-roles', siteUserArray);
