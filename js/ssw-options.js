@@ -32,9 +32,6 @@ var is_master_user = options['master_user'] ? options['master_user'] : false;
 // Create a Array for Site Users in order to process form
 var siteUserArray = Object.keys(site_user_category);
 
-//console.log(options);
-//console.log(siteUserArray);
-
 // add a default --Select-- value to selectBox
 function addNewSelectOption(selectBox) {
     var opt = document.createElement('option');
@@ -97,17 +94,6 @@ function loadOptionsPage() {
     // load values of userSelect from siteUserArray
     loadSelectFromArray(userSelect, siteUserArray);
     
-    /*
-    for(var siteUserCategory in site_user_category) {
-        // skip loop if property is from prototype
-        if(!site_user_category.hasOwnProperty([siteUserCategory])) { continue; }
-        var opt = document.createElement('option');
-        opt.value = siteUserCategory;
-        opt.innerHTML = siteUserCategory;
-        userSelect.appendChild(opt);
-    }
-    */
-    //addNewSelectOption(userSelect);
     sswUserRole();
 
     // load remaining options independant values
@@ -155,8 +141,6 @@ function sswUserRole() {
     var userSelect = document.getElementById("ssw-user-role-select");
     var siteTypeTxt = document.getElementById("ssw-site-type");
     var siteCategoryTxt = document.getElementById("ssw-site-category");
-    // var siteTypeSelect = document.getElementById("ssw-site-type");    
-    // var siteCategorySelect = document.getElementById("ssw-site-category");
     if (userSelect.value=='add_new')
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
@@ -166,8 +150,6 @@ function sswUserRole() {
         // Set remaining select boxes to Add New
         siteTypeTxt.innerHTML = '';
         siteCategoryTxt.innerHTML = '';
-        // siteTypeSelect.value='add_new';
-        // siteCategorySelect.value='add_new';
     } 
     else 
     {
@@ -185,20 +167,6 @@ function sswUserRole() {
                 siteTypeTxt.innerHTML += '\n';
             }
         }
-        //console.log('userSelect: '+userSelect.value);
-        //console.log(siteTypeUser);
-        //console.log('siteTypeArray: '+siteTypeArray);
-        /*
-        siteTypeSelect.options.length = 0;
-        for(var prop in siteTypeUser) {
-            if(!siteTypeUser.hasOwnProperty([prop])) { continue; }
-            var opt = document.createElement('option');
-            opt.value = prop;
-            opt.innerHTML = siteTypeUser[prop];
-            siteTypeSelect.appendChild(opt);
-        }
-        addNewSelectOption(siteTypeSelect);
-        */
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
@@ -210,17 +178,6 @@ function sswUserRole() {
                 siteCategoryTxt.innerHTML += '\n';
             }
         }
-        /*
-        siteCategorySelect.options.length = 0;
-        for(var prop in siteUserCategory) {
-            if(!siteUserCategory.hasOwnProperty([prop])) { continue; }
-            var opt = document.createElement('option');
-            opt.value = prop;
-            opt.innerHTML = siteUserCategory[prop];
-            siteCategorySelect.appendChild(opt);
-        }
-        addNewSelectOption(siteCategorySelect);
-        */
     }
 
     // trigger change function for siteCategorySelect and siteTypeSelect
@@ -229,35 +186,14 @@ function sswUserRole() {
 }
 
 function sswSiteType() {
-    /* Will be used using Select Box for SiteType input
-    if (document.getElementById("ssw-site-type").value=='add_new')
-    {        
-        document.getElementById("add-site-type-input").style.visibility='visible';
-        document.getElementById("add-site-type-btn").style.visibility='visible';
-
-        // Set remaining select boxes to Add New
-        //document.getElementById("ssw-site-category").value='add_new';
-    } 
-    else 
-    { 
-        document.getElementById("add-site-type-input").style.visibility='hidden';
-        document.getElementById("add-site-type-btn").style.visibility='hidden';
-    }; 
-    */
+    /**
+     *  Will be used using Select Box for SiteType input
+     */
 }
 function sswSiteCategory() {
-    /* Will be used using Select Box for SiteCategory input
-    if (document.getElementById("ssw-site-category").value=='add_new')
-    {
-        document.getElementById("add-site-category-input").style.visibility='visible';
-        document.getElementById("add-site-category-btn").style.visibility='visible';
-    } 
-    else 
-    { 
-        document.getElementById("add-site-category-input").style.visibility='hidden';
-        document.getElementById("add-site-category-btn").style.visibility='hidden';
-    }; 
-    */
+    /**
+     *  Will be used using Select Box for SiteCategory input
+     */
 }
 
 function sswAddNewValue(inputTxtId, selectBoxId) {
@@ -275,17 +211,6 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
             console.log('Please enter a valid User Role');
         }        
     }
-    else {
-        var selectedUser = userSelect.options[userSelect.selectedIndex].value;
-        if(selectBox.value == 'ssw-site-type') {
-            //options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
-        }
-        if(selectBox.value == 'ssw-site-category') {
-            //options['site_user_category'][selectedUser][inputTxt.value] = inputTxt.value;
-        }
-    }
-    //console.log(site_type); 
-    //console.log(site_user_category);
 }
 
 function sswRemoveValue(selectBoxId) {
