@@ -157,16 +157,7 @@ function sswUserRole() {
         document.getElementById("add-user-role-btn").style.visibility='hidden';
         document.getElementById("remove-user-role-btn").style.visibility='visible';
 
-        // change value of siteTypeSelect based on userSelect value
-        var siteTypeUser = site_type[userSelect.value];
-        var siteTypeArray = objToArray(siteTypeUser);
-        siteTypeTxt.innerHTML = '';
-        for(var i=0; i<siteTypeArray.length; i++) {
-            siteTypeTxt.innerHTML += siteTypeArray[i];
-            if(i != siteTypeArray.length-1 ) {
-                siteTypeTxt.innerHTML += '\n';
-            }
-        }
+        sswUpdateUserRole(userSelect.options[userSelect.selectedIndex].value, siteTypeTxt.value, siteCategoryTxt.value);
 
         // change value of siteCategorySelect based on userSelect value
         var siteUserCategory = site_user_category[userSelect.value];
@@ -181,14 +172,50 @@ function sswUserRole() {
     }
 
     // trigger change function for siteCategorySelect and siteTypeSelect
-    sswSiteType();
+//    sswSiteType();
     sswSiteCategory();
 }
 
-function sswSiteType() {
+function sswUpdateUserRole(userSelected, siteType, siteCategory) {
+    jQuery.ajax({
+        type: "POST",
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "json",
+        async: true,
+        data: {
+            action: 'ssw_save_options',
+            update_user_role: userSelected,
+            site_type: siteType,
+            site_category: siteCategory,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
+        },
+        success: function(new_options) {
+            console.log(new_options);
+            var site_user_category = new_options['site_user_category'];
+            var site_type = new_options['site_type'];
+            sswSiteType(userSelected);
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function sswSiteType(userSelected) {
     /**
      *  Will be used using Select Box for SiteType input
      */
+    // change value of siteTypeSelect based on userSelect value
+        var siteTypeTxt = document.getElementById("ssw-site-type");
+        var siteTypeUser = site_type[userSelected];
+        var siteTypeArray = objToArray(siteTypeUser);
+        siteTypeTxt.innerHTML = '';
+        for(var i=0; i<siteTypeArray.length; i++) {
+            siteTypeTxt.innerHTML += siteTypeArray[i];
+            if(i != siteTypeArray.length-1 ) {
+                siteTypeTxt.innerHTML += '\n';
+            }
+        }
 }
 function sswSiteCategory() {
     /**
@@ -213,6 +240,31 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     }
 }
 
+function sswSaveNewUserRole(userSelect, newUserRole) {
+    jQuery.ajax ({
+        type: "POST",
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "json",
+        async: true,
+        data: {
+            action: 'ssw_save_options',
+            new_user_role: newUserRole,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
+        },
+        success: function(new_options) {
+            site_user_category = new_options['site_user_category'];
+            siteUserArray = Object.keys(site_user_category);
+            // load new values of userSelect from siteUserArray
+            loadSelectFromArray(userSelect, siteUserArray);
+            userSelect.selectedIndex = siteUserArray.length-1;
+            sswUserRole();
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
 function sswRemoveValue(selectBoxId) {
     var selectBox = document.getElementById(selectBoxId);
     var userSelect = document.getElementById("ssw-user-role-select");
@@ -235,33 +287,6 @@ function sswRemoveUserRole(userSelect, removeUserRole) {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            console.log(new_options);
-            site_user_category = new_options['site_user_category'];
-            siteUserArray = Object.keys(site_user_category);
-            // load new values of userSelect from siteUserArray
-            loadSelectFromArray(userSelect, siteUserArray);
-            userSelect.selectedIndex = siteUserArray.length-1;
-            sswUserRole();
-        },
-        error: function(errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
-
-function sswSaveNewUserRole(userSelect, newUserRole) {
-    jQuery.ajax ({
-        type: "POST",
-        url: ssw_main_ajax.ajaxurl,
-        dataType: "json",
-        async: true,
-        data: {
-            action: 'ssw_save_options',
-            new_user_role: newUserRole,
-            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
-        },
-        success: function(new_options) {
-            console.log(new_options);
             site_user_category = new_options['site_user_category'];
             siteUserArray = Object.keys(site_user_category);
             // load new values of userSelect from siteUserArray
