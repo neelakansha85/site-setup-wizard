@@ -48,9 +48,12 @@ $step2 = 'essential_options';
                             if ( $is_user_role_restriction != true ) {
                                 foreach ( $site_category as $key => $value) {
                                     $key = $this->ssw_sanitize_option('sanitize_url', $value);
-                                    echo '
-                                    <option value="'.$key.'">'.$value.'</option>
-                                    ';
+
+                                    if($key!='') {
+                                        echo '
+                                        <option value="'.$key.'">'.$value.'</option>
+                                        ';
+                                    }
                                 }
                             }
                             else {
@@ -58,9 +61,11 @@ $step2 = 'essential_options';
                                     if ( $current_user_role == $restricted_role_in_wp && $restricted_role_in_ssw == $site_user ) { 
                                         foreach ( $site_category as $key => $value) {
                                             $key = $this->ssw_sanitize_option('sanitize_url', $value);
-                                            echo '
-                                            <option value="'.$key.'">'.$value.'</option>
-                                            ';
+                                            if($key!='') {
+                                                echo '
+                                                <option value="'.$key.'">'.$value.'</option>
+                                                ';
+                                            }
                                         }
                                     }
                                 }
@@ -69,9 +74,11 @@ $step2 = 'essential_options';
                         else {
                             foreach ( $site_category as $key => $value) {
                                 $key = $this->ssw_sanitize_option('sanitize_url', $value);
-                                echo '
-                                <option value="'.$key.'">'.$value.'</option>
-                                ';
+                                if($key!='') {
+                                    echo '
+                                    <option value="'.$key.'">'.$value.'</option>
+                                    ';
+                                }
                             }
                         }
                     }
