@@ -6,9 +6,9 @@
 /* Get current options for use where required */
 $options = $this->ssw_fetch_config_options();
 
-$ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_field', $_POST['ssw-user-role-select']);
-if($ssw_user_role_selected == 'add_new' && $this->ssw_sanitize_option('sanitize_field', $_POST['add-user-role-input'])!= '') {
-    $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_field', $_POST['add-user-role-input']);
+$ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw-user-role-select']);
+if($ssw_user_role_selected == 'add_new' && $this->ssw_sanitize_option('sanitize_key', $_POST['add-user-role-input'])!= '') {
+    $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_key', $_POST['add-user-role-input']);
 }
 else {
     $ssw_user_role_selected = '';
