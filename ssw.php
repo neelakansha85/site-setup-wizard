@@ -136,30 +136,32 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						header('Content-Type: application/json');
 						echo json_encode($options);
 					}
-					else if(isset($_POST['remove_user_role'])) {
-						$remove_user_role = $this->ssw_sanitize_option('sanitize_field', $_POST['remove_user_role']);
-						if($remove_user_role != '') {
-							//if(isset($site_user_category[$remove_user_role])) {
-								unset($site_user_category[$remove_user_role]);
-							//}
-							//if(isset($site_type[$remove_user_role])) {
-								unset($site_type[$remove_user_role]);
-							//}
-							/* Updating new values for configuration options */
-							$options['site_user_category'] = $site_user_category;
-							$options['site_type'] = $site_type;
-
-							$this->ssw_update_config_options($options);
-
-							/* Return new config options to reload Options Page */
-							header('Content-Type: application/json');
-							echo json_encode($options);
+				}
+				else if(isset($_POST['remove_user_role'])) {
+					$remove_user_role = $this->ssw_sanitize_option('sanitize_field', $_POST['remove_user_role']);
+					if($remove_user_role != '') {
+						if(isset($site_user_category[$remove_user_role])) {
+							unset($site_user_category[$remove_user_role]);
 						}
+						if(isset($site_type[$remove_user_role])) {
+							unset($site_type[$remove_user_role]);
+						}
+						/* Updating new values for configuration options */
+						$options['site_user_category'] = $site_user_category;
+						$options['site_type'] = $site_type;
+
+						$this->ssw_update_config_options($options);
+
+						/* Return new config options to reload Options Page */
+						header('Content-Type: application/json');
+						echo json_encode($options);
 					}
 				}
 	      /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
 				wp_die();
 			}
+			/* This is to save remaining options which do not come via ajax request
+			 */
 			else {
 				include(SSW_PLUGIN_DIR.'admin/ssw_save_options.php');
 				$this->ssw_update_config_options($new_config_options_nsd);
