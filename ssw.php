@@ -126,15 +126,6 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						if(!isset($site_type[$new_user_role])) {
 							$site_type[$new_user_role] = array();
 						}
-						/* Updating new values for configuration options */
-						$options['site_user_category'] = $site_user_category;
-						$options['site_type'] = $site_type;
-
-						$this->ssw_update_config_options($options);
-
-						/* Return new config options to reload Options Page */
-						header('Content-Type: application/json');
-						echo json_encode($options);
 					}
 				}
 				else if(isset($_POST['remove_user_role'])) {
@@ -146,17 +137,17 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						if(isset($site_type[$remove_user_role])) {
 							unset($site_type[$remove_user_role]);
 						}
-						/* Updating new values for configuration options */
-						$options['site_user_category'] = $site_user_category;
-						$options['site_type'] = $site_type;
-
-						$this->ssw_update_config_options($options);
-
-						/* Return new config options to reload Options Page */
-						header('Content-Type: application/json');
-						echo json_encode($options);
 					}
 				}
+				/* Updating new values for configuration options */
+				$options['site_user_category'] = $site_user_category;
+				$options['site_type'] = $site_type;
+				$this->ssw_update_config_options($options);
+
+				/* Return new config options to reload Options Page */
+				header('Content-Type: application/json');
+				echo json_encode($options);
+
 	      /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
 				wp_die();
 			}

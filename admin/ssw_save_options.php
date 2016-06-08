@@ -7,6 +7,13 @@
 $options = $this->ssw_fetch_config_options();
 
 $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_field', $_POST['ssw-user-role-select']);
+if($ssw_user_role_selected == 'add_new' && $this->ssw_sanitize_option('sanitize_field', $_POST['add-user-role-input'])!= '') {
+    $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_field', $_POST['add-user-role-input']);
+}
+else {
+    $ssw_user_role_selected = '';
+}
+
 $ssw_user_role_array = $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-user-roles']);
 $ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-type']);
 $ssw_site_category_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['ssw-site-category']);

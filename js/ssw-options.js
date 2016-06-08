@@ -266,23 +266,22 @@ function sswAddNewValue(inputTxtId, selectBoxId) {
     var userSelect = document.getElementById("ssw-user-role-select");
 
     //var arr = Object.keys(options['site_user_category']).map(function (selectedUser) {return options['site_user_category'][selectedUser]});
-    if(selectBox != userSelect) {
-        var selectedUser = userSelect.options[userSelect.selectedIndex].value;
-        if(selectBox.value == 'ssw-site-type') {
-            //options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
-        }
-        if(selectBox.value == 'ssw-site-category') {
-            //options['site_user_category'][selectedUser][inputTxt.value] = inputTxt.value;
-        }
-    }
-    else {
-
+    if(selectBox == userSelect) {
         if(inputTxt.value != '') {
             sswSaveNewUserRole(selectBox, inputTxt.value);
             inputTxt.value = '';
         }
         else {
             console.log('Please enter a valid User Role');
+        }        
+    }
+    else {
+        var selectedUser = userSelect.options[userSelect.selectedIndex].value;
+        if(selectBox.value == 'ssw-site-type') {
+            //options['site_type'][selectedUser][inputTxt.value.replace(/ /g, "_")] = inputTxt.value;
+        }
+        if(selectBox.value == 'ssw-site-category') {
+            //options['site_user_category'][selectedUser][inputTxt.value] = inputTxt.value;
         }
     }
     //console.log(site_type); 
