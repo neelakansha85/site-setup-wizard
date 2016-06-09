@@ -50,6 +50,20 @@ function objToArray(obj) {
     return arr;
 }
 
+function getUserSelect() {
+    var userSelect = document.getElementById("ssw-user-role-select");
+    return userSelect;
+}
+
+function getSiteTypeTxt() {
+    var siteTypeTxt = document.getElementById("ssw-site-type");
+    return siteTypeTxt;
+}
+
+function getSiteCategoryTxt() {
+    var siteCategoryTxt = document.getElementById("ssw-site-category");
+    return siteCategoryTxt;
+}
 function loadSelectFromArray(selectBox, srcArray) {
     selectBox.options.length = 0;
     if(srcArray.length>0) {
@@ -76,8 +90,9 @@ function findPreviousSelection(selectBoxId) {
         console.log(this.value);
     }).change(function() {
         // Update userSelect based on the new selection
-        if(selectBoxId == 'ssw-user-role-select') {
-            updateUserRole(previous, 'ssw-user-role-select', 'ssw-site-type', 'ssw-site-category');
+        var userSelect = getUserSelect();
+        if(selectBoxId == userSelect.id) {
+            updateUserRole(previous);
         }
         previous = this.value;
     });
@@ -85,9 +100,9 @@ function findPreviousSelection(selectBoxId) {
 
 function loadOptionsPage() {
     // add the values to userSelect by default on page load
-    var userSelect = document.getElementById("ssw-user-role-select");
-    var siteTypeTxt = document.getElementById("ssw-site-type");
-    var siteCategoryTxt = document.getElementById("ssw-site-category");
+    var userSelect = getUserSelect();
+    var siteTypeTxt = getSiteTypeTxt();
+    var siteCategoryTxt = getSiteCategoryTxt();
     var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
     var bannedSiteAddress = document.getElementById("ssw-banned-site-address");
     var termsOfUse = document.getElementById("ssw-terms-of-use");
@@ -117,7 +132,7 @@ function loadOptionsPage() {
     loadSelectFromArray(userSelect, siteUserArray);
 
     findPreviousSelection(userSelect.id);    
-    loadUserRole(userSelect, siteTypeTxt, siteCategoryTxt);
+    loadUserRole();
 
     // load remaining options independant values
     siteCategoryNoPrefix.value = site_category_no_prefix.join(",");
@@ -160,7 +175,10 @@ function loadOptionsPage() {
     debugMasterUser.checked = is_master_user;
 }
 
-function loadUserRole(userSelect, siteTypeTxt, siteCategoryTxt) {
+function loadUserRole() {
+    var userSelect = getUserSelect();
+    var siteTypeTxt = getSiteTypeTxt();
+    var siteCategoryTxt = getSiteCategoryTxt();
     if (userSelect.value=='add_new')
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
@@ -181,10 +199,10 @@ function loadUserRole(userSelect, siteTypeTxt, siteCategoryTxt) {
         loadSiteCategory(userSelect.value, siteCategoryTxt);
 }
 
-function updateUserRole(previousUserSelected, userSelectId, siteTypeTxtId, siteCategoryTxtId) {
-    var userSelect = document.getElementById(userSelectId);
-    var siteTypeTxt = document.getElementById(siteTypeTxtId);
-    var siteCategoryTxt = document.getElementById(siteCategoryTxtId);
+function updateUserRole(previousUserSelected) {
+    var userSelect = getUserSelect();
+    var siteTypeTxt = getSiteTypeTxt();
+    var siteCategoryTxt = getSiteCategoryTxt();
 
     jQuery.ajax({
         type: "POST",
@@ -270,7 +288,7 @@ function loadSiteCategory(userSelected, siteCategoryTxt) {
 function addNewSelectValue(inputTxtId, selectBoxId) {
     var inputTxt = document.getElementById(inputTxtId);
     var selectBox = document.getElementById(selectBoxId);
-    var userSelect = document.getElementById("ssw-user-role-select");
+    var userSelect = getUserSelect();
 
     if(selectBox == userSelect) {
         if(inputTxt.value != '') {
@@ -300,7 +318,7 @@ function saveNewUserRole(userSelect, newUserRole) {
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
             userSelect.selectedIndex = siteUserArray.length-1;
-            loadUserRole('ssw-user-role-select', 'ssw-site-type', 'ssw-site-category');
+            loadUserRole();
         },
         error: function(errorThrown) {
             console.log(errorThrown);
@@ -310,7 +328,7 @@ function saveNewUserRole(userSelect, newUserRole) {
 
 function removeSelectValue(selectBoxId) {
     var selectBox = document.getElementById(selectBoxId);
-    var userSelect = document.getElementById("ssw-user-role-select");
+    var userSelect = getUserSelect();
 
     if(selectBox == userSelect) {
         var selectedUser = userSelect.options[userSelect.selectedIndex].value;
@@ -335,7 +353,7 @@ function removeUserRole(userSelect, removeUserRole) {
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
                 userSelect.selectedIndex = siteUserArray.length-1;
-            loadUserRole('ssw-user-role-select', 'ssw-site-type', 'ssw-site-category');
+            loadUserRole();
         },
         error: function(errorThrown) {
             console.log(errorThrown);
