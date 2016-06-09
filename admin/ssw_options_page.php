@@ -35,8 +35,8 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
             <tbody>
                 <tr>
                     <th scope="row"><label for="ssw-user-role-select"><?php echo esc_html('User Role') ?></label></th>
-                    <td>
-                        <select name="ssw-user-role-select" id="ssw-user-role-select" class="regular-text ssw-select" aria-describedby="ssw-user-role-select-desc" onchange="sswUserRole()">
+                    <td>                   
+                        <select name="ssw-user-role-select" id="ssw-user-role-select" class="regular-text ssw-select" aria-describedby="ssw-user-role-select-desc" >
                         </select>
                         <span id="remove-user-role-btn" class="dashicons dashicons-no ssw-remove-btn" onclick="sswRemoveValue('ssw-user-role-select')"></span>
                         <div class="ssw-add-new-input">
