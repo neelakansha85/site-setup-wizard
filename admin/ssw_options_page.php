@@ -5,6 +5,15 @@ wp_enqueue_script( 'ssw-options-js' );
 /* Include CSS for Options Page */
 wp_enqueue_style( 'ssw-style-admin-css' );
 
+if(isset($_POST['ssw-user-role-select'])) { 
+    if ( !empty($_POST['ssw-user-role-select']) && check_admin_referer('submit_ssw_settings')){
+        $this->ssw_save_options();
+        //echo('Inside ssw_options_page Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
+    }else{
+        wp_die('Please use valid forms to send data.'); 
+    }
+}
+
 global $current_blog;
 global $current_site;
 
@@ -13,27 +22,28 @@ $current_site_root_address = $current_blog->domain.$current_site->path;
 
 /* Pass value of $options to ssw-options.js */
 $options = $this->ssw_fetch_config_options();
-wp_localize_script( 'ssw-options-js', 'options', $options );
+wp_localize_script( 'ssw-options-js', 'sswOptions', $options );
 
 ?>
 
 
 <div class="wrap">
     <h1><?php echo esc_html('Site Setup Wizard Settings') ?></h1>
-    <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate">
+    <form method="post" action="<?php $_SERVER['REQUEST_URI'] ?>" novalidate="novalidate" name="ssw-options-page" id="ssw-options-page">
         <h3><?php echo esc_html('Basic Settings') ?></h3>
         <table class="form-table">
             <tbody>
                 <tr>
-                    <th scope="row"><label for="ssw-user-role"><?php echo esc_html('User Role') ?></label></th>
-                    <td>
-                        <select name="ssw-user-role" id="ssw-user-role" class="regular-text ssw-select" aria-describedby="ssw-user-role-desc" onchange="sswUserRole()">
+                    <th scope="row"><label for="ssw-user-role-select"><?php echo esc_html('User Role') ?></label></th>
+                    <td>                   
+                        <select name="ssw-user-role-select" id="ssw-user-role-select" class="regular-text ssw-select" aria-describedby="ssw-user-role-select-desc" >
                         </select>
+                        <span id="remove-user-role-btn" class="dashicons dashicons-no ssw-remove-btn" onclick="removeSelectValue('ssw-user-role-select')"></span>
                         <div class="ssw-add-new-input">
                             <input name="add-user-role-input" type="text" id="add-user-role-input" class="ssw-add-new-text" placeholder="Add New Site User Role" value="">
-                            <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-user-role-input', 'ssw-user-role')"></span>
+                            <span id="add-user-role-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="addNewSelectValue('add-user-role-input', 'ssw-user-role-select')"></span>
                         </div>
-                        <p class="description" id="ssw-user-role-desc">
+                        <p class="description" id="ssw-user-role-select-desc">
                             <?php _e( 'Please Save Options after adding Site Type and Site Category information for a particular user role.'); ?>
                         </p>
                     </td>
@@ -41,16 +51,8 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <tr>
                     <th scope="row"><label for="ssw-site-type"><?php echo esc_html('Site Type') ?></label></th>
                     <td>
-                    <?php /*
+                    
                     <textarea name="ssw-site-type" id="ssw-site-type" aria-describedby="ssw-site-type-desc" cols="60" rows="5"></textarea>
-                    */ ?>
-                    <select name= "ssw-site-type" id="ssw-site-type" class="regular-text ssw-select" aria-describedby="ssw-site-type-desc" multiple="multiple" onchange="sswSiteType()">
-                    </select>
-                    <div class="ssw-add-new-input">
-                        <input name="add-site-type-input" type="text" id="add-site-type-input" class="ssw-add-new-text" placeholder="Add New Site Type" value="">
-                        <span id="add-site-type-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-type-input', 'ssw-site-type')"></span>
-                    </div>
-
                     <p class="description" id="ssw-site-type-desc">
                         <?php _e( 'These Site Type will be displayed for a user to choose from on first page of Site Setup Wizard (Step 1). Separate types by new line.'); ?>
                     </p>
@@ -59,18 +61,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
             <tr>
                 <th scope="row"><label for="ssw-site-category"><?php echo esc_html('Site Category') ?></label></th>
                 <td>
-                    <?php /*
                     <textarea name="ssw-site-category" id="ssw-site-category" aria-describedby="ssw-site-category-desc" cols="60" rows="5"></textarea>
-                    */ ?>
-                    <select name="ssw-site-category" id="ssw-site-category" class="regular-text ssw-select" aria-describedby="ssw-site-category-desc" multiple="multiple" onchange="sswSiteCategory()">
-                    </select>
-
-                    <?php /* Commenting this out for next iteration */ ?>
-                    <div class="ssw-add-new-input">
-                        <input name="add-site-category-input" type="text" id="add-site-category-input" class="ssw-add-new-text" placeholder="Add New Site Category" value="">
-                        <span id="add-site-category-btn" class="dashicons dashicons-plus-alt ssw-add-new-btn" onclick="sswAddNewValue('add-site-category-input', 'ssw-site-category')"></span>
-                    </div>
-                    <?php /* */ ?>
                     <p class="description" id="ssw-site-category-desc">
                         <?php _e( 'These categories will be used as prefixes to the site address (URL). The site url will be '.$current_site_root_address.'&lt;Site Category&gt;-&lt;Site Address&gt;<br/> Separate categories by new line.'); ?>
                     </p>
@@ -81,7 +72,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <td>
                     <input name="ssw-site-category-no-prefix" type="text" id="ssw-site-category-no-prefix" aria-describedby="ssw-site-category-no-prefix-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-site-category-no-prefix-desc">
-                        <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by spaces.'); ?>
+                        <?php _e( 'These categories will not have any prefixes in the site address i.e. blank &lt;Site Category&gt;. Separate names by comma.'); ?>
                     </p>
                 </td>
             </tr>
@@ -90,7 +81,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                 <td>
                     <input name="ssw-banned-site-address" type="text" id="ssw-banned-site-address" aria-describedby="ssw-banned-site-address-desc" class="large-text" value="" size="45" />
                     <p class="description" id="ssw-banned-site-address-desc">
-                        <?php _e( 'Users are not allowed to register these sites. Separate names by spaces.'); ?>
+                        <?php _e( 'Users are not allowed to register these sites. Separate names by comma.'); ?>
                     </p>
                 </td>
             </tr>
@@ -239,8 +230,8 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
                     <th scope="row"><?php echo esc_html('Debug Mode') ?></th>
                     <td>
                         <fieldset>
-                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="enable" /><?php echo esc_html('Enable') ?></label>
-                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="disable" /><?php echo esc_html('Disable') ?></label>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-enable" value="true" /><?php echo esc_html('Enable') ?></label>
+                            <label><input name="ssw-debug-mode" type="radio" id="ssw-debug-mode-disable" value="false" /><?php echo esc_html('Disable') ?></label>
                         </fieldset>
                     </td>
                 </tr>
@@ -256,6 +247,7 @@ wp_localize_script( 'ssw-options-js', 'options', $options );
         <p class="submit">
             <?php wp_nonce_field('submit_ssw_settings'); ?>
             <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes" onclick="saveOptions()">
+            <input type="button" name="default" id="default" class="ssw-options-default button-primary" value="Reset to Default" onclick="setDefaultOptions()">
         </p>
     </form>
 </div>

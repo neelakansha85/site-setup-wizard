@@ -1,10 +1,10 @@
 # Wordpress Site Setup Wizard Plugin
-Allows multiste registered users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdomain multisite install.
+Allows multisite users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdirectory multisite install.
 
 * Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress 
 * Requires at least: 4.0
 * Requires PHP: 5.5
-* Tested up to: 4.4.2
+* Tested up to: 4.5.2
 * Stable tag: master
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,8 +47,7 @@ Check out the Codex for more information about [installing plugins manually](htt
 # Usage
 * Default plugin settings will be configured upon activating the plugin. 
 * To modify plugin settings:
-    * Modify required settings in `nsd-site-setup-wizard/admin/ssw_update_options.php`.
-    * Go to __Network Admin -> Create Site -> Options__ screen and click __Update Plugin Settings__.
+    * Go to __Network Admin -> Create Site -> Options__ screen and click __Save Changes__.
 
 ## License
 The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.

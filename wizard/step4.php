@@ -2,32 +2,31 @@
 
 $step4 = 'features';
 
-echo '
+?>
 <div class="ssw-container">
     <div class="ssw-content">
-        ';
+        <?php
         include(SSW_PLUGIN_DIR.'admin/ssw_cancel_skip_button.php');
-        echo '
+        ?>
         <div class="ssw-header-wrapper">
-         <h3>Features (Step 3)</h3>
-         ';
-         include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
-         echo '
-         <p class="ssw-header-note">'.$plugins_page_txt.'</p>
-     </div>
-     <fieldset class="ssw-fieldset">
-         ';
-         /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
-         wp_nonce_field('step4_action','step4_nonce');
-         echo '
-         <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step2"/>
-         <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step4"/>
-         <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_finish"/>
-         <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
-         <input id="action" name="action" type="hidden" value="ssw_submit_form_next"/>
-         ';
-
-         if ($wpmu_pretty_plugins == true) {
+            <h3><?php _e($steps_name['step4']); ?></h3>
+            <?php
+            include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
+            ?>
+            <p class="ssw-header-note"><?php _e($plugins_page_txt); ?></p>
+        </div>
+        <fieldset class="ssw-fieldset">
+        <?php
+        /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
+        wp_nonce_field('step4_action','step4_nonce');
+        ?>
+        <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step2"/>
+        <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step4"/>
+        <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_finish"/>
+        <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
+        <input id="action" name="action" type="hidden" value="ssw_submit_form_next"/>
+        <?php
+        if ($wpmu_pretty_plugins == true) {
 
             $this->ssw_debug_log('Step4', 'plugins_categories', $plugins_categories);
             $this->ssw_debug_log('Step4', 'plugins_list', $plugins_list);
@@ -39,13 +38,13 @@ echo '
 
             foreach ($plugins_categories as $category_system_name => $category_name) {
                 if ($category_name != $hide_plugin_category) {
-                    echo '
+                ?>
                     <div class="ssw-plugins-categories-col">
                         <div class="ssw-plugins-categories-title">
-                            <h4 class="ssw-h4">'.$category_name.'</h4>
+                            <h4 class="ssw-h4"><?php _e($category_name); ?></h4>
                         </div>
                         <div class="ssw-plugins-list">
-                            ';
+                            <?php
                             foreach($plugins_list as $plugin_path => $plugin_details) {
                                 $this->ssw_debug_log('Step4', 'plugin_details', $plugin_details);
                                 if( isset($plugin_details['Categories']) ) {
@@ -68,10 +67,10 @@ echo '
                                     }
                                 }
                             }
-                            echo '
+                            ?>
                         </div>
                     </div>
-                    ';
+                <?php
                 }
             }
         }
@@ -80,11 +79,13 @@ echo '
                 if(isset($plugin_details['Name'])) {    
                     echo '
                     <div class="ssw-plugins-categories-col">
-                        <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" />'.$plugin_details['Name'].'</div>';
-                    }
+                        <input type="checkbox" name="plugins_to_install_group[]" value="'.$plugin_path.'" /> '.$plugin_details['Name'].'
+                    </div>';
                 }
-            }    
-            echo '
+            }
+        }
+        ?>    
+            
             <div class="ssw-processing ssw-field" id="ssw-site-processing" name="ssw_site_processing">
                 <span id="ssw-site-processing-label" ></span>
             </div>
@@ -94,6 +95,3 @@ echo '
         </fieldset>
     </div>
 </div>
-
-';
-?>

@@ -7,66 +7,80 @@
 
 /* Inserting all default Values */
 $ssw_config_options_nsd = array(
-    'site_address_bucket' => array(
+    'site_type' => array(
+        'student' => array( 
+            'Personal', 
+            'Teaching/Learning/Research', 
+            'Administrative' 
+            ),
+        'employee' => array(
+            /* Sample Data */
+            /*
+            'Personal Site',
+            'Club Site'
+            */
+            )
+        ),
+    'site_user_category' => array(
         'student' => array(
-            'no_category' => 'No Category Selected',
-            'personal' => 'Personal',
-            'teaching_and_learning' => 'Teaching/Learning/Research',
-            'abu_dhabi' => 'Abu Dhabi',
-            'africahouse' => 'Africa House',
-            'apa' => 'Apa',
-            'as' => 'AS',
-            'bursar' => 'Bursar',
-            'campuscable' => 'Campus Cable',
-            'campusmedia' => 'Campus Media',
-            'careerdevelopment' => 'Career Development',
-            'cas' => 'CAS',
-            'ccpr' => 'CCPR',
-            'chinahouse' => 'China House',
-            'clubs' => 'Clubs',
-            'cmep' => 'CMEP',
-            'csals' => 'CSALS',
-            'csgs' => 'CSGS',
-            'cte' => 'CTE',
-            'dental' => 'Dental',
-            'deutscheshaus' => 'Deutscheshaus',
-            'faculty' => 'Faculty',
-            'facultyhousing' => 'Faculty Housing',
-            'fas' => 'FAS',
-            'financialaid' => 'Financial Aid',
-            'financialservices' => 'Financial Services',
-            'gallatin' => 'Gallatin',
-            'giving' => 'Giving',
-            'gls' => 'Global Liberal Studies',
-            'greyart' => 'Greyart',
-            'gsas' => 'GSAS',
-            'hr' => 'Human Resource',
-            'ir' => 'IR',
-            'kimmelcenter' => 'Kimmel Center',
-            'kjc' => 'KJC',
-            'lgbtq' => 'LGBTQ',
-            'library' => 'Library',
-            'ls' => 'Liberal Studies',
-            'nursing' => 'Nursing',
-            'nyutv' => 'NYU TV',
-            'ogca' => 'OGCA',
-            'ogs' => 'OGS',
-            'osp' => 'OSP',
-            'publicaffairs' => 'Public Affairs',
-            'registrar' => 'Registrar',
-            'residentialeducation' => 'Residential Education',
-            'shanghai' => 'Shanghai',
-            'shc' => 'SHC',
-            'socialwork' => 'Social Work',
-            'sps' => 'SPS',
-            'src' => 'SRC',
-            'steinhardt' => 'Steinhardt',
-            'studentaffairs' => 'Student Affairs',
-            'stugov' => 'Stugov',
-            'sustainability' => 'Sustainability',
-            'tisch' => 'Tisch',
-            'tvcenter' => 'TV Center',
-            'tvmedia' => 'TV Media'
+            'No Category Selected',
+            'Personal',
+            'Teaching/Learning/Research',
+            'Abu Dhabi',
+            'Africa House',
+            'Apa',
+            'AS',
+            'Bursar',
+            'Campus Cable',
+            'Campus Media',
+            'Career Development',
+            'CAS',
+            'CCPR',
+            'China House',
+            'Clubs',
+            'CMEP',
+            'CSALS',
+            'CSGS',
+            'CTE',
+            'Dental',
+            'Deutscheshaus',
+            'Faculty',
+            'Faculty Housing',
+            'FAS',
+            'Financial Aid',
+            'Financial Services',
+            'Gallatin',
+            'Giving',
+            'Global Liberal Studies',
+            'Greyart',
+            'GSAS',
+            'Human Resource',
+            'IR',
+            'Kimmel Center',
+            'KJC',
+            'LGBTQ',
+            'Library',
+            'Liberal Studies',
+            'Nursing',
+            'NYU TV',
+            'OGCA',
+            'OGS',
+            'OSP',
+            'Public Affairs',
+            'Registrar',
+            'Residential Education',
+            'Shanghai',
+            'SHC',
+            'Social Work',
+            'SPS',
+            'SRC',
+            'Steinhardt',
+            'Student Affairs',
+            'Stugov',
+            'Sustainability',
+            'Tisch',
+            'TV Center',
+            'TV Media'
             ),
         'employee' => array(
             /* Sample Data */
@@ -79,21 +93,7 @@ $ssw_config_options_nsd = array(
                 )
         ),
     /* Sites with this category selected will not have any prefixes in it's site address */
-    'site_address_bucket_none_value' => array( 'personal', 'no_category', 'teaching_and_learning' ),
-    'site_type' => array(
-        'student' => array(
-            'personal' => 'Personal Site',
-            'teaching_learning_research' => 'Teaching/Learning/Research Site',
-            'administrative' => 'Administrative'
-            ),
-        'employee' => array(
-            /* Sample Data */
-                /*
-                'personal' => 'Personal Site',
-                'clubs' => 'Club Site'
-                */
-                )
-        ),
+    'site_category_no_prefix' => array( 'No Category Selected', 'Personal', 'Teaching/Learning/Research' ),
     'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
     'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
     'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',

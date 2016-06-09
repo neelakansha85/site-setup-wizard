@@ -15,8 +15,7 @@ if( $_POST['ssw_next_stage'] != '' ) {
             $plugins_to_install_group[] = sanitize_text_field( $selected_plugins );
         }
     }
-    /* sanitize_title_for_query sanitizes the value to make it safe for passing in to a SQL query */
-    $next_stage = sanitize_title_for_query( $_POST['ssw_next_stage'] );
+    $next_stage = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw_next_stage']);
     $this->ssw_debug_log('step4_process', 'next_stage', $next_stage);
     
     $serialized_plugins_to_install_group = serialize( $plugins_to_install_group );
