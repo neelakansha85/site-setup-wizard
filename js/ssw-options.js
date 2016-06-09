@@ -2,13 +2,7 @@
 
 /* JS for Site Setup Wizard Options Page */
 
-
-// Create a Array for Site Users in order to process form
-var site_user_category = options.site_user_category;
-var siteUserArray = Object.keys(options.site_user_category);
-var site_type = options.site_type;
-
-// add a default --Select-- value to selectBox
+// add a default --Add New-- value to selectBox
 function addNewSelectOption(selectBox) {
     var opt = document.createElement('option');
     opt.value = 'add_new';
@@ -63,7 +57,6 @@ function findPreviousSelection(selectBoxId) {
     jQuery('#'+selectBoxId).focus(function () {
         // Store the current value on focus, before it changes
         previous = this.value;
-        console.log(this.value);
     }).change(function() {
         // Update userSelect based on the new selection
         var userSelect = getUserSelect();
@@ -106,11 +99,14 @@ function loadOptionsPage(options) {
 
     var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
     
+    // Create a Array for Site Users in order to process form
+    var siteUserArray = Object.keys(options.site_user_category);
+    
     // load values of userSelect from siteUserArray
     loadSelectFromArray(userSelect, siteUserArray);
 
     findPreviousSelection(userSelect.id);    
-    loadUserRole();
+    loadUserRole(options.site_type, options.site_user_category);
 
     // load remaining options independant values
     siteCategoryNoPrefix.value = options.site_category_no_prefix.join(", ");
@@ -153,14 +149,14 @@ function loadOptionsPage(options) {
     debugMasterUser.checked = options.master_user ? options.master_user : false;
 }
 
-function loadUserRole() {
+function loadUserRole(siteType, siteCategory) {
     var userSelect = getUserSelect();
     var siteTypeTxt = getSiteTypeTxt();
     var siteCategoryTxt = getSiteCategoryTxt();
 
     showHideAddNew(userSelect);
-    loadSiteType(userSelect.value, siteTypeTxt);
-    loadSiteCategory(userSelect.value, siteCategoryTxt);
+    loadSiteType(siteType[userSelect.value]);
+    loadSiteCategory(siteCategory[userSelect.value]);
 }
 
 function showHideAddNew(selectBox) {
@@ -203,13 +199,8 @@ function updateUserRole(previousUserSelected) {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            //console.log(new_options);
-            var site_user_category = new_options['site_user_category'];
-            var site_type = new_options['site_type'];
-            console.log('before loadSiteType');
-            loadSiteType(userSelect.value, siteTypeTxt);
-            loadSiteCategory(userSelect.value, siteCategoryTxt);
-            console.log('after loadSiteType');
+            loadSiteType(new_options.site_type[userSelect.value]);
+            loadSiteCategory(new_options.site_user_category[userSelect.value]);
         },
         error: function(errorThrown) {
             console.log(errorThrown);
@@ -218,41 +209,29 @@ function updateUserRole(previousUserSelected) {
     showHideAddNew(userSelect);
 }
 
-function loadSiteType(userSelected, siteTypeTxt) {
-    /**
-     *  Will be used using Select Box for SiteType input
-     */
+function loadSiteType(siteType) {
     // change value of siteTypeSelect based on userSelect value
-    console.log('inside loadSiteType');
-        var siteTypeUser = site_type[userSelected];
-        var siteTypeArray = objToArray(siteTypeUser);
-        console.log(siteTypeTxt);
-        console.log(siteTypeUser);
-        console.log(siteTypeArray);
-        siteTypeTxt.value = '';
-        for(var i=0; i<siteTypeArray.length; i++) {
-            siteTypeTxt.value += siteTypeArray[i];
-            if(i != siteTypeArray.length-1 ) {
-                siteTypeTxt.value += '\n';
-            }
+    var siteTypeTxt = getSiteTypeTxt();
+    var siteTypeArray = objToArray(siteType);
+    siteTypeTxt.value = '';
+    for(var i=0; i<siteTypeArray.length; i++) {
+        siteTypeTxt.value += siteTypeArray[i];
+        if(i != siteTypeArray.length-1 ) {
+            siteTypeTxt.value += '\n';
         }
+    }
 }
-function loadSiteCategory(userSelected, siteCategoryTxt) {
-    /**
-     *  Will be used using Select Box for SiteCategory input
-     */
+function loadSiteCategory(siteCategory) {
     // change value of siteCategorySelect based on userSelect value
-    console.log('inside loadSiteCategory');
-        // change value of siteCategorySelect based on userSelect value
-        var siteUserCategory = site_user_category[userSelected];
-        var siteCategoryArray = objToArray(siteUserCategory);
-        siteCategoryTxt.value = '';
-        for(var i=0; i<siteCategoryArray.length; i++) {
-            siteCategoryTxt.value += siteCategoryArray[i];
-            if(i != siteCategoryArray.length-1 ) {
-                siteCategoryTxt.value += '\n';
-            }
+    var siteCategoryTxt = getSiteCategoryTxt();
+    var siteCategoryArray = objToArray(siteCategory);
+    siteCategoryTxt.value = '';
+    for(var i=0; i<siteCategoryArray.length; i++) {
+        siteCategoryTxt.value += siteCategoryArray[i];
+        if(i != siteCategoryArray.length-1 ) {
+            siteCategoryTxt.value += '\n';
         }
+    }
 }
 
 function addNewSelectValue(inputTxtId, selectBoxId) {
@@ -287,7 +266,7 @@ function saveNewUserRole(userSelect, newUserRole) {
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
             userSelect.selectedIndex = siteUserArray.length-1;
-            loadUserRole();
+            loadUserRole(new_options.site_type, new_options.site_user_category);
         },
         error: function(errorThrown) {
             console.log(errorThrown);
@@ -321,7 +300,7 @@ function removeUserRole(userSelect, removeUserRole) {
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
                 userSelect.selectedIndex = siteUserArray.length-1;
-            loadUserRole();
+            loadUserRole(new_options.site_type, new_options.site_user_category);
         },
         error: function(errorThrown) {
             console.log(errorThrown);
@@ -365,6 +344,6 @@ function saveOptions() {
 }
 
 // Load the values first time when the page loads 
-window.onload = loadOptionsPage(options);
+window.onload = loadOptionsPage(sswOptions);
 
 /* ENDS JS for Site Setup Wizard Options Page */

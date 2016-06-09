@@ -22,7 +22,7 @@ $current_site_root_address = $current_blog->domain.$current_site->path;
 
 /* Pass value of $options to ssw-options.js */
 $options = $this->ssw_fetch_config_options();
-wp_localize_script( 'ssw-options-js', 'options', $options );
+wp_localize_script( 'ssw-options-js', 'sswOptions', $options );
 
 ?>
 
