@@ -99,7 +99,7 @@ function findPreviousSelection(selectBoxId) {
 }
 
 function loadOptionsPage() {
-    // add the values to userSelect by default on page load
+    // initialize all DOM elements
     var userSelect = getUserSelect();
     var siteTypeTxt = getSiteTypeTxt();
     var siteCategoryTxt = getSiteCategoryTxt();
@@ -135,8 +135,8 @@ function loadOptionsPage() {
     loadUserRole();
 
     // load remaining options independant values
-    siteCategoryNoPrefix.value = site_category_no_prefix.join(",");
-    bannedSiteAddress.value = banned_site_address.join(",");
+    siteCategoryNoPrefix.value = site_category_no_prefix.join(", ");
+    bannedSiteAddress.value = banned_site_address.join(", ");
     termsOfUse.innerHTML = terms_of_use;
     pluginsPageTxt.innerHTML = plugins_page_txt;
     privacySelection.checked = is_privacy_selection;
@@ -179,13 +179,23 @@ function loadUserRole() {
     var userSelect = getUserSelect();
     var siteTypeTxt = getSiteTypeTxt();
     var siteCategoryTxt = getSiteCategoryTxt();
-    if (userSelect.value=='add_new')
+
+    showHideAddNew(userSelect);
+    loadSiteType(userSelect.value, siteTypeTxt);
+    loadSiteCategory(userSelect.value, siteCategoryTxt);
+}
+
+function showHideAddNew(selectBox) {
+    var siteTypeTxt = getSiteTypeTxt();
+    var siteCategoryTxt = getSiteCategoryTxt();
+
+    if (selectBox.value=='add_new')
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
         document.getElementById("add-user-role-btn").style.visibility='visible';
         document.getElementById("remove-user-role-btn").style.visibility='hidden';
 
-        // Set remaining select boxes to Add New
+        // Set dependent Textarea to null
         siteTypeTxt.value = '';
         siteCategoryTxt.value = '';
     } 
@@ -195,8 +205,6 @@ function loadUserRole() {
         document.getElementById("add-user-role-btn").style.visibility='hidden';
         document.getElementById("remove-user-role-btn").style.visibility='visible';
     }
-    loadSiteType(userSelect.value, siteTypeTxt);
-        loadSiteCategory(userSelect.value, siteCategoryTxt);
 }
 
 function updateUserRole(previousUserSelected) {
@@ -229,23 +237,7 @@ function updateUserRole(previousUserSelected) {
             console.log(errorThrown);
         }
     });
-
-    if (userSelect.value=='add_new')
-    {
-        document.getElementById("add-user-role-input").style.visibility='visible';
-        document.getElementById("add-user-role-btn").style.visibility='visible';
-        document.getElementById("remove-user-role-btn").style.visibility='hidden';
-
-        // Set remaining select boxes to Add New
-        siteTypeTxt.value = '';
-        siteCategoryTxt.value = '';
-    } 
-    else 
-    {
-        document.getElementById("add-user-role-input").style.visibility='hidden';
-        document.getElementById("add-user-role-btn").style.visibility='hidden';
-        document.getElementById("remove-user-role-btn").style.visibility='visible';
-    }
+    showHideAddNew(userSelect);
 }
 
 function loadSiteType(userSelected, siteTypeTxt) {
