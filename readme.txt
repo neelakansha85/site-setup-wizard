@@ -2,15 +2,15 @@
 Contributors: neelakansha85
 Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress
 Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 1.2.5
+Tested up to: 4.5.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2V9UGN9L5547U&lc=US&item_name=Site%20Setup%20Wizard%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 
 == Description ==
 
-Allows multiste registered users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdomain multisite install.
+Allows multisite registered users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdirectory multisite install.
 
 == Installation ==
 
@@ -57,11 +57,11 @@ Yes, it allows Super admins to add a set of banned site addresses/names from the
 
 = Will it send a notification to users after creating a site? =
 
-Yes, it sends a notification email to the site admin after completing the Site Setup Wizard. It also displays user with the new site url on the last page of the wizard.
+Yes, it sends a notification email to the site admin after completing the Site Setup Wizard. It also displays user new site url on the last page of the wizard.
 
 = Does this plugin support resuming of wizard process? =
 
-Yes, this plugin has an ability to resume every time from the wizard step where you left off last until you finish it completely or click cancel on the top right side.
+Yes, this plugin has an ability to resume wizard steps from where you left last until you finish it completely or click cancel on the top right side.
 
 = Does it provide analytics of sites created using this plugin? =
 
@@ -84,7 +84,11 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more documentation for now.
 
 == Changelog ==
-= 1.2.6 =
+= 1.3 =
+* Added a functional Options Page to modify settings.
+* Added a Reset to Default button for resetting all options.
+* Optimized code or security and performance.
+* Added custom sanitize functions for sanitizing user inputs.
 * Fixed finding plugins default data when Pretty Plugins is enabled but does not override Plugin's default name.
 * Changed site_type value in options from associate array to array.
 
