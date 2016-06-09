@@ -116,6 +116,13 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 			if (isset($_POST['ssw_ajax_nonce']) && wp_verify_nonce($_POST['ssw_ajax_nonce'], 'ssw_ajax_action') ){
 				include(SSW_PLUGIN_DIR.'admin/ssw_default_options.php');
 				$this->ssw_update_config_options($ssw_config_options_nsd);
+				$options = $this->ssw_fetch_config_options();
+				/* Return new config options to reload Options Page */
+				header('Content-Type: application/json');
+				echo json_encode($options);
+
+	      /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
+				wp_die();
 			}
 		}
 

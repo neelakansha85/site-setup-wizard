@@ -350,9 +350,7 @@ function setDefaultOptions() {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            // loadOptionsPage(new_options);
-            location.reload(true);
-
+             loadOptionsPage(new_options);
         },
         error: function(errorThrown) {
             console.log(errorThrown);
