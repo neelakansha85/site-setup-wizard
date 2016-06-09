@@ -128,7 +128,7 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 
 				if(isset($_POST['new_user_role'])) {
 					$new_user_role = $this->ssw_sanitize_option('sanitize_field', $_POST['new_user_role']);
-					if($new_user_role != '') {
+					if($new_user_role != '' && $new_user_role != 'add_new') {
 						if(!isset($site_user_category[$new_user_role])) {
 							$site_user_category[$new_user_role] = array();
 						}
@@ -158,8 +158,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 						if(isset($site_type[$update_user_role])) {
 							$ssw_site_type_array = $this->ssw_sanitize_option('to_array_on_eol', $_POST['site_type']);
 							$site_type[$update_user_role] = $ssw_site_type_array;
-							echo 'Site Type: ';
-							print_r($ssw_site_type_array);
+							//echo 'Site Type: ';
+							//print_r($ssw_site_type_array);
 						}
 					}
 				}
