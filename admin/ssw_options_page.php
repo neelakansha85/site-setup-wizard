@@ -5,8 +5,8 @@ wp_enqueue_script( 'ssw-options-js' );
 /* Include CSS for Options Page */
 wp_enqueue_style( 'ssw-style-admin-css' );
 
-if(isset($_POST['ssw-user-roles'])) { 
-    if ( !empty($_POST['ssw-user-roles']) && check_admin_referer('submit_ssw_settings')){
+if(isset($_POST['ssw-user-role-select'])) { 
+    if ( !empty($_POST['ssw-user-role-select']) && check_admin_referer('submit_ssw_settings')){
         $this->ssw_save_options();
         //echo('Inside ssw_options_page Debug Mode: '.$_POST['ssw-debug-mode'].'<br/>');
     }else{

@@ -52,14 +52,19 @@ function objToArray(obj) {
 
 function loadSelectFromArray(selectBox, srcArray) {
     selectBox.options.length = 0;
-    for( var i=0; i<srcArray.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = srcArray[i];
-        opt.innerHTML = srcArray[i];
-        selectBox.appendChild(opt);
-        if(i == srcArray.length-1) {
-            addNewSelectOption(selectBox);
+    if(srcArray.length>0) {
+        for( var i=0; i<srcArray.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = srcArray[i];
+            opt.innerHTML = srcArray[i];
+            selectBox.appendChild(opt);
+            if(i == srcArray.length-1) {
+                addNewSelectOption(selectBox);
+            }
         }
+    }
+    else {
+        addNewSelectOption(selectBox);
     }
 }
 
@@ -156,11 +161,6 @@ function loadOptionsPage() {
 }
 
 function loadUserRole(userSelect, siteTypeTxt, siteCategoryTxt) {
-    /*
-    var userSelect = document.getElementById(userSelectId);
-    var siteTypeTxt = document.getElementById(siteTypeTxtId);
-    var siteCategoryTxt = document.getElementById(siteCategoryTxtId);
-    */
     if (userSelect.value=='add_new')
     {
         document.getElementById("add-user-role-input").style.visibility='visible';
@@ -176,10 +176,9 @@ function loadUserRole(userSelect, siteTypeTxt, siteCategoryTxt) {
         document.getElementById("add-user-role-input").style.visibility='hidden';
         document.getElementById("add-user-role-btn").style.visibility='hidden';
         document.getElementById("remove-user-role-btn").style.visibility='visible';
-
-        loadSiteType(userSelect.value, siteTypeTxt);
-        loadSiteCategory(userSelect.value, siteCategoryTxt);
     }
+    loadSiteType(userSelect.value, siteTypeTxt);
+        loadSiteCategory(userSelect.value, siteCategoryTxt);
 }
 
 function updateUserRole(previousUserSelected, userSelectId, siteTypeTxtId, siteCategoryTxtId) {
@@ -335,7 +334,7 @@ function removeUserRole(userSelect, removeUserRole) {
             siteUserArray = Object.keys(site_user_category);
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
-            userSelect.selectedIndex = siteUserArray.length-1;
+                userSelect.selectedIndex = siteUserArray.length-1;
             loadUserRole('ssw-user-role-select', 'ssw-site-type', 'ssw-site-category');
         },
         error: function(errorThrown) {

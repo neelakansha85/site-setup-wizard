@@ -7,6 +7,20 @@
 
 /* Inserting all default Values */
 $ssw_config_options_nsd = array(
+    'site_type' => array(
+        'student' => array( 
+            'Personal', 
+            'Teaching/Learning/Research', 
+            'Administrative' 
+            ),
+        'employee' => array(
+            /* Sample Data */
+            /*
+            'Personal Site',
+            'Club Site'
+            */
+            )
+        ),
     'site_user_category' => array(
         'student' => array(
             'No Category Selected',
@@ -80,20 +94,6 @@ $ssw_config_options_nsd = array(
         ),
     /* Sites with this category selected will not have any prefixes in it's site address */
     'site_category_no_prefix' => array( 'personal', 'no_category', 'teaching_and_learning' ),
-    'site_type' => array(
-        'student' => array( 
-            'Personal', 
-            'Teaching/Learning/Research', 
-            'Administrative' 
-            ),
-        'employee' => array(
-            /* Sample Data */
-            /*
-            'Personal Site',
-            'Club Site'
-            */
-            )
-        ),
     'banned_site_address' => array( 'andrewhamilton', 'andrew_hamilton', 'johnsexton', 'john_sexton', 'nyu', 'wp-admin', 'abusive', 'documentation', 'get-started', 'about-us', 'terms_of_use', 'contact', 'blog', 'create-new-site' , 'create' , 'z' ),
     'terms_of_use' => 'I accept the <a href="http://wp.nyu.edu/terms-of-use" target="_blank">Terms of Use</a>',
     'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="http://www.nyu.edu/servicelink/KB0012644" target="_blank">available plugins here.</a>',
