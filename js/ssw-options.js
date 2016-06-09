@@ -2,35 +2,11 @@
 
 /* JS for Site Setup Wizard Options Page */
 
-var site_user_category = options['site_user_category'];
-var site_category_no_prefix = options['site_category_no_prefix'];
-var banned_site_address = options['banned_site_address'];
-var hide_plugin_category = options['hide_plugin_category'];
-var external_plugins = options['external_plugins'];
-var wpmu_multisite_privacy_plugin = external_plugins['wpmu_multisite_privacy_plugin'] ? external_plugins['wpmu_multisite_privacy_plugin']: false;
-var wpmu_pretty_plugins = external_plugins['wpmu_pretty_plugins'] ? external_plugins['wpmu_pretty_plugins'] : false;
-var wpmu_multisite_theme_manager = external_plugins['wpmu_multisite_theme_manager'] ? external_plugins['wpmu_multisite_theme_manager'] : false;
-var wpmu_new_blog_template = external_plugins['wpmu_new_blog_template'] ? external_plugins['wpmu_new_blog_template'] : false;
-
-var privacy_selection_txt = options['advanced_privacy']['privacy_selection_txt'];
-var private_network_users_txt = options['advanced_privacy']['private_network_users_txt'];
-var private_site_users_txt = options['advanced_privacy']['private_site_users_txt'];
-var private_administrator_txt = options['advanced_privacy']['private_administrator_txt'];
-
-var user_role_mapping = options['user_role_mapping'];
-var site_type = options['site_type'];
-var is_user_role_restriction = options['user_role_restriction'] ? options['user_role_restriction'] : false;
-var ssw_not_available = options['ssw_not_available'];
-var ssw_not_available_txt = options['ssw_not_available_txt'];
-var terms_of_use = options['terms_of_use'];
-var plugins_page_txt = options['plugins_page_txt'];
-var steps_name = options['steps_name'] ? options['steps_name'] : '';
-var is_privacy_selection = options['privacy_selection'] ? options['privacy_selection'] : false;
-var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
-var is_master_user = options['master_user'] ? options['master_user'] : false;
 
 // Create a Array for Site Users in order to process form
-var siteUserArray = Object.keys(site_user_category);
+var site_user_category = options.site_user_category;
+var siteUserArray = Object.keys(options.site_user_category);
+var site_type = options.site_type;
 
 // add a default --Select-- value to selectBox
 function addNewSelectOption(selectBox) {
@@ -98,7 +74,7 @@ function findPreviousSelection(selectBoxId) {
     });
 }
 
-function loadOptionsPage() {
+function loadOptionsPage(options) {
     // initialize all DOM elements
     var userSelect = getUserSelect();
     var siteTypeTxt = getSiteTypeTxt();
@@ -127,6 +103,8 @@ function loadOptionsPage() {
     var debugModeEnable = document.getElementById("ssw-debug-mode-enable");
     var debugModeDisable = document.getElementById("ssw-debug-mode-disable");
     var debugMasterUser = document.getElementById("ssw-debug-master-user");
+
+    var is_debug_mode = options['debug_mode'] ? options['debug_mode'] : false;
     
     // load values of userSelect from siteUserArray
     loadSelectFromArray(userSelect, siteUserArray);
@@ -135,35 +113,35 @@ function loadOptionsPage() {
     loadUserRole();
 
     // load remaining options independant values
-    siteCategoryNoPrefix.value = site_category_no_prefix.join(", ");
-    bannedSiteAddress.value = banned_site_address.join(", ");
-    termsOfUse.innerHTML = terms_of_use;
-    pluginsPageTxt.innerHTML = plugins_page_txt;
-    privacySelection.checked = is_privacy_selection;
+    siteCategoryNoPrefix.value = options.site_category_no_prefix.join(", ");
+    bannedSiteAddress.value = options.banned_site_address.join(", ");
+    termsOfUse.innerHTML = options.terms_of_use;
+    pluginsPageTxt.innerHTML = options.plugins_page_txt;
+    privacySelection.checked = options.privacy_selection ? options.privacy_selection : false;
 
     // Wizard Titles
-    step1.value = steps_name['step1'];
-    step2.value = steps_name['step2'];
-    step3.value = steps_name['step3'];
-    step4.value = steps_name['step4'];
-    stepFinish.value = steps_name['finish'];
+    step1.value = options.steps_name.step1;
+    step2.value = options.steps_name.step2;
+    step3.value = options.steps_name.step3;
+    step4.value = options.steps_name.step4;
+    stepFinish.value = options.steps_name.finish;
     
     // External Plugins
-    wpmuMultisitePrivacyPlugin.checked = wpmu_multisite_privacy_plugin;
-    wpmuPrettyPlugin.checked = wpmu_pretty_plugins;
-    wpmuMultisiteThemeManagerPlugin.checked = wpmu_multisite_theme_manager;
-    wpmuNewBlogTemplatePlugin.checked = wpmu_new_blog_template;
+    wpmuMultisitePrivacyPlugin.checked = options.external_plugins.wpmu_multisite_privacy_plugin ? options.external_plugins.wpmu_multisite_privacy_plugin : false;
+    wpmuPrettyPlugin.checked = options.external_plugins.wpmu_pretty_plugins ? options.external_plugins.wpmu_pretty_plugins : false;
+    wpmuMultisiteThemeManagerPlugin.checked = options.external_plugins.wpmu_multisite_theme_manager ? options.external_plugins.wpmu_multisite_theme_manager : false;
+    wpmuNewBlogTemplatePlugin.checked = options.external_plugins.wpmu_new_blog_template ? options.external_plugins.wpmu_new_blog_template : false;
 
     // Advanced Privacy Options
-    privacySelectionTxt.innerHTML = privacy_selection_txt;
-    privateNetworkUsersTxt.value = private_network_users_txt;
-    privateSiteUsersTxt.value = private_site_users_txt;
-    privateAdministratorTxt.value = private_administrator_txt;
+    privacySelectionTxt.innerHTML = options.advanced_privacy.privacy_selection_txt;
+    privateNetworkUsersTxt.value = options.advanced_privacy.private_network_users_txt;
+    privateSiteUsersTxt.value = options.advanced_privacy.private_site_users_txt;
+    privateAdministratorTxt.value = options.advanced_privacy.private_administrator_txt;
 
     // User Role Restriction
-    userRoleRestriction.checked = is_user_role_restriction;
-    sswNotAvailable.value = ssw_not_available;
-    sswNotAvailableTxt.innerHTML = ssw_not_available_txt;
+    userRoleRestriction.checked = options.user_role_restriction ? options.user_role_restriction : false;
+    sswNotAvailable.value = options.ssw_not_available;
+    sswNotAvailableTxt.innerHTML = options.ssw_not_available_txt;
     
     // Debug Settings
     if(is_debug_mode) {
@@ -172,7 +150,7 @@ function loadOptionsPage() {
     else {
         debugModeDisable.checked = true;
     }
-    debugMasterUser.checked = is_master_user;
+    debugMasterUser.checked = options.master_user ? options.master_user : false;
 }
 
 function loadUserRole() {
@@ -305,8 +283,7 @@ function saveNewUserRole(userSelect, newUserRole) {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            site_user_category = new_options['site_user_category'];
-            siteUserArray = Object.keys(site_user_category);
+            siteUserArray = Object.keys(new_options.site_user_category);
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
             userSelect.selectedIndex = siteUserArray.length-1;
@@ -340,8 +317,7 @@ function removeUserRole(userSelect, removeUserRole) {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            site_user_category = new_options['site_user_category'];
-            siteUserArray = Object.keys(site_user_category);
+            siteUserArray = Object.keys(new_options.site_user_category);
             // load new values of userSelect from siteUserArray
             loadSelectFromArray(userSelect, siteUserArray);
                 userSelect.selectedIndex = siteUserArray.length-1;
@@ -374,7 +350,7 @@ function setDefaultOptions() {
             ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce
         },
         success: function(new_options) {
-            // loadOptionsPage();
+            // loadOptionsPage(new_options);
             location.reload(true);
 
         },
@@ -391,6 +367,6 @@ function saveOptions() {
 }
 
 // Load the values first time when the page loads 
-window.onload = loadOptionsPage();
+window.onload = loadOptionsPage(options);
 
 /* ENDS JS for Site Setup Wizard Options Page */
