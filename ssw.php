@@ -6,7 +6,7 @@ Plugin URI: https://github.com/neelakansha85/nsd-site-setup-wizard
 Author: Neel Shah <neel@nsdesigners.com>
 Author URI: http://neelshah.info
 License: GPL2
-Version: 1.3
+Version: 1.3.1
 */
 
 
@@ -26,7 +26,7 @@ define('SSW_PLUGINS_CATEGORIES_FOR_DATABASE', 'ssw_plugins_categories_nsd');
 define('SSW_PLUGINS_LIST_FOR_DATABASE', 'ssw_plugins_list_nsd');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'ssw_themes_categories_nsd');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'ssw_themes_list_nsd');
-define('SSW_VERSION', '1.3');
+define('SSW_VERSION', '1.3.1');
 
 
 if(!class_exists('Site_Setup_Wizard_NSD')) {
@@ -554,8 +554,8 @@ if(!class_exists('Site_Setup_Wizard_NSD')) {
 		/* SSW Shortcode function */
 		public function ssw_shortcode() {
 			if( !is_user_logged_in()) {
-				$login_url = site_url( 'wp-login.php?redirect_to='.urlencode( network_site_url( $_SERVER['REQUEST_URI'] ) ) ).'&action=shibboleth';
-				echo sprintf( __( 'You must first <a href="%s">log in</a>, and then you can create a new site.' ), $login_url );
+				$login_url = wp_login_url( get_permalink() );
+				echo sprintf( __( 'You must first <a href="%s">log in</a> to create a new site.' ), $login_url );
 			}
 			else {
 				$this->ssw_create_site();
