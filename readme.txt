@@ -84,6 +84,9 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.3.1 =
+* Fixed [Issue #14](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/14).
+
 = 1.3 =
 * Added a functional Options Page to modify settings.
 * Added a Reset to Default button for resetting all options.
