@@ -23,13 +23,13 @@ Allows multisite users to create sites using pre selected features/settings in s
 * It sends a notification to the site admin's once the wizard is completed with the new link to their site.
 * Super admins get analytics of sites created using the plugin including including if users did complete all steps of the wizard or not.
 
-`GitHub Plugin URI: https://github.com/neelakansha85/nsd-site-setup-wizard`
+`GitHub Plugin URI: https://github.com/neelakansha85/site-setup-wizard`
 
 ## Installation
 
 ### Upload
 
-1. Download the latest [tagged archive](https://github.com/neelakansha85/nsd-site-setup-wizard/releases) (choose the "zip" option).
+1. Download the latest [tagged archive](https://github.com/neelakansha85/site-setup-wizard/releases) (choose the "zip" option).
 2. Unzip the archive, rename the folder correctly to `nsd-site-setup-wizard`, then re-zip the file.
 3. Go to the __Network Admin -> Plugins -> Add New__ screen and click the __Upload__ tab.
 4. Upload the zipped archive directly.
@@ -37,7 +37,7 @@ Allows multisite users to create sites using pre selected features/settings in s
 
 ### Manual
 
-1. Download the latest [tagged archive](https://github.com/neelakansha85/nsd-site-setup-wizard/releases) (choose the "zip" option).
+1. Download the latest [tagged archive](https://github.com/neelakansha85/site-setup-wizard/releases) (choose the "zip" option).
 2. Unzip the archive, rename the folder to `nsd-site-setup-wizard`.
 3. Copy the folder to your `/wp-content/plugins/` directory.
 4. Go to the __Network Admin -> Plugins__ screen and click __Network Activate__ below __Site Setup Wizard__.
@@ -65,7 +65,7 @@ A copy of the license is included in the root of the plugin’s directory. The f
 
 ## Issues
 
-Please log issues on the GitHub at https://github.com/neelakansha85/nsd-site-setup-wizard/issues
+Please log issues on the GitHub at https://github.com/neelakansha85/site-setup-wizard/issues
 
 ## ChangeLog
 

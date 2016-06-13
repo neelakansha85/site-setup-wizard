@@ -32,7 +32,7 @@ else {
 }
 
 /* Inserting all new values */
-$new_config_options_nsd = array(
+$new_ssw_config_options = array(
     'site_type' => $site_type,
     'site_user_category' => $site_user_category,
     /* Sites with this category selected will not have any prefixes in it's site address */

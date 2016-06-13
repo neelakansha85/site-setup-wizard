@@ -6,7 +6,7 @@
 */
 
 /* Inserting all default Values */
-$ssw_config_options_nsd = array(
+$ssw_config_options = array(
     'site_type' => array(
         'student' => array( 
             'Personal', 

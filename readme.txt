@@ -81,11 +81,12 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 
 = Where can I find documentation? =
 
-Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more documentation for now.
+Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
 = 1.3.1 =
-* Fixed [Issue #14](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/14).
+* Renamed plugins's main database table to wp_nsd_site_setup_wizard
+* Fixed [Issue #14](https://github.com/neelakansha85/site-setup-wizard/issues/14).
 
 = 1.3 =
 * Added a functional Options Page to modify settings.
@@ -108,16 +109,16 @@ Please check https://github.com/neelakansha85/nsd-site-setup-wizard for more doc
 * Added Options Page to view all options for Site Setup Wizard
 * Added new options to configure in Options Page
 * Removed template_type field from wp_ssw_main_nsd table
-* Fixed [Issue #12](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/12) Restricting users from creating sites with names as site categories
-* Fixed [Issue #1](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/1)
+* Fixed [Issue #12](https://github.com/neelakansha85/site-setup-wizard/issues/12) Restricting users from creating sites with names as site categories
+* Fixed [Issue #1](https://github.com/neelakansha85/site-setup-wizard/issues/1)
 * Fixed PHP Warnings and Notices that used to appear when running this plugin. 
 
 = 1.2.2 = 
 * Added a Readme.md file for documentation
 * Added Debug functionality to plugin where it logs all plugin data to wp-content/uploads/**nsd_ssw_sql_log.log** if **debug_mode** is set true.
 * Changed custom.js to ssw-main.js and variables associated with it for identifying it easily while degubbing.
-* Fixed [Issue #3](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/3) conflicting with Activity Log Plugin.
-* Fixed [Issue #2](https://github.com/neelakansha85/nsd-site-setup-wizard/issues/2) related to Quick Draft and Permalinks not working.
+* Fixed [Issue #3](https://github.com/neelakansha85/site-setup-wizard/issues/3) conflicting with Activity Log Plugin.
+* Fixed [Issue #2](https://github.com/neelakansha85/site-setup-wizard/issues/2) related to Quick Draft and Permalinks not working.
 
 = 1.2.0 =
 * Initialized this plugin with proper documentation and structure for release.
