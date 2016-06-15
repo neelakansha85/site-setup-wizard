@@ -339,8 +339,6 @@ function setDefaultOptions() {
 
 function saveOptions() {
     var theForm = document.forms['ssw-options-page'];
-    addHiddenInput(theForm, 'ssw-user-roles', siteUserArray);
-
 }
 
 // Load the values first time when the page loads 
