@@ -21,9 +21,18 @@ Allows multisite registered users to create sites using pre selected features/se
 
 == Screenshots ==
 
-1. Plugin Essential Settings Page
-2. Select Features Page in the wizard
-3. Options Page
+1. Select Site Type
+2. Essential Settings for creating a site
+3. Select Features/Plugins available to activate on your site
+4. Select Features/Plugins based on categorization from WPMU Pretty Plugins
+5. Finish page for wizard displaying site url
+6. Basic settings available in Site Setup Wizard
+7. Advanced settings available in Site Setup Wizard
+8. More settings available in Site Setup Wizard
+9. Analytics page for metrics collection
+
+== Upgrade Notice ==
+
 
 == Frequently Asked Questions ==
 
