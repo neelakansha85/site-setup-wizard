@@ -63,6 +63,7 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 			add_action( 'admin_notices', array( $this, 'ssw_admin_errors' ) );
 			add_action( 'plugins_loaded', array( $this, 'ssw_find_plugins' ) );
 			add_action( 'admin_init', array($this, 'ssw_export_options') );
+			add_action( 'admin_init', array($this, 'ssw_import_options') );
 			
 			/* Include Javascripts and CSS for SSW Plugin on the backend */
 			add_action( 'admin_enqueue_scripts', array( $this, 'ssw_admin_scripts' ) );
@@ -78,7 +79,6 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 			add_action( 'wp_ajax_ssw_check_admin_email_exists', array( $this, 'ssw_check_admin_email_exists'));
 			add_action( 'wp_ajax_ssw_set_default_options', array( $this, 'ssw_set_default_options' ) );
 			add_action( 'wp_ajax_ssw_save_options', array( $this, 'ssw_save_options' ) );
-			// add_action( 'wp_ajax_ssw_update_config_options', array( $this, 'ssw_update_config_options'));
 
 			/* Add ajax request handlers for all buttons of wizard for frontend section */
 			add_action( 'wp_ajax_nopriv_ssw_submit_form_cancel', array( $this, 'ssw_create_site' ) );
@@ -128,41 +128,53 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 		}
 		/**
 		 * Export current config options to download as JSON file
+		 *
+		 * @since 1.4
+		 * @return JSON Attachment if function is called from Options Page
 		 */
 		function ssw_export_options() {
-			//if(empty($_POST['ssw_action']) || $_POST['ssw_action'] == 'export_options')
-			//	return;
-			if(!wp_verify_nonce($_POST['ssw_export_nonce'], 'ssw_export_nonce'))
-				return;
-			if(!current_user_can('manage_network'))
-				return;
-			$options = get_site_option(SSW_CONFIG_OPTIONS_FOR_DATABASE);
-			ignore_user_abort(true);
+			if(!empty($_POST['ssw_action']) && $_POST['ssw_action'] == 'export_options') {
+				if(!wp_verify_nonce($_POST['ssw_export_nonce'], 'ssw_export_nonce'))
+					return;
+				if(!current_user_can('manage_network'))
+					return;
+				$options = get_site_option(SSW_CONFIG_OPTIONS_FOR_DATABASE);
+				ignore_user_abort(true);
 
-			nocache_headers();
-			header('Content-Type: application/json; charset=utf-8');
-			header('Content-Disposition: attachment; filename=ssw-settings-export-'.date('m-d-Y').'.json');
-			header("Expires: 0");
-
-			print_r($options);
-			exit;
+				nocache_headers();
+				header('Content-Type: application/json; charset=utf-8');
+				header('Content-Disposition: attachment; filename=ssw-settings-export-'.date('m-d-Y').'.json');
+				header("Expires: 0");
+				echo json_encode($options);
+				exit;
+			}
 		}
 
 		/**
 		 * Import config options from previous JSON backup file
+		 *
+		 * @since 1.4
+		 * @return redirects to Options page after updating new imported options
 		 */
 		function ssw_import_options() {
-			if(!wp_verify_nonce($_POST['ssw_import_nonce'], 'ssw_import_nonce'))
-				return;
-			if(!current_user_can('manage_network'))
-				return;
-			$extension = end(explode('.', $_FILES['import_file']['name']));
-			if($extension != 'json') {
-				wp_die(__('Please upload a valid .json file'));
-			}
-			$import_file = $_FILES['import_file']['tmp_name'];
-			if(empty($import_file)) {
-				wp_die(__('Please upload a file to import settings'));
+			if(!empty($_POST['ssw_action']) && $_POST['ssw_action'] == 'import_options') {
+				if(!wp_verify_nonce($_POST['ssw_import_nonce'], 'ssw_import_nonce'))
+					return;
+				if(!current_user_can('manage_network'))
+					return;
+				$extension = end(explode('.', $_FILES['import_file']['name']));
+				if($extension != 'json') {
+					wp_die(__('Please upload a valid .json file'));
+				}
+				$import_file = $_FILES['import_file']['tmp_name'];
+				if(empty($import_file)) {
+					wp_die(__('Please upload a file to import settings'));
+				}
+				$new_options = json_decode(file_get_contents($import_file), true);
+				$this->ssw_update_config_options($new_options);
+
+				wp_safe_redirect(network_admin_url('admin.php?page='.SSW_OPTIONS_PAGE_SLUG));
+				exit;
 			}
 		}
 

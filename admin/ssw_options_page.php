@@ -16,15 +16,6 @@ if(isset($_POST['ssw-user-role-select'])) {
         wp_die('Please use valid forms to send data.'); 
     }
 }
-/*
-else if(isset($_POST['ssw_action']) && $_POST['ssw_action'] == 'export_options') {
-    $this->ssw_export_options();
-}
-*/
-else if(isset($_POST['ssw_action']) && $_POST['ssw_action'] == 'import_options') {
-    //$this->ssw_import_options();
-}
-//    $this->ssw_export_options();
 
 global $current_blog;
 global $current_site;
