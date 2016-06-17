@@ -1,5 +1,8 @@
 <?php
 
+//create action for ssw_options_page_loaded
+do_action('ssw_options_page_loaded');
+
 /* Include the Javascripts for the ssw plugin while trying to create a site */
 wp_enqueue_script( 'ssw-options-js' );
 /* Include CSS for Options Page */
@@ -247,7 +250,54 @@ wp_localize_script( 'ssw-options-js', 'sswOptions', $options );
         <p class="submit">
             <?php wp_nonce_field('submit_ssw_settings'); ?>
             <input type="submit" name="submit" id="submit" class="ssw-options-submit button-primary" value="Save Changes" onclick="saveOptions()">
-            <input type="button" name="default" id="default" class="ssw-options-default button-primary" value="Reset to Default" onclick="setDefaultOptions()">
         </p>
     </form>
+
+    <h3><?php echo esc_html('Export and Import') ?></h3>
+    <form method="post">
+        <table class="form-table">
+            <tbody>
+                <th scope="row"><label for="ssw-export-options"><?php _e('Export'); ?></label></th>
+                <td>
+                    <input type="hidden" name="ssw_action" value="export_options" />
+                    <?php wp_nonce_field('ssw_export_nonce', 'ssw_export_nonce'); ?>
+                    <?php submit_button( __('Download Export File'), 'secondary', 'submit', false); ?>
+                    <p class="description" id="ssw-export-options-desc">
+                        <?php _e( 'Export Site Setup Wizard settings as a .json file. This file can be used as a backup for your current settings.'); ?>
+                    </p>
+                </td>
+            </tbody>
+        </table>
+    </form>
+    <form method="post" enctype="multipart/form-data">
+        <table class="form-table">
+            <tbody>
+                <th scope="row"><label for="ssw-import-options"><?php _e('Import'); ?></label></th>
+                <td>
+                    <input type="hidden" name="ssw_action" value="import_options" />
+                    <input type="file" name="import_file"/>
+                    <div class="ssw-import-options-button">
+                    <?php wp_nonce_field('ssw_import_nonce', 'ssw_import_nonce'); ?>
+                    <?php submit_button( __('Import Settings'), 'secondary', 'submit', false); ?>
+                    </div>
+                    <p class="description" id="ssw-import-options-desc">
+                        <?php _e( 'Import Site Setup Wizard configuration settings from a .json file.'); ?>
+                    </p>
+                </td>
+            </tbody>
+        </table>
+    </form>
+    <table class="form-table">
+        <tbody>
+            <th scope="row"><label for="ssw-set-default-settings"><?php _e('Reset'); ?></label></th>
+            <td>
+                <input type="hidden" name="ssw_action" value="set_default_settings" />
+                <?php wp_nonce_field('ssw_set_default_nonce', 'ssw_set_default_nonce'); ?>
+                <input type="button" name="default" id="default" class="ssw-options-default button-secondary" value="Reset all settings" onclick="setDefaultOptions()">
+                <p class="description" id="ssw-set-default-settings-desc">
+                    <?php _e( 'Reset all settings to their default.'); ?>
+                </p>
+            </td>
+        </tbody>
+    </table>
 </div>
