@@ -33,6 +33,8 @@ Allows multisite registered users to create sites using pre selected features/se
 
 == Upgrade Notice ==
 
+= 1.4 =
+This version changes the value for default settings.
 
 == Frequently Asked Questions ==
 
@@ -93,6 +95,13 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.4 = 
+* Added new Export/Import settings functionality.
+* Updated default settings value for releasing in Wordpress.org.
+* Updated readme.txt with new screenshots for plugin.
+* Fixed [Issue #25](https://github.com/neelakansha85/site-setup-wizard/issues/25).
+* Fixed PHP Notice issue for undefined ssw-user-roles.
+
 = 1.3.1 =
 * Renamed plugins's main database table to wp_nsd_site_setup_wizard
 * Fixed [Issue #14](https://github.com/neelakansha85/site-setup-wizard/issues/14).
