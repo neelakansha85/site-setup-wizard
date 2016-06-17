@@ -130,7 +130,7 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 		 * Export current config options to download as JSON file
 		 *
 		 * @since 1.4
-		 * @return JSON Attachment if function is called from Options Page
+		 * @return string JSON object as attachment if function is called from Options Page
 		 */
 		function ssw_export_options() {
 			if(!empty($_POST['ssw_action']) && $_POST['ssw_action'] == 'export_options') {
@@ -154,7 +154,7 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 		 * Import config options from previous JSON backup file
 		 *
 		 * @since 1.4
-		 * @return redirects to Options page after updating new imported options
+		 * @return void redirects to Options page after updating new imported options
 		 */
 		function ssw_import_options() {
 			if(!empty($_POST['ssw_action']) && $_POST['ssw_action'] == 'import_options') {
