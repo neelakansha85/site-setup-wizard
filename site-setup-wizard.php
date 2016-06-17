@@ -62,6 +62,7 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 			/* Display all errors as admin message if occured */
 			add_action( 'admin_notices', array( $this, 'ssw_admin_errors' ) );
 			add_action( 'plugins_loaded', array( $this, 'ssw_find_plugins' ) );
+			add_action( 'admin_init', array($this, 'ssw_export_options') );
 			
 			/* Include Javascripts and CSS for SSW Plugin on the backend */
 			add_action( 'admin_enqueue_scripts', array( $this, 'ssw_admin_scripts' ) );
@@ -123,6 +124,45 @@ if(!class_exists('NSD_Site_Setup_Wizard')) {
 
 	      /* Extra wp_die is to stop ajax call from appending extra 0 to the resposne */
 				wp_die();
+			}
+		}
+		/**
+		 * Export current config options to download as JSON file
+		 */
+		function ssw_export_options() {
+			//if(empty($_POST['ssw_action']) || $_POST['ssw_action'] == 'export_options')
+			//	return;
+			if(!wp_verify_nonce($_POST['ssw_export_nonce'], 'ssw_export_nonce'))
+				return;
+			if(!current_user_can('manage_network'))
+				return;
+			$options = get_site_option(SSW_CONFIG_OPTIONS_FOR_DATABASE);
+			ignore_user_abort(true);
+
+			nocache_headers();
+			header('Content-Type: application/json; charset=utf-8');
+			header('Content-Disposition: attachment; filename=ssw-settings-export-'.date('m-d-Y').'.json');
+			header("Expires: 0");
+
+			print_r($options);
+			exit;
+		}
+
+		/**
+		 * Import config options from previous JSON backup file
+		 */
+		function ssw_import_options() {
+			if(!wp_verify_nonce($_POST['ssw_import_nonce'], 'ssw_import_nonce'))
+				return;
+			if(!current_user_can('manage_network'))
+				return;
+			$extension = end(explode('.', $_FILES['import_file']['name']));
+			if($extension != 'json') {
+				wp_die(__('Please upload a valid .json file'));
+			}
+			$import_file = $_FILES['import_file']['tmp_name'];
+			if(empty($import_file)) {
+				wp_die(__('Please upload a file to import settings'));
 			}
 		}
 
