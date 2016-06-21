@@ -1,6 +1,6 @@
 === Site Setup Wizard ===
 Contributors: shahneel
-Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress
+Tags: plugin, multisite, site, setup, wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
 Tested up to: 4.5.2
 Stable tag: trunk
@@ -8,9 +8,46 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2V9UGN9L5547U&lc=US&item_name=Site%20Setup%20Wizard%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 
+Offers registered users flexibility to select site type, plugins, privacy and many other settings before creating a new site.
+
 == Description ==
 
-Allows multisite registered users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdirectory multisite install.
+Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in http://yourdomain.com/hr-benefits **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently.   
+
+Requires a wordpress multisite subdirectory install. 
+
+= Users can select from the below options =
+* Site Type
+* Site Category
+* Site Address
+* Site Title
+* Site Privacy
+* Site Admin's Email (Only allows for a registered user's email address to be used while creating a site)
+* Plugins to be activated
+
+= Current Features =
+* Displays different Site Type and Site Category based on user role mapping if activated
+* Integrates with WPMU Multisite Privacy Plugin to provide advanced privacy options
+* Integrates with WPMU Pretty Plugins to provide categorization of Plugins
+* Updates plugins list on installing/removing a plugin
+* Bans users except super admins to be able to create sites with a site category as the complete site url
+* Allows super admins to set banned site urls
+* Allows super admins to create categories which do not need to have any prefixes in site address
+* Provides Analytics of total sites created using this plugin based on the site type
+* Allows users to resume Site Setup Wizard steps if they did not finish all steps
+* Sends notification to users after creating a site
+* Allows super admins to configure text displayed on all steps
+* Allows super admins to decide whether user should be able to select privacy or not
+
+= Coming soon =
+* Allow users to select Theme.
+* A step in wizard to Add New Users to their site while creating it
+* Option to map wordpress user role with Site Setup Wizard user roles
+* Integrate with WPMU New Blog Template
+* Register option with Site Type value on per site basis to display modify wordpress admin area based on their site type
+
+Please check Screenshots for more information.
+
 
 == Installation ==
 
@@ -45,6 +82,18 @@ Yes, it does display wordpress privacy options for user to select while creating
 = Does it support WPMU Multisite Privacy Plugin? = 
 
 Yes, it supports and has an option for you to enable under External Plugins, if you want to take advantage of WPMU Multisite Privacy Plugin.
+
+= How do I change the default Yellow color of buttons? =
+
+Please use CSS property to change button color for now. You can use class **.ssw-start-btn** and **.ssw-front-btn** to change color of button on all steps. For example using below CSS you can set all buttons to black color:
+`.ssw-front-btn {
+  background-color: #000 !important;
+}
+
+.ssw-start-btn {
+  background-color: #000 !important;
+}`
+
 
 = Does this plugin display a list of all available plugins to select while creating a site? = 
 
