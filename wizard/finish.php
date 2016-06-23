@@ -38,12 +38,17 @@ $finish = 'finish';
 
         /* Check if there is there is any valid data for the site to be updated */
         if($new_blog_id != '') {
-        /* This check is to avoid creating new site if it is sub domain multisite installation 
-        since it is not supported currently with the path variable */
+        /* 
+        This check is to avoid creating new site if it is sub domain multisite 
+        installation since it is not supported currently with the path variable
+         */
         if( !is_subdomain_install() ) {
 
             /* Activate all plugins selected during the wizard for new site */
-            /* Switching to newly created blog to activate plugins using wordpress sandbox activation method */
+            /* 
+            Switching to newly created blog to activate plugins 
+            using wordpress sandbox activation method
+             */
             switch_to_blog($new_blog_id);
             if($plugins_list != '') {
                 foreach ($plugins_list as $key => $value){
@@ -55,13 +60,14 @@ $finish = 'finish';
             }
 
             echo '<p>Your new site is now ready at <a href="'.$path.'">http://'.$current_blog->domain.$path.'</a></p>';
-            /* Delete current site's details from the SSW_MAIN_TABLE to allow user create another site now. */
-            //        $wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id );
 
             $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET wizard_completed = '.true.' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
             $this->ssw_debug_log('step4_process', 'ssw_process_query', $ssw_process_query);
             
-            /* Update current site's details as wizard_completed = true from the SSW_MAIN_TABLE to allow user create another site now. */
+            /* 
+            Update current site's details as wizard_completed = true from 
+            the SSW_MAIN_TABLE to allow user create another site now.
+             */
             $result = $wpdb->query( $ssw_process_query );
             $this->ssw_log_sql_error($wpdb->last_error);
             

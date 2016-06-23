@@ -1,9 +1,7 @@
 <?php
 
-/**
-* Update SSW options when fetched from Options Page 
-*/
-/* Get current options for use where required */
+// Update SSW options when fetched from Options Page 
+// Get current options for use where required
 $options = $this->ssw_fetch_config_options();
 
 $ssw_user_role_selected = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw-user-role-select']);
@@ -58,10 +56,10 @@ $new_ssw_config_options = array(
         'private_administrator_txt' => $this->ssw_sanitize_option('allow_html', $_POST['private-administrator-txt'])
         ),
     'hide_plugin_category' => 'other',
-    /**
-    * All contents will be displayed to users based on the mapped user roles
-    * if user_role_restriction is set true 
-    */
+    /*
+    All contents will be displayed to users based on the mapped user roles
+    if user_role_restriction is set true 
+     */
     'user_role_restriction' => isset($_POST['user-role-restriction']) ? true : false,
     'user_role_mapping' => array(
         'student' => 'subscriber',
@@ -75,6 +73,6 @@ $new_ssw_config_options = array(
     'master_user' => isset($_POST['ssw-debug-master-user']) ? true : false
     );
 
-/* END Default Content for config options  */
+/* END Default Content for config options */
 
 ?>

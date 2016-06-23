@@ -2,10 +2,10 @@
 
 /* Insert from Step 1 data into SSW's table in database */
 if( $_POST['ssw_next_stage'] != '' ) {
-		/**
-		* sanitize_title_for_query sanitizes the value to make it safe
-		* for passing in to a SQL query
-		*/
+		/*
+		sanitize_title_for_query sanitizes the value to make it safe
+		for passing in to a SQL query
+		 */
 		$site_type = $this->ssw_sanitize_option('sanitize_text_field', $_POST['ssw_site_type']);
 		$this->ssw_debug_log('step1_process','site_type',$site_type);
 

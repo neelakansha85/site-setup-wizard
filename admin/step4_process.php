@@ -1,14 +1,14 @@
 <?php
 
-/**
-* Insert from Step 4 data into SSW's table in database 
-*/
+/*
+Insert from Step 4 data into SSW's table in database 
+ */
 if( $_POST['ssw_next_stage'] != '' ) {    
     $plugins_to_install_group = array();
-    /** 
-    * plugins_to_install_group contains path of the plugins files to be 
-    * activated hence requires capital letters and forward slashes to be allowed 
-    */
+    /* 
+    plugins_to_install_group contains path of the plugins files to be 
+    activated hence requires capital letters and forward slashes to be allowed 
+     */
     if ( $_POST['plugins_to_install_group'] != '' ) {
         foreach ( $_POST['plugins_to_install_group'] as $selected_plugins )
         {

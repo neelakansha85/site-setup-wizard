@@ -1,11 +1,11 @@
 <?php
 
-/**
- * Default Content for config options - Imp for initializing 
- * all the options for SSW Plugin 
+/* 
+Default Content for config options - Imp for
+initializing all the options for SSW Plugin
  */
 
-// Inserting all default Values */
+// Inserting all default Values
 $ssw_config_options = array(
     'site_type' => array(
         'student' => array( 
@@ -64,10 +64,10 @@ $ssw_config_options = array(
         'private_administrator_txt' => 'Limited to only site administrators who you specify in the "Users" settings (good for preparing a site before making it visible to a larger audience)'
         ),
     'hide_plugin_category' => 'other',
-    /**
-    * All contents will be displayed to users based on the mapped user roles
-    * if user_role_restriction is set true 
-    */
+    /* 
+    All contents will be displayed to users based on the 
+    mapped user roles if user_role_restriction is set true 
+     */
     'user_role_restriction' => false,
     'user_role_mapping' => array(
         'student' => 'subscriber',
