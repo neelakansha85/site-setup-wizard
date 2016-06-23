@@ -321,11 +321,7 @@ if(!class_exists('Site_Setup_Wizard')) {
 
 		/*	Deactivate the plugin	*/
 		public function ssw_deactivate() {
-			/* Simply deactivate the plugin for now */			
-			/** 
-			* Also deleting the Options saved for the plugin since still need to fix a way to update * the options from Options Page
-			*/
-			delete_site_option( SSW_CONFIG_OPTIONS_FOR_DATABASE );
+			/* Simply deactivate the plugin for now */
 			
 		} 
 		
