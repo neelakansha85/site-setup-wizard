@@ -144,6 +144,10 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.4.1 = 
+* Fixed an issue where users custom settings would get deleted on deactivating plugin.
+* Added upgrade functionality for updating database when required. [Issue #26](https://github.com/neelakansha85/site-setup-wizard/issues/26)
+
 = 1.4 = 
 * Added new Export/Import settings functionality.
 * Updated default settings value for releasing in Wordpress.org.

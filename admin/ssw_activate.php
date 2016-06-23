@@ -4,7 +4,7 @@ global $wpdb;
 /* Table name to store on going site setup wizard */
 $ssw_main_table = $this->ssw_main_table();
 
-$sql_ssw_main_table = 'CREATE TABLE IF NOT EXISTS '.$ssw_main_table.' (
+$sql_ssw_main_table = "CREATE TABLE ".$ssw_main_table." (
 	ssw_id bigint(20) AUTO_INCREMENT,
 	user_id bigint(20) NOT NULL,
 	admin_email varchar(100) DEFAULT NULL,
@@ -22,13 +22,13 @@ $sql_ssw_main_table = 'CREATE TABLE IF NOT EXISTS '.$ssw_main_table.' (
 	site_type varchar(100) DEFAULT NULL,
 	blog_id bigint(20) DEFAULT NULL,
 	ssw_main_meta longtext DEFAULT NULL,
-	site_created boolean NOT NULL DEFAULT "0",
-	wizard_completed boolean NOT NULL DEFAULT "0",
-	starttime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
-	endtime timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
-	PRIMARY KEY ID (ssw_id)
+	site_created boolean NOT NULL DEFAULT '0',
+	wizard_completed boolean NOT NULL DEFAULT '0',
+	starttime timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+	endtime timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+	PRIMARY KEY  (ssw_id)
 	)
-;';
+;";
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $sql_ssw_main_table );

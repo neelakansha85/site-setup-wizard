@@ -6,7 +6,7 @@ initializing all the options for SSW Plugin
  */
 
 // Inserting all default Values
-$ssw_config_options = array(
+$ssw_default_options = array(
     'site_type' => array(
         'student' => array( 
             'Personal', 
