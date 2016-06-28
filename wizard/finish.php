@@ -58,6 +58,11 @@ $finish = 'finish';
                     }
                 }
             }
+            // Apply selected theme
+            $theme = wp_get_theme($theme);
+            if($theme->exists()) {
+                switch_theme($theme->get_stylesheet());
+            }
 
             echo '<p>Your new site is now ready at <a href="'.$path.'">http://'.$current_blog->domain.$path.'</a></p>';
 

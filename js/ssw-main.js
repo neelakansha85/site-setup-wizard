@@ -12,7 +12,7 @@ var ssw_site_address_banned_msg = "This site address is not allowed. Please ente
 var ssw_site_address_other_error_msg = "There was an issue checking availability of this site address, please try again.";
 var ssw_site_title_invalid_msg = "Site title can not be left blank."; 
 var ssw_site_privacy_error_msg = "Please select a site privacy option.";
-var ssw_theme_error_msg = "Please select a theme.";
+var ssw_theme_error_msg = "Please select a theme to proceed.";
 var ssw_terms_error_msg = "Please accept the Terms of Use to proceed.";
 var ssw_site_processing_step2_msg = "<h6>Please wait while your site address is being reserved. It may take few minutes.</h6>";
 var ssw_site_processing_step4_msg = "<h6>Please wait while your site is being prepared. It may take few minutes to do so based on the number of features you selected to activate for your site.</h6>";
@@ -146,7 +146,7 @@ function ssw_js_validate_form(step) {
         }
     }
     else if(step == 'ssw_step3') {
-        if (ssw_validate_theme()) {
+        if (ssw_js_validate_theme()) {
             return true;
         }
     }
