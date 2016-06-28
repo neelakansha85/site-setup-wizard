@@ -1,6 +1,5 @@
 <?php
 
-$can_skip = true;
 $step3 = 'themes';
 
 ?> 
@@ -26,25 +25,26 @@ $step3 = 'themes';
             <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
             <input id="action" name="action" type="hidden" value="ssw_submit_form_next"/>
             
-            <div class="ssw-field">
+            <div class="ssw-field">    
+            <?php
+            $themes = wp_get_themes();
+            foreach ( $themes as $theme ) {
+                if($theme->is_allowed()) {
+            ?>
                 <div class="ssw-themes-categories-col ssw-themes-border">
                     <div class="ssw-element" id="width-double">
                         <div class="ssw-element-inner">
-                            <a href="../wp-content/themes/twentyfourteen/screenshot.png" alt="screenshot of theme" class="thumb-wrap  mfp-image">
-                                <img src="../wp-content/themes/twentyfourteen/screenshot.png">
-                                <div class="thumb-overlay" style="display: none;">
-                                    <div class="thumb-bg" style="background-color:rgba(255,165,0,0.85);">
-                                        <div class="thumb-title fadeInLeft animated">Twenty Fourteen (theme name)</div>
-                                    </div>
-                                </div>
-                            </a>
+                            <img src="<?php echo esc_url($theme->get_screenshot()); ?>">
                         </div>
                     </div>
                     <div class="ssw-themes-radio">
-                        <input type="radio" name="select_theme" value="Twenty Fourteen (theme name)" tabindex="5">Select this theme
+                        <input type="radio" name="select_theme" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" tabindex="5">&nbsp;<?php echo $theme->title; ?>
                     </div>
                 </div>
-            </div>
+            <?php
+                }
+            }
+            ?>
             <div class="ssw-proceed ssw-field">
                 <input name="ssw_back_btn" class="ssw-primary-btn ssw-back-btn" type="button" onclick="ssw_js_submit_form_previous()" value="Back" tabindex="10" />
                 <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Next" onclick="ssw_js_submit_form_next()" tabindex="11" />
