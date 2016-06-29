@@ -2,7 +2,7 @@
 Contributors: shahneel
 Tags: plugin, multisite, site, setup, wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
-Tested up to: 4.5.2
+Tested up to: 4.5.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Offers registered users flexibility to select site type, plugins, privacy and ma
 
 == Description ==
 
-Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in http://yourdomain.com/hr-benefits **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently.   
+Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in http://yourdomain.com/hr-benefits **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently.   
 
 Requires a wordpress multisite subdirectory install. 
 
@@ -23,10 +23,12 @@ Requires a wordpress multisite subdirectory install.
 * Site Title
 * Site Privacy
 * Site Admin's Email (Only allows for a registered user's email address to be used while creating a site)
+* Theme for your new site (Only displays Network Activated Themes)
 * Plugins to be activated
 
 = Current Features =
 * Displays different Site Type and Site Category based on user role mapping if activated
+* Allows users to select theme for their new site
 * Integrates with WPMU Multisite Privacy Plugin to provide advanced privacy options
 * Integrates with WPMU Pretty Plugins to provide categorization of Plugins
 * Updates plugins list on installing/removing a plugin
@@ -39,8 +41,8 @@ Requires a wordpress multisite subdirectory install.
 * Allows super admins to configure text displayed on all steps
 * Allows super admins to decide whether user should be able to select privacy or not
 
+
 = Coming soon =
-* Allow users to select Theme.
 * A step in wizard to Add New Users to their site while creating it
 * Option to map wordpress user role with Site Setup Wizard user roles
 * Integrate with WPMU New Blog Template
@@ -69,6 +71,12 @@ Please check Screenshots for more information.
 9. Analytics page for metrics collection
 
 == Upgrade Notice ==
+
+= 1.5 =
+Provides a new step for selecting Themes to users.
+
+= 1.4.1= 
+Fixed a critical issue related to your custom settings. Please update now.
 
 = 1.4 =
 This version changes the value for default settings.
@@ -144,6 +152,10 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5 =
+* Added new Select Theme step after Essential Settings. [Issue #21](https://github.com/neelakansha85/site-setup-wizard/issues/21)
+* Store Site Type option for newly created sites. [Issue #20](https://github.com/neelakansha85/site-setup-wizard/issues/20)
+
 = 1.4.1 = 
 * Fixed an issue where users custom settings would get deleted on deactivating plugin.
 * Added upgrade functionality for updating database when required. [Issue #26](https://github.com/neelakansha85/site-setup-wizard/issues/26)
