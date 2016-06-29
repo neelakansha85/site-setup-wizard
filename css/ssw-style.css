@@ -233,11 +233,20 @@
 	margin:0;
 }
 
+/* Themes Page */
+.ssw-themes-screenshot {
+    display: block;
+}
+.ssw-themes-screenshot:hover {
+	background-color: #000;
+	opacity: 0.4;
+}
+
 /* Style for making columns for themes when WPMU Pretty Plugins is activated with plugin categories */
 .ssw-themes-categories-col {
 	display:inline-block;
 	vertical-align: top;
-	
+	margin-bottom: 10px;	
 }
 
 .ssw-themes-radio {
@@ -247,6 +256,10 @@
 
 .ssw-themes-radio .ssw-input {
 	width:auto;
+}
+
+.ssw-themes-categories-col input[type="radio"]:checked + img {
+	border: 4px solid orange;
 }
 
 .ssw-themes-border {

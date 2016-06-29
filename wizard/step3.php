@@ -26,32 +26,32 @@ $step3 = 'themes';
             <input id="action" name="action" type="hidden" value="ssw_submit_form_next"/>
             
             <div class="ssw-field">    
-            <?php
-            $themes = wp_get_themes();
-            foreach ( $themes as $theme ) {
-                if($theme->is_allowed()) {
-            ?>
-                <div class="ssw-themes-categories-col ssw-themes-border">
-                    <div class="ssw-element" id="width-double">
-                        <div class="ssw-element-inner">
-                            <img src="<?php echo esc_url($theme->get_screenshot()); ?>">
-                        </div>
+                <?php
+                $themes = wp_get_themes();
+                foreach ( $themes as $theme ) {
+                    if($theme->is_allowed()) {
+                ?>
+                    <div class="ssw-themes-categories-col">
+                        <label for="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>">
+                            <img class="ssw-themes-screenshot" src="<?php echo esc_url($theme->get_screenshot()); ?>">
+                            <div class="ssw-themes-radio">
+                                <input type="radio" name="select_theme" id="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" tabindex="5">
+                                <span class="ssw-themes-title"><?php echo $theme->title; ?></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="ssw-themes-radio">
-                        <input type="radio" name="select_theme" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" tabindex="5">&nbsp;<?php echo $theme->title; ?>
-                    </div>
-                </div>
-            <?php
+                <?php
+                    }
                 }
-            }
-            ?>
-            <div class="ssw-error ssw-field" id="ssw-themes-error" name="ssw-themes-error">
-                <label class="ssw-site-title-error-field-spacing ssw-label">&nbsp;</label>
-                <span id="ssw-themes-error-label" class="ssw-span"></span>
+                ?>
+                <div class="ssw-error ssw-field" id="ssw-themes-error" name="ssw-themes-error">
+                    <label class="ssw-site-title-error-field-spacing ssw-label">&nbsp;</label>
+                    <span id="ssw-themes-error-label" class="ssw-span"></span>
+                </div>
+                <div class="ssw-proceed ssw-field">
+                    <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Next" onclick="ssw_js_submit_form_next()" tabindex="11" />
+                </div>
             </div>
-            <div class="ssw-proceed ssw-field">
-                <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Next" onclick="ssw_js_submit_form_next()" tabindex="11" />
-            </div> 
         </fieldset>
     </div>
 </div>

@@ -58,7 +58,7 @@
 	.ssw-themes-categories-col {
 		width:90%;
 		text-align:left;
-	}	
+	}
 	.ssw-site-address-error-field-spacing {
 		display:none;
 	}
@@ -83,7 +83,6 @@
 		margin: 10px auto;
 		text-align:left;
 	}
-
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
@@ -110,18 +109,23 @@
 		width:30%;
 		margin-right:2.7%;
 	}
-
-	.ssw-themes-categories-col {
-		width:30%;
-		margin-right:2.7%;
-	}	
-
 	.ssw-field .ssw-primary-btn {
 		width:154px;
 	}
 
 }
-
+@media (min-width: 768px) and (max-width: 1024px) {
+	.ssw-themes-categories-col {
+		width:45%;
+		margin-right:2.7%;
+	}
+}
 @media (max-width: 782px) {
 	
+}
+@media (min-width: 1024px) {
+	.ssw-themes-categories-col {
+		width:30%;
+		margin-right:2.7%;
+	}
 }
