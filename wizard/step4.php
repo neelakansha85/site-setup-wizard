@@ -20,7 +20,7 @@ $step4 = 'features';
         /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
         wp_nonce_field('step4_action','step4_nonce');
         ?>
-        <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step2"/>
+        <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step3"/>
         <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step4"/>
         <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_finish"/>
         <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
@@ -90,6 +90,7 @@ $step4 = 'features';
                 <span id="ssw-site-processing-label" ></span>
             </div>
             <div class="ssw-proceed ssw-field">
+                <input name="ssw_back_btn" class="ssw-primary-btn ssw-back-btn" type="button" onclick="ssw_js_submit_form_previous()" value="Back" tabindex="10" />
                 <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Finish" onclick="ssw_js_submit_form_next()" tabindex="11" />
             </div> 
         </fieldset>

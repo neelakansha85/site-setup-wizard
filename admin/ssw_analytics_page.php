@@ -40,21 +40,4 @@ foreach( $results2 as $obj ) {
     }
 }
 
-echo '<br/><br/>';
-
-$theme = 'twentythirteen';
-$theme = wp_get_theme($theme);
-print_r($theme);
-echo '<br/><br/>';
-var_dump($theme->exists());
-echo '<br/><br/>';
-var_dump($theme->get_stylesheet());
-
-            if($theme->exists()) {
-                switch_theme($theme->get_stylesheet());
-            }
-
-
-echo '</p>';
-
 ?>

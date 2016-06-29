@@ -50,7 +50,6 @@ $step3 = 'themes';
                 <span id="ssw-themes-error-label" class="ssw-span"></span>
             </div>
             <div class="ssw-proceed ssw-field">
-                <input name="ssw_back_btn" class="ssw-primary-btn ssw-back-btn" type="button" onclick="ssw_js_submit_form_previous()" value="Back" tabindex="10" />
                 <input name="ssw_next_btn" class="ssw-primary-btn ssw-front-btn" type="button" value="Next" onclick="ssw_js_submit_form_next()" tabindex="11" />
             </div> 
         </fieldset>
