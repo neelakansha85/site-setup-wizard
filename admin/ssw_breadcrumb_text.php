@@ -10,12 +10,10 @@ if(isset($step2)) {
 	echo 'class="sww-breadcrumb-selected"';
 }
 echo '>'.$steps_name['step2'].'</span> -> <span ';
-/*
 if(isset($step3)) {
 	echo 'class="sww-breadcrumb-selected"';
 }
 echo '>'.$steps_name['step3'].'</span> -> <span ';
-*/
 if(isset($step4)) {
 	echo 'class="sww-breadcrumb-selected"';
 }

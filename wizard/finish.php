@@ -13,7 +13,6 @@ $finish = 'finish';
         </div>
         <fieldset class="ssw-fieldset">        
         <?php
-        /* Wordpress Security function wp_nonce to avoid execution of same function/object multiple times */
         wp_nonce_field('finish_action','finish_nonce');
         ?>
         <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step4"/>
@@ -21,7 +20,6 @@ $finish = 'finish';
         <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step1"/>
         <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
         <?php
-        /* Fetch all data from the SSW Plugins's Main Table for current user to start creating site for him */
         $results = $wpdb->get_results( 
             'SELECT blog_id, theme, plugins_list, admin_email, admin_user_id, path, title, site_type FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.'
             and site_created = true and wizard_completed = false'
@@ -37,65 +35,60 @@ $finish = 'finish';
             $site_type = $obj->site_type;
         }
 
-        /* Check if there is there is any valid data for the site to be updated */
+        // Check if there is there is any valid data for the site to be updated */
         if($new_blog_id != '') {
-        /* 
-        This check is to avoid creating new site if it is sub domain multisite 
-        installation since it is not supported currently with the path variable
-         */
-        if( !is_subdomain_install() ) {
-
-            /* Activate all plugins selected during the wizard for new site */
-            /* 
-            Switching to newly created blog to activate plugins 
-            using wordpress sandbox activation method
-             */
-            switch_to_blog($new_blog_id);
-            if($plugins_list != '') {
-                foreach ($plugins_list as $key => $value){
-                    $plugin_acivation = activate_plugin($value);
-                    if( is_wp_error( $plugin_acivation ) ) {
-                        echo '<br/>'.$value.' plugin failed to activate.';
+             
+            // This check is to avoid creating new site if it is sub domain multisite 
+            // installation since it is not supported currently with the path variable
+            if( !is_subdomain_install() ) {
+                // Activate all plugins selected during the wizard for new site
+                switch_to_blog($new_blog_id);
+                if($plugins_list != '') {
+                    foreach ($plugins_list as $key => $value){
+                        $plugin_acivation = activate_plugin($value);
+                        if( is_wp_error( $plugin_acivation ) ) {
+                            echo '<br/>'.$value.' plugin failed to activate.';
+                        }
                     }
                 }
+                // Apply selected theme
+                $theme = wp_get_theme($theme);
+                if($theme->exists()) {
+                    switch_theme($theme->get_stylesheet());
+                }
+
+                // Add new option for Site Type 
+                update_option(SSW_SITE_TYPE_KEY, $site_type);
+
+                // Restore to original blog it came from before switch_to_blog()
+                restore_current_blog();
+
+                echo '<p>Your new site is now ready at <a href="'.$path.'">http://'.$current_blog->domain.$path.'</a></p>';
+
+                $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET wizard_completed = '.true.' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
+                $this->ssw_debug_log('step4_process', 'ssw_process_query', $ssw_process_query);
+                
+                // Update current site's details as wizard_completed = true from 
+                // the SSW_MAIN_TABLE to allow user create another site now.
+                
+                $result = $wpdb->query( $ssw_process_query );
+                $this->ssw_log_sql_error($wpdb->last_error);
+
+                // Send notifications for the newly created site
+                include(SSW_PLUGIN_DIR.'admin/user_notification.php');
             }
-
-            // Add new option for Site Type 
-            update_option(SSW_SITE_TYPE_KEY, $site_type);
-
-            echo '<p>Your new site is now ready at <a href="'.$path.'">http://'.$current_blog->domain.$path.'</a></p>';
-
-            $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET wizard_completed = '.true.' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
-            $this->ssw_debug_log('step4_process', 'ssw_process_query', $ssw_process_query);
-            
-            /* 
-            Update current site's details as wizard_completed = true from 
-            the SSW_MAIN_TABLE to allow user create another site now.
-             */
-            $result = $wpdb->query( $ssw_process_query );
-            $this->ssw_log_sql_error($wpdb->last_error);
-            
-            $admin_first_name = get_user_meta( $admin_user_id, 'first_name', true );
-            $admin_last_name = get_user_meta( $admin_user_id, 'last_name', true );
-            $blog_details = get_blog_details($new_blog_id);
-
-            /* Send notifications for the newly created site */
-            include(SSW_PLUGIN_DIR.'admin/user_notification.php');
-            /* Restore to original blog it came from before you switched to new blog site to update it's features */
-            restore_current_blog();
+            else {
+                echo '<p>This plugin supports only sub directory wordpress install. Please change your installation to sub directory installation.</p>';
+            }
         }
         else {
-            echo '<p>This plugin supports only sub directory wordpress install. Please change your installation to sub directory installation.</p>';
+            echo '
+                <p>You don\'t seem to have any site created for adding features to it. Please create a new site first.</p>
+                <p>If you think you have reached this page in error, please click 
+                <a href="#" onclick="ssw_js_submit_form_cancel()" style="color:red;" value="Cancel" />Start Over</a> to begin creating sites agaisn!</p>
+            ';
         }
-    }
-    else {
-        echo '
-            <p>You don\'t seem to have any site created for adding features to it. Please create a new site first.</p>
-            <p>If you think you have reached this page in error, please click 
-            <a href="#" onclick="ssw_js_submit_form_cancel()" style="color:red;" value="Cancel" />Start Over</a> to begin creating sites agaisn!</p>
-        ';
-    }
-    ?>    
-    </fieldset>
-</div>
+        ?>    
+        </fieldset>
+    </div>
 </div>

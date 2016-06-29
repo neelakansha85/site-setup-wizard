@@ -21,7 +21,7 @@ $step2 = 'essential_options';
             ?>
             <input id="ssw-previous-stage" name="ssw_previous_stage" type="hidden" value="ssw_step1"/>
             <input id="ssw-current-stage" name="ssw_current_stage" type="hidden" value="ssw_step2"/>
-            <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step4"/>
+            <input id="ssw-next-stage" name="ssw_next_stage" type="hidden" value="ssw_step3"/>
             <input id="is-privacy-selection" name="is_privacy_selection" type="hidden" value="<?php _e((int)$is_privacy_selection); ?>"/>
             <input id="ssw-cancel" name="ssw_cancel" type="hidden" value=""/>
 

@@ -39,6 +39,5 @@ foreach( $results2 as $obj ) {
         echo $site_type.' - '.$number_of_sites.'<br/>';
     }
 }
-echo '</p>';
 
 ?>
