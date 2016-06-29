@@ -6,7 +6,7 @@
  * Author: Neel Shah <neel@nsdesigners.com>
  * Author URI: http://neelshah.info
  * License: GPL2
- * Version: 1.5
+ * Version: 1.5.1
  */
 
 define('SSW_PLUGIN_URL', plugin_dir_url( __FILE__ ));
@@ -26,7 +26,7 @@ define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'nsd_ssw_themes_categories');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'nsd_ssw_themes_list');
 define('SSW_SITE_TYPE_KEY', 'nsd_ssw_site_type');
 define('SSW_VERSION_KEY', 'nsd_ssw_version');
-define('SSW_VERSION_NUM', '1.5');
+define('SSW_VERSION_NUM', '1.5.1');
 
 
 if(!class_exists('Site_Setup_Wizard')) {
@@ -994,6 +994,8 @@ if(!class_exists('Site_Setup_Wizard')) {
 					if ( isset( $_POST['step2_nonce'] ) && wp_verify_nonce($_POST['step2_nonce'], 'step2_action') ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step2_process.php');
+						/* You can include this file at any step during which you want to create new site */
+						include(SSW_PLUGIN_DIR.'admin/create_new_site.php');
 					}
 					include(SSW_PLUGIN_DIR.'wizard/step3.php');
 				}
@@ -1003,14 +1005,12 @@ if(!class_exists('Site_Setup_Wizard')) {
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step2_process.php');
 						/* Create Actual new site based on information given */
-						/* You can include this file at any step before which you want to create new site*/
+						/* You can include this file at any step during which you want to create new site */
 						include(SSW_PLUGIN_DIR.'admin/create_new_site.php');
 					}
 					else if ( isset( $_POST['step3_nonce'] ) && wp_verify_nonce($_POST['step3_nonce'], 'step3_action' ) ){
 						/* update fields in the database only if POST values come from previous step */
 						include(SSW_PLUGIN_DIR.'admin/step3_process.php');
-						/* You can include this file at any step before which you want to create new site*/
-						include(SSW_PLUGIN_DIR.'admin/create_new_site.php');
 					}
 					include(SSW_PLUGIN_DIR.'wizard/step4.php');
 				}

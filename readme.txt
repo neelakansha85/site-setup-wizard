@@ -62,15 +62,19 @@ Please check Screenshots for more information.
 
 1. Select Site Type
 2. Essential Settings for creating a site
-3. Select Features/Plugins available to activate on your site
-4. Select Features/Plugins based on categorization from WPMU Pretty Plugins
-5. Finish page for wizard displaying site url
-6. Basic settings available in Site Setup Wizard
-7. Advanced settings available in Site Setup Wizard
-8. More settings available in Site Setup Wizard
-9. Analytics page for metrics collection
+3. Select Theme for your site
+4. Select Features/Plugins available to activate on your site
+5. Select Features/Plugins based on categorization from WPMU Pretty Plugins
+6. Finish page for wizard displaying site url
+7. Basic settings available in Site Setup Wizard
+8. Advanced settings available in Site Setup Wizard
+9. More settings available in Site Setup Wizard
+10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+Bug fixes.
 
 = 1.5 =
 Provides a new step for selecting Themes to users.
@@ -152,6 +156,9 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5.1 =
+* Fixes error message being displayed on Features page while returning from Themes page using Back button.
+
 = 1.5 =
 * Added new Select Theme step after Essential Settings. [Issue #21](https://github.com/neelakansha85/site-setup-wizard/issues/21)
 * Store Site Type option for newly created sites. [Issue #20](https://github.com/neelakansha85/site-setup-wizard/issues/20)
