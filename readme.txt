@@ -40,16 +40,14 @@ Requires a wordpress multisite subdirectory install.
 * Sends notification to users after creating a site
 * Allows super admins to configure text displayed on all steps
 * Allows super admins to decide whether user should be able to select privacy or not
-
+* Registers option 'nsd_ssw_site_type' with Site Type value for every site created
 
 = Coming soon =
 * A step in wizard to Add New Users to their site while creating it
 * Option to map wordpress user role with Site Setup Wizard user roles
 * Integrate with WPMU New Blog Template
-* Register option with Site Type value on per site basis to display modify wordpress admin area based on their site type
 
 Please check Screenshots for more information.
-
 
 == Installation ==
 
