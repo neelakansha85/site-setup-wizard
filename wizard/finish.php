@@ -23,7 +23,7 @@ $finish = 'finish';
         <?php
         /* Fetch all data from the SSW Plugins's Main Table for current user to start creating site for him */
         $results = $wpdb->get_results( 
-            'SELECT blog_id, theme, plugins_list, admin_email, admin_user_id, path, title FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.'
+            'SELECT blog_id, theme, plugins_list, admin_email, admin_user_id, path, title, site_type FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.'
             and site_created = true and wizard_completed = false'
             );
         foreach( $results as $obj ) {
@@ -34,6 +34,7 @@ $finish = 'finish';
             $admin_user_id = $obj->admin_user_id;
             $path = $obj->path;
             $title = $obj->title;
+            $site_type = $obj->site_type;
         }
 
         /* Check if there is there is any valid data for the site to be updated */
@@ -58,6 +59,9 @@ $finish = 'finish';
                     }
                 }
             }
+
+            // Add new option for Site Type 
+            update_option(SSW_SITE_TYPE_KEY, $site_type);
 
             echo '<p>Your new site is now ready at <a href="'.$path.'">http://'.$current_blog->domain.$path.'</a></p>';
 
