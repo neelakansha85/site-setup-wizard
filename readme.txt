@@ -1,6 +1,6 @@
 === Site Setup Wizard ===
 Contributors: shahneel
-Tags: plugin, multisite, site, setup, wizard, site registration, site creation, create site, wp-signup
+Tags: plugin, multisite, site setup wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
 Tested up to: 4.5.3
 Stable tag: trunk
@@ -41,10 +41,11 @@ Requires a wordpress multisite subdirectory install.
 * Allows super admins to configure text displayed on all steps
 * Allows super admins to decide whether user should be able to select privacy or not
 * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
+* Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
+* Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
 
 = Coming soon =
 * A step in wizard to Add New Users to their site while creating it
-* Option to map wordpress user role with Site Setup Wizard user roles
 * Integrate with WPMU New Blog Template
 
 Please check Screenshots for more information.
@@ -70,6 +71,9 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+Added new feature. Fixed CSS issue on Theme page in Network Admin dashboard.
 
 = 1.5.1 =
 Bug fixes.
@@ -154,6 +158,10 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5.2 =
+* Added new feature to save admin's user role while creating new site. [Issue #28](https://github.com/neelakansha85/site-setup-wizard/issues/28)
+* Fixes CSS issue for Theme page in Network Admin Dashboard.[Issue #29](https://github.com/neelakansha85/site-setup-wizard/issues/29)
+
 = 1.5.1 =
 * Fixes error message being displayed on Features page while returning from Themes page using Back button.
 

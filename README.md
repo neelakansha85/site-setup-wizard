@@ -1,36 +1,69 @@
-# Wordpress Site Setup Wizard Plugin
-Allows multisite users to create sites using pre selected features/settings in steps. This plugin can be used by placing a shortcode [site_setup_wizard] on any page. This plugin only works with subdirectory multisite install.
+# [Wordpress Site Setup Wizard Plugin](https://wordpress.org/plugins/site-setup-wizard)
+![Banner](http://plugins.svn.wordpress.org/site-setup-wizard/assets/banner-772x250.png)
 
-* Tags: plugin, wordpress, site setup wizard, multisite site registration, site creation, wordpress 
+Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in [http://yourdomain.com/hr-benefits](#) **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently. 
+
+You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-wizard) in [wordpress.org](https://wordpress.org/plugins/site-setup-wizard).
+
+* Tags: wordpress plugin, site setup wizard, multisite, site registration, site creation, create site, wp-signup
 * Requires at least: 4.0
 * Requires PHP: 5.5
-* Tested up to: 4.5.2
+* Tested up to: 4.5.3
 * Stable tag: master
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Features
 
-* This plugin allows users to select following settings before creating a site:
-    * Site Privacy (Also includes WPMU Multisite Privacy settings if enabled).
-    * Site Category (Allows users to select a pre-configured site category if required). (Ex: http://yourdomain.com/category1-mysite)
-    * Plugins to be activated within the site (Works with WPMU Pretty Plugins including their categories if enabled).
-* Super admins can configure banned site names to disallow users from creating specific sites.
-* User's email address is displayed by default  on the page in addition to allowing them to enter another user from the system as an admin for the new site.
-* Users are not allow to use hyphen "-" in a site name since it is used to differentiate between sites and their catgories. 
-* If WPMU Pretty Plugins is not enabled, it will display all the plugins available for site admins to activate.
-* It resumes from where user's left off on returning to the plugin page if they haven't completed all steps of the wizard.
-* It sends a notification to the site admin's once the wizard is completed with the new link to their site.
-* Super admins get analytics of sites created using the plugin including including if users did complete all steps of the wizard or not.
+* Users can select from the below options
+    * Site Type
+    * Site Category
+    * Site Address
+    * Site Title
+    * Site Privacy
+    * Site Admin's Email (Only allows for a registered user's email address to be used while creating a site)
+    * Theme for your new site (Only displays Network Activated Themes)
+    * Plugins to be activated
+
+* Current Features
+    * Displays different Site Type and Site Category based on user role mapping if activated
+    * Allows users to select theme for their new site
+    * Integrates with WPMU Multisite Privacy Plugin to provide advanced privacy options
+    * Integrates with WPMU Pretty Plugins to provide categorization of Plugins
+    * Updates plugins list on installing/removing a plugin
+    * Bans users except super admins to be able to create sites with a site category as the complete site url
+    * Allows super admins to set banned site urls
+    * Allows super admins to create categories which do not need to have any prefixes in site address
+    * Provides Analytics of total sites created using this plugin based on the site type
+    * Allows users to resume Site Setup Wizard steps if they did not finish all steps
+    * Sends notification to users after creating a site
+    * Allows super admins to configure text displayed on all steps
+    * Allows super admins to decide whether user should be able to select privacy or not
+    * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
+    * Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
+    * Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
 
 `GitHub Plugin URI: https://github.com/neelakansha85/site-setup-wizard`
+
+## Screenshots
+
+![Screenshot-1](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-1.png)
+![Screenshot-2](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-2.png)
+![Screenshot-3](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-3.png)
+![Screenshot-4](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-4.png)
+![Screenshot-5](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-5.png)
+![Screenshot-6](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-6.png)
+![Screenshot-7](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-7.png)
+![Screenshot-8](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-8.png)
+![Screenshot-9](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-9.png)
+![Screenshot-10](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-10.png)
 
 ## Installation
 
 ### Upload
 
 1. Download the latest [tagged archive](https://github.com/neelakansha85/site-setup-wizard/releases) (choose the "zip" option).
-2. Unzip the archive, rename the folder correctly to `nsd-site-setup-wizard`, then re-zip the file.
+2. Unzip the archive, rename the folder correctly to `site-setup-wizard`, then re-zip the file.
 3. Go to the __Network Admin -> Plugins -> Add New__ screen and click the __Upload__ tab.
 4. Upload the zipped archive directly.
 5. Go to the Network Admin -> Plugins screen and click __Network Activate__ below __Site Setup Wizard__.
@@ -38,7 +71,7 @@ Allows multisite users to create sites using pre selected features/settings in s
 ### Manual
 
 1. Download the latest [tagged archive](https://github.com/neelakansha85/site-setup-wizard/releases) (choose the "zip" option).
-2. Unzip the archive, rename the folder to `nsd-site-setup-wizard`.
+2. Unzip the archive, rename the folder to `site-setup-wizard`.
 3. Copy the folder to your `/wp-content/plugins/` directory.
 4. Go to the __Network Admin -> Plugins__ screen and click __Network Activate__ below __Site Setup Wizard__.
 
