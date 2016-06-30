@@ -1,5 +1,5 @@
 # [Wordpress Site Setup Wizard Plugin](https://wordpress.org/plugins/site-setup-wizard)
-![Banner](http://plugins.svn.wordpress.org/site-setup-wizard/assets/banner-772x250.png)
+![banner-772x250](https://cloud.githubusercontent.com/assets/6759546/16505621/e3d7bc98-3eeb-11e6-89d5-f5383a698e2e.png)
 
 Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in [http://yourdomain.com/hr-benefits](#) **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently. 
 
@@ -47,16 +47,16 @@ You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-w
 
 ## Screenshots
 
-![Screenshot-1](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-1.png)
-![Screenshot-2](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-2.png)
-![Screenshot-3](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-3.png)
-![Screenshot-4](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-4.png)
-![Screenshot-5](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-5.png)
-![Screenshot-6](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-6.png)
-![Screenshot-7](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-7.png)
-![Screenshot-8](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-8.png)
-![Screenshot-9](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-9.png)
-![Screenshot-10](http://plugins.svn.wordpress.org/site-setup-wizard/assets/screenshot-10.png)
+![screenshot-1](https://cloud.githubusercontent.com/assets/6759546/16505626/e3db310c-3eeb-11e6-836a-53192e66a4b9.png)
+![screenshot-2](https://cloud.githubusercontent.com/assets/6759546/16505625/e3d8e7da-3eeb-11e6-8a5e-7a589ff3e56d.png)
+![screenshot-3](https://cloud.githubusercontent.com/assets/6759546/16505622/e3d8c106-3eeb-11e6-976e-e315051d9d68.png)
+![screenshot-4](https://cloud.githubusercontent.com/assets/6759546/16505623/e3d8f0e0-3eeb-11e6-96be-660cb7c0cbc1.png)
+![screenshot-5](https://cloud.githubusercontent.com/assets/6759546/16505624/e3d8f7a2-3eeb-11e6-8ead-758ff7a92e72.png)
+![screenshot-6](https://cloud.githubusercontent.com/assets/6759546/16505629/e3df64b6-3eeb-11e6-83e6-17e5966d8a98.png)
+![screenshot-7](https://cloud.githubusercontent.com/assets/6759546/16505630/e3e1e57e-3eeb-11e6-8151-db47d3849889.png)
+![screenshot-8](https://cloud.githubusercontent.com/assets/6759546/16505631/e3e22566-3eeb-11e6-85ae-83dacd1b6b51.png)
+![screenshot-9](https://cloud.githubusercontent.com/assets/6759546/16505627/e3ddbd32-3eeb-11e6-90d2-c841a668632f.png)
+![screenshot-10](https://cloud.githubusercontent.com/assets/6759546/16505628/e3df0ec6-3eeb-11e6-840a-44a9b150f7f2.png)
 
 ## Installation
 
