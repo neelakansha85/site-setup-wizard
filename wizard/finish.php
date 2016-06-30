@@ -35,6 +35,11 @@ $finish = 'finish';
             $site_type = $obj->site_type;
         }
 
+        // Get admin's user role on main site
+        switch_to_blog(1);
+        $admin_info = get_userdata($admin_user_id);
+        restore_current_blog();
+
         // Check if there is there is any valid data for the site to be updated */
         if($new_blog_id != '') {
              
@@ -59,6 +64,9 @@ $finish = 'finish';
 
                 // Add new option for Site Type 
                 update_option(SSW_SITE_TYPE_KEY, $site_type);
+
+                //Add new option for saving User Role
+                update_option(SSW_USER_ROLE_KEY, $admin_info->roles);
 
                 // Restore to original blog it came from before switch_to_blog()
                 restore_current_blog();

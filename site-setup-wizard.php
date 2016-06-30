@@ -25,6 +25,7 @@ define('SSW_PLUGINS_LIST_FOR_DATABASE', 'nsd_ssw_plugins_list');
 define('SSW_THEMES_CATEGORIES_FOR_DATABASE', 'nsd_ssw_themes_categories');
 define('SSW_THEMES_LIST_FOR_DATABASE', 'nsd_ssw_themes_list');
 define('SSW_SITE_TYPE_KEY', 'nsd_ssw_site_type');
+define('SSW_USER_ROLE_KEY', 'nsd_ssw_user_role');
 define('SSW_VERSION_KEY', 'nsd_ssw_version');
 define('SSW_VERSION_NUM', '1.5.1');
 
