@@ -236,6 +236,7 @@
 /* Themes Page */
 .ssw-themes-screenshot {
     display: block;
+    max-width: 100%;
 }
 .ssw-themes-screenshot:hover {
 	background-color: #000;
