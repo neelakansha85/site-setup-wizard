@@ -905,8 +905,10 @@ if(!class_exists('Site_Setup_Wizard')) {
 
 			$current_user_id = $current_user->ID;
 			$current_user_email = $current_user->user_email;
+			
 			// Identifing current domain and path on domain where wordpress is running from
 			$current_site_root_address = $current_blog->domain.$current_site->path;
+			
 			// Identifying current user's role to restrict some content based on that
 			$current_user_role_array = $current_user->roles;
 			if(!$current_user_role_array) {
@@ -953,6 +955,7 @@ if(!class_exists('Site_Setup_Wizard')) {
 			$theme_options = $this->ssw_fetch_theme_options();
 			$themes_categories = $theme_options['themes_categories'];
 			$themes_list = $theme_options['themes_list'];
+			
 			// Fetch plugin options to get list of all plugins and their categories
 			$plugin_options = $this->ssw_fetch_plugin_options();
 			$plugins_categories = $plugin_options['plugins_categories'];
@@ -961,10 +964,22 @@ if(!class_exists('Site_Setup_Wizard')) {
 			if ( $current_user_role == $ssw_not_available ) {
 				_e($ssw_not_available_txt);
 			}
+			
 			else {
+				
+				/**
+				 * Apply Filter for performing extra check before loading all steps
+				 *
+				 * @since  1.5.3 
+				 */
+				$ssw_hide_steps = apply_filters('ssw_additional_checks', FALSE);
+
+				if(true === $ssw_hide_steps)
+					return;
+
 				$ssw_main_table = $this->ssw_main_table();
 
-					// Cancel current site setup Wizard Process and restart it
+				// Cancel current site setup Wizard Process and restart it
 				if( isset( $_POST['ssw_cancel'] ) && 'true' === $_POST['ssw_cancel'] )
 				{
 					$wpdb->query( 'DELETE FROM '.$ssw_main_table.' WHERE user_id = '.$current_user_id.' and wizard_completed = false' );
