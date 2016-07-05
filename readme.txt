@@ -42,6 +42,7 @@ Requires a wordpress multisite subdirectory install.
 * Allows super admins to decide whether user should be able to select privacy or not
 * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
 * Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
+* Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin)
 * Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
 
 = Coming soon =
@@ -71,6 +72,8 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+= 1.5.3 =
+Added new feature to allow super admins to perform additional check before displaying all steps to user.
 
 = 1.5.2 =
 Added new feature. Fixed CSS issue on Theme page in Network Admin dashboard.
@@ -158,6 +161,10 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+
+= 1.5.3 =
+* Added new feature to allow super admins to perform additional check before displaying all steps to user using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin. Please refer to [Issue #31](https://github.com/neelakansha85/site-setup-wizard/issues/31) for additional details.
+
 = 1.5.2 =
 * Added new feature to save admin's user role while creating new site. [Issue #28](https://github.com/neelakansha85/site-setup-wizard/issues/28)
 * Fixes CSS issue for Theme page in Network Admin Dashboard.[Issue #29](https://github.com/neelakansha85/site-setup-wizard/issues/29)
