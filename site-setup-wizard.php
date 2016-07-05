@@ -109,12 +109,11 @@ if(!class_exists('Site_Setup_Wizard')) {
 		 * Find Site Setup Wizard Plugin's main table name with wp prefixes
 		 *
 		 * @since  1.0
-		 * @param  constant $tablename takes SSW's main table name
 		 * @return string            value of the main table with proper wordpress prefixes
 		 */
-		public function ssw_main_table( $tablename = SSW_MAIN_TABLE ) {
+		public function ssw_main_table() {
 			global $wpdb;
-			$ssw_main_table = $wpdb->base_prefix.$tablename;
+			$ssw_main_table = $wpdb->base_prefix.SSW_MAIN_TABLE;
 			return $ssw_main_table;
 		}
 
