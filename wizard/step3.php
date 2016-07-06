@@ -29,7 +29,7 @@ $step3 = 'themes';
                 <?php
                 $themes = wp_get_themes();
                 foreach ( $themes as $theme ) {
-                    if($theme->is_allowed()) {
+                    if($theme->is_allowed('network')) {
                 ?>
                     <div class="ssw-themes-categories-col">
                         <label for="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>">
