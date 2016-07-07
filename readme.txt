@@ -72,6 +72,9 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+= 1.5.4 = 
+Fixed a critical issue related to Themes Step. Please update now.
+
 = 1.5.3 =
 Added new feature to allow super admins to perform additional check before displaying all steps to user.
 
@@ -161,6 +164,8 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5.4 =
+* Fixed an issue related to Theme step displaying all network enabled themes. Please refer to [Issue #32](https://github.com/neelakansha85/site-setup-wizard/issues/32) for additional details.
 
 = 1.5.3 =
 * Added new feature to allow super admins to perform additional check before displaying all steps to user using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin. Please refer to [Issue #31](https://github.com/neelakansha85/site-setup-wizard/issues/31) for additional details.
