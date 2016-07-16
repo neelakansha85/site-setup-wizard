@@ -1,7 +1,7 @@
 # [Wordpress Site Setup Wizard Plugin](https://wordpress.org/plugins/site-setup-wizard)
 ![banner-772x250](https://cloud.githubusercontent.com/assets/6759546/16505621/e3d7bc98-3eeb-11e6-89d5-f5383a698e2e.png)
 
-Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using different many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in [http://yourdomain.com/hr-benefits](#) **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently. 
+Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in [http://yourdomain.com/hr-benefits](#) **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently. 
 
 You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-wizard) in [wordpress.org](https://wordpress.org/plugins/site-setup-wizard).
 
