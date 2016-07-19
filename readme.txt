@@ -1,5 +1,5 @@
 === Site Setup Wizard ===
-Contributors: shahneel
+Contributors: shah.neel
 Tags: plugin, multisite, site setup wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
 Tested up to: 4.5.3
@@ -72,6 +72,9 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+= 1.5.5 = 
+Added new feature to allow super admins to hide Features page if required.
+
 = 1.5.4 = 
 Fixed a critical issue related to Themes Step. Please update now.
 
@@ -164,6 +167,9 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5.5 = 
+* Added new feature to allow super admins to hide Features page if required.
+
 = 1.5.4 =
 * Fixed an issue related to Theme step displaying all network enabled themes. Please refer to [Issue #32](https://github.com/neelakansha85/site-setup-wizard/issues/32) for additional details.
 
