@@ -1050,7 +1050,11 @@ if(!class_exists('Site_Setup_Wizard')) {
 				}
 				
 				else if($ssw_next_stage == 'ssw_finish') {
-					if ( isset( $_POST['step4_nonce'] ) && wp_verify_nonce( $_POST['step4_nonce'], 'step4_action' ) ){
+					if ( isset( $_POST['step3_nonce'] ) && wp_verify_nonce($_POST['step3_nonce'], 'step3_action' ) ){
+						include(SSW_PLUGIN_DIR.'admin/step3_process.php');
+
+					}
+					else if ( isset( $_POST['step4_nonce'] ) && wp_verify_nonce( $_POST['step4_nonce'], 'step4_action' ) ){
 						include(SSW_PLUGIN_DIR.'admin/step4_process.php');
 
 					}
