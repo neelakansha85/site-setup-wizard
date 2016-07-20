@@ -511,6 +511,12 @@ if(!class_exists('Site_Setup_Wizard')) {
 
 			// Register all required Javascripts for SSW Plugin with it's wp_register_script hook
 			wp_register_script( 'ssw-main-js', SSW_PLUGIN_URL.'js/ssw-main.js' );
+			
+			// For Analytics Page
+			wp_register_script( 'd3-min-js', 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js' );
+			wp_register_script( 'nv-d3-min-js', SSW_PLUGIN_URL.'vendor/nv.d3/nv.d3.min.js', array('d3-min-js') );
+			wp_register_script( 'ssw-analytics-js', SSW_PLUGIN_URL.'js/ssw-analytics.js' );
+			
 			// Include the Javascripts for the ssw plugin while trying to create a site
 			wp_enqueue_script( 'ssw-main-js' );
 
@@ -528,6 +534,11 @@ if(!class_exists('Site_Setup_Wizard')) {
 			wp_register_style( 'ssw-style-css', SSW_PLUGIN_URL.'css/ssw-style.css' );
 			wp_register_style( 'ssw-style-admin-css', SSW_PLUGIN_URL.'css/ssw-style-admin.css' );
 			wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
+			
+			// For Analytics Page
+			wp_register_style( 'bootstrap-min-css', SSW_PLUGIN_URL.'vendor/bootstrap/css/bootstrap.min.css' );
+			wp_register_style( 'nv-d3-min-css', SSW_PLUGIN_URL.'vendor/nv.d3/nv.d3.min.css' );
+			
 			wp_enqueue_style( 'ssw-style-css' );
 			wp_enqueue_style( 'ssw-media-css' );
 		}
