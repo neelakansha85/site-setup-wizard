@@ -16,7 +16,7 @@ echo '<h3>Site Setup Wizard Analytics</h3>';
 
 /* Fetch count of all sites created so far using Site Setup Wizard based on their cateogory selected */
 $results = $wpdb->get_results( 
-    'SELECT site_type, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE site_created = 1 AND site_type != '' group by site_type'
+    'SELECT site_type, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE site_created = 1 group by site_type'
     );
 
 echo '<h4>Number of Sites created using Site Setup Wizard</h4>';
