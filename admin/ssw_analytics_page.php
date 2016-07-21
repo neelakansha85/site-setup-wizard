@@ -6,41 +6,34 @@ wp_enqueue_script( 'nv-d3-min-js' );
 
 wp_enqueue_style( 'bootstrap-min-css' );
 wp_enqueue_style( 'nv-d3-min-css' );
+wp_enqueue_style( 'ssw-style-admin-css' );
 
 global $wpdb;
 $ssw_main_table = $this->ssw_main_table();
 $options = $this->ssw_fetch_config_options();
 $is_debug_mode = $options['debug_mode'];    
 
-echo '<h3>Site Setup Wizard Analytics</h3>';
+$ssw_analytics = new stdClass();
 
-/* Fetch count of all sites created so far using Site Setup Wizard based on their cateogory selected */
+/* Get count of all sites created based on cateogory selected on Step 1 */
 $results = $wpdb->get_results( 
-    'SELECT site_type, count(*) as number_of_sites FROM '.$ssw_main_table.' WHERE site_created = 1 group by site_type'
+    "SELECT site_type, COUNT(*) as number_of_sites FROM {$ssw_main_table} WHERE site_created = 1 AND site_type <> '' AND site_type IS NOT NULL GROUP BY site_type"
     );
 
-echo '<h4>Number of Sites created using Site Setup Wizard</h4>';
-echo '<p>';
+$ssw_analytics->siteTypeResults = $results;
 
-foreach( $results as $obj ) {
-
-    $site_type = $obj->site_type;
-    $number_of_sites = $obj->number_of_sites;
-    if($site_type!='') {
-        echo $site_type.' - '.$number_of_sites.'<br/>';
-    }
-}
-echo '</p>';
-
-wp_localize_script( 'ssw-analytics-js', 'sswAnalytics', $results );
+wp_localize_script( 'ssw-analytics-js', 'sswAnalytics', $ssw_analytics );
 
 ?>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <svg id="pie-site-type">
-            </svg>
+<div class="wrap">
+    <h1><?php echo esc_html('Site Setup Wizard Analytics') ?></h1>
+    <h4><?php echo esc_html('Sites created based on their Type') ?></h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <svg id="pie-site-type">
+                </svg>
+            </div>
         </div>
     </div>
 </div>

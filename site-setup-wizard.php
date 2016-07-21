@@ -536,7 +536,7 @@ if(!class_exists('Site_Setup_Wizard')) {
 			wp_register_style( 'ssw-media-css', SSW_PLUGIN_URL.'css/ssw-media.css' );
 			
 			// For Analytics Page
-			wp_register_style( 'bootstrap-min-css', SSW_PLUGIN_URL.'lib/bootstrap/css/bootstrap.min.css' );
+			wp_register_style( 'bootstrap-min-css', SSW_PLUGIN_URL.'lib/bootstrap/css/bootstrap.min.css');
 			wp_register_style( 'nv-d3-min-css', SSW_PLUGIN_URL.'lib/nv.d3/nv.d3.min.css' );
 			
 			wp_enqueue_style( 'ssw-style-css' );

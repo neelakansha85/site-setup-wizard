@@ -63,3 +63,15 @@
 }
 
 /* ENDS Media CSS for Options Page */
+
+/* Analytics Page */
+body {
+  background-color: #F1F1F1;
+  font-family: "Open Sans",sans-serif;
+}
+
+#pie-site-type {
+  max-height: 500px;
+}
+
+/* ENDS Analytics Page */

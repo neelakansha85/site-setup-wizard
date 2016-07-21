@@ -4,39 +4,28 @@
 	/**
 	 * Load all graphs after the window is loaded
 	 */
-
-	 $( window ).load(function() {
+	$( window ).load(function() {
 
 		loadGraphs();
-		
+
 		function loadGraphs() {
 
-			var fitScreen = false;
-			var zoom = 1;
-			var height = 350;
-			var width = 350;
-
-			var legend = nv.models.legend();
-			//legend.
-
-			console.log(sswAnalytics);
+			var height = 400;
+			var width = 400;
 
 			nv.addGraph(function() {
 				var chart = nv.models.pieChart()
-				.x(function(d) { return d.site_type })
+				.x(function(d) { return d.site_type})
 				.y(function(d) { return d.number_of_sites })
 				.showTooltipPercent(true)
-						.donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-						.donutRatio(0.20)     //Configure how big you want the donut hole size to be.
-						.width(width)
-						.height(height)
-						.showLabels(true)
-						.labelsOutside(false)
-						.showLegend(true)
-				//.legend(legend)
-				;
+				.width(width)
+				.height(height)
+				.showLabels(true)
+				.labelsOutside(false)
+				.showLegend(true);
+
 				d3.select("#pie-site-type")
-				.datum(sswAnalytics)
+				.datum(sswAnalytics.siteTypeResults)
 				.attr('width', width)
 				.attr('height', height)
 				.attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -47,11 +36,9 @@
 				nv.utils.windowResize(chart.update);
 				return chart;
 			});
-
 		}
 	});
-
-	})( jQuery );
+})( jQuery );
 
 /**
  * Bootstrap Hack For D3 graphs
