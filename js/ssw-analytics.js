@@ -19,36 +19,48 @@
 
 var myData = testData();
 
+var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
+var dateFormat = d3.time.format("%Y-%m-%d");
+
 var allData = d3.nest()
-  .key(function (d) { return d.site_type; })
-  .entries(sswAnalytics.allSitesInfo)
-  ;
+.key(function (d) { return d.site_type; })
+.entries(sswAnalytics.allSitesInfo)
+;
 
-  var type1 = d3.nest()
-  	.key(function (d) { return d.key; })
-  	.sortKeys()
-  	.rollup(function (d) {
-  		return d3.sum(d, function (g) { return 1; });
-  	})
-  	.entries(allData.key)
-  	;
+var type1 = d3.nest()
+.key(function (d) { return dateFormat(parseDate(d.endtime)); })
+.sortKeys()
+.rollup(function (d) {
+	return d3.sum(d, function (g) { return 1; });
+})
+.entries(allData[0].values)
+;
 
+type1.forEach( function (d) {
+	d.x = d.key;
+	d.y = d.values;
+	delete(d.values);
+	delete(d.key);
+})
+
+//myData = type1;
 
 
 function loadAllSitesInfo2() {
 	nv.addGraph(function() {
-        var chart = nv.models.lineWithFocusChart();
-        chart.brushExtent([50,70]);
-        chart.xAxis.tickFormat(d3.format(',f')).axisLabel("Stream - 3,128,.1");
-        chart.x2Axis.tickFormat(d3.format(',f'));
-        chart.yTickFormat(d3.format(',.2f'));
-        chart.useInteractiveGuideline(true);
-        d3.select('#all-sites-info')
-            .datum(myData)
-            .call(chart);
-        nv.utils.windowResize(chart.update);
-        return chart;
-    });
+		var chart = nv.models.lineWithFocusChart();
+		chart.brushExtent([50,70]);
+		chart.xAxis.tickFormat(d3.format(',f')).axisLabel("Stream - 3,128,.1");
+		chart.x2Axis.tickFormat(d3.format(',f'));
+		chart.yTickFormat(d3.format(',.2f'));
+		chart.useInteractiveGuideline(true);
+
+		d3.select('#all-sites-info')
+		.datum(myData)
+		.call(chart);
+		nv.utils.windowResize(chart.update);
+		return chart;
+	});
 }
 
 function testData() {
