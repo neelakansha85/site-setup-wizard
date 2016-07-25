@@ -28,28 +28,34 @@ wp_localize_script( 'ssw-analytics-js', 'sswAnalytics', $ssw_analytics );
 	<h1><?php echo esc_html('Site Setup Wizard Analytics') ?></h1>
 	<div class="container-fluid">
 		<div class="row">
-			<h4><?php echo esc_html('Number of Sites Created') ?></h4>
+			<div class="col-md-12">
+				<h4 id="ssw-a-total-sites"><?php echo esc_html('Total number of sites created = ') ?><span id="ssw-a-total-sites-value"></span></h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h4><?php echo esc_html('Number of Sites Created') ?></h4>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-12">
 				<button type="button" class="btn btn-sm btn-primary" name="Based on Month" value="Based on Month" onclick="loadAllSitesInfo('%b %Y')" > <?php echo esc_html('Based on Month') ?>
 				</button>
 				<button type="button" class="btn btn-sm btn-primary" name="Based on Date" value="Based on Date" onclick="loadAllSitesInfo('%d %b %Y')" > <?php echo esc_html('Based on Date') ?>
 				</button>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-12">
 				<svg id="all-sites-info">
 				</svg>
 			</div>
 		</div>
 		<div class="row top-buffer">
-			<h4><?php echo esc_html('Types of Sites') ?></h4>
 			<div class="col-md-4">
+				<h4><?php echo esc_html('Types of Sites') ?></h4>
 				<svg id="site-type-info">
 				</svg>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<h4 id="ssw-a-total-sites">Total number of sites created = <span id="ssw-a-total-sites-value"></span></h4>
 			</div>
 		</div>
 	</div>

@@ -18,19 +18,16 @@
  *
  * @since 1.5.5
  */
- function loadAllSitesInfo(dateFormat) {
-
- 	if (typeof dateFormat === 'undefined') {
- 		var dateFormat = '%b %Y';
- 	}
-
+ function loadAllSitesInfo(newDateFormat) {
+ 	
+	var dateFormat = newDateFormat || '%b %Y';
  	var parseDate = d3.time.format(dateFormat);
  	var total = 0;
  	var height = 400;
 	//var width = 1100;
 
-	var allSitesInfo = sswAnalytics.allSitesInfo
-	.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
+	var allSitesInfo = sswAnalytics.allSitesInfo || [];
+	allSitesInfo.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
 
 	allSitesInfo = d3.nest()
 	.key(function (d) { return d.site_type; })
@@ -97,8 +94,8 @@
  	var height = 400;
  	var width = 400;
 
- 	var allSitesInfo = sswAnalytics.allSitesInfo
-	.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
+ 	var allSitesInfo = sswAnalytics.allSitesInfo || [];
+	allSitesInfo.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
 
 	var siteTypeInfo = d3.nest()
 	.key(function (d) { return d.site_type; })
