@@ -33,17 +33,22 @@ wp_localize_script( 'ssw-analytics-js', 'sswAnalytics', $ssw_analytics );
 ?>
 <div class="wrap">
     <h1><?php echo esc_html('Site Setup Wizard Analytics') ?></h1>
-    <h4><?php echo esc_html('Number of Sites Created') ?></h3>
     <div class="container-fluid">
+        <h4><?php echo esc_html('Number of Sites Created') ?></h3>
         <div class="row">
             <div class="col-md-12">
                 <svg id="all-sites-info">
                 </svg>
             </div>
         </div>
-    </div>
-    <h4><?php echo esc_html('Sites created based on their Type') ?></h3>
-    <div class="container-fluid">
+        <h4><?php echo esc_html('Test Data') ?></h3>
+        <div class="row">
+            <div class="col-md-12">
+                <svg id="test-data">
+                </svg>
+            </div>
+        </div>
+        <h4><?php echo esc_html('Sites created based on their Type') ?></h3>
         <div class="row">
             <div class="col-md-4">
                 <svg id="site-type-info">
