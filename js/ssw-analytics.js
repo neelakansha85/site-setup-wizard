@@ -20,15 +20,16 @@
 function loadAllSitesInfo() {
 
   var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
-  var dateFormat = d3.time.format("%Y-%m-%d");
+  var dateFormat = d3.time.format('%B %Y');
   var height = 400;
   //var width = 1100;
 
 
   var allData = d3.nest()
   .key(function (d) { return d.site_type; })
-  .key(function (d) { return dateFormat(parseDate(d.endtime)); })
-  .sortKeys()
+  .sortKeys(d3.ascending)
+  .key(function (d) { return dateFormat(new Date(d.endtime)); })
+  //.sortKeys(d3.ascending)
   .rollup(function (leaves) { return leaves.length; })
   .entries(sswAnalytics.allSitesInfo)
   ;
@@ -53,8 +54,8 @@ function loadAllSitesInfo() {
 		
     chart.xAxis
       .tickFormat(function(d) { return d3.time.format('%B %Y')(new Date(d));})
-      .rotateLabels(-45)
-      .axisLabel("Sites Created");
+      //.rotateLabels(-45)
+      .axisLabel("Time");
 		
     chart.x2Axis.
       tickFormat(function(d) { return d3.time.format('%B %Y')(new Date(d));})
@@ -64,8 +65,8 @@ function loadAllSitesInfo() {
     chart.yTickFormat(d3.format('d'));    
     chart.yAxis.axisLabel('Number of Sites');    
     
-    chart.useInteractiveGuideline(true);
-    chart.interpolate('basis');
+    //chart.useInteractiveGuideline(true);
+    //chart.interpolate('basis');
 
     d3.select('#all-sites-info')
     .datum(allData)
