@@ -17,43 +17,40 @@ $ssw_analytics = new stdClass();
 
 /* Get all sites created using Site Setup Wizard */
 $results = $wpdb->get_results(
-    "SELECT site_type, blog_id, endtime FROM wp_nsd_site_setup_wizard WHERE site_created = 1 AND blog_id <> '' AND blog_id IS NOT NULL"
-    );
+	"SELECT site_type, blog_id, endtime FROM {$ssw_main_table} WHERE site_created = 1 AND blog_id <> '' AND blog_id IS NOT NULL"
+	);
 $ssw_analytics->allSitesInfo = $results;
-
-/* Get count of all sites created based on cateogory selected on Step 1 */
-$results = $wpdb->get_results( 
-    "SELECT site_type, COUNT(*) as number_of_sites FROM {$ssw_main_table} WHERE site_created = 1 AND site_type <> '' AND site_type IS NOT NULL GROUP BY site_type"
-    );
-
-$ssw_analytics->siteTypeInfo = $results;
 
 wp_localize_script( 'ssw-analytics-js', 'sswAnalytics', $ssw_analytics );
 
 ?>
 <div class="wrap">
-    <h1><?php echo esc_html('Site Setup Wizard Analytics') ?></h1>
-    <div class="container-fluid">
-        <h4><?php echo esc_html('Number of Sites Created') ?></h3>
-        <div class="row">
-            <div class="col-md-12">
-                <svg id="all-sites-info">
-                </svg>
-            </div>
-        </div>
-        <h4><?php echo esc_html('Test Data') ?></h3>
-        <div class="row">
-            <div class="col-md-12">
-                <svg id="test-data">
-                </svg>
-            </div>
-        </div>
-        <h4><?php echo esc_html('Sites created based on their Type') ?></h3>
-        <div class="row">
-            <div class="col-md-4">
-                <svg id="site-type-info">
-                </svg>
-            </div>
-        </div>
-    </div>
+	<h1><?php echo esc_html('Site Setup Wizard Analytics') ?></h1>
+	<div class="container-fluid">
+		<div class="row">
+			<h4><?php echo esc_html('Number of Sites Created') ?></h4>
+			<div class="col-md-12">
+				<button type="button" class="btn btn-sm btn-primary" name="Based on Month" value="Based on Month" onclick="loadAllSitesInfo('%b %Y')" > <?php echo esc_html('Based on Month') ?>
+				</button>
+				<button type="button" class="btn btn-sm btn-primary" name="Based on Date" value="Based on Date" onclick="loadAllSitesInfo('%d %b %Y')" > <?php echo esc_html('Based on Date') ?>
+				</button>
+			</div>
+			<div class="col-md-12">
+				<svg id="all-sites-info">
+				</svg>
+			</div>
+		</div>
+		<div class="row top-buffer">
+			<h4><?php echo esc_html('Types of Sites') ?></h4>
+			<div class="col-md-4">
+				<svg id="site-type-info">
+				</svg>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h4 id="ssw-a-total-sites">Total number of sites created = <span id="ssw-a-total-sites-value"></span></h4>
+			</div>
+		</div>
+	</div>
 </div>

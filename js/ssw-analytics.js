@@ -4,143 +4,88 @@
 	/**
 	 * Load all graphs after the window is loaded
 	 */
-   $( window ).load(function() {
+	 $( window ).load(function() {
 
-    loadTestLineChart();
+	 	loadSiteTypeInfo();
 
-    loadAllSitesInfo();
+	 	loadAllSitesInfo();
 
-    loadSiteTypeInfo();
-
-    console.log(sswAnalytics.allSitesInfo);
-
-  });
- })( jQuery );
-
-function loadAllSitesInfo() {
-
-  var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
-  var dateFormat = d3.time.format('%B %Y');
-  var height = 400;
-  //var width = 1100;
-
-
-  var allData = d3.nest()
-  .key(function (d) { return d.site_type; })
-  .sortKeys(d3.ascending)
-  .key(function (d) { return dateFormat(new Date(d.endtime)); })
-  //.sortKeys(d3.ascending)
-  .rollup(function (leaves) { return leaves.length; })
-  .entries(sswAnalytics.allSitesInfo)
-  ;
-
-  allData.forEach( function (d) {
-    d.values.forEach(function (g) {
-      g.x = new Date(g.key);
-      g.y = g.values;
-      delete(g.values);
-      delete(g.key);
-    })
-  })
-
-	nv.addGraph(function() {
-		var chart = nv.models.lineWithFocusChart()
-    .color(d3.scale.category10().range())
-    .margin({left: 100})
-    .margin({right: 100})
-    //.width(width)
-    .height(height)
-    ;
-		
-    chart.xAxis
-      .tickFormat(function(d) { return d3.time.format('%B %Y')(new Date(d));})
-      //.rotateLabels(-45)
-      .axisLabel("Time");
-		
-    chart.x2Axis.
-      tickFormat(function(d) { return d3.time.format('%B %Y')(new Date(d));})
-      .axisLabel("Sites Created");
-    //chart.yTickFormat(d3.format(',.2f'));
-    
-    chart.yTickFormat(d3.format('d'));    
-    chart.yAxis.axisLabel('Number of Sites');    
-    
-    //chart.useInteractiveGuideline(true);
-    //chart.interpolate('basis');
-
-    d3.select('#all-sites-info')
-    .datum(allData)
-    .call(chart)
-    .attr('height', height)
-    ;
-    
-    nv.utils.windowResize(chart.update);
-    
-    return chart;
-  });
-}
-
+	 });
+})( jQuery );
 
 /**
- * Load Test Line Chart
+ * Display Line Chart based on allSitesInfo
  *
  * @since 1.5.5
  */
- function loadTestLineChart() {
+ function loadAllSitesInfo(dateFormat) {
 
-   var height = 400;
-   var width = 900;
-   nv.addGraph(function() {  
-   var chart = nv.models.lineChart();
-  
-  chart.xAxis
-       .axisLabel('Date')
-       .rotateLabels(-45)
-       .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)); });
- 
-   chart.yAxis
-       .axisLabel('Activity')
-       .tickFormat(d3.format('d'));
- 
-   d3.select('#test-data')
-       .datum(fakeActivityByDate())
-     .transition().duration(500)
-       .call(chart);
- 
-   nv.utils.windowResize(function() { d3.select('#test-data').call(chart) });
- 
-   return chart;
- });
+ 	if (typeof dateFormat === 'undefined') {
+ 		var dateFormat = '%b %Y';
+ 	}
 
+ 	var parseDate = d3.time.format(dateFormat);
+ 	var total = 0;
+ 	var height = 400;
+	//var width = 1100;
+
+	var allSitesInfo = sswAnalytics.allSitesInfo
+	.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
+
+	allSitesInfo = d3.nest()
+	.key(function (d) { return d.site_type; })
+	.sortKeys(d3.ascending)
+	.key(function (d) { return parseDate(new Date(d.endtime)); })
+	.rollup(function (leaves) { return leaves.length; })
+	.entries(allSitesInfo)
+	;
+
+	allSitesInfo.forEach( function (d) {
+		d.values.forEach(function (g) {
+			g.x = new Date(g.key);
+			g.y = g.values;
+			total = total + g.values;
+			delete(g.values);
+			delete(g.key);
+		})
+	})
+
+	nv.addGraph(function() {
+		var chart = nv.models.lineWithFocusChart()
+		.color(d3.scale.category10().range())
+		.margin({left: 100})
+		.margin({right: 100})
+	//.width(width)
+	.height(height)
+	;
+
+	chart.xAxis
+	.tickFormat(function(d) { return parseDate(new Date(d));})
+	  //.rotateLabels(-45)
+	  .axisLabel("Time");
+
+	  chart.x2Axis.
+	  tickFormat(function(d) { return parseDate(new Date(d));})
+	  .axisLabel("Sites Created");
+
+	  chart.yTickFormat(d3.format('d'));    
+	  chart.yAxis.axisLabel('Number of Sites');    
+
+	  chart.useInteractiveGuideline(true);
+
+	  d3.select('#all-sites-info')
+	  .datum(allSitesInfo)
+	  .call(chart)
+	  .attr('height', height)
+	  ;
+
+	  nv.utils.windowResize(chart.update);
+
+	  return chart;
+	});
+
+	displayTotalSites(total);
  }
-
-function days(num) {
-  return num*60*60*1000*24
-}
- /**************************************
-  * Simple test data generator
-  */
-
-function fakeActivityByDate() {
-   var lineData = [];
-   var y=0;
-   var start_date = new Date() - days(365); // one year ago
-   for (var i = 0; i < 100; i++) {
-     lineData.push({x: new Date(start_date + days(i)), y: y});
-     y=y+Math.floor((Math.random()*10)-3);
-   }
-   return [
-     {
-       values: lineData,
-       key: 'Activity',
-       color: '#ff7f0e'
-     }
-   ];
- }
-
-
-
-
 
 /**
  * Display pie chart based on siteTypeInfo
@@ -149,35 +94,51 @@ function fakeActivityByDate() {
  */
  function loadSiteTypeInfo() {
 
-   var height = 400;
-   var width = 400;
+ 	var height = 400;
+ 	var width = 400;
 
-   nv.addGraph(function() {
-    var chart = nv.models.pieChart()
-    .x(function(d) { return d.site_type})
-    .y(function(d) { return d.number_of_sites })
-    .showTooltipPercent(true)
-    .width(width)
-    .height(height)
-    .showLabels(true)
-    .labelsOutside(false)
-    .labelType(function(d, i, values) {
-     return values.key + ':' + values.value;
-   })
-    .showLegend(true)
-    ;
+ 	var allSitesInfo = sswAnalytics.allSitesInfo
+	.sort(function(a, b){ return d3.ascending(a.endtime, b.endtime); });
 
-    d3.select("#site-type-info")
-    .datum(sswAnalytics.siteTypeInfo)
-    .attr('width', width)
-    .attr('height', height)
-    .attr('viewBox', '0 0 ' + width + ' ' + height)
-    .transition().duration(500)
-    .attr('perserveAspectRatio', 'xMinYMid')
-    .call(chart)
-    ;
+	var siteTypeInfo = d3.nest()
+	.key(function (d) { return d.site_type; })
+	.sortKeys(d3.ascending)
+	.rollup(function (leaves) { return leaves.length; })
+	.entries(allSitesInfo)
+	;
 
-    nv.utils.windowResize(chart.update);
-    return chart;
-  });
+ 	nv.addGraph(function() {
+ 		var chart = nv.models.pieChart()
+ 		.x(function(d) { return d.key})
+ 		.y(function(d) { return d.values })
+ 		.showTooltipPercent(true)
+ 		.width(width)
+ 		.height(height)
+ 		.showLabels(true)
+ 		.labelsOutside(false)
+ 		.labelType(function(d, i, values) {
+ 			return values.key + ':' + values.value;
+ 		})
+ 		.showLegend(true)
+ 		;
+
+ 		d3.select("#site-type-info")
+ 		.datum(siteTypeInfo)
+ 		.attr('width', width)
+ 		.attr('height', height)
+ 		.attr('viewBox', '0 0 ' + width + ' ' + height)
+ 		.transition().duration(500)
+ 		.attr('perserveAspectRatio', 'xMinYMid')
+ 		.call(chart)
+ 		;
+
+ 		nv.utils.windowResize(chart.update);
+ 		return chart;
+ 	});
  }
+
+function displayTotalSites(total) {
+	var totalSitesId = document.getElementById('ssw-a-total-sites-value');
+
+	totalSitesId.innerHTML = total;
+}
