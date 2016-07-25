@@ -73,7 +73,7 @@ Please check Screenshots for more information.
 
 == Upgrade Notice ==
 = 1.5.5 = 
-Added new feature to allow super admins to hide Features page if required.
+Added new charts on Analytics Page.
 
 = 1.5.4 = 
 Fixed a critical issue related to Themes Step. Please update now.
@@ -168,6 +168,7 @@ Please check https://github.com/neelakansha85/site-setup-wizard for more documen
 
 == Changelog ==
 = 1.5.5 = 
+* Added pretty charts on Analytics Page for meaningful insights of Plugin usage.
 * Added new feature to allow super admins to hide Features page if required.
 
 = 1.5.4 =
