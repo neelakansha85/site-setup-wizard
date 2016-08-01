@@ -41,6 +41,7 @@ You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-w
     * Allows super admins to decide whether user should be able to select privacy or not
     * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
     * Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
+    * Hide specific Themes or Plugins from the Wizard Steps.
     * Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin)
     * Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
 
