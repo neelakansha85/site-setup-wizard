@@ -336,7 +336,7 @@ function ssw_js_validate_privacy() {
 
 /* Function to validate select_theme */
 function ssw_js_validate_theme() {    
-    var theme_button = document.getElementById('ssw-steps').select_theme;
+    var theme_button = document.getElementsByName('select_theme');
     var theme_button_count = -1;
 
     for (var i=theme_button.length-1; i > -1; i--) {
