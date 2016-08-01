@@ -51,14 +51,18 @@ $step4 = 'features';
                                     foreach ($plugin_details['Categories'] as $category_count => $category_system_name_in_details) {
                                         if($category_system_name == $category_system_name_in_details) {
                                             if(isset($plugin_details['Name'])) {
-                                                echo '<input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" />'; 
-                                                echo '<label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label><br/>';
+                                                if( !in_array($plugin_details['Name'], $hide_plugins) ) {
+                                                    echo '<input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" />'; 
+                                                    echo '<label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label><br/>';
+                                                }
                                             }
                                             else {
                                                 $plugin_details = $plugins_default_data[$plugin_path];;
                                                 if(isset($plugin_details['Name'])) {
-                                                    echo '<input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" />'; 
-                                                echo '<label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label><br/>';
+                                                    if( !in_array($plugin_details['Name'], $hide_plugins) ) {
+                                                        echo '<input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" />'; 
+                                                        echo '<label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label><br/>';
+                                                    }
                                                 }
                                             }
                                         }
