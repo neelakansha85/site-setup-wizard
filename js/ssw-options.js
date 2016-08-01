@@ -75,6 +75,8 @@ function loadOptionsPage(options) {
     var siteCategoryNoPrefix = document.getElementById("ssw-site-category-no-prefix");
     var bannedSiteAddress = document.getElementById("ssw-banned-site-address");
     var termsOfUse = document.getElementById("ssw-terms-of-use");
+    var hideThemes = document.getElementById("ssw-hide-themes");
+    var hidePlugins = document.getElementById("ssw-hide-plugins");
     var pluginsPageTxt = document.getElementById("ssw-plugins-page-txt");
     var privacySelection = document.getElementById("ssw-privacy-selection");
     var step1 = document.getElementById("ssw-step-1");
@@ -112,6 +114,8 @@ function loadOptionsPage(options) {
     siteCategoryNoPrefix.value = options.site_category_no_prefix.join(", ");
     bannedSiteAddress.value = options.banned_site_address.join(", ");
     termsOfUse.innerHTML = options.terms_of_use;
+    hideThemes.value = options.hide_themes.join(", ");
+    hidePlugins.value = options.hide_plugins.join(", ");
     pluginsPageTxt.innerHTML = options.plugins_page_txt;
     privacySelection.checked = options.privacy_selection ? options.privacy_selection : false;
 

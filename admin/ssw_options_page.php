@@ -98,6 +98,24 @@ wp_localize_script( 'ssw-options-js', 'sswOptions', $options );
                 </td>
             </tr>
             <tr>
+                <th scope="row"><label for="ssw-hide-themes"><?php echo esc_html('Hide Themes') ?></label></th>
+                <td>
+                    <input name="ssw-hide-themes" type="text" id="ssw-hide-themes" aria-describedby="ssw-hide-themes-desc" class="large-text" value="" size="45" />
+                    <p class="description" id="ssw-hide-themes-desc">
+                        <?php _e( 'These themes will not be displayed on Themes selection page even if network enabled. Separate names by comma.'); ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="ssw-hide-plugins"><?php echo esc_html('Hide plugins') ?></label></th>
+                <td>
+                    <input name="ssw-hide-plugins" type="text" id="ssw-hide-plugins" aria-describedby="ssw-hide-plugins-desc" class="large-text" value="" size="45" />
+                    <p class="description" id="ssw-hide-plugins-desc">
+                        <?php _e( 'These plugins will not be displayed on Plugins selection page. Separate names by comma.'); ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><label for="ssw-plugins-page-txt"><?php echo esc_html('Plugins Page Note') ?></label></th>
                 <td>
                     <textarea name="ssw-plugins-page-txt" id="ssw-plugins-page-txt" aria-describedby="ssw-plugins-page-txt-desc" cols="60" rows="5"></textarea>
