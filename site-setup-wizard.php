@@ -945,6 +945,8 @@ if(!class_exists('Site_Setup_Wizard')) {
 			$ssw_not_available = $options['ssw_not_available'];
 			$ssw_not_available_txt = $options['ssw_not_available_txt'];
 			$terms_of_use = $options['terms_of_use'];
+			$hide_themes = $options['hide_themes'];
+			$hide_plugins = $options['hide_plugins'];
 			$plugins_page_txt = $options['plugins_page_txt'];
 			$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
 			$is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;

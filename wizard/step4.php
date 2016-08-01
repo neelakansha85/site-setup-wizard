@@ -74,11 +74,13 @@ $step4 = 'features';
         }
         else {
             foreach ($plugins_list as $plugin_path => $plugin_details){
-                if(isset($plugin_details['Name'])) {    
-                    echo '
-                    <div class="ssw-plugins-categories-col">
-                        <input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" /> <label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label>
-                    </div>';
+                if(isset($plugin_details['Name'])) {
+                    if( !in_array($plugin_details['Name'], $hide_plugins) ) {
+                        echo '
+                        <div class="ssw-plugins-categories-col">
+                            <input type="checkbox" id='.sanitize_html_class($plugin_details['Name']).' name="plugins_to_install_group[]" value="'.esc_attr($plugin_path).'" /> <label for='.sanitize_html_class($plugin_details['Name']).'>'.esc_attr($plugin_details['Name']).'</label>
+                        </div>';
+                    }
                 }
             }
         }

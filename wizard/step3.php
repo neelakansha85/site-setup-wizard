@@ -30,17 +30,19 @@ $step3 = 'themes';
                 $themes = wp_get_themes();
                 foreach ( $themes as $theme ) {
                     if($theme->is_allowed('network')) {
-                ?>
-                    <div class="ssw-themes-categories-col">
-                        <label for="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>">
-                            <img class="ssw-themes-screenshot" src="<?php echo esc_url($theme->get_screenshot()); ?>">
-                            <div class="ssw-themes-radio">
-                                <input type="radio" name="select_theme" id="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" tabindex="5">
-                                <span class="ssw-themes-title"><?php echo $theme->title; ?></span>
+                        if( !in_array($theme->title, $hide_themes) ) {
+                        ?>
+                            <div class="ssw-themes-categories-col">
+                                <label for="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>">
+                                    <img class="ssw-themes-screenshot" src="<?php echo esc_url($theme->get_screenshot()); ?>">
+                                    <div class="ssw-themes-radio">
+                                        <input type="radio" name="select_theme" id="ssw-themes-<?php echo esc_attr( $theme->get_stylesheet() ); ?>" value="<?php echo esc_attr( $theme->get_stylesheet() ); ?>" tabindex="5">
+                                        <span class="ssw-themes-title"><?php echo $theme->title; ?></span>
+                                    </div>
+                                </label>
                             </div>
-                        </label>
-                    </div>
-                <?php
+                        <?php
+                        }
                     }
                 }
                 ?>
