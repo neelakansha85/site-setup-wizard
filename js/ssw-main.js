@@ -63,18 +63,31 @@ function ssw_js_submit_form_previous() {
 function ssw_js_submit_form_next() {
     var current_stage = document.forms['ssw-steps'].ssw_current_stage.value;
     
-    if(current_stage == 'ssw_step2' || current_stage == 'ssw_step4') {
-        /* Hiding processing symbol from being displayed to assist with Hotfix for Step2 freeze issue */
-        //ssw_js_display_processing(true);
-        ssw_js_display_processing_msg(true);
-    }
-
     if(!ssw_js_validate_form(current_stage)) {
         if(current_stage == 'ssw_step2' || current_stage == 'ssw_step4') {
             ssw_js_display_processing(false);
             ssw_js_display_processing_msg(false);
         }
         return false;
+    }
+
+    if(current_stage == 'ssw_step2') {
+        // Validate email and domain first then process on success
+        ssw_js_check_admin_email_exists();
+    }
+    else {
+        ssw_js_proccess_form_next();
+    }
+}
+/* ENDS Function for 'Next' button action */
+
+function ssw_js_proccess_form_next() {
+    var current_stage = document.forms['ssw-steps'].ssw_current_stage.value;
+
+    if(current_stage == 'ssw_step2' || current_stage == 'ssw_step4') {
+        /* Hiding processing symbol from being displayed to assist with Hotfix for Step2 freeze issue */
+        //ssw_js_display_processing(true);
+        ssw_js_display_processing_msg(true);
     }
 
     var theForm = document.forms['ssw-steps'];
@@ -93,7 +106,104 @@ function ssw_js_submit_form_next() {
         } 
     });
 }
-/* ENDS Function for 'Next' button action */
+
+/* JS for checking availability of site address from wordpress server */
+function ssw_js_check_domain_available() {
+    var site_exists = '';
+    var site_category = document.getElementById('ssw-steps').site_category.value;
+    var site_address = document.getElementById('ssw-steps').site_address.value;
+    site_address = site_address.toLowerCase();
+    var site_complete_path = ssw_js_get_site_complete_path();
+
+    /**
+    * AJAX request with async flag false as we need the response synchrnously for 
+    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
+    */
+    jQuery.ajax({
+        type: "POST", 
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "html",
+        data: { 
+            action: 'ssw_check_domain_exists',
+            site_category: site_category,
+            site_address: site_address,
+            site_complete_path: site_complete_path,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
+        },
+        success: function(site_exists_value){
+            site_exists = site_exists_value;
+
+            if(site_exists == 2) { //this is a banned site address
+                document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_banned_msg;
+                document.getElementById("ssw-site-address-error").style.display="block"; 
+                return false;
+            }
+            else if (site_exists == 1) { //site already exists
+                document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_unavailable_msg;
+                document.getElementById("ssw-site-address-error").style.display="block"; 
+                return false;
+            }
+            else if (site_exists == 0) { //site doesn't exist, good to go
+
+                //process the ssw_steps form for next page
+                ssw_js_proccess_form_next();
+
+                return true;
+            }
+            else {
+                document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_other_error_msg;
+                document.getElementById("ssw-site-address-error").style.display="block";
+                return false;   
+            }
+        } 
+    });
+}
+/* ENDS JS for checking availability of site address from wordpress server */
+
+/* JS to check if given admin email address is a registered user of the system */
+function ssw_js_check_admin_email_exists() {
+    var admin_user_id = '';
+    
+    /**
+    * AJAX request with aync flag true as we need the response synchrnously for 
+    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
+    */
+    jQuery.ajax({
+        type: "POST", 
+        url: ssw_main_ajax.ajaxurl,
+        dataType: "html",
+        data: { 
+            action: 'ssw_check_admin_email_exists',
+            admin_email: document.getElementById('ssw-steps').admin_email.value,
+            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
+        },
+        success: function(admin_user_id_value){
+            admin_user_id = admin_user_id_value;
+            
+            if(admin_user_id == 0) {
+                document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
+                document.getElementById("ssw-validate-email-error").style.display="block";
+                return false;
+            }
+            else if(admin_user_id > 0) {
+                var theForm = document.forms['ssw-steps'];
+                ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
+
+                // Check if domain is available
+                ssw_js_check_domain_available();
+
+                return true;
+            }
+            else {
+                document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
+                document.getElementById("ssw-validate-email-error").style.display="block";
+                return false;
+            }
+        } 
+    });
+}
+/* ENDS JS to check if given admin email address is a registered user of the system */
+
 
 /* Function for 'Skip' button action */
 function ssw_js_submit_form_skip() {
@@ -129,19 +239,11 @@ function ssw_js_validate_form(step) {
             var is_privacy_selection = document.getElementById('ssw-steps').is_privacy_selection.value;
             if(is_privacy_selection == 1) {
                 if(ssw_js_validate_privacy()) {
-                    if(ssw_js_check_admin_email_exists()) {
-                        if(ssw_js_check_domain_available()) {
                             return true;
-                        }                
-                    }
                 }
             }
             else { 
-                if(ssw_js_check_admin_email_exists()) {
-                    if(ssw_js_check_domain_available()) {
                         return true;
-                    }                
-                }
             }
         }
     }
@@ -267,97 +369,6 @@ function ssw_js_validate_terms() {
     }
 }
 /* ENDS Function to validate site_terms */
-
-/* JS for checking availability of site address from wordpress server */
-function ssw_js_check_domain_available() {
-    var site_exists = '';
-    var site_category = document.getElementById('ssw-steps').site_category.value;
-    var site_address = document.getElementById('ssw-steps').site_address.value;
-    site_address = site_address.toLowerCase();
-    var site_complete_path = ssw_js_get_site_complete_path();
-
-    /**
-    * AJAX request with async flag false as we need the response synchrnously for 
-    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
-    */
-    jQuery.ajax({
-        type: "POST", 
-        url: ssw_main_ajax.ajaxurl,
-        dataType: "html",
-        async: false,
-        data: { 
-            action: 'ssw_check_domain_exists',
-            site_category: site_category,
-            site_address: site_address,
-            site_complete_path: site_complete_path,
-            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
-        },
-        success: function(site_exists_value){
-            site_exists = site_exists_value;
-        } 
-    });
-
-    if(site_exists == 2) { //this is a banned site address
-        document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_banned_msg;
-        document.getElementById("ssw-site-address-error").style.display="block"; 
-        return false;
-    }
-    else if (site_exists == 1) { //site already exists
-        document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_unavailable_msg;
-        document.getElementById("ssw-site-address-error").style.display="block"; 
-        return false;
-    }
-    else if (site_exists == 0) { //site doesn't exist, good to go
-        return true;
-    }
-    else {
-        document.getElementById("ssw-site-address-error-label").innerHTML=ssw_site_address_other_error_msg;
-        document.getElementById("ssw-site-address-error").style.display="block";
-        return false;   
-    }
-}
-/* ENDS JS for checking availability of site address from wordpress server */
-
-/* JS to check if given admin email address is a registered user of the system */
-function ssw_js_check_admin_email_exists() {
-    var admin_user_id = '';
-    
-    /**
-    * AJAX request with aync flag true as we need the response synchrnously for 
-    * use in the ssw_js_validate_form() and ssw_js_submit_form_next() function 
-    */
-    jQuery.ajax({
-        type: "POST", 
-        url: ssw_main_ajax.ajaxurl,
-        dataType: "html",
-        async: false,
-        data: { 
-            action: 'ssw_check_admin_email_exists',
-            admin_email: document.getElementById('ssw-steps').admin_email.value,
-            ssw_ajax_nonce: ssw_main_ajax.ssw_ajax_nonce  
-        },
-        success: function(admin_user_id_value){
-            admin_user_id = admin_user_id_value;
-        } 
-    });
-
-    if(admin_user_id == 0) {
-        document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_unavailable_msg;
-        document.getElementById("ssw-validate-email-error").style.display="block";
-        return false;
-    }
-    else if(admin_user_id > 0) {
-        var theForm = document.forms['ssw-steps'];
-        ssw_js_add_hidden_input(theForm, 'admin_user_id', admin_user_id);
-        return true;
-    }
-    else {
-        document.getElementById("ssw-validate-email-error-label").innerHTML=ssw_email_other_error_msg;
-        document.getElementById("ssw-validate-email-error").style.display="block";
-        return false;
-    }
-}
-/* ENDS JS to check if given admin email address is a registered user of the system */
 
 /* ENDS JS for Validating Forms based on current step */
 
