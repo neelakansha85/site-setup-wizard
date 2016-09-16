@@ -12,7 +12,7 @@ Offers registered users flexibility to select site type, plugins, privacy and ma
 
 == Description ==
 
-Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are seperated using a hyphen (-). For example in http://yourdomain.com/hr-benefits **hr is a site category** while **benefits is site address**. This helps in organizing sites effeciently.   
+Site Setup Wizard plugin allows all your multisite registered users to be able to create new sites using many options such as their site type, category, address, theme, plugins they want to activate, privacy and many more in form of steps. It can be used by placing a shortcode [site_setup_wizard] on any page. Site category and addresses are separated using a hyphen (-). For example in http://yourdomain.com/hr-benefits **hr is a site category** while **benefits is site address**. This helps in organizing sites efficiently.   
 
 Requires a wordpress multisite subdirectory install. 
 
