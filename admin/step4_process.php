@@ -22,11 +22,20 @@ if( $_POST['ssw_next_stage'] != '' ) {
     $this->ssw_debug_log('step4_process', 'serialized_plugins_to_install_group', $serialized_plugins_to_install_group);
     
     $endtime = current_time('mysql');
-    $ssw_process_query = 'UPDATE '.$ssw_main_table.' SET plugins_list = \''.$serialized_plugins_to_install_group.'\', 
-    next_stage = \''.$next_stage.'\', endtime = \''.$endtime.'\' WHERE user_id = '.$current_user_id.' and wizard_completed = false';
-    $this->ssw_debug_log('step4_process', 'ssw_process_query', $ssw_process_query);
-    
-    $result = $wpdb->query( $ssw_process_query );
+
+    $result = $wpdb->update(
+        $ssw_main_table,
+        array(
+            'plugins_list' => $serialized_plugins_to_install_group,
+            'next_stage' => $next_stage,
+            'endtime' => $endtime
+        ),
+        array(
+            'user_id' => $current_user_id,
+            'wizard_completed' => false
+        )
+    );
+
     $this->ssw_log_sql_error($wpdb->last_error);
     
     if ( is_wp_error( $result ) ) {

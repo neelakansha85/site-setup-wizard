@@ -62,16 +62,30 @@ if( $_POST['ssw_next_stage'] != '' && sanitize_key( $_POST['site_address'] ) != 
     $next_stage = $this->ssw_sanitize_option('sanitize_key', $_POST['ssw_next_stage']);
     $this->ssw_debug_log('step2_process', 'next_stage', $next_stage);
     $endtime = current_time('mysql');
-    $ssw_process_query =  'UPDATE '.$ssw_main_table.' SET user_id = \''.$current_user_id.'\', admin_email = \''.$admin_email.'\', 
-    admin_user_id = \''.$admin_user_id.'\', path = \''.$path.'\', title = \''.$title.'\', 
-    privacy = \''.$privacy.'\', next_stage = \''.$next_stage.'\', endtime = \''.$endtime.'\' WHERE user_id = '.$current_user_id.' and site_created = false and wizard_completed = false';
-    $this->ssw_debug_log('step2_process', 'ssw_process_query', $ssw_process_query);
+
     /* Throw Error if site address is illegal */
     if( $is_banned_site == 1) {
         $result = new WP_Error( 'broke', __("This site address is not allowed. Please enter another one.", "Site Setup Wizard") );
     }
     else {
-        $result = $wpdb->query( $ssw_process_query );
+        $result = $wpdb->update(
+            $ssw_main_table,
+            array(
+                'admin_email' => $admin_email,
+                'admin_user_id' => $admin_user_id,
+                'path' => $path,
+                'title' => $title,
+                'privacy' => $privacy,
+                'next_stage' => $next_stage,
+                'endtime' => $endtime
+            ),
+            array(
+                'user_id' => $current_user_id,
+                'site_created' => false,
+                'wizard_completed' => false
+            )
+        );
+
         $this->ssw_log_sql_error($wpdb->last_error);
     }
 
