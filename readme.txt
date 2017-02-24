@@ -2,7 +2,7 @@
 Contributors: shah.neel
 Tags: plugin, multisite, site setup wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
-Tested up to: 4.7
+Tested up to: 4.7.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -73,6 +73,9 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+
+= 1.5.7 =
+Fixed issue related to not allowing users to create sites with a single quote in the site title
 
 = 1.5.6 = 
 Added new feature to hide selected Themes and Plugins from wizard steps.
@@ -172,7 +175,10 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
-= 1.5.4 =
+= 1.5.7 =
+* Fixed [Issue #42](https://github.com/neelakansha85/site-setup-wizard/issues/42).
+
+= 1.5.6 =
 * Added a new feature to hide selected Themes from theme selection page. Please refer to [Issue #35](https://github.com/neelakansha85/site-setup-wizard/issues/35) for additional details.
 * Added a new feature to hide selected Plugins from plugins selection (Features) page. Please refer to [Issue #36](https://github.com/neelakansha85/site-setup-wizard/issues/36) for additional details.
 

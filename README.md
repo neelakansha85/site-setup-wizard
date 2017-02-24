@@ -8,7 +8,7 @@ You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-w
 * Tags: wordpress plugin, site setup wizard, multisite, site registration, site creation, create site, wp-signup
 * Requires at least: 4.0
 * Requires PHP: 5.5
-* Tested up to: 4.7
+* Tested up to: 4.7.2
 * Stable tag: master
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

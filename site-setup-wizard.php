@@ -6,7 +6,7 @@
  * Author: Neel Shah <neel@nsdesigners.com>
  * Author URI: http://neelshah.info
  * License: GPL2
- * Version: 1.5.6
+ * Version: 1.5.7
  */
 
 define('SSW_PLUGIN_URL', plugin_dir_url( __FILE__ ));
@@ -27,7 +27,7 @@ define('SSW_THEMES_LIST_FOR_DATABASE', 'nsd_ssw_themes_list');
 define('SSW_SITE_TYPE_KEY', 'nsd_ssw_site_type');
 define('SSW_USER_ROLE_KEY', 'nsd_ssw_user_role');
 define('SSW_VERSION_KEY', 'nsd_ssw_version');
-define('SSW_VERSION_NUM', '1.5.6');
+define('SSW_VERSION_NUM', '1.5.7');
 
 
 if(!class_exists('Site_Setup_Wizard')) {
