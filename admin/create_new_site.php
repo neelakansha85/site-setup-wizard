@@ -25,7 +25,7 @@ if( $path != '' ) {
         $new_blog_id = wpmu_create_blog( $current_blog->domain, $path, $title, $admin_user_id );
         if( !is_wp_error( $new_blog_id ) && $is_privacy_selection == true ) {
             /* Set Privacy of the newly created blog to the privacy level selected durign the wizard */
-            update_blog_option($new_blog_id, 'blog_public', $privacy, true);
+            update_blog_option($new_blog_id, 'blog_public', $privacy);
         }
         $endtime = current_time('mysql');
         /* Update current site's details with the blog_id of the newly created blog in SSW_MAIN_TABLE */
