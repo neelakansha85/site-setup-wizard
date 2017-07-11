@@ -178,7 +178,8 @@ Please check https://github.com/neelakansha85/site-setup-wizard for more documen
 
 == Changelog ==
 = 1.5.8 =
-Fixed [Issue #43](https://github.com/neelakansha85/site-setup-wizard/issues/43)
+* Added new option to add custom message on the Finish page [Issue #44](https://github.com/neelakansha85/site-setup-wizard/issues/44)
+* Fixed [Issue #43](https://github.com/neelakansha85/site-setup-wizard/issues/43)
 
 = 1.5.7 =
 * Fixed [Issue #42](https://github.com/neelakansha85/site-setup-wizard/issues/42).

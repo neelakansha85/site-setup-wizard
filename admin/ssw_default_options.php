@@ -46,6 +46,7 @@ $ssw_default_options = array(
     'hide_plugins' => array(''),
     'terms_of_use' => 'I accept the <a href="#terms-of-use">Terms of Use</a>',
     'plugins_page_txt' => 'THIS STEP IS OPTIONAL! Select features to add functionality to your site. You can activate or deactivate these plugins as you need them from the admin\'s Plugins screen. Learn more about <a href="#available-plugins">available plugins here.</a>',
+    'finish_page_txt' => '',
     'steps_name' => array(
         'step1' => 'Start',
         'step2' => 'Essential Settings',

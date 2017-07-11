@@ -124,6 +124,15 @@ wp_localize_script( 'ssw-options-js', 'sswOptions', $options );
                     </p>
                 </td>
             </tr>
+            <tr>
+                <th scope="row"><label for="ssw-finish-page-txt"><?php echo esc_html('Finish Page Note') ?></label></th>
+                <td>
+                    <textarea name="ssw-finish-page-txt" id="ssw-finish-page-txt" aria-describedby="ssw-finish-page-txt-desc" cols="60" rows="5"></textarea>
+                    <p class="description" id="ssw-finish-page-txt-desc">
+                        <?php _e('Please enter the text you want to display on Finish page.'); ?>
+                    </p>
+                </td>
+            </tr>
         </tbody>
     </table>
     <h3><?php echo esc_html('Wizard Step Titles') ?></h3>

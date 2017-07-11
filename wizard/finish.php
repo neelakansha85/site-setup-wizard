@@ -10,6 +10,7 @@ $finish = 'finish';
            <?php
            include(SSW_PLUGIN_DIR.'admin/ssw_breadcrumb_text.php');
            ?>
+           <p class="ssw-header-note"><?php _e($finish_page_txt); ?></p>
         </div>
         <fieldset class="ssw-fieldset">        
         <?php

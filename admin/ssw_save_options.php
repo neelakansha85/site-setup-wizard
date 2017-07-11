@@ -38,6 +38,7 @@ $new_ssw_config_options = array(
     'hide_themes' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-hide-themes']),
     'hide_plugins' => $this->ssw_sanitize_option('to_array_on_comma', $_POST['ssw-hide-plugins']),
     'plugins_page_txt' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-plugins-page-txt']),
+    'finish_page_txt' => $this->ssw_sanitize_option('allow_html', $_POST['ssw-finish-page-txt']),
     'steps_name' => array(
         'step1' => $this->ssw_sanitize_option('sanitize_field', $_POST['ssw-step-1']),
         'step2' => $this->ssw_sanitize_option('sanitize_field', $_POST['ssw-step-2']),

@@ -78,6 +78,7 @@ function loadOptionsPage(options) {
     var hideThemes = document.getElementById("ssw-hide-themes");
     var hidePlugins = document.getElementById("ssw-hide-plugins");
     var pluginsPageTxt = document.getElementById("ssw-plugins-page-txt");
+    var finishPageTxt = document.getElementById("ssw-finish-page-txt");
     var privacySelection = document.getElementById("ssw-privacy-selection");
     var step1 = document.getElementById("ssw-step-1");
     var step2 = document.getElementById("ssw-step-2");
@@ -116,7 +117,8 @@ function loadOptionsPage(options) {
     termsOfUse.innerHTML = options.terms_of_use;
     hideThemes.value = options.hide_themes.join(", ");
     hidePlugins.value = options.hide_plugins.join(", ");
-    pluginsPageTxt.innerHTML = options.plugins_page_txt;
+    pluginsPageTxt.innerHTML = options.plugins_page_txt ? options.plugins_page_txt : "";
+    finishPageTxt.innerHTML = options.finish_page_txt ? options.finish_page_txt : "";
     privacySelection.checked = options.privacy_selection ? options.privacy_selection : false;
 
     // Wizard Titles

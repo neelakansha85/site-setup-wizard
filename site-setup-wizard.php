@@ -948,6 +948,7 @@ if(!class_exists('Site_Setup_Wizard')) {
 			$hide_themes = $options['hide_themes'];
 			$hide_plugins = $options['hide_plugins'];
 			$plugins_page_txt = $options['plugins_page_txt'];
+			$finish_page_txt = $options['finish_page_txt'];
 			$steps_name = isset($options['steps_name']) ? $options['steps_name'] : '';
 			$is_privacy_selection = isset($options['privacy_selection']) ? $options['privacy_selection'] : false;
 			$is_debug_mode = isset($options['debug_mode']) ? $options['debug_mode'] : false;
