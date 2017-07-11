@@ -46,6 +46,7 @@
 	text-transform:none;
 	margin-bottom: 0px;
 	margin-top: 8px;
+	display: inline-block;
 }
 
 /* Hack to keep select fields inline in Namo */
