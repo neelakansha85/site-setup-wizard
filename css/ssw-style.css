@@ -64,11 +64,6 @@
 	display:inline-block;
 	vertical-align:middle;
 }
-/* Don't display error until it happens */
-.ssw-error {
-	display:none;
-	color: #ff1133;
-}
 
 .ssw-error .ssw-span {
 	display:inline-block;
