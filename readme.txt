@@ -2,11 +2,11 @@
 Contributors: shah.neel
 Tags: plugin, multisite, site setup wizard, site registration, site creation, create site, wp-signup
 Requires at least: 4.0
-Tested up to: 4.7.2
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: http://neelshah.info
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2V9UGN9L5547U&lc=US&item_name=Site%20Setup%20Wizard%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 
 Offers registered users flexibility to select site type, plugins, privacy and many other settings before creating a new site.
 
@@ -43,7 +43,7 @@ Requires a wordpress multisite subdirectory install.
 * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
 * Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
 * Hide specific Themes or Plugins from the Wizard Steps.
-* Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin)
+* Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://wordpress.org/plugins/ssw-additional-checks/)
 * Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
 
 = Coming soon =
@@ -73,6 +73,8 @@ Please check Screenshots for more information.
 10. Analytics page for metrics collection
 
 == Upgrade Notice ==
+= 1.5.8 =
+Fixed broken css issue when using Twenty Seventeen theme and Site Setup Wizard
 
 = 1.5.7 =
 Fixed issue related to not allowing users to create sites with a single quote in the site title
@@ -175,6 +177,9 @@ The WordPress support forums: https://wordpress.org/support/plugin/site-setup-wi
 Please check https://github.com/neelakansha85/site-setup-wizard for more documentation for now.
 
 == Changelog ==
+= 1.5.8 =
+Fixed [Issue #43](https://github.com/neelakansha85/site-setup-wizard/issues/43)
+
 = 1.5.7 =
 * Fixed [Issue #42](https://github.com/neelakansha85/site-setup-wizard/issues/42).
 

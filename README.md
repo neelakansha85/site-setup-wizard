@@ -8,7 +8,7 @@ You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-w
 * Tags: wordpress plugin, site setup wizard, multisite, site registration, site creation, create site, wp-signup
 * Requires at least: 4.0
 * Requires PHP: 5.5
-* Tested up to: 4.7.2
+* Tested up to: 4.8
 * Stable tag: master
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,8 +42,8 @@ You can also find [Site Setup Wizard](https://wordpress.org/plugins/site-setup-w
     * Registers option 'nsd_ssw_site_type' with Site Type value for every site created
     * Registers option 'nsd_ssw_user_role' with Admin's User Role value from main site in newly created site's option table
     * Hide specific Themes or Plugins from the Wizard Steps.
-    * Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://github.com/neelakansha85/ssw-additional-checks) Plugin)
-    * Option to map wordpress user role with Site Setup Wizard user roles (Currently in beta)
+    * Allows super admins to perform additional checks if required before displaying all steps to a user. (Using [SSW Additional Checks](https://wordpress.org/plugins/ssw-additional-checks/)
+    * Option to map wordpress user role with Site Setup Wizard user roles
 
 `GitHub Plugin URI: https://github.com/neelakansha85/site-setup-wizard`
 
