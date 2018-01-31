@@ -100,6 +100,9 @@ if(!class_exists('Site_Setup_Wizard')) {
 			// Add shortcode [site_setup_wizard] to any page to display Site Setup Wizard over it
 			add_shortcode('site_setup_wizard', array( $this, 'ssw_shortcode' ) );
 			
+			// Add action to handle when a site is deleted
+			add_action( 'delete_blog', array( &$this, 'ssw_handle_site_deleted' ), 10, 1);
+			
 			// Check and store is the wordpress installation is multisite or not
 			$this->multisite = is_multisite();
 
@@ -1081,6 +1084,17 @@ if(!class_exists('Site_Setup_Wizard')) {
 					die();
 				}
 			}
+		}
+
+		/**
+		 * SSW Remove an incomplete workflow when a site is deleted
+		 *
+		 * @since  1.5.9
+		 * @return void
+		 */
+		public function ssw_handle_site_deleted($blog_id) {
+			global $wpdb;
+			$wpdb->query( 'DELETE FROM '.$this->ssw_main_table().' WHERE blog_id = '.$blog_id.' and wizard_completed = false' );
 		}
 	}
 }
